@@ -16,23 +16,25 @@
         <div class="pannels">
             <div class="left-pannel">
                 <form id="data-entry" onsubmit="" action="">
-                    <div class="number_image">
+                    <div class="number_image form-row">
                         <div class="number label-above">
                             <label for="mobile">Mobile Number</label>
                             <input type="number" id="mobile" placeholder="Enter mobile number" />
                         </div>
 
-                        <label class="upload-box">
-                            <div class="upload-placeholder">📤</div>
-                            <span>Upload Photo</span>
-                            <input type="file" id="photo-upload" hidden />
-                        </label>
+                        <div class="upld">
+                            <label class="upload-box">
+                                <div class="upload-placeholder">📤</div>
+                                <span>Upload Photo</span>
+                                <input type="file" id="photo-upload" hidden />
+                            </label>
 
-                        <label class="upload-box">
-                            <div class="upload-placeholder">📤</div>
-                            <span>Upload Signature</span>
-                            <input type="file" id="sign-upload" hidden />
-                        </label>
+                            <label class="upload-box">
+                                <div class="upload-placeholder">📤</div>
+                                <span>Upload Signature</span>
+                                <input type="file" id="sign-upload" hidden />
+                            </label>
+                        </div>
                     </div>
 
                     <div class="divider"></div>
@@ -147,7 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="vehi-desc" id="vehicle">
+                    <div class="vehi-desc form-row" id="vehicle">
                         <div class="label-above vehicle-number">
                             <label>Vehicle No</label>
                             <input type="text" placeholder="Vehicle number" />
