@@ -1,21 +1,21 @@
 * {
   box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
   user-select: none;
   font-family: 'Poppins', sans-serif;
-  background: #f6f9fc;
   overflow: hidden;
+}
+
+html, body {
+  background: #f6f9fc;
+  height: 100%;
 }
 
 .container {
   height: 100vh;
   width: 100vw;
-  padding: 12px;
+  padding: 1%;
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -25,10 +25,10 @@ html, body {
 header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 2%;
   font-weight: bold;
-  margin-bottom: 5px;
-  font-size: 16px;
+  margin-bottom: 2%;
+  font-size: 100%;
 }
 
 .pannels {
@@ -109,7 +109,8 @@ form {
 
 input[type="text"],
 input[type="date"],
-input[type="number"] {
+input[type="number"],
+select {
   text-transform: uppercase;
   padding: 6px;
   border: 1px solid #dce1e7;
@@ -118,6 +119,17 @@ input[type="number"] {
   font-size: 12px;
   width: 100%;
   user-select: none;
+  height: 32px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 label {
@@ -186,7 +198,7 @@ label {
 }
 
 .btn {
-  padding: 6px 12px;
+  padding: 0 12px;
   border: none;
   color: white;
   font-weight: bold;
@@ -195,6 +207,10 @@ label {
   font-size: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.1s ease;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn:hover {
@@ -202,19 +218,19 @@ label {
 }
 
 .btn.blue {
-  background: #60b5ff;
+  background: #008CBA;;
 }
 
 .btn.yellow {
-  background: #eadd2e;
+  background: #fcba03;
 }
 
 .btn.red {
-  background: #ff3131;
+  background: #f44336;
 }
 
 .btn.green {
-  background: #6dd83b;
+  background: #04AA6D;
 }
 
 #vehicle {
@@ -240,4 +256,9 @@ label {
   border-radius: 4px;
   cursor: pointer;
   white-space: nowrap;
+}
+
+
+#amount {
+    width: 20%;
 }

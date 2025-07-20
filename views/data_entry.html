@@ -19,7 +19,7 @@
                     <div class="number_image">
                         <div class="number label-above">
                             <label for="mobile">Mobile Number</label>
-                            <input type="text" id="mobile" placeholder="Enter mobile number" />
+                            <input type="number" id="mobile" placeholder="Enter mobile number" />
                         </div>
 
                         <label class="upload-box">
@@ -57,8 +57,14 @@
                             <div class="form-row">
                                 <div class="label-above">
                                     <label>Car</label>
-                                    <input type="text" placeholder="Car name" />
+                                    <select>
+                                        <option value="">Select Car</option>
+                                        <option value="a">A</option>
+                                        <option value="b">B</option>
+                                        <option value="c">C</option>
+                                    </select>
                                 </div>
+
                                 <div class="label-above">
                                     <label>Instructor</label>
                                     <input type="text" placeholder="Instructor name" />
@@ -152,13 +158,13 @@
                             <input type="text" placeholder="Work description" />
                         </div>
 
-                        <button type="button" class="btn small-btn">Add</button>
+                        <button type="button" class="btn small-btn">Show Past Records</button>
                     </div>
 
                     <div class="form-row">
                         <div class="label-above" style="flex: 1;">
                             <label>Total Amount</label>
-                            <input type="number" placeholder="Enter total amount" />
+                            <input type="number" id="amount" placeholder="Enter total amount" />
                         </div>
                     </div>
 
