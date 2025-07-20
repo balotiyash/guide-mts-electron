@@ -16,7 +16,7 @@ function createWindow() {
   win.show();
 
   // Load your HTML file
-  win.loadFile(path.join(__dirname, '../views/data_entry.html'));
+  win.loadFile(path.join(__dirname, '../views/index.html'));
 }
 
 // Create the window when Electron is ready
