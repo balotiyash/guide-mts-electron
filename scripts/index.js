@@ -1,32 +1,3 @@
-// const { app, BrowserWindow, ipcMain } = require('electron');
-// const path = require('path');
-
-// function createWindow() {
-//   const win = new BrowserWindow({
-//     width: 500,
-//     height: 400,
-//     webPreferences: {
-//       preload: path.join(__dirname, 'preload.js'),
-//       contextIsolation: true,
-//       nodeIntegration: false,
-//     },
-//   });
-
-// win.loadFile(path.join(__dirname, '../views/index.html'));
-
-// }
-
-// app.whenReady().then(createWindow);
-
-// ipcMain.handle('login', async (event, { username, password }) => {
-//   if (username === 'ADMIN' && password === 'ADMIN') {
-//     return { success: true };
-//   } else {
-//     return { success: false };
-//   }
-// });
-
-
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
