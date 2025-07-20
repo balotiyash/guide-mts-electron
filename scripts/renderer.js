@@ -10,6 +10,8 @@ loginBtn.addEventListener('click', async () => {
   if (response.success) {
     message.innerText = 'Login Successful 🎉';
     message.style.color = 'green';
+    window.location.href = "../views/data_entry.html";
+
   } else {
     message.innerText = 'Login Failed ❌';
     message.style.color = 'red';

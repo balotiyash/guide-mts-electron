@@ -1,0 +1,163 @@
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f6f9fc;
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  padding: 12px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.back-btn {
+  font-size: 16px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 20%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+form {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.form-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.label-above {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+input[type="text"],
+input[type="date"] {
+  padding: 6px;
+  border: 1px solid #dce1e7;
+  border-radius: 4px;
+  background: #f0f4f8;
+  font-size: 12px;
+  width: 100%;
+}
+
+label {
+  font-size: 11px;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.number_image {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.number {
+  width: 150px !important;
+  max-width: 150px !important;
+  flex: 0 0 150px !important;
+  margin-right: auto; /* ⬅ Pushes it to the left */
+}
+
+
+.number input {
+  width: 100% !important;
+}
+.divider {
+  height: 1px;
+  background-color: gray;
+}
+
+.upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 6px;
+  width: 80px;
+  height: 80px;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.upload-box label {
+  margin-top: 4px;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 11px;
+  text-align: center;
+}
+
+.upload-placeholder {
+  font-size: 20px;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.btn {
+  padding: 6px 12px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn.blue {
+  background: #4a6cf7;
+}
+
+.btn.green {
+  background: #34c38f;
+}
+
+.btn.red {
+  background: #f46a6a;
+}
+
+.btn.dark-blue {
+  background: #001a34;
+}

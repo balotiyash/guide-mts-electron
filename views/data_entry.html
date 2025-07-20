@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Customer Data Entry</title>
+  <link rel="stylesheet" href="../styles/data_entry.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <button class="back-btn">←</button>
+      <h4>CUSTOMER DATA ENTRY</h4>
+    </header>
+
+    <form>
+      <div class="number_image">
+        <div class="number label-above">
+          <label for="mobile">Mobile Number</label>
+          <input type="text" id="mobile" placeholder="Enter mobile number" />
+        </div>
+
+        <div class="upload-box">
+          <div class="upload-placeholder">📤</div>
+          <label for="photo-upload">Upload Photo</label>
+          <input type="file" id="photo-upload" hidden />
+        </div>
+
+        <div class="upload-box">
+          <div class="upload-placeholder">📤</div>
+          <label for="sign-upload">Upload Signature</label>
+          <input type="file" id="sign-upload" hidden />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="form-row">
+        <div class="label-above">
+          <label>Name</label>
+          <input type="text" placeholder="Enter name" />
+        </div>
+        <div class="label-above">
+          <label>Date Of Birth</label>
+          <input type="text" placeholder="DD/MM/YYYY" />
+        </div>
+        <div class="label-above">
+          <label>S/D/W of</label>
+          <input type="text" placeholder="Enter relation" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="label-above" style="flex: 1;">
+          <label>Address</label>
+          <input type="text" placeholder="Enter address" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="label-above">
+          <label>Car</label>
+          <input type="text" placeholder="Car name" />
+        </div>
+        <div class="label-above">
+          <label>Instructor</label>
+          <input type="text" placeholder="Instructor name" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="label-above">
+          <label>LL No-1</label>
+          <input type="text" placeholder="LL No-1" />
+        </div>
+        <div class="label-above">
+          <label>Class 1</label>
+          <input type="text" placeholder="Class 1" />
+        </div>
+        <div class="label-above">
+          <label>LL No-2</label>
+          <input type="text" placeholder="LL No-2" />
+        </div>
+        <div class="label-above">
+          <label>Class 2</label>
+          <input type="text" placeholder="Class 2" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="label-above">
+          <label>Issued On</label>
+          <input type="date" />
+        </div>
+        <div class="label-above">
+          <label>Valid Upto</label>
+          <input type="date" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="label-above">
+          <label>MDL No</label>
+          <input type="text" placeholder="Enter MDL No" />
+        </div>
+        <div class="label-above">
+          <label>Class</label>
+          <input type="text" placeholder="Class" />
+        </div>
+        <div class="label-above">
+          <label>Issued On</label>
+          <input type="date" />
+        </div>
+        <div class="label-above">
+          <label>Valid Upto</label>
+          <input type="date" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="label-above">
+          <label>Endorsement (If Any)</label>
+          <input type="text" placeholder="Enter endorsement" />
+        </div>
+        <div class="label-above">
+          <label>Dated</label>
+          <input type="date" />
+        </div>
+        <div class="label-above">
+          <label>Valid Upto</label>
+          <input type="date" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="label-above" style="flex: 1;">
+          <label>Vehicle No</label>
+          <input type="text" placeholder="Vehicle number" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="label-above" style="flex: 1;">
+          <label>Work Description</label>
+          <input type="text" placeholder="Work description" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="label-above" style="flex: 1;">
+          <label>Total Amount</label>
+          <input type="text" placeholder="Enter total amount" />
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button type="button" class="btn blue">New</button>
+        <button type="button" class="btn green">Edit</button>
+        <button type="button" class="btn red">Clear</button>
+        <button type="submit" class="btn dark-blue">Save</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
