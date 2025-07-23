@@ -84,6 +84,7 @@ form {
   border: 1px solid #ccc;
   background: #f0f4f8;
   font-size: 0.8vw;
+  text-transform: uppercase;
 }
 
 .form-row {
@@ -109,6 +110,7 @@ select {
   background: #f0f4f8;
   font-size: 0.8vw;
   width: 100%;
+  text-transform: uppercase;
 }
 
 /* Chrome, Safari, Edge */
