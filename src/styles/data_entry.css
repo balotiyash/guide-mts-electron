@@ -1,0 +1,305 @@
+/* File: data_entry.css
+    Author: Neha Balotia
+    Description: This page contains all the CSS code of the Customer Data Entry Page.
+    Created on: 
+    Last Modified: 23/07/2025 */
+
+/* RESET & GLOBALS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  font-family: sans-serif;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 1vh 0;
+}
+
+/* CONTAINER & LAYOUT */
+.container {
+  height: 98vh;
+  width: 100vw;
+  padding: 1.5vh 2vw;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+header {
+  font-size: 1.4vw;
+  font-weight: bold;
+  margin-bottom: 1vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  font-size: 0.9vw;
+}
+
+/* Divide form into left and right halves */
+.division {
+  display: flex;
+  gap: 2%;
+  width: 100%;
+}
+
+.left,
+.right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+/* Half-height textarea (address box) */
+.half-height {
+  height: 10vh;
+}
+
+/* FORM ELEMENTS */
+.form-row {
+  display: flex;
+  gap: 2%;
+  flex-wrap: wrap;
+  margin-bottom: 1vh;
+}
+
+.label-above {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Style for combo-box inputs using datalist */
+input[list] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: #f0f4f8;
+  background-size: 0.8vw;
+
+  border: 1px solid #dce1e7;
+  border-radius: 0.3vw;
+  padding: 1.5vh 2vw 1.5vh 0.6vw;
+  font-size: 0.8vw;
+  text-transform: uppercase;
+  width: 100%;
+  cursor: pointer;
+}
+
+input[list]:hover {
+  background-color: #eaf2f8;
+}
+
+/* Input styling */
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select {
+  text-transform: uppercase;
+  padding: 1.5vh 0.6vw;
+  border: 1px solid #dce1e7;
+  border-radius: 0.3vw;
+  background: #f0f4f8;
+  font-size: 0.8vw;
+  width: 100%;
+}
+
+/* Remove spinners on number input */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+textarea {
+  text-transform: uppercase;
+}
+
+/* Address field */
+#address-text {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  padding: 0.5vh 0.5vw;
+  border-radius: 0.3vw;
+  border: 1px solid #ccc;
+  background: #f0f4f8;
+  font-size: 0.8vw;
+}
+
+/* Prefix styling for LL No fields
+.prefix-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #dce1e7;
+  border-radius: 0.3vw;
+  background: #f0f4f8;
+  overflow: hidden;
+}
+
+.prefix-input .prefix {
+  background-color: #e0e6ec;
+  padding: 1.5vh 0.6vw;
+  font-size: 0.8vw;
+  text-transform: uppercase;
+  border-right: 1px solid #dce1e7;
+}
+
+.prefix-input input {
+  border: none;
+  background: transparent;
+  padding: 1.5vh 0.6vw;
+  font-size: 0.8vw;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.prefix-input input:focus {
+  outline: none;
+} */
+
+/* LABEL */
+label {
+  font-size: 0.75vw;
+  margin-bottom: 0.4vh;
+}
+
+/* IMAGE UPLOAD */
+.number_image {
+  display: flex;
+  gap: 2%;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.number {
+  flex: 0 1 25%;
+  min-width: 160px;
+}
+
+.upld {
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+}
+
+.upload-box {
+  width: 8vw;
+  height: 10vh;
+  padding: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  border-radius: 0.3vw;
+  cursor: pointer;
+  font-size: 0.8vw;
+}
+
+.upload-box:hover {
+  background-color: #f0f8ff;
+  border-color: #2196f3;
+}
+
+.upload-placeholder {
+  font-size: 1.5vw;
+}
+
+.upload-box span {
+  font-size: 0.7vw;
+  text-align: center;
+}
+
+/* VEHICLE BLOCK */
+#vehicle {
+  display: flex;
+  gap: 1vw;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+#vehicle .vehicle-number {
+  min-width: 10%;
+  flex: 1;
+}
+
+/* BUTTONS */
+.buttons {
+  display: flex;
+  gap: 1vw;
+  justify-content: flex-end;
+  margin-top: 1vh;
+}
+
+.btn {
+  padding: 0 1vw;
+  font-size: 0.8vw;
+  height: 4.2vh;
+  border: none;
+  border-radius: 0.3vw;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0.2vh 0.5vh rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn.blue {
+  background-color: #008CBA;
+}
+
+.btn.yellow {
+  background-color: #fcba03;
+}
+
+.btn.red {
+  background-color: #f44336;
+}
+
+.btn.green {
+  background-color: #04AA6D;
+}
+
+.small-btn {
+  height: 4vh;
+  padding: 0 1vw;
+  font-size: 0.8vw;
+  background-color: #4a6cf7;
+  color: white;
+  border: none;
+  border-radius: 0.3vw;
+  white-space: nowrap;
+}
+
+/* Divider line */
+.divider {
+  height: 1px;
+  background-color: gray;
+  margin: 1vh 0;
+}
+
+/* Amount input */
+#amount {
+  width: 20%;
+}
