@@ -2,224 +2,253 @@
     File: views/data_entry.html
     Author: Neha Balotia
     Description: This page contains all the HTML5 code of the Customer Data Entry Page.
-    Created on: 
-    Last Modified: 23/07/2025
+    Created on: 26/07/2025
+    Last Modified: 27/07/2025
 -->
 
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Header -->
 <head>
-  <meta charset="UTF-8" />
-  <title>Customer Data Entry</title>
-  <link rel="stylesheet" href="../styles/data_entry.css" />
+    <meta charset="UTF-8" />
+    <title>Customer Data Entry</title>
+    <!-- Shared Stylesheet contianing styles of input fields, buttons -->
+     <link rel="stylesheet" href="../styles/shared.css">
+    <!-- Style Sheet for Data Entry page. -->
+    <link rel="stylesheet" href="../styles/data_entry.css" />
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <h4>CUSTOMER DATA ENTRY</h4>
-    </header>
+    <div class="container">
+        <!-- Page Header -->
+        <header>
+            <h4>CUSTOMER DATA ENTRY</h4>
+        </header>
 
-    <!-- Main panel containing form -->
-    <main class="pannels">
-      <div class="main">
-        <form id="data-entry" action="">
-          <!-- Mobile number and photo uploads -->
-          <div class="number_image form-row">
-            <div class="number label-above">
-              <label for="mobile">Mobile Number</label>
-              <input type="number" id="mobile" placeholder="Enter mobile number" autocomplete="off" />
-            </div>
+        <!-- Main Form Panel -->
+        <main class="pannels">
+            <div class="main">
+                <form id="data-entry" action="">
 
-            <div class="upld">
-              <!-- Upload Photo -->
-              <label class="upload-box">
-                <div class="upload-placeholder">📤</div>
-                <span>Upload Photo</span>
-                <input type="file" id="photo-upload" hidden autocomplete="off"  />
-              </label>
-              <!-- Upload Signature -->
-              <label class="upload-box">
-                <div class="upload-placeholder">📤</div>
-                <span>Upload Signature</span>
-                <input type="file" id="sign-upload" hidden autocomplete="off"  />
-              </label>
-            </div>
-          </div>
+                    <!-- Mobile Number and Photo Upload Section -->
+                    <div class="number_image form-row">
+                        <!-- Mobile Number -->
+                        <div class="number label-above">
+                            <label for="mobile">Mobile Number</label>
+                            <input type="number" id="mobile" placeholder="Enter mobile number" autocomplete="off" />
+                        </div>
 
-          <div class="divider"></div>
+                        <!-- Photo and Signature Upload -->
+                        <div class="upld">
+                            <label class="upload-box">
+                                <div class="upload-placeholder">📤</div>
+                                <span>Upload Photo</span>
+                                <input type="file" id="photo-upload" hidden autocomplete="off" />
+                            </label>
+                            <label class="upload-box">
+                                <div class="upload-placeholder">📤</div>
+                                <span>Upload Signature</span>
+                                <input type="file" id="sign-upload" hidden autocomplete="off" />
+                            </label>
+                        </div>
+                    </div>
 
-          <!-- Name, DOB, Relation -->
-          <div class="form-row">
-            <div class="label-above">
-              <label>Name</label>
-              <input type="text" placeholder="Enter name" autocomplete="off" />
-            </div>
-            <div class="label-above">
-              <label>Date Of Birth</label>
-              <input type="date" autocomplete="off" />
-            </div>
-            <div class="label-above">
-              <label>S/D/W of</label>
-              <input type="text" placeholder="Enter relation" autocomplete="off" />
-            </div>
-          </div>
+                    <div class="divider"></div>
 
-          <!-- Car/instructor/license block -->
-          <div class="division">
-            <div class="left">
-              <!-- Car and Instructor selection -->
-              <div class="form-row">
-                <div class="label-above">
-                  <label>Car</label>
-                  <select>
-                    <option value="">Select Car</option>
-                    <option>A</option>
-                    <option>B</option>
-                    <option>C</option>
-                  </select>
-                </div>
-                <div class="label-above">
-                  <label>Instructor</label>
-                  <select>
-                    <option value="">Select</option>
-                    <option>A</option>
-                    <option>B</option>
-                    <option>C</option>
-                  </select>
-                </div>
-              </div>
+                    <!-- Personal Details -->
+                    <div class="personal">
+                        <div class="label-above">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Enter full name" autocomplete="off">
+                        </div>
+                        <div class="label-above"> 
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" placeholder="DD/MM/YYYY" autocomplete="off">
+                        </div>
+                        <div class="label-above">
+                            <label for="relation">Son of / Daughter of / Wife of</label>
+                            <input type="text" id="relation" placeholder="Enter relation name" autocomplete="off">
+                        </div>
+                    </div>
 
-              <!-- LL No and Class -->
-              <div class="form-row">
-                <div class="label-above">
-                  <label>LL No-1</label>
-                  <input type="text" value="MH01 /" placeholder="LL No-1" autocomplete="off" />
-                </div>
-                <div class="label-above">
-                  <label>Class 1</label>
-                  <input type="text" placeholder="Class 1" autocomplete="off" />
-                </div>
-              </div>
+                    <!-- Left and Right Column Layout -->
+                    <div class="panels">
+                        <!-- Left Column -->
+                        <div class="left">
 
-              <div class="form-row">
-                <div class="label-above">
-                  <label>LL No-2</label>
-                  <input type="text" value="MH01 /" placeholder="LL No-2" autocomplete="off" />
-                </div>
-                <div class="label-above">
-                  <label>Class 2</label>
-                  <input type="text" placeholder="Class 2" autocomplete="off" />
-                </div>
-              </div>
-            </div>
+                            <!-- Car and Instructor -->
+                            <div class="form-row car-instr">
+                                <div class="label-above">
+                                    <label for="car">Car</label>
+                                    <select id="car">
+                                    <option value="">Select option</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                </select>
+                                </div>
+                                <div class="label-above">
+                                    <label for="instr">Instructor</label>
+                                    <select id="instr">
+                                    <option value="">Select option</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                </select>
+                                </div>
+                            </div>
 
-            <!-- Address + Issued/Valid Date -->
-            <div class="right">
-              <div class="label-above half-height">
-                <label>Address</label>
-                <textarea id="address-text" placeholder="Enter full address here" autocomplete="off" ></textarea>
-              </div>
+                            <!-- LL No. & Class Entries -->
+                            <div class="form-row ll-class">
+                                <div class="label-above">
+                                    <label for="ll1">LL No-01</label>
+                                    <input type="text" id="ll1" value="MH01 /" placeholder="Enter LL No. 1" autocomplete="off">
+                                </div>
+                                <div class="label-above">
+                                    <label for="c1">Class 1</label>
+                                    <input type="text" id="c1" placeholder="Enter class 1" autocomplete="off">
+                                </div>
+                            </div>
 
-              <!-- Issued On / Valid Upto -->
-              <div class="form-row">
-                <div class="label-above">
-                  <label>Issued On</label>
-                  <input type="date" autocomplete="off" />
-                </div>
-                <div class="label-above">
-                  <label>Valid Upto</label>
-                  <input type="date" autocomplete="off" />
-                </div>
-              </div>
-            </div>
-          </div>
+                            <div class="form-row ll-class">
+                                <div class="label-above">
+                                    <label for="ll2">LL No-02</label>
+                                    <input type="text" id="ll2" value="MH01 /" placeholder="Enter LL No. 2" autocomplete="off">
+                                </div>
+                                <div class="label-above">
+                                    <label for="c2">Class 2</label>
+                                    <input type="text" id="c2" placeholder="Enter class 2" autocomplete="off">
+                                </div>
+                            </div>
 
-          <!-- MDL Details -->
-          <div class="form-row">
-            <div class="label-above">
-              <label>MDL No</label>
-              <input type="text" placeholder="Enter MDL No" autocomplete="off" />
-            </div>
-            <div class="label-above">
-              <label>Class</label>
-              <input type="text" placeholder="Class" autocomplete="off" />
-            </div>
-            <div class="label-above">
-              <label>Issued On</label>
-              <input type="date" autocomplete="off" />
-            </div>
-            <div class="label-above">
-              <label>Valid Upto</label>
-              <input type="date" autocomplete="off" />
-            </div>
-          </div>
+                            <!-- MDL No. and Class -->
+                            <div class="form-row ll-class">
+                                <div class="label-above">
+                                    <label for="mdl">MDL No.</label>
+                                    <input type="text" id="mdl" placeholder="Enter MDL number" autocomplete="off">
+                                </div>
+                                <div class="label-above">
+                                    <label for="cls">Class</label>
+                                    <input type="text" id="cls" placeholder="Enter class" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
 
-          <!-- Endorsement -->
-          <div class="form-row">
-            <div class="label-above">
-              <label>Endorsement (If Any)</label>
-              <input type="text" placeholder="Enter endorsement" autocomplete="off" />
-            </div>
-            <div class="label-above">
-              <label>Dated</label>
-              <input type="date" autocomplete="off" />
-            </div>
-            <div class="label-above">
-              <label>Valid Upto</label>
-              <input type="date" autocomplete="off" />
-            </div>
-          </div>
+                        <!-- Right Column -->
+                        <div class="right">
+                            <!-- Address -->
+                            <div class="label-above">
+                                <label for="address">Address</label>
+                                <textarea id="address" placeholder="Enter full address"></textarea>
+                            </div>
 
-          <!-- Vehicle info -->
-          <div class="vehi-desc form-row" id="vehicle">
-            <div class="label-above vehicle-number">
-              <label>Vehicle No</label>
-              <input type="text" placeholder="Vehicle number" autocomplete="off" />
+                            <!-- Dates for LL 1 -->
+                            <div class="dates">
+                                <div class="label-above">
+                                    <label for="issued1">Issued on</label>
+                                    <input type="date" id="issued1" autocomplete="off">
+                                </div>
+                                <div class="label-above">
+                                    <label for="upto1">Valid Upto</label>
+                                    <input type="date" id="upto1" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <!-- Dates for LL 2 -->
+                            <div class="dates">
+                                <div class="label-above">
+                                    <label for="issued2">Issued on</label>
+                                    <input type="date" id="issued2" autocomplete="off">
+                                </div>
+                                <div class="label-above">
+                                    <label for="upto2">Valid Upto</label>
+                                    <input type="date" id="upto2" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Endorsement Section -->
+                    <div class="form-row">
+                        <div class="label-above">
+                            <label for="endorsement">Endorsement (If Any)</label>
+                            <input type="text" id="endorsement" placeholder="Enter endorsement details" autocomplete="off">
+                        </div>
+                        <div class="label-above">
+                            <label for="endr-date">Endorsement Dated</label>
+                            <input type="date" id="endr-date" autocomplete="off">
+                        </div>
+                        <div class="label-above">
+                            <label for="endr-valid">Valid Upto</label>
+                            <input type="date" id="endr-valid" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Info and Past Records -->
+                    <div class="panels">
+                        <!-- Vehicle Details -->
+                        <div class="left">
+                            <div class="form-row">
+                                <div class="label-above">
+                                    <label for="vehicle">Vehicle No.</label>
+                                    <input type="text" id="vehicle" placeholder="Enter vehicle number" autocomplete="off">
+                                </div>
+                                <div class="label-above">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" id="amount" placeholder="Enter amount" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <!-- Work Description -->
+                            <div class="label-above">
+                                <label for="work-desc">Work Description</label>
+                                <select id="work-desc">
+                                    <option value="">Select option</option>
+                                    <option value="Trainer">Trainers</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Scrollable Past Records -->
+                        <div class="right">
+                            <div class="label-above">
+                                <label for="past-recs">Past Records</label>
+                                <div id="past-recs" class="scroll-box">
+                                    <p>Previous Record 1</p>
+                                    <p>Previous Record 2</p>
+                                    <p>Previous Record 3</p>
+                                    <p>Previous Record 1</p>
+                                    <p>Previous Record 2</p>
+                                    <p>Previous Record 3</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Action Buttons -->
+                    <div class="buttons">
+                        <button type="button" class="btn blue">New</button>
+                        <button type="button" class="btn yellow">Edit</button>
+                        <button type="button" class="btn red">Clear</button>
+                        <button type="submit" class="btn green">Save</button>
+                    </div>
+
+                </form>
             </div>
+        </main>
+    </div>
 
-            <div class="label-above">
-              <label>Select</label>
-              <select>
-                <option value="">Select</option>
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
-              </select>
-            </div>
-
-            <button type="button" class="btn small-btn">Show Past Records</button>
-          </div>
-
-          <!-- Amount -->
-          <div class="form-row">
-            <div class="label-above" style="flex: 1;">
-              <label>Total Amount</label>
-              <input type="number" id="amount" placeholder="Enter total amount" autocomplete="off" />
-            </div>
-          </div>
-
-          <!-- Action buttons -->
-          <div class="buttons">
-            <button type="button" class="btn blue">New</button>
-            <button type="button" class="btn yellow">Edit</button>
-            <button type="button" class="btn red">Clear</button>
-            <button type="submit" class="btn green">Save</button>
-          </div>
-        </form>
-      </div>
-    </main>
-  </div>
-
-  <!-- Prevent enter from submitting form -->
-  <script>
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-      }
-    });
-  </script>
+    <!-- Prevent Enter key from submitting form accidentally -->
+    <script>
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>

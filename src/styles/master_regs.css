@@ -1,0 +1,224 @@
+/* File: styles/master_regs.css
+   Author: Neha Balotia
+   Description: Styled containers, centered content, and enhanced UI.
+   Updated: 27/07/2025
+*/
+
+html,
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: #ffffff;
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* --- HEADER --- */
+header {
+    padding: 2vh 2vw;
+    border-bottom: 0.2vh solid #ccc;
+}
+
+header h4 {
+    font-size: 2.5vh;
+    font-weight: bold;
+    color: #333;
+}
+
+h2 {
+    font-size: 4vh;
+    font-weight: bold;
+    color: #333;
+}
+
+/* --- MAIN CONTAINER --- */
+.container {
+    height: 90vh;
+    width: 100vw;
+    padding: 2vh 2vw;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+/* --- PANELS: SIDE-BY-SIDE --- */
+.panels {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
+
+/* --- TABLE CONTAINER --- */
+.table-container {
+    width: 60%;
+    padding: 2vh 2vw;
+    background-color: #fefefe;
+    border-radius: 1vw;
+    border: 0.2vh solid #e1e1e1;
+    overflow-y: auto;
+}
+
+/* --- CLEAN TABLE STYLING --- */
+.instructor-table {
+    margin-block: 2vh;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.9vw;
+    background-color: #fff;
+    color: #333;
+    border: 0.15vh solid #d0d7dd;
+    border-radius: 0.6vw;
+    overflow: hidden;
+}
+
+.instructor-table thead {
+    background-color: #e3f2fd;
+    color: #333;
+    text-transform: uppercase;
+    font-size: 0.8vw;
+}
+
+.instructor-table thead th {
+    padding: 1.2vh 1vw;
+    border-right: 0.1vh solid #d0e4f1;
+    text-align: left; /* Align column names to the left */
+    border-bottom: 0.1vh solid #c4d8e2;
+}
+
+.instructor-table td {
+    padding: 1.1vh 1vw;
+    border-top: 0.1vh solid #e0e0e0;
+    border-bottom: 0.1vh solid #e0e0e0;
+    border-right: 0.1vh solid #f0f0f0; /* vertical partition */
+    text-align: left;
+    font-weight: 500;
+}
+
+/* Rounded top corners only */
+.instructor-table thead th:first-child {
+    border-top-left-radius: 0.6vw;
+}
+.instructor-table thead th:last-child {
+    border-top-right-radius: 0.6vw;
+}
+
+
+/* --- FORM CONTAINER --- */
+.form-container {
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Centered form and buttons */
+.form-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+}
+
+.form-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+}
+
+.label-above {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vh;
+}
+
+input[type="text"] {
+    width: 20vw;
+    height: 3.5vh;
+    padding: 0.5vh 1vw;
+    font-size: 0.8vw;
+    border: 0.1vh solid #ccc;
+    border-radius: 0.3vw;
+}
+
+/* --- BUTTONS --- */
+.buttons {
+    transition-duration: 0.4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    margin-top: 1vh;
+    height: 5vh;
+}
+
+.btn {
+    padding: 0 1vw;
+    font-size: 0.8vw;
+    width: 4vw;
+    height: 100%;
+    border-radius: 0.3vw;
+    background-color: transparent; /* No static background */
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s, color 0.3s, border-color 0.3s;
+    border: 0.2vh solid #c7d9e6; /* Default light border */
+}
+
+.btn.yellow {
+    border-color: #ffc107;
+    color: #ffc107;
+}
+
+.btn.orange {
+    border-color: #fd7e14;
+    color: #fd7e14;
+}
+
+.btn.green {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.btn.red {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.btn.yellow:hover {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn.orange:hover {
+    background-color: #fd7e14;
+    color: white;
+}
+
+.btn.green:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn.red:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+/* 
+.btn.blue { background-color: #007bff; }
+.btn.yellow { background-color: #ffc107; }
+.btn.orange { background-color: #fd7e14; }
+.btn.green { background-color: #28a745; }
+.btn.red { background-color: #dc3545; } */

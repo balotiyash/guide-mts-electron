@@ -1,0 +1,76 @@
+/* File: styles/data_entry.css
+   Author: Neha Balotia
+   Description: Compact CSS for Customer Data Entry Page.
+   Created on: 27/07/2025
+   Last Modified: 27/07/2025 
+*/
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    font-family: sans-serif;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 1.2vh 0.8vw;
+    border: 0.15vh solid #dce1e7;
+    border-radius: 0.3vw;
+    background: #f0f4f8;
+    font-size: 0.75vw;
+    text-transform: uppercase;
+    min-height: 5vh;
+}
+
+/* Remove spinners from number fields */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+label {
+    font-weight: bold;
+    color: rgb(58, 58, 58);
+    margin-bottom: 2px;
+    font-size: 1vw;
+}
+
+.btn {
+    padding: 0 1vw;
+    font-size: 0.8vw;
+    width: 5vw;
+    height: 95%;
+    border: none;
+    border-radius: 0.3vw;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0.2vh 0.5vh rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+    margin-bottom: 0vh;
+}
+    
+/* BUTTONS */
+.buttons {
+    display: flex;
+    gap: 1vw;
+    justify-content: flex-end;
+    margin-top: auto;
+    height: 5vh;
+}
+
+.btn:hover {
+    transform: translateY(-0.3vh);
+}

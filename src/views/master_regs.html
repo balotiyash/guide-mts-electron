@@ -1,0 +1,98 @@
+<!-- 
+    File: views/master_regs.html
+    Author: Neha Balotia
+    Description: This page contains all the HTML5 code of the Master Registration Page.
+    Created on: 17/07/2025
+    Last Modified: 27/07/2025
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Header -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Master Registration</title>
+    <!-- Shared Stylesheet  -->
+    <link rel="stylesheet" href="../styles/shared.css">
+    <!-- Stylesheet for Master Registration Page -->
+    <link rel="stylesheet" href="../styles/master_regs.css" />
+</head>
+
+<body>
+    <header>
+        <h4>MASTER REGISTRATION</h4>
+    </header>
+
+    <main class="container">
+        <div class="panels">
+
+            <!-- Left Container: Instructor Table -->
+            <div class="table-container">
+                <label for="tbl">Registered Instructors</label>
+                <table class="instructor-table" id="tbl">
+                    <thead>
+                        <tr class="active-row">
+                            <th>Instructor Name</th>
+                            <th>License Number</th>
+                            <th>Last Updated On</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rajeev Sharma</td>
+                            <td>DL9876</td>
+                            <td>2025-07-25</td>
+                        </tr>
+                        <tr>
+                            <td>Neha Kapoor</td>
+                            <td>DL1234</td>
+                            <td>2025-07-20</td>
+                        </tr>
+                        <tr>
+                            <td>Amit Verma</td>
+                            <td>DL5678</td>
+                            <td>2025-07-18</td>
+                        </tr>
+                        <tr>
+                            <td>Sonal Batra</td>
+                            <td>DL4321</td>
+                            <td>2025-07-10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Right Container: Registration Form -->
+            <div class="form-container right">
+                <div class="form-inner">
+                    <div class="form-content">
+                        <h2>Instructor Registration.</h2><br>
+                        <div class="label-above">
+                            <label for="name">Instructor Name:</label>
+                            <input type="text" id="name" placeholder="Instructor Name" autocomplete="off" />
+                        </div>
+                        <div class="label-above">
+                            <label for="license">License No.</label>
+                            <input type="text" id="license" placeholder="License Number" autocomplete="off" />
+                        </div>
+    
+                    </div>
+
+                    <div class="buttons">
+                        <button type="button" class="btn yellow">Edit</button>
+                        <button type="button" class="btn orange">Clear</button>
+                        <button type="button" class="btn green">Save</button>
+                        <button type="button" class="btn red">Exit</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+
+</html>
