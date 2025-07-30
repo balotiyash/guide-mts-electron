@@ -5,7 +5,7 @@
   "author": "Yash Balotiya",
   "main": "index.js",
   "scripts": {
-    "dist": "electron-builder",
+    "dist": "electron-builder --win --x64",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
@@ -39,6 +39,15 @@
     },
     "linux": {
       "target": "AppImage"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "license": "license.txt",
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Guide MTS"
     }
   },
   "dependencies": {
