@@ -1,11 +1,47 @@
 {
-  "name": "practice",
+  "name": "guide-mts",
   "version": "1.0.0",
+  "description": "An Electron application for MTS Guide",
+  "author": "Yash Balotiya",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "dist": "electron-builder",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
   },
   "devDependencies": {
-    "electron": "^27.3.11"
+    "@electron-forge/cli": "^7.8.2",
+    "@electron-forge/maker-deb": "^7.8.2",
+    "@electron-forge/maker-rpm": "^7.8.2",
+    "@electron-forge/maker-squirrel": "^7.8.2",
+    "@electron-forge/maker-zip": "^7.8.2",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.8.2",
+    "@electron-forge/plugin-fuses": "^7.8.2",
+    "@electron-forge/plugin-webpack": "^7.8.2",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^27.3.11",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.balotiyash.app",
+    "productName": "Guide MTS",
+    "files": [
+      "**/*"
+    ],
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1"
   }
 }
