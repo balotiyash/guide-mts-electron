@@ -1,133 +1,67 @@
+/** 
+ * File: index.js
+ * Author: Yash Balotiya, Neha Balotia
+ * Description: Main script for Electron application. This script initializes the application and creates the main window.
+ * Created on: 13/07/2025
+ * Last Modified: 01/08/2025
+*/
+
+// Importing required modules from Electron
 const { app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('path');
+const createMenuTemplate = require('./menu.js');
+require('dotenv').config();
 
+// Window variable to hold the main application window
 let win;
 
-// ✅ Define the custom menu once at top level
-const menuTemplate = [
-  {
-    label: 'Master',
-    submenu: [
-      {
-        label: 'Customer Registration',
-        click: () => {
-          win.loadFile(path.join(__dirname, 'src/views/data_entry.html'));
-        },
-      },
-      {
-        label: 'Master Registration',
-        click: () => {
-          win.loadFile(path.join(__dirname, 'src/views/master_regs.html'));
-        },
-      },
-      { type: 'separator' },
-      {
-        label: 'Exit',
-        click: () => {
-          app.quit();
-        },
-      },
-    ],
-  },
-  {
-    label: 'Payments',
-    submenu: [
-      {
-        label: 'Receive Payment',
-        click: () => {
-          console.log('Receive Payment clicked');
-        },
-      },
-    ],
-  },
-  {
-    label: 'Reports',
-    submenu: [
-      {
-        label: 'Customer Report',
-        click: () => {
-          console.log('Customer Report clicked');
-        },
-      },
-    ],
-  },
-  {
-    label: 'Form-14',
-    submenu: [
-      {
-        label: 'Generate Form',
-        click: () => {
-          console.log('Generate Form clicked');
-        },
-      },
-    ],
-  },
-  {
-    label: 'Tools',
-    submenu: [
-      {
-        label: 'Developer Tools',
-        click: () => {
-          win.webContents.openDevTools();
-        },
-      },
-    ],
-  },
-  {
-    label: 'Help',
-    submenu: [
-      {
-        label: 'About',
-        click: () => {
-          console.log('About clicked');
-        },
-      },
-    ],
-  },
-];
+// Disable hardware acceleration for better compatibility. This is useful for applications that do not require GPU acceleration.
+app.disableHardwareAcceleration();
 
-function createWindow() {
-  win = new BrowserWindow({
-    show: false,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: true,
-      nodeIntegration: false,
-    },
-  });
+// Function to create the main application window
+const createWindow = () => {
+    win = new BrowserWindow({
+        show: false,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true,
+            nodeIntegration: false,
+        },
+    });
 
-  win.loadFile(path.join(__dirname, 'src/views/index.html'));
-  win.maximize(); 
-  win.show();
+    win.loadFile(path.join(__dirname, 'src/views/index.html'));
+    win.maximize();
+    win.show();
 
-  // ❌ No menu on startup (login screen)
-  Menu.setApplicationMenu(null);
+    // ❌ No menu on startup (login screen)
+    // Menu.setApplicationMenu(null);
 }
 
+// Event listener for when the application is ready
 app.whenReady().then(() => {
-  try {
-    createWindow();
-  } catch (err) {
-    console.error('Failed to create window:', err);
-  }
+    try {
+        createWindow();
+    } catch (err) {
+        console.error('Failed to create window:', err);
+    }
 });
 
-// ✅ Show the menu after successful login
+// After login show the menu
 ipcMain.on('show-menu', () => {
-  const customMenu = Menu.buildFromTemplate(menuTemplate);
-  Menu.setApplicationMenu(customMenu);
+    const customMenu = Menu.buildFromTemplate(createMenuTemplate(win));
+    Menu.setApplicationMenu(customMenu);
 });
 
-// ✅ Handle login validation
+// Handle login validation
 ipcMain.handle('login', async (event, { username, password }) => {
-  return username === 'ADMIN' && password === 'ADMIN'
-    ? { success: true }
-    : { success: false };
+    return username === process.env.UNAME && password === process.env.PASSWORD
+        ? { success: true }
+        : { success: false };
 });
 
-// ✅ Secure page navigation
+// Secure page navigation
 ipcMain.on('navigate-to', (event, targetPage) => {
-  if (win) {
-    win.loadFile(path.join(__dirname, 'src/views', targetPage));
-  }
+    if (win) {
+        win.loadFile(path.join(__dirname, 'src/views', targetPage));
+    }
 });
