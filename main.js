@@ -10,7 +10,6 @@
 const { app, BrowserWindow, ipcMain, Menu, screen } = require('electron');
 const path = require('path');
 const createMenuTemplate = require('./menu.js');
-require('dotenv').config();
 
 // Window variable to hold the main application window
 let win;
@@ -59,7 +58,7 @@ ipcMain.on('show-menu', () => {
 
 // Handle login validation
 ipcMain.handle('login', async (event, { username, password }) => {
-    return username === process.env.UNAME && password === process.env.PASSWORD
+    return username === 'ADMIN' && password === 'ADMIN'
         ? { success: true }
         : { success: false };
 });
