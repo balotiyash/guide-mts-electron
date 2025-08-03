@@ -2,9 +2,8 @@
    Author: Neha Balotia
    Description: Compact CSS for Customer Data Entry Page.
    Created on: 27/07/2025
-   Last Modified: 27/07/2025 
+   Last Modified: 03/08/2025 
 */
-
 
 * {
     box-sizing: border-box;
@@ -12,6 +11,10 @@
     padding: 0;
     user-select: none;
     font-family: sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 input[type="text"],
@@ -40,6 +43,15 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+img {
+    user-drag: none;  
+   user-select: none;
+   -moz-user-select: none;
+   -webkit-user-drag: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+}
+
 label {
     font-weight: bold;
     color: rgb(58, 58, 58);
@@ -61,7 +73,7 @@ label {
     transition: background 0.3s, transform 0.1s;
     margin-bottom: 0vh;
 }
-    
+
 /* BUTTONS */
 .buttons {
     display: flex;

@@ -3,11 +3,11 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 01/08/2025
+ * Last Modified: 03/08/2025
 */
 
 // Importing required modules from Electron
-const { app, BrowserWindow, ipcMain, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, screen } = require('electron');
 const path = require('path');
 const createMenuTemplate = require('./menu.js');
 require('dotenv').config();
@@ -20,12 +20,17 @@ app.disableHardwareAcceleration();
 
 // Function to create the main application window
 const createWindow = () => {
+    const primaryDisplay = screen.getPrimaryDisplay();
+    const { width, height } = primaryDisplay.workAreaSize;
+
     win = new BrowserWindow({
-        show: false,
+        // show: false, 
+        minWidth: Math.floor(width * 1),
+        minHeight: Math.floor(height * 1),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
-            nodeIntegration: false,
+            nodeIntegration: true,
         },
     });
 
