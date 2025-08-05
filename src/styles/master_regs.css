@@ -222,3 +222,29 @@ input[type="text"] {
 .btn.orange { background-color: #fd7e14; }
 .btn.green { background-color: #28a745; }
 .btn.red { background-color: #dc3545; } */
+tbody tr:hover {
+    background-color: #f0f0f0; /* Light gray on hover */
+    cursor: pointer;
+}
+select{
+    width: 20vw;
+    height: 3.5vh;
+    padding: 0.5vh 1vw;
+    font-size: 0.8vw;
+    border: 0.1vh solid #ccc;
+    border-radius: 0.3vw;
+}
+
+select option {
+    padding: 0.5vh 1vw;
+    font-size: 1vw;
+}
+
+#entrydate {
+    width: 20vw;
+    height: 3.5vh;
+    padding: 0.5vh 1vw;
+    font-size: 0.8vw;
+    border: 0.1vh solid #ccc;
+    border-radius: 0.3vw;
+}
