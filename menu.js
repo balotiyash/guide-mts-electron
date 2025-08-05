@@ -30,6 +30,18 @@ function createMenuTemplate(win) {
                         win.loadFile(path.join(__dirname, 'src/views/master_regs.html'));
                     },
                 },
+                {
+                    label: 'Car Entry',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, 'src/views/car_entry.html'));
+                    },
+                },
+                {
+                    label: 'Fuel Entry',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, 'src/views/fuel_entry.html'));
+                    },
+                },
                 { type: 'separator' },
                 {
                     label: 'Exit',
