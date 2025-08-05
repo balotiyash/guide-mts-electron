@@ -1,0 +1,13 @@
+/* 
+    File: styles/dashboard.css
+    Author: Neha Balotia, Yash Balotiya
+    Description: This page contains all the CSS code of the Dashboard Page.
+    Created on: 05/08/2025
+    Last Modified: 05/08/2025
+*/
+
+#mainContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}

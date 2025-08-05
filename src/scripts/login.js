@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Handles user login functionality for the Guide Motor Training School application.
  * Created on: 20/07/2025
- * Last Modified: 03/08/2025
+ * Last Modified: 04/08/2025
 */
 
 // Only runs when the DOM is fully loaded
@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Enables Menu
             window.electronAPI.showMenu();
 
-            // Navigating to Data Entry page
-            window.electronAPI.navigateTo('data_entry.html');
+            // Navigating to Dashboard page
+            window.electronAPI.navigateTo('dashboard.html');
         } else {
             message.innerText = 'Invalid Username or Password';
             message.style.color = 'red';

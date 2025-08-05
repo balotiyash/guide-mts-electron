@@ -38,7 +38,7 @@ const createWindow = () => {
     win.show();
 
     // ❌ No menu on startup (login screen)
-    // Menu.setApplicationMenu(null);
+    Menu.setApplicationMenu(null);
 }
 
 // Event listener for when the application is ready
