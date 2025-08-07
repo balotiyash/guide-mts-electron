@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Login Page.
     Created on: 13/07/2025
-    Last Modified: 03/08/2025
+    Last Modified: 06/08/2025
 -->
 
 <!DOCTYPE html>
@@ -33,8 +33,9 @@
                 <img src="../assets/gifs/Traffic concept.gif" alt="Car Driving Animation" />
 
                 <!-- Brand Name -->
-                <h1>Guide</h1>
-                <p>Motor Training School</p>
+                <!-- <h1>Guide</h1>
+                <p>Motor Training School</p> -->
+                <img src="../assets/images/guide-logo.png" alt="Guide Motor Training School Logo" class="logo" />
             </div>
         </div>
 
@@ -43,10 +44,10 @@
             <div class="login-box">
                 <h2>Welcome Back 👋</h2>
                 <p class="subtitle">Please login to continue</p>
-                <input type="text" id="username" placeholder="Enter Username" />
-                <input type="password" id="password" placeholder="ENTER PASSWORD" />
+                <input type="text" id="username" placeholder="Enter Username" autocomplete="off" title="Please enter your username" />
+                <input type="password" id="password" placeholder="ENTER PASSWORD" autocomplete="off" title="Please enter your password" />
                 <button id="loginBtn">Login</button>
-                <div id="message"></div>
+                <!-- <div id="message"></div> -->
             </div>
         </div>
     </main>

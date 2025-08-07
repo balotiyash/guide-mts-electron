@@ -3,7 +3,7 @@
     Author: Neha Balotia, Yash Balotiya
     Description: This page contains all the CSS code of the Login Page.
     Created on: 13/07/2025
-    Last Modified: 03/08/2025
+    Last Modified: 06/08/2025
 */
 
 /* Disable selection globally */
@@ -38,10 +38,14 @@ body {
 .brand img {
     width: 80%;
     height: auto;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     /* user select off drag */
     user-select: none;
     -webkit-user-select: none;
+}
+
+.logo {
+    margin-bottom: 100px;
 }
 
 .brand h1 {
@@ -59,6 +63,7 @@ body {
 /* Right Login Panel (2 parts) */
 .right-panel {
     flex: 2;
+    /* width: 20%; */
     background: #ffffff;
     display: flex;
     align-items: center;
@@ -67,8 +72,15 @@ body {
 }
 
 .login-box {
-    width: 100%;
-    max-width: 380px;
+    width: 70%;
+    min-height: calc(35%);
+    /* height: 100%; */
+    /* max-width: 380px; */
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
     background: #ffffff;
     padding: 40px 45px;
     border-radius: 20px;
@@ -84,25 +96,27 @@ body {
 }
 
 .subtitle {
-    font-size: 14px;
+    /* font-size: 14px; */
     color: #555;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
 }
 
 input[type="text"],
 input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
+    /* width: 100%; */
+    /* padding: 12px; */
+    /* margin-bottom: 15px; */
+    /* border: 1px solid #ccc; */
+    /* border-radius: 8px; */
+    /* font-size: 14px; */
     background-color: #fdfdfd;
     transition: border-color 0.3s;
 }
 
 input:focus {
-    border-color: #1976d2;
+    /* border-color: #1976d2; */
+    border-width: 2px;
+    border-color: orange;
     outline: none;
 }
 
@@ -122,7 +136,8 @@ input:focus {
 button {
     width: 100%;
     padding: 12px;
-    background-color: #1976d2;
+    /* background-color: #1976d2; */
+    background-color: #EB5B00;
     color: #fff;
     font-size: 15px;
     font-weight: 600;
@@ -133,7 +148,8 @@ button {
 }
 
 button:hover {
-    background-color: #0f5db3;
+    /* background-color: #0f5db3; */
+    background-color: #d45a00;
 }
 
 #message {

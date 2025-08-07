@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Dashboard Page after Login.
     Created on: 04/08/2025
-    Last Modified: 05/08/2025
+    Last Modified: 06/08/2025
 -->
 
 <!DOCTYPE html>
@@ -26,15 +26,94 @@
     ">
 
     <!-- Stylesheets -->
-     <link rel="stylesheet" href="../styles/shared.css">
+    <link rel="stylesheet" href="../styles/shared.css">
     <link rel="stylesheet" href="../styles/dashboard.css">
 </head>
 
 <body>
     <!-- Main Content -->
     <main id="mainContainer">
-        <h1>GUIDE MTS Dashboard</h1>
-        <canvas id="myChart" width="400" height="200"></canvas>
+        <section id="headerSection">
+            <!-- <h1>GUIDE MTS Dashboard</h1> -->
+            <span>
+                <img src="../assets/images/guide-logo.png" alt="Guide Motor Training School Logo" id="logoImage">
+
+                <!-- <b>- DASHBOARD</b>  -->
+            </span>
+            <input type="month" name="" id="monthInput" title="Select Month & Year">
+        </section>
+
+        <!-- Actual Area -->
+        <section id="dashboardSection">
+            <!-- Left Buttons Div -->
+            <div id="leftButtonsDiv">
+                <!-- Button 1 -->
+                <div class="dashboardButton" id="">
+                    <img src="../assets/images/registration.jpg" alt="">
+                    <p>Student Registration</p>
+                </div>
+
+                <!-- Button 1 -->
+                <div class="dashboardButton" id="">
+                    <img src="../assets/images/search.jpg" alt="">
+                    <p>Student Search</p>
+                </div>
+
+                <!-- Button 1 -->
+                <div class="dashboardButton" id="">
+                    <img src="../assets/images/amount.jpg" alt="">
+                    <p>Student Fees</p>
+                </div>
+
+                <!-- Button 1 -->
+                <div class="dashboardButton" id="">
+                    <img src="../assets/images/form-14.jpg" alt="">
+                    <p>Form 14</p>
+                </div>
+
+                <!-- Button 1 -->
+                <div class="dashboardButton" id="">
+                    <img src="../assets/images/car-fuel.jpg" alt="">
+                    <p>Car Fuel</p>
+                </div>
+
+                <!-- Button 1 -->
+                <div class="dashboardButton" id="">
+                    <img src="../assets/images/backup.jpg" alt="">
+                    <p>Backup</p>
+                </div>
+            </div>
+
+            <!-- Middle Section -->
+            <div id="middleChartsDiv">
+
+                <!-- Chart Div1 -->
+                <div class="chartContainer">
+                    <h3>Total Students Enrolled</h3>
+                    <canvas id="chart1"></canvas>
+                </div>
+
+                <!-- Chart Div2 -->
+                <div class="chartContainer cc2">
+
+                    <div class="chartContainer2">
+                        <h3>Monthly Revenue</h3><br>
+                        <canvas id="chart2"></canvas>
+                    </div>
+
+                    <div class="chartContainerSmall3">
+                        <h3>Car Selection</h3><br>
+                        <canvas id="chart3"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Section -->
+            <div id="rightMainDiv">
+                <!-- Content for the right section goes here -->
+            </div>
+        </section>
+
     </main>
 
     <!-- Scripts -->
