@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 03/08/2025
+ * Last Modified: 08/08/2025
 */
 
 // Importing required modules from Electron

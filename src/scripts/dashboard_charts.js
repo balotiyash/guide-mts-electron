@@ -3,15 +3,15 @@
  * Author: Yash Balotiya
  * Description: Main script for the Dashboard page. This script initializes the charts on the dashboard.
  * Created on: 04/08/2025
- * Last Modified: 04/08/2025
+ * Last Modified: 08/08/2025
 */
 
-// const Chart = require('chart.js/auto');
-
+// Onload event to initialize charts
 window.addEventListener('DOMContentLoaded', () => {
+    // Chart 1
     const ctx = document.getElementById('chart1').getContext('2d');
 
-    const myChart = new Chart(ctx, {
+    new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -48,8 +48,9 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Chart 2
     const ctx1 = document.getElementById('chart2').getContext('2d');
-    const myChart1 = new Chart(ctx1, {
+    new Chart(ctx1, {
         type: 'line',
         data: {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -86,14 +87,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    // Chart 3
     const ctx3 = document.getElementById('chart3').getContext('2d');
-    const myChart3 = new Chart(ctx3, {
+    new Chart(ctx3, {
         type: 'doughnut',
         data: {
             labels: ['Wagon R', 'Swift', 'Baleno', 'Alto', 'Innova', 'Fortuner'],
             datasets: [{
                 label: 'Votes',
-                data: [12, 19, 3, 5, 2, 3, 7],
+                data: [12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

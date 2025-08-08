@@ -1,0 +1,147 @@
+/* 
+    File: styles/dashboard_right.css
+    Author: Yash Balotiya
+    Description: This page contains all the CSS code of the Dashboard Page specifically for charts, statistics & Reminders.
+    Created on: 05/08/2025
+    Last Modified: 08/08/2025
+*/
+
+/* Middle Charts Section */
+#middleChartsDiv {
+    width: 60%;
+}
+
+.chartContainer {
+    width: 100%;
+    height: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+}
+
+.cc2 {
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.chartContainer2 {
+    width: 60%;
+}
+
+#rightMainDiv {
+    width: 25%;
+}
+
+.chartContainer h3 {
+    align-self: flex-start;
+}
+
+#chart1 {
+    height: 90%;
+}
+
+#chart2 {
+    width: 100%;
+}
+
+#chart3 {
+    width: 100%;
+}
+
+/* Right Side Container */
+#rightMainDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 20px;
+}
+
+/* Each Section */
+.rightChild {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Date & Time */
+.dateTimeDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    font-size: 20px;
+}
+
+/* Stats Section */
+.mainStatsDiv {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    width: 100%;
+    gap: 4%;
+}
+
+.statCard {
+    width: 48%;
+    padding: 16px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 4px;
+}
+
+/* Reminder Div */
+.reminderTitleSpan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+td,
+th {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.scrollDiv {
+    height: 300px;
+    overflow-y: auto;
+}
+
+/* Send SMS Button */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: brown;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: darkred;
+}

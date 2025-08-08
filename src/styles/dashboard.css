@@ -1,9 +1,9 @@
 /* 
     File: styles/dashboard.css
-    Author: Neha Balotia, Yash Balotiya
+    Author: Yash Balotiya
     Description: This page contains all the CSS code of the Dashboard Page.
     Created on: 05/08/2025
-    Last Modified: 05/08/2025
+    Last Modified: 08/08/2025
 */
 
 body {
@@ -11,6 +11,7 @@ body {
     height: 100vh;
 }
 
+/* Main Container */
 #mainContainer {
     width: 100%;
     height: 100%;
@@ -18,9 +19,9 @@ body {
     flex-direction: column;
     padding: 20px;
     background-color: #fafbfc;
-    /* text-align: center; */
 }
 
+/* Header Section */
 #headerSection {
     display: flex;
     justify-content: space-between;
@@ -35,7 +36,6 @@ body {
 #logoImage {
     width: 40%;
     height: auto;
-    /* margin: 0 auto 20px; */
 }
 
 #headerSection b {
@@ -49,6 +49,7 @@ body {
     justify-self: flex-end;
 }
 
+/* Main Dashboard Section */
 #dashboardSection {
     height: 100%;
     display: flex;
@@ -56,6 +57,7 @@ body {
     margin-top: 20px;
 }
 
+/* Left, Middle, Right Sections */
 #leftButtonsDiv,
 #middleChartsDiv,
 #rightMainDiv {
@@ -67,44 +69,10 @@ body {
     justify-content: space-between;
 }
 
-#middleChartsDiv {
-    width: 60%;
-    /* background-color: white;
-    padding: 20px;
-    border-radius: 12px; */
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-}
-
-.chartContainer {
-    width: 100%;
-    height: 49%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 0 20px;
-    /* margin-bottom: 20px; */
-}
-
-.cc2 {
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-.chartContainer2 {
-    width: 60%;
-}
-
-#rightMainDiv {
-    width: 25%;
-}
-
+/* Left Side Buttons */
 .dashboardButton {
-    width: 100%;
-    /* Height square */
+    width: 8vw;
+    height: 8vw;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -115,6 +83,7 @@ body {
     background-color: white;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-align: center;
 }
 
 .dashboardButton:hover {
@@ -128,44 +97,4 @@ body {
 
 .dashboardButton img {
     width: 80%;
-}
-
-.chartContainer h3 {
-    align-self: flex-start;
-}
-
-#chart1 {
-    /* width: 100%; */
-    height: 90%;
-}
-
-#chart2 {
-    width: 100%;
-}
-
-#chart3 {
-    width: 100%;
-}
-
-/* Responsive for Laptop */
-@media (max-width: 1536px) {
-    .dashboardButton {
-        height: 16%;
-    }
-
-    .dashboardButton img {
-        width: 50%;
-    }
-
-    .chartContainerSmall3 {
-        height: 90%;
-    }
-
-    #chart3 {
-        width: 90%;
-    }
-
-    .cc2 br {
-        display: none;
-    }
 }

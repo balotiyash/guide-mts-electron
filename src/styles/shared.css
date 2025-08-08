@@ -1,8 +1,8 @@
-/* File: styles/data_entry.css
+/* File: styles/shared.css
    Author: Neha Balotia, Yash Balotiya
-   Description: Compact CSS for Customer Data Entry Page.
+   Description: Public CSS for Shared Components.
    Created on: 27/07/2025
-   Last Modified: 06/08/2025 
+   Last Modified: 08/08/2025 
 */
 
 * {
@@ -17,6 +17,7 @@
     -ms-user-select: none;
 }
 
+/* Input Fields */
 input[type="text"],
 input[type="date"],
 input[type="number"],
@@ -30,7 +31,8 @@ textarea {
     padding: 12px;
     border: 0.15vh solid #dce1e7;
     border-radius: 0.3vw;
-    background: #f0f4f8;
+    /* background: #f0f4f8; */
+    background-color: #f8f9fa;
     text-transform: uppercase;
     transition: border 0.3s ease;
     outline: none; /* Prevent default black outline */
@@ -61,6 +63,7 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+/* Images not selectable */
 img {
     user-drag: none;  
    user-select: none;

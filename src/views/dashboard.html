@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Dashboard Page after Login.
     Created on: 04/08/2025
-    Last Modified: 06/08/2025
+    Last Modified: 08/08/2025
 -->
 
 <!DOCTYPE html>
@@ -28,58 +28,60 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../styles/shared.css">
     <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/dashboard_right.css">
+    <link rel="stylesheet" href="../styles/dashboard_responsive.css">
 </head>
 
 <body>
     <!-- Main Content -->
     <main id="mainContainer">
+        <!-- Header Section -->
         <section id="headerSection">
-            <!-- <h1>GUIDE MTS Dashboard</h1> -->
-            <span>
-                <img src="../assets/images/guide-logo.png" alt="Guide Motor Training School Logo" id="logoImage">
+            <!-- Guide MTS Logo -->
+            <img src="../assets/images/guide-logo.png" alt="Guide Motor Training School Logo" id="logoImage">
 
-                <!-- <b>- DASHBOARD</b>  -->
-            </span>
-            <input type="month" name="" id="monthInput" title="Select Month & Year">
+            <!-- Month Input -->
+            <input type="month" id="monthInput" title="Select Month & Year">
         </section>
 
         <!-- Actual Area -->
         <section id="dashboardSection">
+            
             <!-- Left Buttons Div -->
             <div id="leftButtonsDiv">
                 <!-- Button 1 -->
                 <div class="dashboardButton" id="">
-                    <img src="../assets/images/registration.jpg" alt="">
+                    <img src="../assets/images/registration.jpg" alt="Student Registration Image">
                     <p>Student Registration</p>
                 </div>
 
-                <!-- Button 1 -->
+                <!-- Button 2 -->
                 <div class="dashboardButton" id="">
-                    <img src="../assets/images/search.jpg" alt="">
+                    <img src="../assets/images/search.jpg" alt="Student Search Image">
                     <p>Student Search</p>
                 </div>
 
-                <!-- Button 1 -->
+                <!-- Button 3 -->
                 <div class="dashboardButton" id="">
-                    <img src="../assets/images/amount.jpg" alt="">
+                    <img src="../assets/images/amount.jpg" alt="Student Fees Image">
                     <p>Student Fees</p>
                 </div>
 
-                <!-- Button 1 -->
+                <!-- Button 4 -->
                 <div class="dashboardButton" id="">
-                    <img src="../assets/images/form-14.jpg" alt="">
+                    <img src="../assets/images/form-14.jpg" alt="Form 14 Image">
                     <p>Form 14</p>
                 </div>
 
-                <!-- Button 1 -->
+                <!-- Button 5 -->
                 <div class="dashboardButton" id="">
-                    <img src="../assets/images/car-fuel.jpg" alt="">
+                    <img src="../assets/images/car-fuel.jpg" alt="Car Fuel Image">
                     <p>Car Fuel</p>
                 </div>
 
-                <!-- Button 1 -->
+                <!-- Button 6 -->
                 <div class="dashboardButton" id="">
-                    <img src="../assets/images/backup.jpg" alt="">
+                    <img src="../assets/images/backup.jpg" alt="Backup Image">
                     <p>Backup</p>
                 </div>
             </div>
@@ -96,11 +98,13 @@
                 <!-- Chart Div2 -->
                 <div class="chartContainer cc2">
 
+                    <!-- Left -->
                     <div class="chartContainer2">
                         <h3>Monthly Revenue</h3><br>
                         <canvas id="chart2"></canvas>
                     </div>
 
+                    <!-- Right -->
                     <div class="chartContainerSmall3">
                         <h3>Car Selection</h3><br>
                         <canvas id="chart3"></canvas>
@@ -110,14 +114,172 @@
 
             <!-- Right Section -->
             <div id="rightMainDiv">
-                <!-- Content for the right section goes here -->
+                
+                <!-- Date & Time Section -->
+                <div class="rightChild">
+                    <!-- Title -->
+                    <h3>Current Date & Time</h3>
+
+                    <!-- Date & Time Display -->
+                    <div class="dateTimeDiv">
+                        <span id="currentDate">08/08/2025</span>
+                        <span id="currentTime">12:00:00 PM</span>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="rightChild">
+                    
+                    <!-- Title -->
+                    <h3>Business Stats</h3>
+
+                    <!-- Main Stats Div 1 -->
+                    <div class="mainStatsDiv">
+                        <!-- All Time Registration -->
+                        <span class="statCard">
+                            <small>All Time Registration</small>
+                            <big><b>100,000</b></big>
+                        </span>
+
+                        <!-- Current Year Registration -->
+                        <span class="statCard">
+                            <small>Current Year Registration</small>
+                            <big><b>500</b></big>
+                        </span>
+                    </div>
+
+                    <!-- Main Stats Div 2 -->
+                    <div class="mainStatsDiv">
+                        
+                        <!-- Repeat Students -->
+                        <span class="statCard">
+                            <small>Repeat Students</small>
+                            <big><b>1000</b></big>
+                        </span>
+
+                        <!-- Pending Payments -->
+                        <span class="statCard">
+                            <small>Pending Payments</small>
+                            <big><b>20</b></big>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Reminders -->
+                <div class="rightChild">
+
+                    <!-- Title and Select Dropdown -->
+                    <span class="reminderTitleSpan">
+
+                        <!-- Title -->
+                        <h3>Reminders</h3>
+
+                        <!-- Select Dropdown -->
+                        <select id="reminderSelect" title="Select Reminder Type">
+                            <option value="payments">Payments</option>
+                            <option value="licenses">Licenses</option>
+                            <option value="birthdays">Birthdays</option>
+                        </select>
+                    </span>
+
+                    <!-- Table Head -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Phone No.</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                    <!-- Scrollable Div with Table -->
+                    <div class="scrollDiv">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>$100</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Sent Reminders Button -->
+                    <button>Sent Reminders</button>
+                </div>
             </div>
         </section>
-
     </main>
 
     <!-- Scripts -->
-    <script src="../scripts/chart.umd.js"></script>
+    <script src="../scripts/imports/chart.umd.js"></script>
     <script src="../scripts/dashboard_charts.js"></script>
 </body>
 
