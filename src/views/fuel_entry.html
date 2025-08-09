@@ -1,0 +1,108 @@
+<!-- 
+    Created on: 05/08/2025
+    Last Modified: 05/08/2025
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Header -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Master Registration</title>
+    <!-- Shared Stylesheet  -->
+    <link rel="stylesheet" href="../styles/shared.css">
+    <!-- Stylesheet for Master Registration Page -->
+    <link rel="stylesheet" href="../styles/master_regs.css" />
+</head>
+
+<body>
+    <header>
+        <h4>Fuel Entry</h4>
+    </header>
+
+    <main class="container">
+        <div class="panels">
+
+            <!-- Left Container: Instructor Table -->
+            <div class="table-container">
+                <label for="tbl">Car Fuel Entry</label>
+                <table class="instructor-table" id="tbl">
+                    <thead>
+                        <tr class="active-row">
+                            <th>Car Name</th>
+                            <th>Date</th>
+                            <th>Fuel Amount</th>
+                            <th>Fuel Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Maruti Wagonar</td>
+                            <td>05/09/2025</td>
+                            <td>500</td>
+                            <td>Petrol</td>
+                        </tr>
+                        <tr>
+                            <td>Ertiga</td>
+                            <td>20/09/2025</td>
+                            <td>400</td>
+                            <td>Diesel</td>
+                        </tr>
+                        <tr>
+                            <td>Brezza</td>
+                            <td>20/09/2025</td>
+                            <td>300</td>
+                            <td>Petrol</td>
+                        </tr>
+                        <tr>
+                            <td>Alto</td>
+                            <td>20/09/2025</td>
+                            <td>200</td>
+                            <td>CNG</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Right Container: Registration Form -->
+            <div class="form-container right">
+                <div class="form-inner">
+                    <div class="form-content">
+                        <h2>Fuel Entry.</h2><br>
+                        <div class="label-above">
+                            <label for="name">Car Name:</label>
+                            <select name="car_name" id="car_name">
+                                <option value="" disabled selected>Select Car Name</option>
+                                <option value="Maruti Wagonar">Maruti Wagonar</option>
+                                <option value="Ertiga">Ertiga</option>
+                                <option value="Brezza">Brezza</option>
+                                <option value="Alto">Alto</option>
+                            </select>
+                        </div>
+                        <div class="label-above">
+                            <label for="license">Date:</label>
+                            <input type="date" id="entrydate" placeholder="Date" autocomplete="off" />
+                        </div>
+                        <div class="label-above">
+                            <label for="number">Amount &#8377;:</label>
+                            <input type="text" id="number" placeholder="Amount" autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class="buttons">
+                        <button type="button" class="btn yellow">Edit</button>
+                        <button type="button" class="btn orange">Clear</button>
+                        <button type="button" class="btn green">Save</button>
+                        <button type="button" class="btn red">Exit</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+
+</html>
