@@ -1,43 +1,56 @@
 <!-- 
     File: views/car_entry.html
-    Author: Ayush Shetty
+    Author: Ayush Shetty, Yash Balotiya
     Description: This page contains all the HTML5 code of the Car Entry Registration Page.
     Created on: 05/08/2025
-    Last Modified: 05/08/2025
+    Last Modified: 09/08/2025
 -->
 
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Header -->
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Master Registration</title>
-    <!-- Shared Stylesheet  -->
+
+    <!-- Tab Title -->
+    <title>Guide Motor Training School | Vehicle Registration</title>
+
+    <!-- Content Security Policy (adjusted to allow CDN) -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' https://cdn.jsdelivr.net; 
+        style-src 'self' 'unsafe-inline'; 
+        font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
+        img-src 'self' data:;
+    ">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../styles/shared.css">
-    <!-- Stylesheet for Master Registration Page -->
-    <link rel="stylesheet" href="../styles/master_regs.css" />
+    <link rel="stylesheet" href="../styles/master_entry.css" />
 </head>
 
 <body>
+    <!-- Header Section -->
     <header>
-        <h4>CAR REGISTRATION</h4>
+        <h1>VEHICLE REGISTRATION</h1>
     </header>
 
+    <!-- Main Content -->
     <main class="container">
         <div class="panels">
 
             <!-- Left Container: Instructor Table -->
             <div class="table-container">
-                <label for="tbl">Registered Instructors</label>
+
+                <!-- Table Title -->
+                <h2>Registered Vehicles</h2>
                 <table class="instructor-table" id="tbl">
                     <thead>
                         <tr class="active-row">
-                            <th>Car Name</th>
-                            <th>Car Model</th>
-                            <th>Car Number</th>
+                            <th>Vehicle Name</th>
+                            <th>Vehicle Model</th>
+                            <th>Vehicle Number</th>
                             <th>Fuel Type</th>
                         </tr>
                     </thead>
@@ -72,23 +85,35 @@
 
             <!-- Right Container: Registration Form -->
             <div class="form-container right">
-                <div class="form-inner">
+                <div class="form-inner car_form_inner">
+
+                    <!-- Main Form -->
                     <div class="form-content">
-                        <h2>Car Registration.</h2><br>
+
+                        <!-- Form Title -->
+                        <h2>Vehicle Registration</h2>
+
+                        <!-- Vehicle Name -->
                         <div class="label-above">
-                            <label for="name">Car Name:</label>
-                            <input type="text" id="name" placeholder="Car Name" autocomplete="off" />
+                            <label for="name">Vehicle Name</label>
+                            <input type="text" id="name" placeholder="Vehicle Name" autocomplete="off" />
                         </div>
+
+                        <!-- Vehicle Model -->
                         <div class="label-above">
-                            <label for="license">Car Model:</label>
-                            <input type="text" id="license" placeholder="Car Model" autocomplete="off" />
+                            <label for="license">Vehicle Model</label>
+                            <input type="text" id="license" placeholder="Vehicle Model" autocomplete="off" />
                         </div>
+
+                        <!-- Vehicle Number -->
                         <div class="label-above">
-                            <label for="number">Car Number:</label>
-                            <input type="text" id="number" placeholder="Car Number" autocomplete="off" />
+                            <label for="number">Vehicle Number</label>
+                            <input type="text" id="number" placeholder="Vehicle Number" autocomplete="off" />
                         </div>
+
+                        <!-- Fuel Type -->
                         <div class="label-above">
-                            <label for="number">Fuel Type:</label>
+                            <label for="number">Fuel Type</label>
                             <select name="fuel" id="fuel">
                                 <option value="Petrol">Petrol</option>
                                 <option value="Diesel">Diesel</option>
@@ -96,18 +121,17 @@
                                 <option value="Electric">Electric</option>
                             </select>
                         </div>
-    
-                    </div>
 
-                    <div class="buttons">
-                        <button type="button" class="btn yellow">Edit</button>
-                        <button type="button" class="btn orange">Clear</button>
-                        <button type="button" class="btn green">Save</button>
-                        <button type="button" class="btn red">Exit</button>
+                        <!-- Submit Buttons -->
+                        <div class="buttons">
+                            <button type="button" class="btn green">Save</button>
+                            <button type="button" class="btn yellow">Edit</button>
+                            <button type="button" class="btn orange">Clear</button>
+                            <button type="button" class="btn red">Exit</button>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 </body>

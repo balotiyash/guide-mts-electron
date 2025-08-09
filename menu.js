@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 08/08/2025
+ * Last Modified: 09/08/2025
 */
 
 // Menu template for the application
@@ -33,11 +33,11 @@ function createMenuTemplate(win) {
                 {
                     label: 'Master Registration',
                     click: () => {
-                        win.loadFile(path.join(__dirname, 'src/views/master_regs.html'));
+                        win.loadFile(path.join(__dirname, 'src/views/master_entry.html'));
                     },
                 },
                 {
-                    label: 'Car Entry',
+                    label: 'Car Registration',
                     click: () => {
                         win.loadFile(path.join(__dirname, 'src/views/car_entry.html'));
                     },
@@ -46,13 +46,6 @@ function createMenuTemplate(win) {
                     label: 'Fuel Entry',
                     click: () => {
                         win.loadFile(path.join(__dirname, 'src/views/fuel_entry.html'));
-                    },
-                },
-                { type: 'separator' },
-                {
-                    label: 'Exit',
-                    click: () => {
-                        app.quit();
                     },
                 },
             ],
@@ -97,6 +90,17 @@ function createMenuTemplate(win) {
                     label: 'Developer Tools',
                     click: () => {
                         win.webContents.openDevTools();
+                    },
+                },
+                {
+                    label: 'Logout',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, 'src/views/index.html'));
+                    },
+                },{
+                    label: 'Exit',
+                    click: () => {
+                        app.quit();
                     },
                 },
             ],

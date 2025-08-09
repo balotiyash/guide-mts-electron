@@ -1,40 +1,53 @@
 <!-- 
-    File: views/master_regs.html
-    Author: Neha Balotia
+    File: views/master_entry.html
+    Author: Neha Balotia, Yash Balotiya
     Description: This page contains all the HTML5 code of the Master Registration Page.
     Created on: 17/07/2025
-    Last Modified: 03/08/2025
+    Last Modified: 09/08/2025
 -->
 
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Header -->
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Master Registration</title>
-    <!-- Shared Stylesheet  -->
+
+    <!-- Tab Title -->
+    <title>Guide Motor Training School - Master Registration</title>
+
+    <!-- Content Security Policy (adjusted to allow CDN) -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' https://cdn.jsdelivr.net; 
+        style-src 'self' 'unsafe-inline'; 
+        font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
+        img-src 'self' data:;
+    ">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../styles/shared.css">
-    <!-- Stylesheet for Master Registration Page -->
-    <link rel="stylesheet" href="../styles/master_regs.css" />
+    <link rel="stylesheet" href="../styles/master_entry.css" />
 </head>
 
 <body>
+    <!-- Header -->
     <header>
-        <h4>MASTER REGISTRATION</h4>
+        <h1>MASTER REGISTRATION</h1>
     </header>
 
+    <!-- Main Content -->
     <main class="container">
         <div class="panels">
-
             <!-- Left Container: Instructor Table -->
             <div class="table-container">
-                <label for="tbl">Registered Instructors</label>
+                <!-- <label for="tbl">Registered Instructors</label> -->
+                <h3>Registered Instructors</h3>
+
+                <!-- Instructor Table -->
                 <table class="instructor-table" id="tbl">
                     <thead>
-                        <tr class="active-row">
+                        <tr>
                             <th>Instructor Name</th>
                             <th>License Number</th>
                             <th>Last Updated On</th>
@@ -68,28 +81,41 @@
             <!-- Right Container: Registration Form -->
             <div class="form-container right">
                 <div class="form-inner">
+
+                    <!-- Main Form Title -->
                     <div class="form-content">
-                        <h2>Instructor Registration.</h2><br>
+
+                        <!-- Title -->
+                        <h2>Instructor Registration</h2>
+
+                        <!-- Instructor Name -->
                         <div class="label-above">
-                            <label for="name">Instructor Name:</label>
+                            <label for="name">Instructor Name</label>
                             <input type="text" id="name" placeholder="Instructor Name" autocomplete="off" />
                         </div>
+
+                        <!-- License Number -->
                         <div class="label-above">
-                            <label for="license">License No.</label>
+                            <label for="license">License Number</label>
                             <input type="text" id="license" placeholder="License Number" autocomplete="off" />
                         </div>
-    
-                    </div>
 
-                    <div class="buttons">
-                        <button type="button" class="btn yellow">Edit</button>
-                        <button type="button" class="btn orange">Clear</button>
-                        <button type="button" class="btn green">Save</button>
-                        <button type="button" class="btn red">Exit</button>
+                        <!-- License Expiration Date -->
+                        <div class="label-above">
+                            <label for="license-expiration">License Expiration Date</label>
+                            <input type="date" id="license-expiration" placeholder="YYYY-MM-DD" autocomplete="off" />
+                        </div>
+
+                        <!-- Form Buttons -->
+                        <div class="buttons">
+                            <button type="button" class="btn green">Save</button>
+                            <button type="button" class="btn yellow">Edit</button>
+                            <button type="button" class="btn orange">Clear</button>
+                            <button type="button" class="btn red">Exit</button>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 </body>

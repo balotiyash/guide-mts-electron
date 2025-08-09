@@ -73,9 +73,11 @@ table {
 
 /* Button Section */
 .buttonSection {
+    width: 30%;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+    align-self: flex-end;
     gap: 12px;
 }
 

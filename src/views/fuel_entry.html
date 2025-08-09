@@ -1,39 +1,59 @@
 <!-- 
+    File: views/fuel_entry.html
+    Author: Yash Balotiya, Ayush Shetty
+    Description: This page contains all the HTML5 code of the Fuel Entry Page.
     Created on: 05/08/2025
-    Last Modified: 05/08/2025
+    Last Modified: 09/08/2025
 -->
 
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Header -->
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Master Registration</title>
-    <!-- Shared Stylesheet  -->
+
+    <!-- Tab Title -->
+    <title>Guide Motor Training School | Fuel Entry</title>
+
+    <!-- Content Security Policy (adjusted to allow CDN) -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' https://cdn.jsdelivr.net; 
+        style-src 'self' 'unsafe-inline'; 
+        font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
+        img-src 'self' data:;
+    ">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../styles/shared.css">
-    <!-- Stylesheet for Master Registration Page -->
-    <link rel="stylesheet" href="../styles/master_regs.css" />
+    <link rel="stylesheet" href="../styles/master_entry.css" />
 </head>
 
 <body>
+    <!-- Header Section -->
     <header>
-        <h4>Fuel Entry</h4>
+        <h1>Fuel Entry</h1>
     </header>
 
+    <!-- Main Content -->
     <main class="container">
         <div class="panels">
 
             <!-- Left Container: Instructor Table -->
             <div class="table-container">
-                <label for="tbl">Car Fuel Entry</label>
-                <table class="instructor-table" id="tbl">
+                <!-- Title -->
+                <div class="table-header">
+                    <h2>Vehicle Fuel Records</h2>
+                    <input type="month" id="fuel-date" autocomplete="off" title="Select Date" />
+                </div>
+
+                <!-- Table -->
+                <table class="instructor-table">
                     <thead>
                         <tr class="active-row">
                             <th>Car Name</th>
-                            <th>Date</th>
+                            <th>Month & Year</th>
                             <th>Fuel Amount</th>
                             <th>Fuel Type</th>
                         </tr>
@@ -41,25 +61,25 @@
                     <tbody>
                         <tr>
                             <td>Maruti Wagonar</td>
-                            <td>05/09/2025</td>
+                            <td>June 2025</td>
                             <td>500</td>
                             <td>Petrol</td>
                         </tr>
                         <tr>
                             <td>Ertiga</td>
-                            <td>20/09/2025</td>
+                            <td>September 2025</td>
                             <td>400</td>
                             <td>Diesel</td>
                         </tr>
                         <tr>
                             <td>Brezza</td>
-                            <td>20/09/2025</td>
+                            <td>September 2025</td>
                             <td>300</td>
                             <td>Petrol</td>
                         </tr>
                         <tr>
                             <td>Alto</td>
-                            <td>20/09/2025</td>
+                            <td>September 2025</td>
                             <td>200</td>
                             <td>CNG</td>
                         </tr>
@@ -69,38 +89,48 @@
 
             <!-- Right Container: Registration Form -->
             <div class="form-container right">
-                <div class="form-inner">
+                <div class="form-inner fuel-inner-form">
+
+                    <!-- Main Form -->
                     <div class="form-content">
-                        <h2>Fuel Entry.</h2><br>
+
+                        <!-- Title -->
+                        <h2>Daily Fuel Entry</h2>
+
+                        <!-- Select Vehicle -->
                         <div class="label-above">
-                            <label for="name">Car Name:</label>
-                            <select name="car_name" id="car_name">
-                                <option value="" disabled selected>Select Car Name</option>
+                            <label for="name">Vehicle Name</label>
+                            <select name="car_name" id="car_name" title="Select Vehicle Name">
+                                <option value="" disabled selected>Select Vehicle Name</option>
                                 <option value="Maruti Wagonar">Maruti Wagonar</option>
                                 <option value="Ertiga">Ertiga</option>
                                 <option value="Brezza">Brezza</option>
                                 <option value="Alto">Alto</option>
                             </select>
                         </div>
-                        <div class="label-above">
-                            <label for="license">Date:</label>
-                            <input type="date" id="entrydate" placeholder="Date" autocomplete="off" />
-                        </div>
-                        <div class="label-above">
-                            <label for="number">Amount &#8377;:</label>
-                            <input type="text" id="number" placeholder="Amount" autocomplete="off" />
-                        </div>
-                    </div>
 
-                    <div class="buttons">
-                        <button type="button" class="btn yellow">Edit</button>
-                        <button type="button" class="btn orange">Clear</button>
-                        <button type="button" class="btn green">Save</button>
-                        <button type="button" class="btn red">Exit</button>
+                        <!-- Date Input -->
+                        <div class="label-above">
+                            <label for="entrydate">Select Date</label>
+                            <input type="date" id="entrydate" placeholder="Date" autocomplete="off" title="Select Date" />
+                        </div>
+
+                        <!-- Amount Input -->
+                        <div class="label-above">
+                            <label for="amountInput">Amount</label>
+                            <input type="text" id="amountInput" placeholder="Amount" autocomplete="off" title="Enter Amount" />
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <div class="buttons">
+                            <button type="button" class="btn green">Save</button>
+                            <button type="button" class="btn yellow">Edit</button>
+                            <button type="button" class="btn orange">Clear</button>
+                            <button type="button" class="btn red">Exit</button>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 </body>

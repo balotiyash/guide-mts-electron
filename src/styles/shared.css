@@ -64,48 +64,71 @@ label {
     /* font-size: 1em; */
 }
 
-/* ----- Buttons ----- */
-.buttons {
-    display: flex;
-    gap: 0.8rem;
-    justify-content: flex-end;
-    margin-top: 1rem;
-    flex-wrap: wrap;
+h1, h2, h3, h4, h5, h6 {
+    color: brown;
 }
 
+/* --- BUTTONS --- */
 .btn {
-    padding: 0.4rem 1rem;
-    /* font-size: 0.9rem; */
-    min-width: 80px;
-    height: 2.4rem;
-    border: none;
+    padding: 12px;
+    width: 100%;
+    height: 100%;
     border-radius: 20px;
-    /* color: white; */
-    color: black;
+    /* background-color: transparent; */
+    background-color: white;
     font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s, transform 0.1s, color 0.3s, border-color 0.3s;
+    border: 2px solid #c7d9e6;
 }
 
-.btn:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.btn.yellow {
+    border-color: #ffc107;
+    color: #ffc107;
 }
 
-.btn.saveBtn {
-    /* background-color: #4CAF50; */
-    background-color: #73EC8B;
+.btn.orange {
+    border-color: #fd7e14;
+    color: #fd7e14;
 }
 
-.btn.editBtn {
-    /* background-color: #008CBA; */
-    background-color: #FFE100;
+.btn.green {
+    border-color: #28a745;
+    color: #28a745;
 }
 
-.btn.resetBtn {
-    /* background-color: #f44336; */
-    background-color: #FF6363;
+.btn.red {
+    border-color: #dc3545;
+    color: #dc3545;
 }
+
+.btn.yellow:hover {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn.orange:hover {
+    background-color: #fd7e14;
+    color: white;
+}
+
+.btn.green:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn.red:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* 
+.btn.blue { background-color: #007bff; }
+.btn.yellow { background-color: #ffc107; }
+.btn.orange { background-color: #fd7e14; }
+.btn.green { background-color: #28a745; }
+.btn.red { background-color: #dc3545; } 
+*/
 
 /* Table */
 table {
@@ -128,3 +151,41 @@ tbody tr:hover {
     height: 300px;
     overflow-y: auto;
 }
+
+/* ----- Buttons ----- */
+/* .buttons {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.4rem 1rem;
+    min-width: 80px;
+    height: 2.4rem;
+    border: none;
+    border-radius: 20px;
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn.saveBtn {
+    background-color: #73EC8B;
+}
+
+.btn.editBtn {
+    background-color: #FFE100;
+}
+
+.btn.resetBtn {
+    background-color: #FF6363;
+} */
