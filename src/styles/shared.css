@@ -2,55 +2,38 @@
    Author: Neha Balotia, Yash Balotiya
    Description: Public CSS for Shared Components.
    Created on: 27/07/2025
-   Last Modified: 08/08/2025 
+   Last Modified: 09/08/2025
 */
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    user-select: none;
     font-family: sans-serif, Arial, Helvetica;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
 }
 
 /* Input Fields */
-input[type="text"],
-input[type="date"],
-input[type="number"],
-input[type="password"],
-input[type="month"],
-input[type="week"],
-input[type="file"],
+input,
 select,
 textarea {
     width: 100%;
     padding: 12px;
-    border: 0.15vh solid #dce1e7;
-    border-radius: 0.3vw;
+    border: 1px solid #dce1e7;
+    border-radius: 20px;
     /* background: #f0f4f8; */
     background-color: #f8f9fa;
     text-transform: uppercase;
     transition: border 0.3s ease;
-    outline: none; /* Prevent default black outline */
+    outline: none;
 }
 
 /* Orange border on focus */
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="number"]:focus,
-input[type="password"]:focus,
-input[type="month"]:focus,
-input[type="week"]:focus,
-input[type="file"]:focus,
+input:focus,
 select:focus,
 textarea:focus {
-    border: 0.15vh solid orange;
+    border: 1px solid orange;
 }
-
 
 /* Remove spinners from number fields */
 input[type="number"]::-webkit-outer-spin-button,
@@ -60,12 +43,12 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 input[type="number"] {
+    appearance: textfield;
     -moz-appearance: textfield;
 }
 
 /* Images not selectable */
 img {
-    user-drag: none;  
    user-select: none;
    -moz-user-select: none;
    -webkit-user-drag: none;
@@ -77,33 +60,71 @@ label {
     font-weight: bold;
     color: rgb(58, 58, 58);
     margin-bottom: 2px;
-    font-size: 1vw;
+    font-size: 14px;
+    /* font-size: 1em; */
+}
+
+/* ----- Buttons ----- */
+.buttons {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
 .btn {
-    padding: 0 1vw;
-    font-size: 0.8vw;
-    width: 5vw;
-    height: 95%;
+    padding: 0.4rem 1rem;
+    /* font-size: 0.9rem; */
+    min-width: 80px;
+    height: 2.4rem;
     border: none;
-    border-radius: 0.3vw;
-    color: white;
+    border-radius: 20px;
+    /* color: white; */
+    color: black;
     font-weight: bold;
-    box-shadow: 0 0.2vh 0.5vh rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: background 0.3s, transform 0.1s;
-    margin-bottom: 0vh;
-}
-
-/* BUTTONS */
-.buttons {
-    display: flex;
-    gap: 1vw;
-    justify-content: flex-end;
-    margin-top: auto;
-    height: 5vh;
+    transition: all 0.3s ease;
 }
 
 .btn:hover {
-    transform: translateY(-0.3vh);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn.saveBtn {
+    /* background-color: #4CAF50; */
+    background-color: #73EC8B;
+}
+
+.btn.editBtn {
+    /* background-color: #008CBA; */
+    background-color: #FFE100;
+}
+
+.btn.resetBtn {
+    /* background-color: #f44336; */
+    background-color: #FF6363;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+td,
+th {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.scrollDiv {
+    height: 300px;
+    overflow-y: auto;
 }

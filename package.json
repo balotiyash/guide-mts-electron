@@ -1,7 +1,7 @@
 {
-    "name": "guide-mts",
+    "name": "Guide MTS",
     "version": "1.0.0",
-    "description": "An Electron application for MTS Guide",
+    "description": "An Electron application for Guide MTS",
     "author": "Yash Balotiya",
     "main": "main.js",
     "scripts": {

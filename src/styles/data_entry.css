@@ -1,165 +1,102 @@
 /* File: styles/data_entry.css
-   Author: Neha Balotia
-   Description: Compact CSS for Customer Data Entry Page.
-   Created on: 26/07/2025
-   Last Modified: 27/07/2025 
+   Author: Yash Balotiya
+   Description: CSS for Customer Data Entry Page.
+   Created on: 09/08/2025
+   Last Modified: 09/08/2025
 */
 
-
-html, body {
-    height: 100vh;
+body {
     width: 100vw;
-    overflow: hidden;
-    background: #ffffff;
-    padding: 0;
-}
-
-.container {
     height: 100vh;
-    width: 100vw;
-    padding: 3vh 2vw;
+    background: #fafbfc;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    background: #fff;
-}
-
-header h4 {
-    font-size: 3vh;
-    margin-bottom: 1vh;
-}
-
-.divider {
-    height: 0.2vh;
-    background-color: rgb(62, 60, 60);
-    margin: 1vh 0;
-}
-
-/* FORM LAYOUT */
-form {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.form-row,
-.personal,
-.dates,
-.panels,
-.number_image {
-    display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
-    gap: 2%;
-    margin-bottom: 1vh;
+    gap: 20px;
 }
 
-.personal > div,
-.label-above {
-    font-size: 2vh;
-    flex: 1;
+/* Header Style */
+header {
+    width: 100%;
+    color: brown;
+}
+
+/* Main Form Tag */
+main {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    gap: 1%;
 }
 
-
-
-textarea {
-    resize: none;
-    height: 100%;
-}
-
-
-
-.number_image {
-    align-items: flex-end;
-    flex-wrap: wrap;
-}
-
-.number {
-    flex: 0 1 24%;
-    min-width: 16vw;
-}
-
-.upld {
+/* Phone Input Section */
+#phoneInputSection {
+    width: 100%;
     display: flex;
-    gap: 1vw;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
-/* Upload Boxes */
-.upload-box {
-    width: 7vw;
-    height: 9vh;
-    padding: 0.5vh;
+/* Input Container */
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.phoneInputSpan {
+    width: 20%;
+}
+
+#phoneInput {
+    width: 100%;
+}
+
+/* Photo & Signature Input Section */
+#imageInputContainer {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.imageInput {
+    width: 15%;
+    height: 15%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 0.2vh dashed #ccc;
-    border-radius: 0.3vw;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    padding: 12px;
     cursor: pointer;
-    font-size: 0.75vw;
-    background: #fafafa;
-    transition: background-color 0.3s;
-}
-
-.upload-box:hover {
-    background-color: #f0f8ff;
-    border-color: #2196f3;
-}
-
-.upload-placeholder {
-    font-size: 1.3vw;
-    margin-bottom: 0.2vh;
-}
-
-.upload-box span {
-    font-size: 0.65vw;
+    transition: border 0.3s ease;
+    background-color: #f8f9fa;
     text-align: center;
+    gap: 8px;
 }
 
-/* Work Description */
-#work-desc {
-    height: 4vh;
+.imageInput label {
+    cursor: pointer;
 }
 
-/* Scroll Box */
-.scroll-box {
-    margin-bottom: 1vh;
+.imageInput:hover {
+    /* border-color: #008CBA; */
+    border-color: orange;
+}
+
+.imageInput img {
+    width: 40%;
+}
+
+/* Horizontal Divider */
+.hDivider {
     width: 100%;
-    height: 14vh;
-    overflow-y: auto;
-    border: 0.15vh solid #ccc;
-    border-radius: 0.5vh;
-    padding: 0.5vh 1vw;
-    background: #f9f9f9;
-    font-size: 1vw; 
+    min-height: 1px;
+    background: lightgray;
 }
-    .scroll-box p {
-        margin: 0.4vh 0;
-}
-
-/* Panels */
-.left, .right {
-    width: 49%;
-    display: flex;
-    flex-direction: column;
-    gap: 1vh;
-}
-
-.btn.blue {
-    background-color: #008CBA;
-}
-
-.btn.yellow {
-    background-color: #fcba03;
-    color: black;
-}
-
-.btn.red {
-    background-color: #f44336;
-}
-
-.btn.green {
-    background-color: #04AA6D;
-}
-

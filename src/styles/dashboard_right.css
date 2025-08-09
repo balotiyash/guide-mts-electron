@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the CSS code of the Dashboard Page specifically for charts, statistics & Reminders.
     Created on: 05/08/2025
-    Last Modified: 08/08/2025
+    Last Modified: 09/08/2025
 */
 
 /* Middle Charts Section */
@@ -110,23 +110,6 @@
     justify-content: space-between;
     align-items: center;
     gap: 30%;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-}
-
-td,
-th {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-}
-
-.scrollDiv {
-    height: 300px;
-    overflow-y: auto;
 }
 
 /* Send SMS Button */

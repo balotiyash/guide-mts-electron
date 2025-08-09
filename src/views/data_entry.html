@@ -1,254 +1,368 @@
 <!-- 
     File: views/data_entry.html
-    Author: Neha Balotia
+    Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Customer Data Entry Page.
-    Created on: 26/07/2025
-    Last Modified: 27/07/2025
+    Created on: 09/08/2025
+    Last Modified: 09/08/2025
 -->
 
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Header -->
 <head>
     <meta charset="UTF-8" />
-    <title>Customer Data Entry</title>
-    <!-- Shared Stylesheet contianing styles of input fields, buttons -->
-     <link rel="stylesheet" href="../styles/shared.css">
-    <!-- Style Sheet for Data Entry page. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tab Title -->
+    <title>Guide MTS | Customer Data Entry</title>
+
+    <!-- Content Security Policy (adjusted to allow CDN) -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' https://cdn.jsdelivr.net; 
+        style-src 'self' 'unsafe-inline'; 
+        font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
+        img-src 'self' data:;
+    ">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../styles/shared.css">
     <link rel="stylesheet" href="../styles/data_entry.css" />
+    <link rel="stylesheet" href="../styles/data_entry_form.css" />
 </head>
 
 <body>
-    <div class="container">
-        <!-- Page Header -->
-        <header>
-            <h4>CUSTOMER DATA ENTRY</h4>
-        </header>
+    <!-- Heading Title -->
+    <header>
+        <h1>Customer Data Entry</h1>
+    </header>
 
-        <!-- Main Form Panel -->
-        <main class="pannels">
-            <div class="main">
-                <form id="data-entry" action="">
+    <!-- Main Form -->
+    <main>
+        <!-- Phone Number & Images Input -->
+        <section id="phoneInputSection">
 
-                    <!-- Mobile Number and Photo Upload Section -->
-                    <div class="number_image form-row">
-                        <!-- Mobile Number -->
-                        <div class="number label-above">
-                            <label for="mobile">Mobile Number</label>
-                            <input type="number" id="mobile" placeholder="Enter mobile number" autocomplete="off" />
-                        </div>
+            <!-- Phone Input -->
+            <span class="inputContainer phoneInputSpan">
+                <label for="phoneInput">Mobile Number</label>
+                <input type="number" id="phoneInput" placeholder="Enter mobile number" title="Enter mobile number"
+                    autocomplete="off" />
+            </span>
 
-                        <!-- Photo and Signature Upload -->
-                        <div class="upld">
-                            <label class="upload-box">
-                                <div class="upload-placeholder">📤</div>
-                                <span>Upload Photo</span>
-                                <input type="file" id="photo-upload" hidden autocomplete="off" />
-                            </label>
-                            <label class="upload-box">
-                                <div class="upload-placeholder">📤</div>
-                                <span>Upload Signature</span>
-                                <input type="file" id="sign-upload" hidden autocomplete="off" />
-                            </label>
-                        </div>
-                    </div>
+            <!-- Photo & Signature Input -->
+            <div id="imageInputContainer">
+                <!-- Photo Input -->
+                <span class="imageInput" title="Upload Photo">
+                    <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon">
+                    <label for="photoInput">Photo</label>
+                    <input type="file" id="photoInput" accept="image/*" hidden />
+                </span>
 
-                    <div class="divider"></div>
-
-                    <!-- Personal Details -->
-                    <div class="personal">
-                        <div class="label-above">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" placeholder="Enter full name" autocomplete="off">
-                        </div>
-                        <div class="label-above"> 
-                            <label for="dob">Date of Birth</label>
-                            <input type="date" id="dob" placeholder="DD/MM/YYYY" autocomplete="off">
-                        </div>
-                        <div class="label-above">
-                            <label for="relation">Son of / Daughter of / Wife of</label>
-                            <input type="text" id="relation" placeholder="Enter relation name" autocomplete="off">
-                        </div>
-                    </div>
-
-                    <!-- Left and Right Column Layout -->
-                    <div class="panels">
-                        <!-- Left Column -->
-                        <div class="left">
-
-                            <!-- Car and Instructor -->
-                            <div class="form-row car-instr">
-                                <div class="label-above">
-                                    <label for="car">Car</label>
-                                    <select id="car">
-                                    <option value="">Select option</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-                                </div>
-                                <div class="label-above">
-                                    <label for="instr">Instructor</label>
-                                    <select id="instr">
-                                    <option value="">Select option</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-                                </div>
-                            </div>
-
-                            <!-- LL No. & Class Entries -->
-                            <div class="form-row ll-class">
-                                <div class="label-above">
-                                    <label for="ll1">LL No-01</label>
-                                    <input type="text" id="ll1" value="MH01 /" placeholder="Enter LL No. 1" autocomplete="off">
-                                </div>
-                                <div class="label-above">
-                                    <label for="c1">Class 1</label>
-                                    <input type="text" id="c1" placeholder="Enter class 1" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-row ll-class">
-                                <div class="label-above">
-                                    <label for="ll2">LL No-02</label>
-                                    <input type="text" id="ll2" value="MH01 /" placeholder="Enter LL No. 2" autocomplete="off">
-                                </div>
-                                <div class="label-above">
-                                    <label for="c2">Class 2</label>
-                                    <input type="text" id="c2" placeholder="Enter class 2" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <!-- MDL No. and Class -->
-                            <div class="form-row ll-class">
-                                <div class="label-above">
-                                    <label for="mdl">MDL No.</label>
-                                    <input type="text" id="mdl" placeholder="Enter MDL number" autocomplete="off">
-                                </div>
-                                <div class="label-above">
-                                    <label for="cls">Class</label>
-                                    <input type="text" id="cls" placeholder="Enter class" autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right Column -->
-                        <div class="right">
-                            <!-- Address -->
-                            <div class="label-above">
-                                <label for="address">Address</label>
-                                <textarea id="address" placeholder="Enter full address"></textarea>
-                            </div>
-
-                            <!-- Dates for LL 1 -->
-                            <div class="dates">
-                                <div class="label-above">
-                                    <label for="issued1">Issued on</label>
-                                    <input type="date" id="issued1" autocomplete="off">
-                                </div>
-                                <div class="label-above">
-                                    <label for="upto1">Valid Upto</label>
-                                    <input type="date" id="upto1" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <!-- Dates for LL 2 -->
-                            <div class="dates">
-                                <div class="label-above">
-                                    <label for="issued2">Issued on</label>
-                                    <input type="date" id="issued2" autocomplete="off">
-                                </div>
-                                <div class="label-above">
-                                    <label for="upto2">Valid Upto</label>
-                                    <input type="date" id="upto2" autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Endorsement Section -->
-                    <div class="form-row">
-                        <div class="label-above">
-                            <label for="endorsement">Endorsement (If Any)</label>
-                            <input type="text" id="endorsement" placeholder="Enter endorsement details" autocomplete="off">
-                        </div>
-                        <div class="label-above">
-                            <label for="endr-date">Endorsement Dated</label>
-                            <input type="date" id="endr-date" autocomplete="off">
-                        </div>
-                        <div class="label-above">
-                            <label for="endr-valid">Valid Upto</label>
-                            <input type="date" id="endr-valid" autocomplete="off">
-                        </div>
-                    </div>
-
-                    <!-- Vehicle Info and Past Records -->
-                    <div class="panels">
-                        <!-- Vehicle Details -->
-                        <div class="left">
-                            <div class="form-row">
-                                <div class="label-above">
-                                    <label for="vehicle">Vehicle No.</label>
-                                    <input type="text" id="vehicle" placeholder="Enter vehicle number" autocomplete="off">
-                                </div>
-                                <div class="label-above">
-                                    <label for="amount">Amount</label>
-                                    <input type="number" id="amount" placeholder="Enter amount" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <!-- Work Description -->
-                            <div class="label-above">
-                                <label for="work-desc">Work Description</label>
-                                <select id="work-desc">
-                                    <option value="">Select option</option>
-                                    <option value="Trainer">Trainers</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Scrollable Past Records -->
-                        <div class="right">
-                            <div class="label-above">
-                                <label for="past-recs">Past Records</label>
-                                <div id="past-recs" class="scroll-box">
-                                    <p>Previous Record 1</p>
-                                    <p>Previous Record 2</p>
-                                    <p>Previous Record 3</p>
-                                    <p>Previous Record 1</p>
-                                    <p>Previous Record 2</p>
-                                    <p>Previous Record 3</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Form Action Buttons -->
-                    <div class="buttons">
-                        <button type="button" class="btn blue">New</button>
-                        <button type="button" class="btn yellow">Edit</button>
-                        <button type="button" class="btn red">Clear</button>
-                        <button type="submit" class="btn green">Save</button>
-                    </div>
-
-                </form>
+                <!-- Signature Input -->
+                <span class="imageInput" title="Upload Signature">
+                    <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon">
+                    <label for="signatureInput">Signature</label>
+                    <input type="file" id="signatureInput" accept="image/*" hidden />
+                </span>
             </div>
-        </main>
-    </div>
+        </section>
 
-    <!-- Prevent Enter key from submitting form accidentally -->
-    <script>
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
-                e.preventDefault();
-            }
-        });
-    </script>
+        <!-- Horizontal Divider -->
+        <div class="hDivider"></div>
+
+        <!-- Name, DOB, Relation Input Section -->
+        <section class="nameSection">
+            <!-- Name Input -->
+            <span class="inputContainer">
+                <label for="nameInput">Name</label>
+                <input type="text" id="nameInput" placeholder="Enter full name" title="Enter full name"
+                    autocomplete="off" />
+            </span>
+
+            <!-- Date of Birth Input -->
+            <span class="inputContainer">
+                <label for="dobInput">Date of Birth</label>
+                <input type="date" id="dobInput" title="Select date of birth" />
+            </span>
+
+            <!-- Relation Input -->
+            <span class="inputContainer">
+                <label for="relationInput">Son / Daughter / Wife of</label>
+                <input type="text" id="relationInput" placeholder="Enter relation's full name"
+                    title="Enter relation's full name" autocomplete="off" />
+            </span>
+        </section>
+
+        <!-- Address Input Section -->
+        <section class="addressSection">
+            <!-- Left Side -->
+            <div>
+                <span>
+                    <!-- Car Select -->
+                    <span class="inputContainer">
+                        <label for="carSelect">Car</label>
+                        <select id="carSelect" title="Select car">
+                            <option value="" selected disabled>Select car</option>
+                            <option value="car1">Car 1</option>
+                            <option value="car2">Car 2</option>
+                        </select>
+                    </span>
+
+                    <!-- Instructor Select -->
+                    <span class="inputContainer">
+                        <label for="instructorSelect">Instructor</label>
+                        <select id="instructorSelect" title="Select instructor">
+                            <option value="" selected disabled>Select instructor</option>
+                            <option value="instructor1">Instructor 1</option>
+                            <option value="instructor2">Instructor 2</option>
+                        </select>
+                    </span>
+                </span>
+
+                <span>
+                    <!-- Licence Input -->
+                    <span class="inputContainer">
+                        <label for="licenseInput">LL No-01</label>
+                        <input type="text" id="licenseInput" placeholder="Enter license number"
+                            title="Enter license number" value="MH01 /" autocomplete="off" />
+                    </span>
+
+                    <!-- Class Input -->
+                    <span class="inputContainer">
+                        <label for="classInput">Class 1</label>
+                        <input type="text" id="classInput" placeholder="Enter class 1" title="Enter class 1"
+                            autocomplete="off" />
+                    </span>
+                </span>
+            </div>
+
+            <!-- Right Side -->
+            <div>
+                <!-- Address Input -->
+                <span class="inputContainer addressInputSpan">
+                    <label for="addressInput">Address</label>
+                    <textarea id="addressInput" placeholder="Enter full address" title="Enter full address"></textarea>
+                </span>
+            </div>
+        </section>
+
+        <!-- License & Class Section -->
+        <section class="licenseClassSection">
+            <!-- License Input -->
+            <span class="inputContainer">
+                <label for="licenseInput2">LL No-02</label>
+                <input type="text" id="licenseInput2" placeholder="Enter license number" title="Enter license number"
+                    value="MH01 /" autocomplete="off" />
+            </span>
+
+            <!-- Class Input -->
+            <span class="inputContainer">
+                <label for="classInput2">Class 2</label>
+                <input type="text" id="classInput2" placeholder="Enter class 2" title="Enter class 2"
+                    autocomplete="off" />
+            </span>
+
+            <!-- Issued on -->
+            <span class="inputContainer">
+                <label for="issuedOnInput">Issued on</label>
+                <input type="date" id="issuedOnInput" title="Select issue date" />
+            </span>
+
+            <!-- Valid Until -->
+            <span class="inputContainer">
+                <label for="validUntilInput">Valid Until</label>
+                <input type="date" id="validUntilInput" title="Select valid until date" />
+            </span>
+        </section>
+
+        <!-- MDL & Class Section -->
+        <section class="licenseClassSection">
+            <!-- License Input -->
+            <span class="inputContainer">
+                <label for="mdlNoInput">MDL Number</label>
+                <input type="text" id="mdlNoInput" placeholder="Enter mdl number" title="Enter mdl number"
+                    autocomplete="off" />
+            </span>
+
+            <!-- Class Input -->
+            <span class="inputContainer">
+                <label for="mdlClassInput">Class</label>
+                <input type="text" id="mdlClassInput" placeholder="Enter class" title="Enter class"
+                    autocomplete="off" />
+            </span>
+
+            <!-- Issued on -->
+            <span class="inputContainer">
+                <label for="mdlIssuedInput">Issued on</label>
+                <input type="date" id="mdlIssuedInput" title="Select issue date" />
+            </span>
+
+            <!-- Valid Until -->
+            <span class="inputContainer">
+                <label for="mdlValidUntilInput">Valid Until</label>
+                <input type="date" id="mdlValidUntilInput" title="Select valid until date" />
+            </span>
+        </section>
+
+        <!-- Endorsment Section -->
+        <section class="licenseClassSection">
+            <!-- License Input -->
+            <span class="inputContainer">
+                <label for="endorsementInput">Endorsement (If Any)</label>
+                <input type="text" id="endorsementInput" placeholder="Enter endorsement details" title="Enter endorsement"
+                    autocomplete="off" />
+            </span>
+
+            <!-- Issued on -->
+            <span class="inputContainer">
+                <label for="endorsementDatedInput">Endorsement Dated</label>
+                <input type="date" id="endorsementDatedInput" title="Select endorsement dated" />
+            </span>
+
+            <!-- Valid Until -->
+            <span class="inputContainer">
+                <label for="validUntilInput">Valid Until</label>
+                <input type="date" id="validUntilInput" title="Select valid until date" />
+            </span>
+        </section>
+
+        <!-- Amount section -->
+        <section class="licenseClassSection">
+            <!-- Vehicle Input -->
+            <span class="inputContainer">
+                <label for="vehicleNoInput">Vehicle License</label>
+                <input type="text" id="vehicleNoInput" placeholder="Enter vehicle license number" title="Enter vehicle license number"
+                    value="MH01 /" autocomplete="off" />
+            </span>
+
+            <!-- Amount -->
+            <span class="inputContainer">
+                <label for="amountInput">Amount</label>
+                <input type="number" id="amountInput" placeholder="Enter amount" title="Enter amount"
+                    autocomplete="off" />
+            </span>
+
+            <!-- Work Description -->
+            <span class="inputContainer">
+                <label for="workDescriptionInput">Work Description</label>
+                <input type="text" id="workDescriptionInput" placeholder="Enter work description" title="Enter work description"
+                    autocomplete="off" />
+            </span>
+        </section>
+
+        <!-- Past records section -->
+        <section class="licenseClassSection">
+            <!-- Past Records -->
+            <span class="inputContainer">
+                <label for="">Valid Until</label>
+
+                <!-- Table -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="tableCol">Sr. No.</th>
+                            <th class="tableCol">Date</th>
+                            <th class="workCol">Work Description</th>
+                            <th class="tableCol">Amount</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <!-- Scrollable Div -->
+                <div class="scrollDiv">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="tableCol">1</td>
+                                <td class="tableCol">01/01/2025</td>
+                                <td class="workCol">Work Description 1</td>
+                                <td class="tableCol">₹1000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02/01/2025</td>
+                                <td>Work Description 2</td>
+                                <td>₹2000</td>
+                            </tr>
+                            <tr>
+                                <td class="tableCol">1</td>
+                                <td class="tableCol">01/01/2025</td>
+                                <td class="workCol">Work Description 1</td>
+                                <td class="tableCol">₹1000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02/01/2025</td>
+                                <td>Work Description 2</td>
+                                <td>₹2000</td>
+                            </tr>
+                            <tr>
+                                <td class="tableCol">1</td>
+                                <td class="tableCol">01/01/2025</td>
+                                <td class="workCol">Work Description 1</td>
+                                <td class="tableCol">₹1000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02/01/2025</td>
+                                <td>Work Description 2</td>
+                                <td>₹2000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02/01/2025</td>
+                                <td>Work Description 2</td>
+                                <td>₹2000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02/01/2025</td>
+                                <td>Work Description 2</td>
+                                <td>₹2000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02/01/2025</td>
+                                <td>Work Description 2</td>
+                                <td>₹2000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02/01/2025</td>
+                                <td>Work Description 2</td>
+                                <td>₹2000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02/01/2025</td>
+                                <td>Work Description 2</td>
+                                <td>₹2000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02/01/2025</td>
+                                <td>Work Description 2</td>
+                                <td>₹2000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02/01/2025</td>
+                                <td>Work Description 2</td>
+                                <td>₹2000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </span>
+        </section>
+
+        <!-- Buttons Section -->
+        <section class="buttonSection">
+            <button type="button" class="btn saveBtn">Save</button>
+            <button type="button" class="btn editBtn">Edit</button>
+            <button type="button" class="btn resetBtn">Reset</button>
+        </section>
+    </main>
 </body>
 
 </html>

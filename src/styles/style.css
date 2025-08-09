@@ -3,11 +3,11 @@
     Author: Neha Balotia, Yash Balotiya
     Description: This page contains all the CSS code of the Login Page.
     Created on: 13/07/2025
-    Last Modified: 08/08/2025
+    Last Modified: 09/08/2025
 */
 
 body {
-    height: 100%;
+    width: 100vw;
     height: 100vh;
 }
 
@@ -43,6 +43,49 @@ body {
 .logo {
     margin-bottom: 100px;
 }
+
+/* Footer */
+footer {
+    padding: 0 20px;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    bottom: 0;
+}
+
+.footer-logo {
+    display: none;
+    width: 100px;
+    height: auto;
+}
+
+footer h2 {
+    display: none;
+    margin: 0;
+    font-size: 1.2rem;
+    background: linear-gradient(90deg, darkorange, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+footer div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    display: none;
+    transition: all 0.3s ease-in-out;
+}
+
+footer div img {
+    width: 30px;
+    /* Adjust icon size */
+    height: 30px;
+}
+
 
 /* Animations */
 @keyframes fadeInLeft {

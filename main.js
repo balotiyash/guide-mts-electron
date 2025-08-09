@@ -1,5 +1,5 @@
 /** 
- * File: index.js
+ * File: main.js
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
@@ -7,7 +7,7 @@
 */
 
 // Importing required modules from Electron
-const { app, BrowserWindow, ipcMain, Menu, screen } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, screen, dialog } = require('electron');
 const path = require('path');
 const createMenuTemplate = require('./menu.js');
 
@@ -67,5 +67,39 @@ ipcMain.handle('login', async (event, { username, password }) => {
 ipcMain.on('navigate-to', (event, targetPage) => {
     if (win) {
         win.loadFile(path.join(__dirname, 'src/views', targetPage));
+    }
+});
+
+// Show error dialog
+ipcMain.on('show-error-box', async (event, { title, message }) => {
+    const currentWindow = BrowserWindow.getFocusedWindow() || win;
+
+    if (currentWindow) {
+        await dialog.showMessageBox(currentWindow, {
+            type: 'error',
+            title,
+            message,
+            buttons: ['OK'],
+            defaultId: 0
+        });
+    } else {
+        console.error('No focused window to show error box.');
+    }
+});
+
+// Show success dialog
+ipcMain.on('show-success-box', async (event, { title, message }) => {
+    const currentWindow = BrowserWindow.getFocusedWindow() || win;
+
+    if (currentWindow) {
+        await dialog.showMessageBox(currentWindow, {
+            type: 'info',
+            title,
+            message,
+            buttons: ['OK'],
+            defaultId: 0
+        });
+    } else {
+        console.error('No focused window to show success box.');
     }
 });
