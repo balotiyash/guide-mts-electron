@@ -1,8 +1,8 @@
 <!-- 
-    File: views/car_entry.html
-    Author: Ayush Shetty, Yash Balotiya
-    Description: This page contains all the HTML5 code of the Car Entry Registration Page.
-    Created on: 05/08/2025
+    File: views/payment_entry.html
+    Author: Yash Balotiya, Ayush Shetty
+    Description: This page contains all the HTML5 code of the Payment Entry Page.
+    Created on: 09/08/2025
     Last Modified: 10/08/2025
 -->
 
@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Tab Title -->
-    <title>Guide Motor Training School | Vehicle Registration</title>
+    <title>Guide Motor Training School | Payment Entry</title>
 
     <!-- Content Security Policy (adjusted to allow CDN) -->
     <meta http-equiv="Content-Security-Policy" content="
@@ -26,32 +26,37 @@
     ">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../styles/shared.css">
+    <link rel="stylesheet" href="../styles/shared.css" />
     <link rel="stylesheet" href="../styles/master_entry.css" />
 </head>
 
 <body>
     <!-- Header Section -->
     <header>
-        <h1>VEHICLE REGISTRATION</h1>
+        <h1>Payment Management</h1>
     </header>
 
     <!-- Main Content -->
     <main class="container">
         <div class="panels">
 
-            <!-- Left Container: Vehicle Table -->
+            <!-- Left Container: Payment Table -->
             <div class="table-container">
+                <!-- Title -->
+                <div class="table-header">
+                    <h2>Pending Fee Payments</h2>
+                    <input type="text" id="payment-date" autocomplete="off" title="Enter text to search"
+                        placeholder="Search..." />
+                </div>
 
-                <!-- Table Title -->
-                <h2>Registered Vehicles</h2>
-                <table class="instructor-table" id="tbl">
+                <!-- Table -->
+                <table class="instructor-table">
                     <thead>
                         <tr class="active-row">
-                            <th>Vehicle Name</th>
-                            <th>Vehicle Model</th>
-                            <th>Vehicle Number</th>
-                            <th>Fuel Type</th>
+                            <th>Name</th>
+                            <th>Work</th>
+                            <th>Fee Amount</th>
+                            <th>Pending Amount</th>
                         </tr>
                     </thead>
                 </table>
@@ -61,146 +66,146 @@
                         <tbody>
                             <tr>
                                 <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
+                                <td>June 2025</td>
+                                <td>500</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
+                                <td>September 2025</td>
+                                <td>400</td>
                                 <td>Diesel</td>
                             </tr>
                             <tr>
                                 <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
+                                <td>September 2025</td>
+                                <td>300</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
+                                <td>September 2025</td>
+                                <td>200</td>
                                 <td>CNG</td>
                             </tr>
                             <tr>
                                 <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
+                                <td>June 2025</td>
+                                <td>500</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
+                                <td>September 2025</td>
+                                <td>400</td>
                                 <td>Diesel</td>
                             </tr>
                             <tr>
                                 <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
+                                <td>September 2025</td>
+                                <td>300</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
+                                <td>September 2025</td>
+                                <td>200</td>
                                 <td>CNG</td>
                             </tr>
                             <tr>
                                 <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
+                                <td>June 2025</td>
+                                <td>500</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
+                                <td>September 2025</td>
+                                <td>400</td>
                                 <td>Diesel</td>
                             </tr>
                             <tr>
                                 <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
+                                <td>September 2025</td>
+                                <td>300</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
+                                <td>September 2025</td>
+                                <td>200</td>
                                 <td>CNG</td>
                             </tr>
                             <tr>
                                 <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
+                                <td>June 2025</td>
+                                <td>500</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
+                                <td>September 2025</td>
+                                <td>400</td>
                                 <td>Diesel</td>
                             </tr>
                             <tr>
                                 <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
+                                <td>September 2025</td>
+                                <td>300</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
+                                <td>September 2025</td>
+                                <td>200</td>
                                 <td>CNG</td>
                             </tr>
                             <tr>
                                 <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
+                                <td>June 2025</td>
+                                <td>500</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
+                                <td>September 2025</td>
+                                <td>400</td>
                                 <td>Diesel</td>
                             </tr>
                             <tr>
                                 <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
+                                <td>September 2025</td>
+                                <td>300</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
+                                <td>September 2025</td>
+                                <td>200</td>
                                 <td>CNG</td>
                             </tr>
                             <tr>
                                 <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
+                                <td>June 2025</td>
+                                <td>500</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
+                                <td>September 2025</td>
+                                <td>400</td>
                                 <td>Diesel</td>
                             </tr>
                             <tr>
                                 <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
+                                <td>September 2025</td>
+                                <td>300</td>
                                 <td>Petrol</td>
                             </tr>
                             <tr>
                                 <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
+                                <td>September 2025</td>
+                                <td>200</td>
                                 <td>CNG</td>
                             </tr>
                         </tbody>
@@ -208,43 +213,47 @@
                 </div>
             </div>
 
-            <!-- Right Container: Registration Form -->
+            <!-- Right Container: Fee Payment Form -->
             <div class="form-container right">
-                <div class="form-inner car_form_inner">
+                <div class="form-inner fuel-inner-form">
 
                     <!-- Main Form -->
                     <div class="form-content">
 
-                        <!-- Form Title -->
-                        <h2>Vehicle Registration</h2>
+                        <!-- Title -->
+                        <h2>Fee Payment</h2>
 
-                        <!-- Vehicle Name -->
-                        <div class="label-above">
-                            <label for="name">Vehicle Name</label>
-                            <input type="text" id="name" placeholder="Vehicle Name" autocomplete="off" />
-                        </div>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <td>Yash Balotiya</td>
+                            </tr>
+                            <tr>
+                                <th>Total Amount</th>
+                                <td>500</td>
+                            </tr>
+                            <tr>
+                                <th>Pending Amount</th>
+                                <td>0</td>
+                            </tr>
+                        </table>
 
-                        <!-- Vehicle Model -->
+                        <!-- Payment Mode Select -->
                         <div class="label-above">
-                            <label for="license">Vehicle Model</label>
-                            <input type="text" id="license" placeholder="Vehicle Model" autocomplete="off" />
-                        </div>
-
-                        <!-- Vehicle Number -->
-                        <div class="label-above">
-                            <label for="number">Vehicle Number</label>
-                            <input type="text" id="number" placeholder="Vehicle Number" autocomplete="off" />
-                        </div>
-
-                        <!-- Fuel Type -->
-                        <div class="label-above">
-                            <label for="number">Fuel Type</label>
-                            <select name="fuel" id="fuel">
-                                <option value="Petrol">Petrol</option>
-                                <option value="Diesel">Diesel</option>
-                                <option value="CNG">CNG</option>
-                                <option value="Electric">Electric</option>
+                            <label for="paymentMode">Payment Mode</label>
+                            <select id="paymentMode">
+                                <option value="credit_card">Credit Card</option>
+                                <option value="debit_card">Debit Card</option>
+                                <option value="net_banking">Net Banking</option>
+                                <option value="upi">UPI</option>
                             </select>
+                        </div>
+
+                        <!-- Amount Input -->
+                        <div class="label-above">
+                            <label for="amountInput">Amount Paid</label>
+                            <input type="text" id="amountInput" placeholder="Amount" autocomplete="off"
+                                title="Enter Amount" />
                         </div>
 
                         <!-- Submit Buttons -->
