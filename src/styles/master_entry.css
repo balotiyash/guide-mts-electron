@@ -2,7 +2,7 @@
    Author: Neha Balotia, Yash Balotiya
    Description: Styles for the Master Entry Page, Fuel, Car, Payments too.
    Created on: 27/07/2025
-   Updated: 10/08/2025
+   Updated: 15/08/2025
 */
 
 html,
@@ -121,7 +121,7 @@ input {
 
 .fuel-inner-form {
     width: 60%;
-    /* height: 30%; */
+    height: 70%;
 }
 
 .fuel-inner-form input {
