@@ -2,7 +2,7 @@
    Author: Neha Balotia, Yash Balotiya
    Description: Public CSS for Shared Components.
    Created on: 27/07/2025
-   Last Modified: 09/08/2025
+   Last Modified: 15/08/2025
 */
 
 * {
@@ -49,11 +49,11 @@ input[type="number"] {
 
 /* Images not selectable */
 img {
-   user-select: none;
-   -moz-user-select: none;
-   -webkit-user-drag: none;
-   -webkit-user-select: none;
-   -ms-user-select: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 label {
@@ -64,7 +64,12 @@ label {
     /* font-size: 1em; */
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: brown;
 }
 
@@ -190,3 +195,19 @@ tbody tr:hover {
 .btn.resetBtn {
     background-color: #FF6363;
 } */
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    /* background-color: #555; */
+    background-color: brown;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #eee;
+}

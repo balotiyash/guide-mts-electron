@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the CSS code of the Dashboard Page.
     Created on: 05/08/2025
-    Last Modified: 09/08/2025
+    Last Modified: 15/08/2025
 */
 
 body {
@@ -72,8 +72,10 @@ body {
 
 /* Left Side Buttons */
 .dashboardButton {
-    width: 8vw;
-    height: 8vw;
+    /* width: 8vw; */
+    /* height: 8vw; */
+    /* width: 7vw; */
+    height: 7vw;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -97,5 +99,9 @@ body {
 }
 
 .dashboardButton img {
+    width: 60%;
+}
+
+.dashboardButton:nth-child(3) img {
     width: 80%;
 }

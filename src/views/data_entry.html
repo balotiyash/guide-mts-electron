@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Customer Data Entry Page.
     Created on: 09/08/2025
-    Last Modified: 10/08/2025
+    Last Modified: 15/08/2025
 -->
 
 <!DOCTYPE html>
@@ -49,6 +49,13 @@
                     autocomplete="off" />
             </span>
 
+            <!-- Customer ID Display -->
+            <span class="inputContainer phoneInputSpan">
+                <label for="customerIdInput">Customer ID</label>
+                <input type="number" id="customerIdInput" placeholder="Customer ID"
+                    autocomplete="off" readonly />
+            </span>
+
             <!-- Photo & Signature Input -->
             <div id="imageInputContainer">
                 <!-- Photo Input -->
@@ -82,7 +89,7 @@
             <!-- Date of Birth Input -->
             <span class="inputContainer">
                 <label for="dobInput">Date of Birth</label>
-                <input type="date" id="dobInput" title="Select date of birth" />
+                <input type="date" id="dobInput" title="Select date of birth"  />
             </span>
 
             <!-- Relation Input -->
@@ -168,10 +175,10 @@
                 <input type="date" id="issuedOnInput" title="Select issue date" />
             </span>
 
-            <!-- Valid Until -->
+            <!-- Valid Till -->
             <span class="inputContainer">
-                <label for="validUntilInput">Valid Until</label>
-                <input type="date" id="validUntilInput" title="Select valid until date" />
+                <label for="validUntilInput">Valid Till</label>
+                <input type="date" id="validUntilInput" title="Select valid till date" />
             </span>
         </section>
 
@@ -197,10 +204,10 @@
                 <input type="date" id="mdlIssuedInput" title="Select issue date" />
             </span>
 
-            <!-- Valid Until -->
+            <!-- Valid Till -->
             <span class="inputContainer">
-                <label for="mdlValidUntilInput">Valid Until</label>
-                <input type="date" id="mdlValidUntilInput" title="Select valid until date" />
+                <label for="mdlValidUntilInput">Valid Till</label>
+                <input type="date" id="mdlValidUntilInput" title="Select valid till date" />
             </span>
         </section>
 
@@ -219,10 +226,10 @@
                 <input type="date" id="endorsementDatedInput" title="Select endorsement dated" />
             </span>
 
-            <!-- Valid Until -->
+            <!-- Valid Till -->
             <span class="inputContainer">
-                <label for="validUntilInput">Valid Until</label>
-                <input type="date" id="validUntilInput" title="Select valid until date" />
+                <label for="validUntilInput">Valid Till</label>
+                <input type="date" id="validUntilInput" title="Select valid till date" />
             </span>
         </section>
 
@@ -254,7 +261,7 @@
         <section class="licenseClassSection">
             <!-- Past Records -->
             <span class="inputContainer">
-                <label for="">Valid Until</label>
+                <label for="">Past Records</label>
 
                 <!-- Table -->
                 <table>
