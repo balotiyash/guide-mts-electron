@@ -3,14 +3,19 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Forge configuration file for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 01/08/2025
+ * Last Modified: 15/08/2025
 */
 
+// Common JS
 // This configuration file is used by Electron Forge to build and package the application.
-const { FusesPlugin } = require('@electron-forge/plugin-fuses');
-const { FuseV1Options, FuseVersion } = require('@electron/fuses');
+// const { FusesPlugin } = require('@electron-forge/plugin-fuses');
+// const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
-module.exports = {
+// Module imports
+import { FusesPlugin, FuseV1Options, FuseVersion } from '@electron-forge/plugin-fuses';
+
+// module.exports = {
+export default {
     packagerConfig: {
         asar: true,
     },

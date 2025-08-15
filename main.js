@@ -3,13 +3,23 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 08/08/2025
+ * Last Modified: 15/08/2025
 */
 
+// Common JS
 // Importing required modules from Electron
-const { app, BrowserWindow, ipcMain, Menu, screen, dialog } = require('electron');
-const path = require('path');
-const createMenuTemplate = require('./menu.js');
+// const { app, BrowserWindow, ipcMain, Menu, screen, dialog } = require('electron');
+// const path = require('path');
+// const createMenuTemplate = require('./menu.js');
+
+// Module JS
+import { app, BrowserWindow, ipcMain, Menu, screen, dialog } from "electron";
+import path from "path";
+import createMenuTemplate from "./menu.js";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Window variable to hold the main application window
 let win;

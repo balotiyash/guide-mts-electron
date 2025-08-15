@@ -1,12 +1,13 @@
 {
-    "name": "Guide MTS",
+    "name": "guide-mts",
     "version": "1.0.0",
     "description": "An Electron application for Guide MTS",
     "author": "Yash Balotiya",
     "main": "main.js",
+    "type": "module",
     "scripts": {
         "dist": "electron-builder --win --x64",
-        "start": "electron .",
+        "start": "electron -- ./main.js",
         "package": "electron-forge package",
         "make": "electron-forge make",
         "publish": "electron-forge publish",
@@ -23,10 +24,14 @@
         "@electron-forge/maker-zip": "^7.8.2",
         "@electron-forge/plugin-auto-unpack-natives": "^7.8.2",
         "@electron-forge/plugin-fuses": "^7.8.2",
-        "@electron-forge/plugin-webpack": "^7.8.2",
+        "@electron-forge/plugin-webpack": "^7.8.3",
         "@electron/fuses": "^1.8.0",
-        "electron": "^27.3.11",
-        "electron-builder": "^26.0.12"
+        "electron": "^37.3.0",
+        "electron-builder": "^26.0.12",
+        "html-webpack-plugin": "^5.6.4",
+        "webpack": "^5.101.2",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.15.2"
     },
     "build": {
         "appId": "com.balotiyash.app",

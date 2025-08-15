@@ -6,11 +6,21 @@
  * Last Modified: 15/08/2025
 */
 
+// Common JS
 // Menu template for the application
-const path = require('path');
-const { app } = require('electron');
+// const path = require('path');
+// const { app } = require('electron');
 
-function createMenuTemplate(win) {
+// Module 
+import path from 'path';
+import { app } from 'electron';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// function createMenuTemplate(win) {
+const createMenuTemplate = (win) => {
     // Check if the platform is macOS to adjust menu items accordingly
     const isMac = process.platform === 'darwin';
 
@@ -210,4 +220,5 @@ function createMenuTemplate(win) {
     ];
 }
 
-module.exports = createMenuTemplate;
+// module.exports = createMenuTemplate;
+export default createMenuTemplate;
