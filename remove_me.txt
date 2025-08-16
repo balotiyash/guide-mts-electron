@@ -14,3 +14,7 @@
  * Created on: 
  * Last Modified: 
 */
+
+npm run dist -- -p always
+
+notepad "$env:APPDATA\guide-mts\logs\main.log"

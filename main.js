@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 15/08/2025
+ * Last Modified: 16/08/2025
 */
 
 // Common JS
@@ -17,6 +17,13 @@ import { app, BrowserWindow, ipcMain, Menu, screen, dialog } from "electron";
 import path from "path";
 import createMenuTemplate from "./menu.js";
 import { fileURLToPath } from 'url';
+import updater from "electron-updater";
+const { autoUpdater } = updater;
+import log from "electron-log";
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = "info";
+log.info("App starting...");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,6 +56,12 @@ const createWindow = () => {
 
     // ❌ No menu on startup (login screen)
     // Menu.setApplicationMenu(null);
+
+    // Check for updates after window is ready
+    win.once("ready-to-show", () => {
+        console.log("Checking for updates...");
+        autoUpdater.checkForUpdatesAndNotify();
+    });
 }
 
 // Event listener for when the application is ready
@@ -58,6 +71,13 @@ app.whenReady().then(() => {
     } catch (err) {
         console.error('Failed to create window:', err);
     }
+});
+
+// Auto-updater events
+autoUpdater.on("update-downloaded", () => {
+  // Ask user if they want to install now
+  console.log("Update downloaded. Prompting user to install.");
+  autoUpdater.quitAndInstall();
 });
 
 // After login show the menu

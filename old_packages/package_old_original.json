@@ -1,0 +1,62 @@
+{
+    "name": "guide-mts",
+    "version": "1.0.0",
+    "description": "An Electron application for Guide MTS",
+    "author": "Yash Balotiya",
+    "main": "main.mjs",
+    "type": "module",
+    "scripts": {
+        "dist": "electron-builder --win --x64",
+        "start": "electron -- ./main.mjs",
+        "package": "electron-forge package",
+        "make": "electron-forge make",
+        "publish": "electron-forge publish",
+        "lint": "echo \"No linting configured\"",
+        "dev": "nodemon --exec electron .",
+        "postinstall": "electron-builder install-app-deps",
+        "postuninstall": "electron-builder install-app-deps --force"
+    },
+    "devDependencies": {
+        "@electron-forge/cli": "^7.8.2",
+        "@electron-forge/maker-deb": "^7.8.2",
+        "@electron-forge/maker-rpm": "^7.8.2",
+        "@electron-forge/maker-squirrel": "^7.8.2",
+        "@electron-forge/maker-zip": "^7.8.2",
+        "@electron-forge/plugin-auto-unpack-natives": "^7.8.2",
+        "@electron-forge/plugin-fuses": "^7.8.2",
+        "@electron-forge/plugin-webpack": "^7.8.2",
+        "@electron/fuses": "^1.8.0",
+        "electron": "^27.3.11",
+        "electron-builder": "^26.0.12"
+    },
+    "build": {
+        "appId": "com.balotiyash.app",
+        "productName": "Guide MTS",
+        "files": [
+            "**/*"
+        ],
+        "mac": {
+            "target": "dmg"
+        },
+        "win": {
+            "target": "nsis"
+        },
+        "linux": {
+            "target": "AppImage"
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true,
+            "license": "license.txt",
+            "perMachine": false,
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true,
+            "shortcutName": "Guide MTS"
+        }
+    },
+    "dependencies": {
+        "dotenv": "^17.2.1",
+        "electron-squirrel-startup": "^1.0.1",
+        "nodemon": "^3.1.10"
+    }
+}

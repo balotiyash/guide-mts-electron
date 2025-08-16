@@ -12,7 +12,8 @@
 // const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 // Module imports
-import { FusesPlugin, FuseV1Options, FuseVersion } from '@electron-forge/plugin-fuses';
+import { FusesPlugin } from '@electron-forge/plugin-fuses';
+import { FuseV1Options, FuseVersion } from '@electron/fuses';
 
 // module.exports = {
 export default {
