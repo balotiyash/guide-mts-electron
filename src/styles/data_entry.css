@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: CSS for Customer Data Entry Page.
    Created on: 09/08/2025
-   Last Modified: 15/08/2025
+   Last Modified: 18/08/2025
 */
 
 body {
@@ -14,7 +14,7 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    overflow: hidden;
+/*     overflow: hidden; */
 }
 
 /* Header Style */
