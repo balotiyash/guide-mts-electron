@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: CSS for Customer Data Entry Page specifically starting from name input section and responsiveness.
    Created on: 09/08/2025
-   Last Modified: 15/08/2025
+   Last Modified: 18/08/2025
 */
 
 /* Name Section */
@@ -68,7 +68,7 @@ table {
 }
 
 .scrollDiv {
-    height: 200px;
+    height: 150px;
 }
 
 /* Button Section */
