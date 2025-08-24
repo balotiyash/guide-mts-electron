@@ -3,3 +3,5 @@ dist/
 *.log
 .env
 out/
+guide-db-migration/.venv/
+guide-db-migration/sqlite_db/
