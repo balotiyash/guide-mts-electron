@@ -1,16 +1,10 @@
 /** 
- * File: main.js
+ * File: src/scripts/main.js
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 16/08/2025
+ * Last Modified: 25/08/2025
 */
-
-// Common JS
-// Importing required modules from Electron
-// const { app, BrowserWindow, ipcMain, Menu, screen, dialog } = require('electron');
-// const path = require('path');
-// const createMenuTemplate = require('./menu.js');
 
 // Module JS
 import { app, BrowserWindow, ipcMain, Menu, screen, dialog } from "electron";
@@ -21,10 +15,12 @@ import updater from "electron-updater";
 const { autoUpdater } = updater;
 import log from "electron-log";
 
+// Logging the meta information
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = "info";
 log.info("App starting...");
 
+// Getting the current file and directory names
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -40,17 +36,18 @@ const createWindow = () => {
     const { width, height } = primaryDisplay.workAreaSize;
 
     win = new BrowserWindow({
-        // show: false, 
+        show: false, 
         minWidth: Math.floor(width * 1),
         minHeight: Math.floor(height * 1),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
-            nodeIntegration: true,
+            nodeIntegration: false,
         },
     });
 
-    win.loadFile(path.join(__dirname, 'src/views/index.html'));
+    // Loading the main application view
+    win.loadFile(path.join(__dirname, '../views/index.html'));
     win.maximize();
     win.show();
 
@@ -96,7 +93,8 @@ ipcMain.handle('login', async (event, { username, password }) => {
 // Secure page navigation
 ipcMain.on('navigate-to', (event, targetPage) => {
     if (win) {
-        win.loadFile(path.join(__dirname, 'src/views', targetPage));
+        // win.loadFile(path.join(__dirname, 'src/views', targetPage));
+        win.loadFile(path.join(__dirname, '../views', targetPage));
     }
 });
 

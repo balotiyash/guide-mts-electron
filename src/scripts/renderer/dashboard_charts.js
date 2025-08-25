@@ -1,9 +1,9 @@
 /** 
- * File: dashboard_charts.js
+ * File: src/scripts/renderer/dashboard_charts.js
  * Author: Yash Balotiya
  * Description: Main script for the Dashboard page. This script initializes the charts on the dashboard.
  * Created on: 04/08/2025
- * Last Modified: 08/08/2025
+ * Last Modified: 25/08/2025
 */
 
 // Onload event to initialize charts

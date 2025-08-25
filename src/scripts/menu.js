@@ -1,17 +1,12 @@
 /** 
- * File: menu.js
+ * File: src/scripts/menu.js
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 15/08/2025
+ * Last Modified: 25/08/2025
 */
 
-// Common JS
-// Menu template for the application
-// const path = require('path');
-// const { app } = require('electron');
-
-// Module 
+// Module JS
 import path from 'path';
 import { app } from 'electron';
 import { fileURLToPath } from 'url';

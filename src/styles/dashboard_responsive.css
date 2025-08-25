@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the CSS code of the responsiveness of Dashboard Page.
     Created on: 05/08/2025
-    Last Modified: 18/08/2025
+    Last Modified: 25/08/2025
 */
 
 /* Responsive */
@@ -28,6 +28,10 @@
 }
 
 @media (max-width: 1600px) {
+    #mainContainer {
+        padding-top: 0;
+    }
+
     #dashboardSection {
         margin-top: 8px;
     }

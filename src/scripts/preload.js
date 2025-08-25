@@ -1,17 +1,17 @@
 /** 
- * File: preload.mjs
+ * File: src/scripts/preload.js
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 15/08/2025
+ * Last Modified: 25/08/2025
 */
 
 // Common JS
 // Importing required modules from Electron
-// const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
 // Importing required modules from Electron
-import { contextBridge, ipcRenderer } from "electron";
+// import { contextBridge, ipcRenderer } from "electron";
 
 // Exposing secure APIs to the renderer process
 contextBridge.exposeInMainWorld('electronAPI', {

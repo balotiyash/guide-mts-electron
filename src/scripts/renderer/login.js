@@ -1,9 +1,9 @@
 /** 
- * File: src/scripts/login.js
+ * File: src/scripts/renderer/login.js
  * Author: Yash Balotiya, Neha Balotia
  * Description: Handles user login functionality for the Guide Motor Training School application.
  * Created on: 20/07/2025
- * Last Modified: 08/08/2025
+ * Last Modified: 25/08/2025
 */
 
 // Only runs when the DOM is fully loaded
