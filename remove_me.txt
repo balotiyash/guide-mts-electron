@@ -18,3 +18,7 @@
 npm run dist -- -p always
 
 notepad "$env:APPDATA\guide-mts\logs\main.log"
+
+npm list electron
+npm install --save-dev electron-rebuild
+npx electron-rebuild

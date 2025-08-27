@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Dashboard Page after Login.
     Created on: 04/08/2025
-    Last Modified: 25/08/2025
+    Last Modified: 27/08/2025
 -->
 
 <!DOCTYPE html>
@@ -41,7 +41,7 @@
             <img src="../assets/images/guide-logo.png" alt="Guide Motor Training School Logo" id="logoImage">
 
             <!-- Month Input -->
-            <input type="month" id="monthInput" title="Select Month & Year">
+            <input type="month" id="monthInput" title="Select Month & Year" />
         </section>
 
         <!-- Actual Area -->
@@ -122,8 +122,8 @@
 
                     <!-- Date & Time Display -->
                     <div class="dateTimeDiv">
-                        <span id="currentDate">08/08/2025</span>
-                        <span id="currentTime">12:00:00 PM</span>
+                        <span id="currentDate">Loading...</span>
+                        <span id="currentTime">Loading...</span>
                     </div>
                 </div>
 
@@ -138,13 +138,13 @@
                         <!-- All Time Registration -->
                         <span class="statCard">
                             <small>All Time Registration</small>
-                            <big><b>100,000</b></big>
+                            <big><b id="allTimeCountTxt">Loading...</b></big>
                         </span>
 
                         <!-- Current Year Registration -->
                         <span class="statCard">
                             <small>Current Year Registration</small>
-                            <big><b>500</b></big>
+                            <big><b id="currentYearCountTxt">Loading...</b></big>
                         </span>
                     </div>
 
@@ -154,13 +154,13 @@
                         <!-- Repeat Students -->
                         <span class="statCard">
                             <small>Repeat Students</small>
-                            <big><b>1000</b></big>
+                            <big><b id="repeatStudentsCountTxt">Loading...</b></big>
                         </span>
 
                         <!-- Pending Payments -->
                         <span class="statCard">
                             <small>Pending Payments</small>
-                            <big><b>20</b></big>
+                            <big><b id="pendingPaymentsCountTxt">Loading...</b></big>
                         </span>
                     </div>
                 </div>
@@ -280,8 +280,8 @@
 
     <!-- Scripts -->
     <script src="../scripts/imports/chart.umd.js"></script>
-    <script src="../scripts/renderer/dashboard.js"></script>
-    <script src="../scripts/renderer/dashboard_charts.js"></script>
+    <script type="module" src="../scripts/renderer/dashboard.js"></script>
+    <script type="module" src="../scripts/renderer/dashboard_charts.js"></script>
 </body>
 
 </html>

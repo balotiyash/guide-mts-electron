@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 25/08/2025
+ * Last Modified: 26/08/2025
 */
 
 // Module JS
@@ -14,6 +14,8 @@ import { fileURLToPath } from 'url';
 import updater from "electron-updater";
 const { autoUpdater } = updater;
 import log from "electron-log";
+import { registerDbHandler } from "./main/ipc/dbHandler.js";
+import  { registerDashboardHandlers } from "./main/ipc/dashboardHandler.js";
 
 // Logging the meta information
 autoUpdater.logger = log;
@@ -64,6 +66,8 @@ const createWindow = () => {
 // Event listener for when the application is ready
 app.whenReady().then(() => {
     try {
+        registerDbHandler(); // register all db IPC
+        registerDashboardHandlers(); // register all dashboard IPC
         createWindow();
     } catch (err) {
         console.error('Failed to create window:', err);

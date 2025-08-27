@@ -1,9 +1,9 @@
 /** 
- * File: src/scripts/menu.js
+ * File: ../scripts/menu.js
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 25/08/2025
+ * Last Modified: 26/08/2025
 */
 
 // Module JS
@@ -11,6 +11,7 @@ import path from 'path';
 import { app } from 'electron';
 import { fileURLToPath } from 'url';
 
+// File paths
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -26,31 +27,31 @@ const createMenuTemplate = (win) => {
                 {
                     label: 'Dashboard',
                     click: () => {
-                        win.loadFile(path.join(__dirname, 'src/views/dashboard.html'));
+                        win.loadFile(path.join(__dirname, '../views/dashboard.html'));
                     },
                 },
                 {
                     label: 'Customer Registration',
                     click: () => {
-                        win.loadFile(path.join(__dirname, 'src/views/data_entry.html'));
+                        win.loadFile(path.join(__dirname, '../views/data_entry.html'));
                     },
                 },
                 {
                     label: 'Master Registration',
                     click: () => {
-                        win.loadFile(path.join(__dirname, 'src/views/master_entry.html'));
+                        win.loadFile(path.join(__dirname, '../views/master_entry.html'));
                     },
                 },
                 {
                     label: 'Vehicle Registration',
                     click: () => {
-                        win.loadFile(path.join(__dirname, 'src/views/car_entry.html'));
+                        win.loadFile(path.join(__dirname, '../views/car_entry.html'));
                     },
                 },
                 {
                     label: 'Fuel Entry',
                     click: () => {
-                        win.loadFile(path.join(__dirname, 'src/views/fuel_entry.html'));
+                        win.loadFile(path.join(__dirname, '../views/fuel_entry.html'));
                     },
                 },
             ],
@@ -61,13 +62,13 @@ const createMenuTemplate = (win) => {
                 {
                     label: 'Payment Management',
                     click: () => {
-                        win.loadFile(path.join(__dirname, 'src/views/payment_entry.html'));
+                        win.loadFile(path.join(__dirname, '../views/payment_entry.html'));
                     },
                 },
                 {
                     label: 'Receipts Management',
                     click: () => {
-                        win.loadFile(path.join(__dirname, 'src/views/receipts.html'));
+                        win.loadFile(path.join(__dirname, '../views/receipts.html'));
                     },
                 },
             ],
@@ -106,7 +107,7 @@ const createMenuTemplate = (win) => {
                 {
                     label: 'Logout',
                     click: () => {
-                        win.loadFile(path.join(__dirname, 'src/views/index.html'));
+                        win.loadFile(path.join(__dirname, '../views/index.html'));
                     },
                 },{
                     label: 'Exit',
