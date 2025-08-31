@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Dashboard Page after Login.
     Created on: 04/08/2025
-    Last Modified: 27/08/2025
+    Last Modified: 29/08/2025
 -->
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
 
         <!-- Actual Area -->
         <section id="dashboardSection">
-            
+
             <!-- Left Buttons Div -->
             <div id="leftButtonsDiv">
                 <!-- Button 1 -->
@@ -114,7 +114,7 @@
 
             <!-- Right Section -->
             <div id="rightMainDiv">
-                
+
                 <!-- Date & Time Section -->
                 <div class="rightChild">
                     <!-- Title -->
@@ -129,7 +129,7 @@
 
                 <!-- Stats Section -->
                 <div class="rightChild">
-                    
+
                     <!-- Title -->
                     <h3>Business Stats</h3>
 
@@ -150,10 +150,10 @@
 
                     <!-- Main Stats Div 2 -->
                     <div class="mainStatsDiv">
-                        
+
                         <!-- Repeat Students -->
                         <span class="statCard">
-                            <small>Repeat Students</small>
+                            <small>Repeat Customers</small>
                             <big><b id="repeatStudentsCountTxt">Loading...</b></big>
                         </span>
 
@@ -176,6 +176,7 @@
 
                         <!-- Select Dropdown -->
                         <select id="reminderSelect" title="Select Reminder Type">
+                            <option value="learning">Learning License</option>
                             <option value="payments">Payments</option>
                             <option value="licenses">Licenses</option>
                             <option value="birthdays">Birthdays</option>
@@ -272,7 +273,11 @@
                     </div>
 
                     <!-- Sent Reminders Button -->
-                    <button>Send Reminders</button>
+                    <!-- <button>Check Reminders</button> -->
+                    <div id="reminderButtonDiv">
+                        <marquee behavior="scroll" direction="left"><pre>Check LL Reminders                  Check Payment Reminders                 Check License Expiry Reminders              Check Birthday Reminders</pre></marquee>
+                        <button id="reminderButton">OK</button>
+                    </div>
                 </div>
             </div>
         </section>

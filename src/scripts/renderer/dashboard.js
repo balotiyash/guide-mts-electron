@@ -71,10 +71,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         initCharts(chart1Data, chart2RevenueData, chart2FuelData, chart3Names, chart3Counts);
     };
 
-    // Initial load
+    // Initial load Charts
     await loadAndRenderCharts(now.getFullYear().toString());
 
-    // Reload charts when year changes
+    // Reload charts when year changes Charts
     monthInput.addEventListener("change", (event) => {
         const selectedYear = event.target.value.split("-")[0];
         loadAndRenderCharts(selectedYear);
@@ -102,4 +102,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("currentYearCountTxt").innerText = currentYearCount;
     document.getElementById("allTimeCountTxt").innerText = allTimeCount;
     document.getElementById("pendingPaymentsCountTxt").innerText = pendingPaymentsCount;
+
+    // Reminder button click event
+    document.getElementById("reminderButton").addEventListener("click", () => {
+        window.open('reminder.html', '_blank', 'width=600,height=400');
+    });
 });

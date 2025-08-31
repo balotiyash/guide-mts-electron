@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the CSS code of the Dashboard Page specifically for charts, statistics & Reminders.
     Created on: 05/08/2025
-    Last Modified: 09/08/2025
+    Last Modified: 29/08/2025
 */
 
 /* Middle Charts Section */
@@ -112,19 +112,52 @@
     gap: 30%;
 }
 
+#reminderButtonDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Send SMS Button */
 button {
-    width: 100%;
+    /* width: 100%; */
     padding: 10px;
+    margin-left: 8px;
     background-color: brown;
     color: white;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
+    /* animation: yellowBlink 1.5s infinite; */
+    transition: background-color 1s ease;
 }
 
 button:hover {
     background-color: darkred;
+}
+
+/* animation bg color yellow blink */
+@keyframes yellowBlink {
+    0% {
+        background-color: brown;
+    }
+
+    50% {
+        background-color: yellow;
+        color: darkred;
+    }
+
+    100% {
+        background-color: brown;
+    }
+}
+
+/* Marquee */
+#reminderButtonDiv marquee {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-color: yellow;
+    border-radius: 12px;
 }

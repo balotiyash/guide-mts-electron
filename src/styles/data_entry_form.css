@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: CSS for Customer Data Entry Page specifically starting from name input section and responsiveness.
    Created on: 09/08/2025
-   Last Modified: 18/08/2025
+   Last Modified: 28/08/2025
 */
 
 /* Name Section */
@@ -83,6 +83,10 @@ table {
 
 /* Responsive */
 @media (max-width: 1600px) {
+    body {
+        padding-top: 0;
+    }
+
     main,
     label {
         font-size: 12px;
