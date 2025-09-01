@@ -3,10 +3,10 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 26/08/2025
+ * Last Modified: 01/09/2025
 */
 
-// Module JS
+// Importing required modules & libraries
 import { app, BrowserWindow, ipcMain, Menu, screen, dialog } from "electron";
 import path from "path";
 import createMenuTemplate from "./menu.js";
@@ -14,8 +14,11 @@ import { fileURLToPath } from 'url';
 import updater from "electron-updater";
 const { autoUpdater } = updater;
 import log from "electron-log";
+
+// Register IPC handlers
 import { registerDbHandler } from "./main/ipc/dbHandler.js";
 import  { registerDashboardHandlers } from "./main/ipc/dashboardHandler.js";
+import { registerDataEntryHandlers } from "./main/ipc/dataEntryHandler.js";
 
 // Logging the meta information
 autoUpdater.logger = log;
@@ -50,6 +53,7 @@ const createWindow = () => {
 
     // Loading the main application view
     win.loadFile(path.join(__dirname, '../views/index.html'));
+    // win.loadFile(path.join(__dirname, '../views/data_entry.html'));
     win.maximize();
     win.show();
 
@@ -68,6 +72,7 @@ app.whenReady().then(() => {
     try {
         registerDbHandler(); // register all db IPC
         registerDashboardHandlers(); // register all dashboard IPC
+        registerDataEntryHandlers(); // register all data entry IPC
         createWindow();
     } catch (err) {
         console.error('Failed to create window:', err);
@@ -102,36 +107,23 @@ ipcMain.on('navigate-to', (event, targetPage) => {
     }
 });
 
-// Show error dialog
-ipcMain.on('show-error-box', async (event, { title, message }) => {
-    const currentWindow = BrowserWindow.getFocusedWindow() || win;
+// Show dialog box
+ipcMain.handle('show-dialog-box', async (event, { type, title, message, buttons = ['OK', 'Cancel'] }) => {
+    const currentWindow = BrowserWindow.getFocusedWindow();
 
     if (currentWindow) {
-        await dialog.showMessageBox(currentWindow, {
-            type: 'error',
+        const result = await dialog.showMessageBox(currentWindow, {
+            type, // 'info', 'warning', 'error', 'question', 'none'
             title,
             message,
-            buttons: ['OK'],
-            defaultId: 0
+            buttons,
+            defaultId: 0,
+            cancelId: 1
         });
-    } else {
-        console.error('No focused window to show error box.');
-    }
-});
 
-// Show success dialog
-ipcMain.on('show-success-box', async (event, { title, message }) => {
-    const currentWindow = BrowserWindow.getFocusedWindow() || win;
-
-    if (currentWindow) {
-        await dialog.showMessageBox(currentWindow, {
-            type: 'info',
-            title,
-            message,
-            buttons: ['OK'],
-            defaultId: 0
-        });
+        return result.response; // 👈 This gets sent back to renderer
     } else {
-        console.error('No focused window to show success box.');
+        console.error('No focused window to show dialog box.');
+        return -1;
     }
 });

@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Customer Data Entry Page.
     Created on: 09/08/2025
-    Last Modified: 28/08/2025
+    Last Modified: 01/09/2025
 -->
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
         script-src 'self' https://cdn.jsdelivr.net; 
         style-src 'self' 'unsafe-inline'; 
         font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
-        img-src 'self' data:;
+        img-src 'self' data: blob:;
     ">
 
     <!-- Stylesheets -->
@@ -45,32 +45,31 @@
             <!-- Phone Input -->
             <span class="inputContainer phoneInputSpan">
                 <label for="phoneInput">Mobile Number</label>
-                <input type="number" id="phoneInput" placeholder="Enter mobile number" title="Enter mobile number"
-                    autocomplete="off" />
+                <input type="tel" id="phoneInput" placeholder="Enter mobile number" title="Enter mobile number"
+                    autocomplete="off" maxlength="10" />
             </span>
 
             <!-- Customer ID Display -->
-            <!-- <span class="inputContainer phoneInputSpan">
+            <span class="inputContainer phoneInputSpan">
                 <label for="customerIdInput">Customer ID</label>
-                <input type="number" id="customerIdInput" placeholder="Customer ID"
-                    autocomplete="off" readonly />
-            </span> -->
+                <input type="number" id="customerIdInput" placeholder="Customer ID" autocomplete="off" readonly title="Customer ID" />
+            </span>
 
             <!-- Photo & Signature Input -->
             <div id="imageInputContainer">
                 <!-- Photo Input -->
-                <span class="imageInput" title="Upload Photo">
+                <label class="imageInput" title="Upload Photo" id="photoInputLabel">
                     <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon">
-                    <label for="photoInput">Photo</label>
+                    <span>Photo</span>
                     <input type="file" id="photoInput" accept="image/*" hidden />
-                </span>
+                </label>
 
                 <!-- Signature Input -->
-                <span class="imageInput" title="Upload Signature">
+                <label class="imageInput" title="Upload Signature" id="signatureInputLabel">
                     <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon">
-                    <label for="signatureInput">Signature</label>
+                    <span>Signature</span>
                     <input type="file" id="signatureInput" accept="image/*" hidden />
-                </span>
+                </label>
             </div>
         </section>
 
@@ -89,7 +88,7 @@
             <!-- Date of Birth Input -->
             <span class="inputContainer">
                 <label for="dobInput">Date of Birth</label>
-                <input type="date" id="dobInput" title="Select date of birth"  />
+                <input type="date" id="dobInput" title="Select date of birth" />
             </span>
 
             <!-- Relation Input -->
@@ -108,21 +107,13 @@
                     <!-- Car Select -->
                     <span class="inputContainer">
                         <label for="carSelect">Car</label>
-                        <select id="carSelect" title="Select car">
-                            <option value="" selected disabled>Select car</option>
-                            <option value="car1">Car 1</option>
-                            <option value="car2">Car 2</option>
-                        </select>
+                        <select id="carSelect" title="Select Vehicle"></select>
                     </span>
 
                     <!-- Instructor Select -->
                     <span class="inputContainer">
                         <label for="instructorSelect">Instructor</label>
-                        <select id="instructorSelect" title="Select instructor">
-                            <option value="" selected disabled>Select instructor</option>
-                            <option value="instructor1">Instructor 1</option>
-                            <option value="instructor2">Instructor 2</option>
-                        </select>
+                        <select id="instructorSelect" title="Select Instructor"></select>
                     </span>
                 </span>
 
@@ -216,8 +207,8 @@
             <!-- License Input -->
             <span class="inputContainer">
                 <label for="endorsementInput">Endorsement (If Any)</label>
-                <input type="text" id="endorsementInput" placeholder="Enter endorsement details" title="Enter endorsement"
-                    autocomplete="off" />
+                <input type="text" id="endorsementInput" placeholder="Enter endorsement details"
+                    title="Enter endorsement" autocomplete="off" />
             </span>
 
             <!-- Issued on -->
@@ -228,8 +219,8 @@
 
             <!-- Valid Till -->
             <span class="inputContainer">
-                <label for="validUntilInput">Valid Till</label>
-                <input type="date" id="validUntilInput" title="Select valid till date" />
+                <label for="endorsementValidityInput">Valid Till</label>
+                <input type="date" id="endorsementValidityInput" title="Select valid till date" />
             </span>
         </section>
 
@@ -252,8 +243,8 @@
             <!-- Work Description -->
             <span class="inputContainer">
                 <label for="workDescriptionInput">Work Description</label>
-                <input type="text" id="workDescriptionInput" placeholder="Enter work description" title="Enter work description"
-                    autocomplete="off" />
+                <input type="text" id="workDescriptionInput" placeholder="Enter work description"
+                    title="Enter work description" autocomplete="off" />
             </span>
         </section>
 
@@ -279,83 +270,11 @@
                 <div class="scrollDiv">
                     <table>
                         <tbody>
+                            <!-- Dynamic Data Here -->
                             <tr>
-                                <td class="tableCol">1</td>
-                                <td class="tableCol">01/01/2025</td>
-                                <td class="workCol">Work Description 1Work Description 1Work Description 1Work Description 1Work Description 1Work Description 1Work Description 1</td>
-                                <td class="tableCol">₹1000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2025</td>
-                                <td>Work Description 2</td>
-                                <td>₹2000</td>
-                            </tr>
-                            <tr>
-                                <td class="tableCol">1</td>
-                                <td class="tableCol">01/01/2025</td>
-                                <td class="workCol">Work Description 1</td>
-                                <td class="tableCol">₹1000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2025</td>
-                                <td>Work Description 2</td>
-                                <td>₹2000</td>
-                            </tr>
-                            <tr>
-                                <td class="tableCol">1</td>
-                                <td class="tableCol">01/01/2025</td>
-                                <td class="workCol">Work Description 1</td>
-                                <td class="tableCol">₹1000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2025</td>
-                                <td>Work Description 2</td>
-                                <td>₹2000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2025</td>
-                                <td>Work Description 2</td>
-                                <td>₹2000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2025</td>
-                                <td>Work Description 2</td>
-                                <td>₹2000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2025</td>
-                                <td>Work Description 2</td>
-                                <td>₹2000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2025</td>
-                                <td>Work Description 2</td>
-                                <td>₹2000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2025</td>
-                                <td>Work Description 2</td>
-                                <td>₹2000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2025</td>
-                                <td>Work Description 2</td>
-                                <td>₹2000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2025</td>
-                                <td>Work Description 2</td>
-                                <td>₹2000</td>
+                                <td colspan="4" class="tableCol" style="text-align: center; font-style: italic;">
+                                    No past records found.
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -367,10 +286,13 @@
         <section class="buttonSection">
             <button type="button" class="btn green">Save</button>
             <button type="button" class="btn yellow">Edit</button>
-            <button type="button" class="btn orange">Clear</button>
-            <button type="button" class="btn red">Exit</button>
+            <button type="button" class="btn orange" id="clearBtn">Clear</button>
+            <button type="button" class="btn red" id="exitBtn">Exit</button>
         </section>
     </main>
+
+    <!-- Scripts -->
+    <script type="module" src="../scripts/renderer/data_entry.js"></script>
 </body>
 
 </html>

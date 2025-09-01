@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: CSS for Customer Data Entry Page.
    Created on: 09/08/2025
-   Last Modified: 18/08/2025
+   Last Modified: 31/08/2025
 */
 
 body {
@@ -65,7 +65,7 @@ main {
 
 .imageInput {
     width: 15%;
-    height: 15%;
+    min-height: 15%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,6 +91,18 @@ main {
 
 .imageInput img {
     width: 30%;
+}
+
+.imageInput.withImage {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent; /* override default bg */
+}
+
+.imageInput.withImage img,
+.imageInput.withImage span {
+    display: none;
 }
 
 /* Horizontal Divider */

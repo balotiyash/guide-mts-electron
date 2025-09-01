@@ -22,3 +22,17 @@ notepad "$env:APPDATA\guide-mts\logs\main.log"
 npm list electron
 npm install --save-dev electron-rebuild
 npx electron-rebuild
+
+-- To fetch all repeat customers
+SELECT * 
+FROM work_descriptions
+WHERE customer_id IN (
+    SELECT customer_id
+    FROM work_descriptions
+    GROUP BY customer_id
+    HAVING COUNT(*) > 1
+)
+ORDER BY customer_id;
+
+Go through all Title tags
+remove function of reset image in customer entry

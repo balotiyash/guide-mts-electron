@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Handles user login functionality for the Guide Motor Training School application.
  * Created on: 20/07/2025
- * Last Modified: 26/08/2025
+ * Last Modified: 01/09/2025
 */
 
 // Only runs when the DOM is fully loaded
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.electronAPI.navigateTo('dashboard.html');
         } else {
             // Show error message
-            window.dialogBoxAPI.showErrorBox('Login Failed', 'Invalid Username or Password');
+            window.dialogBoxAPI.showDialogBox('error', 'Login Failed', 'Invalid Username or Password');
 
             // Clear the input fields
             usernameInput.value = '';

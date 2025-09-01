@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 27/08/2025
+ * Last Modified: 01/09/2025
 */
 
 // Importing required modules from Electron
@@ -26,11 +26,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
 // Exposing dialog box APIs
 contextBridge.exposeInMainWorld('dialogBoxAPI', {
-    // API to show an message box
-    showErrorBox: (title, message) => ipcRenderer.send('show-error-box', { title, message }),
-    showSuccessBox: (title, message) => ipcRenderer.send('show-success-box', { title, message })
+    showDialogBox: (type, title, message, buttons) => ipcRenderer.invoke('show-dialog-box', { type, title, message, buttons })
 });
 
+
+// Exposing dashboard APIs
 contextBridge.exposeInMainWorld('dashboardAPI', {
     // Dashboard Charts
     getChart1Data: (selectedYear) => ipcRenderer.invoke('get-chart-1-data', selectedYear),
@@ -42,4 +42,16 @@ contextBridge.exposeInMainWorld('dashboardAPI', {
     getCurrentYearCount: () => ipcRenderer.invoke('get-current-year-count'),
     getRepeatStudentsCount: () => ipcRenderer.invoke('get-repeat-students-count'),
     getPendingPaymentsCount: () => ipcRenderer.invoke('get-pending-payments-count')
+});
+
+// Exposing data entry APIs
+contextBridge.exposeInMainWorld('dataEntryAPI', {
+    // API to fetch Dropdown Names of vehicles & instructors
+    getDropDownNames: (value) => ipcRenderer.invoke('get-drop-down-names', value),
+
+    // API to fetch customer data by phone number
+    searchByPhoneNumber: (phoneNumber) => ipcRenderer.invoke('search-by-phone-number', phoneNumber),
+
+    // API to fetch work description
+    getWorkDescriptions: (userId) => ipcRenderer.invoke('get-work-descriptions', userId)
 });
