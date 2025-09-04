@@ -52,8 +52,8 @@ const createWindow = () => {
     });
 
     // Loading the main application view
-    win.loadFile(path.join(__dirname, '../views/index.html'));
-    // win.loadFile(path.join(__dirname, '../views/data_entry.html'));
+    // win.loadFile(path.join(__dirname, '../views/index.html'));
+    win.loadFile(path.join(__dirname, '../views/data_entry.html'));
     win.maximize();
     win.show();
 
@@ -108,7 +108,7 @@ ipcMain.on('navigate-to', (event, targetPage) => {
 });
 
 // Show dialog box
-ipcMain.handle('show-dialog-box', async (event, { type, title, message, buttons = ['OK', 'Cancel'] }) => {
+ipcMain.handle('show-dialog-box', async (event, { type, title, message, buttons = ['OK'] }) => {
     const currentWindow = BrowserWindow.getFocusedWindow();
 
     if (currentWindow) {

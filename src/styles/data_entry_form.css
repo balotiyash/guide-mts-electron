@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: CSS for Customer Data Entry Page specifically starting from name input section and responsiveness.
    Created on: 09/08/2025
-   Last Modified: 01/09/2025
+   Last Modified: 02/09/2025
 */
 
 /* Name Section */
@@ -99,10 +99,6 @@ table {
     select {
         padding: 8px 12px;
         font-size: 12px;
-    }
-
-    .imageInput img {
-        display: none;
     }
 
     .scrollDiv {

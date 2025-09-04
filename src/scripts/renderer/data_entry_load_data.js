@@ -1,20 +1,32 @@
-/** 
+/**
  * File: src/scripts/renderer/data_entry_load_data.js
  * Author: Yash Balotiya
  * Description: This file contains JS code to HELP load customer data into the form.
  * Created on: 31/08/2025
  * Last Modified: 01/09/2025
-*/
+ */
 
 // Fill the form with customer data using mobile number
-const fillForm = (data, formElements) => {
-    const { customerIdInput, customerNameInput, dobInput, relationInput, carSelect, instructorSelect, addressInput, licenseInput, classInput, licenseInput2, classInput2, issuedOnInput, validUntilInput, mdlNoInput, mdlClassInput, mdlIssuedInput, mdlValidUntilInput, endorsementInput, endorsementDatedInput, endorsementValidityInput, vehicleNoInput } = formElements;
+const fillForm = (data, formElements, imageBlobs) => {
+    const { customerIdInput, customerNameInput, dobInput, relationInput, carSelect, instructorSelect, addressInput, licenseInput, classInput, licenseInput2, classInput2, issuedOnInput, validUntilInput, mdlNoInput, mdlClassInput, mdlIssuedInput, mdlValidUntilInput, endorsementInput, endorsementDatedInput, endorsementValidityInput, vehicleNoInput, amountInput, workDescriptionInput } = formElements;
+
+    // First, clear any existing images/blobs before loading new ones
+    resetImageInputs(imageBlobs);
 
     // User ID
     customerIdInput.value = data.id || "";
 
     // Customer Photo & Signature
-    handleImages(data);
+    // This part handles loading existing images from the DB
+    const photoInputLabel = document.getElementById("photoInputLabel");
+    const signatureInputLabel = document.getElementById("signatureInputLabel");
+
+    if (data?.customer_image instanceof Uint8Array) {
+        setLabelImage(data.customer_image, photoInputLabel, "customerImageInput", imageBlobs);
+    }
+    if (data?.customer_signature instanceof Uint8Array) {
+        setLabelImage(data.customer_signature, signatureInputLabel, "customerSignatureInput", imageBlobs);
+    }
 
     // Name
     customerNameInput.value = data.customer_name || "";
@@ -80,33 +92,26 @@ const fillForm = (data, formElements) => {
     // Vehicle No
     vehicleNoInput.value = data.customer_vehicle_no || "";
 
-    // Charged Amount
+    // Charged Amount & Work Description (These are not part of the main customer data, so they should be reset)
     amountInput.value = "";
     workDescriptionInput.value = "";
 };
 
-// Handle image uploads
-const handleImages = (data) => {
-    // Photo & Signature Inputs
+// NEW: Function to set up event listeners for image inputs
+const setupImageInputListeners = (imageBlobs) => {
     const photoInput = document.getElementById("photoInput");
     const photoInputLabel = document.getElementById("photoInputLabel");
     const signatureInput = document.getElementById("signatureInput");
     const signatureInputLabel = document.getElementById("signatureInputLabel");
 
-    // From DB: Set existing photo/signature if available
-    if (data?.customer_image instanceof Uint8Array) {
-        setLabelImage(data.customer_image, photoInputLabel);
-    }
-
-    if (data?.customer_signature instanceof Uint8Array) {
-        setLabelImage(data.customer_signature, signatureInputLabel);
-    }
-
     // On new photo upload
     photoInput?.addEventListener("change", () => {
         const file = photoInput.files[0];
         if (file) {
-            setLabelImage(file, photoInputLabel);
+            setLabelImage(file, photoInputLabel, "customerImageInput", imageBlobs);
+        } else {
+            // If user clears selection, reset the image
+            setLabelImage(null, photoInputLabel, "customerImageInput", imageBlobs);
         }
     });
 
@@ -114,52 +119,84 @@ const handleImages = (data) => {
     signatureInput?.addEventListener("change", () => {
         const file = signatureInput.files[0];
         if (file) {
-            setLabelImage(file, signatureInputLabel);
+            setLabelImage(file, signatureInputLabel, "customerSignatureInput", imageBlobs);
+        } else {
+            // If user clears selection, reset the image
+            setLabelImage(null, signatureInputLabel, "customerSignatureInput", imageBlobs);
         }
     });
 };
 
-// Set label background image from either a File or a Uint8Array (Blob).
-const setLabelImage = (source, label) => {
-    let imageUrl;
 
-    // If source is a Uint8Array, create a Blob URL
+// Set label background image + store blob
+const setLabelImage = (source, label, blobKey, imageBlobs) => {
+    let imageUrl;
+    let blob = null; // Initialize blob to null
+
+    // Clear previous image and blob if no source is provided (e.g., clearing selection)
+    if (!source) {
+        label.style.backgroundImage = "";
+        label.classList.remove("withImage");
+        imageBlobs[blobKey] = null; // Clear the blob in the storage
+        return; // Exit early
+    }
+
     if (source instanceof Uint8Array) {
-        const blob = new Blob([source], { type: "image/jpeg" });
+        blob = new Blob([source], { type: "image/jpeg" }); // Assuming JPEG for DB images
         imageUrl = URL.createObjectURL(blob);
     } else if (source instanceof File) {
+        blob = source;
         imageUrl = URL.createObjectURL(source);
     }
 
-    // Set the label background image
     if (imageUrl) {
         label.style.backgroundImage = `url(${imageUrl})`;
         label.classList.add("withImage");
+        imageBlobs[blobKey] = blob; // Store the blob
     }
 };
 
-// Reset image inputs
-const resetImageInputs = () => {
+// Convert blob to Base64
+function blobToBase64(blob) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result.split(",")[1]); // strip prefix
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+    });
+}
+
+// Reset image inputs and their associated blobs
+const resetImageInputs = (imageBlobs) => {
     const photoInput = document.getElementById("photoInput");
     const photoInputLabel = document.getElementById("photoInputLabel");
     const signatureInput = document.getElementById("signatureInput");
     const signatureInputLabel = document.getElementById("signatureInputLabel");
 
     // Clear file inputs
-    photoInput.value = "";
-    signatureInput.value = "";
+    if (photoInput) photoInput.value = "";
+    if (signatureInput) signatureInput.value = "";
 
-    // Reset photo label
-    photoInputLabel.style.backgroundImage = "";
-    photoInputLabel.classList.remove("withImage");
+    // Reset photo label and blob
+    if (photoInputLabel) {
+        photoInputLabel.style.backgroundImage = "";
+        photoInputLabel.classList.remove("withImage");
+        imageBlobs.customerImageInput = null;
+    }
 
-    // Reset signature label
-    signatureInputLabel.style.backgroundImage = "";
-    signatureInputLabel.classList.remove("withImage");
+    // Reset signature label and blob
+    if (signatureInputLabel) {
+        signatureInputLabel.style.backgroundImage = "";
+        signatureInputLabel.classList.remove("withImage");
+        imageBlobs.customerSignatureInput = null;
+    }
 };
+
 
 // Export functions
 export {
     fillForm,
-    resetImageInputs
+    blobToBase64,
+    resetImageInputs,
+    setupImageInputListeners // Export the new function
 };

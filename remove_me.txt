@@ -36,3 +36,4 @@ ORDER BY customer_id;
 
 Go through all Title tags
 remove function of reset image in customer entry
+add ; after all functions

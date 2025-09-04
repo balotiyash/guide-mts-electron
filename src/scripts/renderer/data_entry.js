@@ -1,13 +1,13 @@
-/** 
+/**
  * File: src/scripts/renderer/data_entry.js
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
  * Last Modified: 01/09/2025
-*/
+ */
 
 // Import required modules & libraries
-import { fillForm, resetImageInputs } from "./data_entry_load_data.js";
+import { fillForm, blobToBase64, resetImageInputs, setupImageInputListeners } from "./data_entry_load_data.js"; // Import setupImageInputListeners
 
 // On load
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const formElements = {
         phoneInput: document.getElementById("phoneInput"),
         customerIdInput: document.getElementById("customerIdInput"),
+        customerImageInput: document.getElementById("photoInput"),
+        customerSignatureInput: document.getElementById("signatureInput"),
         customerNameInput: document.getElementById("nameInput"),
         dobInput: document.getElementById("dobInput"),
         relationInput: document.getElementById("relationInput"),
@@ -39,33 +41,134 @@ document.addEventListener("DOMContentLoaded", () => {
         workDescriptionInput: document.getElementById("workDescriptionInput"),
     };
 
+    // Object to store image blobs
+    const imageBlobs = {
+        customerImageInput: null,
+        customerSignatureInput: null,
+    };
+
+    // Flag to check if the form is being filled with existing data
+    let is_repeat = false;
+    let userId = null;
+
     // Set vehicle & instructor names in the dropdown
     setDropDownNames("vehicles");
     setDropDownNames("instructors");
 
+    // >>> NEW: Call setupImageInputListeners immediately on DOMContentLoaded <<<
+    setupImageInputListeners(imageBlobs);
+
     // Phone number input validation: Allow only digits and limit to 10 characters
-    phoneInput.addEventListener("input", () => {
-        phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+    formElements.phoneInput.addEventListener("input", () => {
+        formElements.phoneInput.value = formElements.phoneInput.value.replace(/\D/g, "").slice(0, 10);
     });
 
     // Auto-search by phone number
-    phoneInput.addEventListener("input", async () => {
+    formElements.phoneInput.addEventListener("input", async () => {
         // Check if the phone number is valid
-        if (phoneInput.value.length === 10) {
+        if (formElements.phoneInput.value.length === 10) {
             // Search for customer by phone number
-            const result = await window.dataEntryAPI.searchByPhoneNumber(phoneInput.value);
+            const result = await window.dataEntryAPI.searchByPhoneNumber(formElements.phoneInput.value);
 
             // If a customer is found, then update the UI with the customer details
             if (result) {
-                fillForm(result, formElements);
+                is_repeat = true;
+                userId = result.id;
+                fillForm(result, formElements, imageBlobs); // Pass imageBlobs to fillForm
                 fetchWorkDescriptions(result.id);
+            } else {
+                is_repeat = false;
+                // >>> NEW: If no customer found, reset image inputs and blobs <<<
+                // resetImageInputs(imageBlobs);
+            }
+        } else {
+            // >>> NEW: If phone number is incomplete, reset image inputs and blobs <<<
+            // resetImageInputs(imageBlobs);
+        }
+    });
+
+    // Handling click event on Save Button
+    document.getElementById("saveBtn").addEventListener("click", async () => {
+        // Show confirmation dialog
+        const response = await window.dialogBoxAPI.showDialogBox("question", "Save New Entry", "Do you want to save new entry?", ["OK", "Cancel"]);
+
+        // User confirmed, proceed with saving
+        if (response !== 0) return; // 0 = "OK", 1 = "Cancel"
+
+        // Collect form values
+        let formValues = {};
+
+        for (const key in formElements) {
+            const value = formElements[key].value?.trim();
+            formValues[key] = value === "" ? null : value.toLowerCase();
+        }
+
+        // Clean license-related inputs if they are placeholders
+        const placeholder = "mh01 /"; // normalized placeholder
+
+        ["licenseInput", "licenseInput2", "mdlNoInput"].forEach((field) => {
+            if (formValues[field] && formValues[field].toLowerCase() === placeholder) {
+                formValues[field] = null;
+            }
+        });
+
+        // Phone number validation
+        const digitsOnly = formValues.phoneInput?.replace(/\D/g, '');
+        if (!digitsOnly || digitsOnly.length !== 10) {
+            await window.dialogBoxAPI.showDialogBox("error", "Invalid Phone Number", "Please enter a valid 10-digit phone number.");
+            return;
+        }
+
+        // Customer name and DOB validation
+        if (!formValues.customerImageInput || !formValues.customerSignatureInput || !formValues.customerNameInput || !formValues.dobInput || !formValues.relationInput || !formValues.addressInput || !formValues.amountInput || !formValues.workDescriptionInput) {
+            await window.dialogBoxAPI.showDialogBox("error", "Missing Fields", "Please fill in all required fields.");
+            return;
+        }
+
+        // Validate 18+
+        if (new Date().getFullYear() - new Date(formValues.dobInput).getFullYear() < 18) {
+            await window.dialogBoxAPI.showDialogBox("error", "Invalid Age", "Customer must be at least 18 years old.");
+            return;
+        }
+
+        // Attach images (convert to Base64 if blobs exist)
+        if (imageBlobs.customerImageInput) {
+            formValues.customerImageInput = await blobToBase64(imageBlobs.customerImageInput);
+        } else {
+            formValues.customerImageInput = null; // Ensure null if no image selected
+        }
+
+        if (imageBlobs.customerSignatureInput) {
+            formValues.customerSignatureInput = await blobToBase64(imageBlobs.customerSignatureInput);
+        } else {
+            formValues.customerSignatureInput = null; // Ensure null if no signature selected
+        }
+
+        // API call
+        if (is_repeat) {
+            // If form is being filled with existing data, update the record
+            // await window.dataEntryAPI.updateCustomer(formValues);
+            await window.dialogBoxAPI.showDialogBox("info", "Update Functionality", "Update functionality is not yet implemented.");
+        } else {
+            // If new form, create a new record
+            const response = await window.dataEntryAPI.createCustomer(formValues);
+
+            if (response?.status === "success") {
+                // Show success message
+                await window.dialogBoxAPI.showDialogBox("info", "Customer Created", "The customer has been created successfully.");
+                // >>> NEW: Clear form and reset images after successful creation <<<
+                // window.location.reload();
+                // window.location.href = "./payment_entry.html";
+            } else {
+                // Show error message
+                await window.dialogBoxAPI.showDialogBox("error", "Creation Failed", `Failed to create the customer.`);
             }
         }
     });
 
     // Handling click event on Clear Button
     document.getElementById("clearBtn").addEventListener("click", async () => {
-        const response = await window.dialogBoxAPI.showDialogBox("warning", "Reset Form", "Do you want to clear the form?");
+        const response = await window.dialogBoxAPI.showDialogBox("warning", "Reset Form", "Do you want to clear the form?", ["OK", "Cancel"]);
 
         if (response !== 0) return; // 0 = "Yes", 1 = "No"
         window.location.reload();
@@ -73,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handling click event on Exit button
     document.getElementById("exitBtn").addEventListener("click", async () => window.location.href = "dashboard.html");
+
 });
 
 // Function to set vehicle names in the select dropdown

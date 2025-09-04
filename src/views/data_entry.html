@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Customer Data Entry Page.
     Created on: 09/08/2025
-    Last Modified: 01/09/2025
+    Last Modified: 02/09/2025
 -->
 
 <!DOCTYPE html>
@@ -34,43 +34,62 @@
 <body>
     <!-- Heading Title -->
     <header>
-        <h1>Customer Data Entry</h1>
+        <div id="headerTitle">
+            <h1>Customer Data Entry</h1>
+            <!-- Phone Number & Images Input -->
+            <section id="phoneInputSection">
+
+                <!-- Phone Input -->
+                <span class="inputContainer phoneInputSpan">
+                    <label for="phoneInput">Mobile Number</label>
+                    <input type="tel" id="phoneInput" placeholder="Enter mobile number" title="Enter mobile number"
+                        autocomplete="off" maxlength="10" />
+                </span>
+
+                <!-- Customer ID Display -->
+                <span class="inputContainer phoneInputSpan">
+                    <label for="customerIdInput">Customer ID</label>
+                    <input type="number" id="customerIdInput" placeholder="Customer ID" autocomplete="off" readonly
+                        title="Customer ID" />
+                </span>
+        </div>
+
+        <!-- Photo & Signature Input -->
+        <div id="imageInputContainer">
+            <!-- Photo Input -->
+            <!-- <label class="imageInput" title="Upload Photo" id="photoInputLabel">
+                <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon">
+                <span>Photo</span>
+                <input type="file" id="photoInput" accept="image/*" hidden />
+            </label> -->
+
+            <!-- Signature Input -->
+            <!-- <label class="imageInput" title="Upload Signature" id="signatureInputLabel">
+                <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon">
+                <span>Signature</span>
+                <input type="file" id="signatureInput" accept="image/*" hidden />
+            </label> -->
+
+            <!-- Photo Input -->
+            <label class="imageInput" id="photoInputLabel" data-type="photo">
+                <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon" />
+                <span>Photo</span>
+                <input type="file" id="photoInput" accept="image/*" hidden />
+            </label>
+
+            <!-- Signature Input -->
+            <label class="imageInput" id="signatureInputLabel" data-type="signature">
+                <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon" />
+                <span>Signature</span>
+                <input type="file" id="signatureInput" accept="image/*" hidden />
+            </label>
+        </div>
     </header>
 
     <!-- Main Form -->
     <main>
-        <!-- Phone Number & Images Input -->
-        <section id="phoneInputSection">
 
-            <!-- Phone Input -->
-            <span class="inputContainer phoneInputSpan">
-                <label for="phoneInput">Mobile Number</label>
-                <input type="tel" id="phoneInput" placeholder="Enter mobile number" title="Enter mobile number"
-                    autocomplete="off" maxlength="10" />
-            </span>
 
-            <!-- Customer ID Display -->
-            <span class="inputContainer phoneInputSpan">
-                <label for="customerIdInput">Customer ID</label>
-                <input type="number" id="customerIdInput" placeholder="Customer ID" autocomplete="off" readonly title="Customer ID" />
-            </span>
-
-            <!-- Photo & Signature Input -->
-            <div id="imageInputContainer">
-                <!-- Photo Input -->
-                <label class="imageInput" title="Upload Photo" id="photoInputLabel">
-                    <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon">
-                    <span>Photo</span>
-                    <input type="file" id="photoInput" accept="image/*" hidden />
-                </label>
-
-                <!-- Signature Input -->
-                <label class="imageInput" title="Upload Signature" id="signatureInputLabel">
-                    <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon">
-                    <span>Signature</span>
-                    <input type="file" id="signatureInput" accept="image/*" hidden />
-                </label>
-            </div>
         </section>
 
         <!-- Horizontal Divider -->
@@ -230,7 +249,7 @@
             <span class="inputContainer">
                 <label for="vehicleNoInput">Vehicle Number</label>
                 <input type="text" id="vehicleNoInput" placeholder="Enter vehicle number" title="Enter vehicle number"
-                    value="MH01 /" autocomplete="off" />
+                    autocomplete="off" />
             </span>
 
             <!-- Amount -->
@@ -284,8 +303,8 @@
 
         <!-- Buttons Section -->
         <section class="buttonSection">
-            <button type="button" class="btn green">Save</button>
-            <button type="button" class="btn yellow">Edit</button>
+            <button type="button" class="btn green" id="saveBtn">Save</button>
+            <button type="button" class="btn yellow" id="editBtn">Edit</button>
             <button type="button" class="btn orange" id="clearBtn">Clear</button>
             <button type="button" class="btn red" id="exitBtn">Exit</button>
         </section>

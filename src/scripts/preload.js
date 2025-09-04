@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 01/09/2025
+ * Last Modified: 02/09/2025
 */
 
 // Importing required modules from Electron
@@ -53,5 +53,11 @@ contextBridge.exposeInMainWorld('dataEntryAPI', {
     searchByPhoneNumber: (phoneNumber) => ipcRenderer.invoke('search-by-phone-number', phoneNumber),
 
     // API to fetch work description
-    getWorkDescriptions: (userId) => ipcRenderer.invoke('get-work-descriptions', userId)
+    getWorkDescriptions: (userId) => ipcRenderer.invoke('get-work-descriptions', userId),
+
+    // API to create a new customer
+    createCustomer: (formElements) => ipcRenderer.invoke('create-customer', formElements),
+
+    // API to update an existing customer
+    // updateCustomer: (formElements) => ipcRenderer.invoke('update-customer', formElements)
 });

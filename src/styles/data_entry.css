@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: CSS for Customer Data Entry Page.
    Created on: 09/08/2025
-   Last Modified: 31/08/2025
+   Last Modified: 02/09/2025
 */
 
 body {
@@ -13,13 +13,22 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-/*     overflow: hidden; */
+    gap: 12px;
 }
 
 /* Header Style */
 header {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+header h1 {
+    margin-bottom: 8px;
+}
+
+#headerTitle {
+    width: 32.5%;
 }
 
 /* Main Form Tag */
@@ -48,11 +57,7 @@ main {
 }
 
 .phoneInputSpan {
-    width: 20%;
-}
-
-#phoneInput {
-    width: 100%;
+    width: 48%;
 }
 
 /* Photo & Signature Input Section */
@@ -65,7 +70,7 @@ main {
 
 .imageInput {
     width: 15%;
-    min-height: 15%;
+    /* min-height: 15%; */
     display: flex;
     flex-direction: column;
     align-items: center;
