@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage user dashboard functionality for the Guide Motor Training School application.
  * Created on: 08/08/2025
- * Last Modified: 27/08/2025
+ * Last Modified: 14/09/2025
 */
 
 // Importing required modules & libraries
@@ -72,7 +72,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     // Initial load Charts
-    await loadAndRenderCharts(now.getFullYear().toString());
+    // await loadAndRenderCharts(now.getFullYear().toString());
+    loadAndRenderCharts(now.getFullYear().toString());
 
     // Reload charts when year changes Charts
     monthInput.addEventListener("change", (event) => {
@@ -105,6 +106,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Reminder button click event
     document.getElementById("reminderButton").addEventListener("click", () => {
-        window.open('reminder.html', '_blank', 'width=600,height=400');
+        // window.open('reminder.html', '_blank', 'width=600,height=400');
     });
 });

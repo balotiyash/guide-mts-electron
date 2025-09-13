@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the CSS code of the Dashboard Page.
     Created on: 05/08/2025
-    Last Modified: 15/08/2025
+    Last Modified: 14/09/2025
 */
 
 body {
@@ -27,6 +27,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 4px;
 }
 
 #headerSection span {

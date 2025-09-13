@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to HELP load customer data into the form.
  * Created on: 31/08/2025
- * Last Modified: 01/09/2025
+ * Last Modified: 14/09/2025
  */
 
 // Fill the form with customer data using mobile number
@@ -55,11 +55,11 @@ const fillForm = (data, formElements, imageBlobs) => {
     addressInput.value = data.address || "";
 
     // LL No 1
-    licenseInput.value = data.ll_no_1 || "";
+    licenseInput.value = data.ll_no_1 || "mh01 /";
     classInput.value = data.ll_class_1 || "";
 
     // LL No 2
-    licenseInput2.value = data.ll_no_2 || "";
+    licenseInput2.value = data.ll_no_2 || "mh01 /";
     classInput2.value = data.ll_class_2 || "";
 
     // LL Issued Date
@@ -69,7 +69,7 @@ const fillForm = (data, formElements, imageBlobs) => {
     validUntilInput.value = (data.ll_validity_date || "").substring(0, 10);
 
     // MDL No
-    mdlNoInput.value = data.mdl_no || "";
+    mdlNoInput.value = data.mdl_no || "mh01 /";
 
     // MDL Class
     mdlClassInput.value = data.mdl_class || "";
@@ -191,7 +191,6 @@ const resetImageInputs = (imageBlobs) => {
         imageBlobs.customerSignatureInput = null;
     }
 };
-
 
 // Export functions
 export {

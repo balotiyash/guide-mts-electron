@@ -37,3 +37,9 @@ ORDER BY customer_id;
 Go through all Title tags
 remove function of reset image in customer entry
 add ; after all functions
+add clgs after every error & success and print try catch error too
+add * mark on all compulsory form
+try to remove all async opperattions
+when we are inserting into 2 tables in a singke service then if 1st query was successful and other was unsuccessful then rollback 1st entry
+also log all the actions into logger module import
+make date formatter in dataEntryService function in uutility.js then import it

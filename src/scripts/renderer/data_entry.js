@@ -3,11 +3,16 @@
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
- * Last Modified: 01/09/2025
+ * Last Modified: 14/09/2025
  */
 
 // Import required modules & libraries
 import { fillForm, blobToBase64, resetImageInputs, setupImageInputListeners } from "./data_entry_load_data.js"; // Import setupImageInputListeners
+
+// Flag to check if the form is being filled with existing data
+let is_repeat = false;
+let userId = null;
+let jobId = null;
 
 // On load
 document.addEventListener("DOMContentLoaded", () => {
@@ -46,10 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
         customerImageInput: null,
         customerSignatureInput: null,
     };
-
-    // Flag to check if the form is being filled with existing data
-    let is_repeat = false;
-    let userId = null;
 
     // Set vehicle & instructor names in the dropdown
     setDropDownNames("vehicles");
@@ -96,18 +97,77 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response !== 0) return; // 0 = "OK", 1 = "Cancel"
 
         // Collect form values
-        let formValues = {};
+        let formValues = await collectFormValues();
 
+        if (!formValues.amountInput || !formValues.workDescriptionInput) {
+            await window.dialogBoxAPI.showDialogBox("error", "Missing Fields", "Please fill in all required fields.");
+        }
+
+        // API call
+        if (is_repeat) {
+            // If form is being filled with existing data, update the record
+            // await window.dataEntryAPI.updateCustomer(formValues);
+            // await window.dialogBoxAPI.showDialogBox("info", "Update Functionality", "Update functionality is not yet implemented.");
+
+            const response = await window.dataEntryAPI.createJob(userId, formValues.workDescriptionInput, formValues.amountInput);
+
+            if (response?.status === "success") {
+                // Show success message
+                await window.dialogBoxAPI.showDialogBox("info", "Job Created", "A new job has been created for the existing customer.");
+                // >>> NEW: Clear form and reset images after successful creation <<<
+                // window.location.reload();
+                // window.location.href = "./payment_entry.html";
+            } else {
+                // Show error message
+                await window.dialogBoxAPI.showDialogBox("error", "Creation Failed", `Failed to create a new job for the existing customer.`);
+            }
+        } else {
+            // If new form, create a new record
+            const response = await window.dataEntryAPI.createCustomer(formValues);
+
+            if (response?.status === "success") {
+                // Show success message
+                await window.dialogBoxAPI.showDialogBox("info", "Customer Created", "The customer has been created successfully.");
+                // >>> NEW: Clear form and reset images after successful creation <<<
+                // window.location.reload();
+                // window.location.href = "./payment_entry.html";
+            } else {
+                // Show error message
+                await window.dialogBoxAPI.showDialogBox("error", "Creation Failed", `Failed to create the customer.`);
+            }
+        }
+    });
+
+    const collectFormValues = async () => {   
+        // Collect form values
+        let formValues = {};
+        
         for (const key in formElements) {
             const value = formElements[key].value?.trim();
             formValues[key] = value === "" ? null : value.toLowerCase();
         }
 
         // Clean license-related inputs if they are placeholders
-        const placeholder = "mh01 /"; // normalized placeholder
+        // const placeholder1 = "mh01 /"; // normalized placeholder
+        // const placeholder2 = "mh02 /"; // another normalized placeholder
+
+        let placeholder = [];
+        for (let i = 1; i <= 100; i++) {
+            placeholder.push(`mh${i.toString().padStart(2, '0')} /`);
+            placeholder.push(`mh${i.toString().padStart(2, '0')}/`);
+        }
+
+        // ["licenseInput", "licenseInput2", "mdlNoInput"].forEach((field) => {
+        //     if (formValues[field] && formValues[field].toLowerCase() === placeholder.includes(formValues[field])) {
+        //         formValues[field] = null;
+        //     }
+        // });
 
         ["licenseInput", "licenseInput2", "mdlNoInput"].forEach((field) => {
-            if (formValues[field] && formValues[field].toLowerCase() === placeholder) {
+            if (
+                formValues[field] &&
+                placeholder.some(ph => ph.toLowerCase() === formValues[field].toLowerCase())
+            ) {
                 formValues[field] = null;
             }
         });
@@ -120,7 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Customer name and DOB validation
-        if (!formValues.customerImageInput || !formValues.customerSignatureInput || !formValues.customerNameInput || !formValues.dobInput || !formValues.relationInput || !formValues.addressInput || !formValues.amountInput || !formValues.workDescriptionInput) {
+        // !formValues.customerImageInput || !formValues.customerSignatureInput || 
+        // if (!formValues.customerNameInput || !formValues.dobInput || !formValues.relationInput || !formValues.addressInput || !formValues.amountInput || !formValues.workDescriptionInput) {
+        if (!formValues.customerNameInput || !formValues.dobInput || !formValues.relationInput || !formValues.addressInput) {
             await window.dialogBoxAPI.showDialogBox("error", "Missing Fields", "Please fill in all required fields.");
             return;
         }
@@ -144,25 +206,36 @@ document.addEventListener("DOMContentLoaded", () => {
             formValues.customerSignatureInput = null; // Ensure null if no signature selected
         }
 
-        // API call
-        if (is_repeat) {
-            // If form is being filled with existing data, update the record
-            // await window.dataEntryAPI.updateCustomer(formValues);
-            await window.dialogBoxAPI.showDialogBox("info", "Update Functionality", "Update functionality is not yet implemented.");
-        } else {
-            // If new form, create a new record
-            const response = await window.dataEntryAPI.createCustomer(formValues);
+        return formValues;
+    };
 
-            if (response?.status === "success") {
-                // Show success message
-                await window.dialogBoxAPI.showDialogBox("info", "Customer Created", "The customer has been created successfully.");
-                // >>> NEW: Clear form and reset images after successful creation <<<
-                // window.location.reload();
-                // window.location.href = "./payment_entry.html";
-            } else {
-                // Show error message
-                await window.dialogBoxAPI.showDialogBox("error", "Creation Failed", `Failed to create the customer.`);
-            }
+    // Handle click event on Update Button
+    document.getElementById("updateBtn").addEventListener("click", async () => {
+        if  (!is_repeat) {
+            await window.dialogBoxAPI.showDialogBox("warning", "No Existing Customer", "Please search and load an existing customer to update.");
+            return;
+        }
+
+        // Show confirmation dialog
+        const response = await window.dialogBoxAPI.showDialogBox("question", "Update Entry", "Do you want to update this entry?", ["OK", "Cancel"]);
+
+        // User confirmed, proceed with updating
+        if (response !== 0) return; // 0 = "OK", 1 = "Cancel"
+
+        // Collect form values
+        let formValues = await collectFormValues();
+
+        // API call
+        const updateResponse = await window.dataEntryAPI.updateCustomer(userId, jobId, formValues);
+
+        if (updateResponse?.status === "success") {
+            // Show success message
+            await window.dialogBoxAPI.showDialogBox("info", "Customer Updated", "The customer has been updated successfully.");
+            // >>> NEW: Clear form and reset images after successful update <<<
+         //ss   window.location.reload();
+        } else {
+            // Show error message
+            await window.dialogBoxAPI.showDialogBox("error", "Update Failed", `Failed to update the customer.`);
         }
     });
 
@@ -176,6 +249,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handling click event on Exit button
     document.getElementById("exitBtn").addEventListener("click", async () => window.location.href = "dashboard.html");
+
+    // Update validUntilInput based on issuedOnInput (6 months validity)
+    document.getElementById("issuedOnInput").addEventListener("change", (e) => {
+        const issuedDate = new Date(e.target.value);
+        const validUntilDate = new Date(issuedDate.setDate(issuedDate.getDate() + 180));
+        document.getElementById("validUntilInput").value = validUntilDate.toISOString().split("T")[0];
+    });
 
 });
 
@@ -254,6 +334,7 @@ const fetchWorkDescriptions = async (userId) => {
 
         // Add click event to fill inputs
         tr.addEventListener("click", () => {
+            jobId = item.id; // <-- this is the clicked job's ID
             amountInput.value = item.charged_amount;
             workDescriptionInput.value = item.work;
         });
