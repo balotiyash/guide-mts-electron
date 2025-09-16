@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    /* width: 100vw; */
+    /* height: 100vh; */
+    border: 1px solid #000;
+    padding: 20px;
+    /* margin: 20px; */
+    font-size: 12px;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#estdDiv {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+#receiptType {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#companyDetailsDiv {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#companyDetailsDiv img {
+    width: 70%;
+}
+
+#companyDetailsDiv p {
+    /* margin: 8px 0; */
+}
+
+#admissionNoDiv {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#admissionNoDiv span,
+#studentDetailsDiv span:first-child {
+    display: flex;
+}
+
+#studentDetailsDiv span:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    gap: 6px;
+    margin-top: 0;
+}
+
+#studentDetailsDiv table {
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#studentDetailsDiv table th,
+#studentDetailsDiv table td {
+    border: 1px solid #000;
+    padding: 2px 12px;
+}
+
+#studentDetailsDiv span:nth-child(3) {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 40px;
+}
+
+#studentDetailsDiv span:nth-child(4) {
+    padding: 0 90px;
+}
+
+#rulesSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 0 0;
+}
+
+#rulesSection div {
+    width: 90%;
+    /* margin-bottom: 10px; */
+}
+
+#agreementDiv {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#agreementDiv span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 6px;
+}

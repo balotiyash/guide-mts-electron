@@ -3,11 +3,15 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage user dashboard functionality for the Guide Motor Training School application.
  * Created on: 08/08/2025
- * Last Modified: 14/09/2025
+ * Last Modified: 17/09/2025
 */
 
 // Importing required modules & libraries
 import initCharts from "./dashboard_charts.js";
+// import log from "../logger.js";
+
+// Log the loading of the dashboard script
+// log.info("Dashboard script loaded.");
 
 // DOMContentLoaded event listener
 document.addEventListener("DOMContentLoaded", async () => {
@@ -41,6 +45,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.dashboardAPI.getChart2Data(year).catch(() => []),
             window.dashboardAPI.getChart3Data(year).catch(() => [])
         ]);
+
+        document.getElementById("loadingDiv").style.display = "none";
 
         // ---------- Chart 1 ----------
         const chart1Data = Array.from({ length: 12 }, (_, i) => {

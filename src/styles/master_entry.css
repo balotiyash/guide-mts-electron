@@ -2,7 +2,7 @@
    Author: Neha Balotia, Yash Balotiya
    Description: Styles for the Master Entry Page, Fuel, Car, Payments too.
    Created on: 27/07/2025
-   Updated: 15/08/2025
+   Updated: 16/09/2025
 */
 
 html,
@@ -42,11 +42,14 @@ header {
     /* background-color: #fefefe; */
     border-radius: 20px;
     border: 1px solid #e1e1e1;
-    overflow-y: auto;
+    /* overflow-y: auto; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .table-container .scrollDiv {
-    height: 85%;
+    height: 80%;
 }
 
 /* --- CLEAN TABLE STYLING --- */
@@ -57,7 +60,8 @@ header {
 
 /* --- FORM CONTAINER --- */
 .form-container {
-    width: 38%;
+    /* width: 38%; */
+    width: 50%;
     height: 100%;
     display: flex;
     flex-direction: column;

@@ -3,11 +3,15 @@
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
- * Last Modified: 14/09/2025
+ * Last Modified: 16/09/2025
  */
 
 // Import required modules & libraries
-import { fillForm, blobToBase64, resetImageInputs, setupImageInputListeners } from "./data_entry_load_data.js"; // Import setupImageInputListeners
+import { fillForm, blobToBase64, setupImageInputListeners } from "./data_entry_load_data.js"; // Import setupImageInputListeners
+// import log from "../logger.js";
+
+// Log the loading of the data entry script
+// log.info("Data entry script loaded.");
 
 // Flag to check if the form is being filled with existing data
 let is_repeat = false;
@@ -116,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 await window.dialogBoxAPI.showDialogBox("info", "Job Created", "A new job has been created for the existing customer.");
                 // >>> NEW: Clear form and reset images after successful creation <<<
                 // window.location.reload();
-                // window.location.href = "./payment_entry.html";
+                window.location.href = "./payment_entry.html";
             } else {
                 // Show error message
                 await window.dialogBoxAPI.showDialogBox("error", "Creation Failed", `Failed to create a new job for the existing customer.`);
@@ -130,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 await window.dialogBoxAPI.showDialogBox("info", "Customer Created", "The customer has been created successfully.");
                 // >>> NEW: Clear form and reset images after successful creation <<<
                 // window.location.reload();
-                // window.location.href = "./payment_entry.html";
+                window.location.href = "./payment_entry.html";
             } else {
                 // Show error message
                 await window.dialogBoxAPI.showDialogBox("error", "Creation Failed", `Failed to create the customer.`);
@@ -256,7 +260,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const validUntilDate = new Date(issuedDate.setDate(issuedDate.getDate() + 180));
         document.getElementById("validUntilInput").value = validUntilDate.toISOString().split("T")[0];
     });
-
 });
 
 // Function to set vehicle names in the select dropdown

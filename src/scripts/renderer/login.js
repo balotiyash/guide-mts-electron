@@ -3,8 +3,11 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Handles user login functionality for the Guide Motor Training School application.
  * Created on: 20/07/2025
- * Last Modified: 01/09/2025
+ * Last Modified: 16/09/2025
 */
+
+// Logging setup
+// await window.logger.info("Login script loaded");
 
 // Only runs when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,9 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Click event listener for the login button
     loginBtn.addEventListener('click', async () => {
-        const username = usernameInput.value.trim().toUpperCase();
+        // Get the input values
+        const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
 
+        // API call to main process for login
         const response = await window.electronAPI.login({ username, password });
 
         if (response.success) {

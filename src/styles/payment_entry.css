@@ -1,0 +1,66 @@
+.table-header span {
+    width: 50%;
+    display: flex;
+    gap: 8px;
+}
+
+.table-header span input,
+.table-header span select {
+    width: 100%;
+}
+
+.active-row th:first-child,
+#pendingPaymentsTableBody tr td:first-child {
+    width: 20%;
+}
+
+.active-row th:nth-child(2),
+#pendingPaymentsTableBody tr td:nth-child(2) {
+    width: 50%;
+}
+
+.active-row th:nth-child(3),
+.active-row th:last-child,
+#pendingPaymentsTableBody tr td:nth-child(3),
+#pendingPaymentsTableBody tr td:last-child {
+    width: 15%;
+}
+
+#editBtn,
+#paginationControls,
+#printBtnsDiv {
+    display: none;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.pagination button {
+    padding: 8px 20px;
+    border: none;
+    background-color: brown;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+    background-color: darkred;
+}
+
+.pagination button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+#pageInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* font-weight: bold; */
+}

@@ -2,7 +2,7 @@
    Author: Neha Balotia, Yash Balotiya
    Description: Public CSS for Shared Components.
    Created on: 27/07/2025
-   Last Modified: 15/08/2025
+   Last Modified: 17/09/2025
 */
 
 * {
@@ -13,6 +13,23 @@
     user-select: none;
 }
 
+#loadingDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+}
+
 /* Input Fields */
 input,
 select,
@@ -21,7 +38,6 @@ textarea {
     padding: 12px;
     border: 1px solid #dce1e7;
     border-radius: 20px;
-    /* background: #f0f4f8; */
     background-color: #f8f9fa;
     text-transform: uppercase;
     transition: border 0.3s ease;
@@ -61,15 +77,9 @@ label {
     color: rgb(58, 58, 58);
     margin-bottom: 2px;
     font-size: 14px;
-    /* font-size: 1em; */
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     color: brown;
 }
 
@@ -79,7 +89,6 @@ h6 {
     width: 100%;
     height: 100%;
     border-radius: 20px;
-    /* background-color: transparent; */
     background-color: white;
     font-weight: bold;
     cursor: pointer;
@@ -127,14 +136,6 @@ h6 {
     color: white;
 }
 
-/* 
-.btn.blue { background-color: #007bff; }
-.btn.yellow { background-color: #ffc107; }
-.btn.orange { background-color: #fd7e14; }
-.btn.green { background-color: #28a745; }
-.btn.red { background-color: #dc3545; } 
-*/
-
 /* Table */
 table {
     width: 100%;
@@ -142,8 +143,7 @@ table {
     text-align: center;
 }
 
-td,
-th {
+td, th {
     padding: 8px;
     border-bottom: 1px solid #ddd;
 }
@@ -158,44 +158,6 @@ tbody tr:hover {
     overflow-y: auto;
 }
 
-/* ----- Buttons ----- */
-/* .buttons {
-    display: flex;
-    gap: 0.8rem;
-    justify-content: flex-end;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-}
-
-.btn {
-    padding: 0.4rem 1rem;
-    min-width: 80px;
-    height: 2.4rem;
-    border: none;
-    border-radius: 20px;
-    color: black;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn.saveBtn {
-    background-color: #73EC8B;
-}
-
-.btn.editBtn {
-    background-color: #FFE100;
-}
-
-.btn.resetBtn {
-    background-color: #FF6363;
-} */
-
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
@@ -203,7 +165,6 @@ tbody tr:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-    /* background-color: #555; */
     background-color: brown;
     border-radius: 5px;
 }

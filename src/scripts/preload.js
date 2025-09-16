@@ -3,11 +3,22 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 14/09/2025
+ * Last Modified: 16/09/2025
 */
 
 // Importing required modules from Electron
 const { contextBridge, ipcRenderer } = require('electron');
+// const {log} = require("electron-log");
+
+// Configure log
+// log.transports.file.level = "info";
+
+// Expose safe logger API to the renderer
+// contextBridge.exposeInMainWorld("logger", {
+//     info: (...args) => log.info(...args),
+//     error: (...args) => log.error(...args),
+//     warn: (...args) => log.warn(...args),
+// });
 
 // Exposing secure APIs to the renderer process
 contextBridge.exposeInMainWorld('electronAPI', {
@@ -22,6 +33,29 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
     // API to show the application menu
     showMenu: () => ipcRenderer.send('show-menu'),
+
+    // ✅ Trigger PDF generation from renderer
+    // generateInvoice: (invoiceData) =>
+    //     ipcRenderer.send('generate-invoice', invoiceData),
+
+    // // ✅ Listen for invoice data inside invoice.html
+    // onInvoiceData: (callback) =>
+    //     ipcRenderer.on('invoice-data', (event, data) => callback(data))
+
+    // Called from payment_entry.js to ask main to generate an invoice (returns a promise)
+    generateInvoice: (invoiceData, type) => ipcRenderer.invoke('generate-invoice', invoiceData, type),
+
+    // Called from the invoice renderer (reciept.html)
+    // - tells main "I'm ready to receive the invoice data" (passes token)
+    requestInvoiceData: (token) => ipcRenderer.send('invoice-ready', token),
+
+    // - renderer registers a callback to receive the actual invoice data
+    onInvoiceData: (callback) => ipcRenderer.on('invoice-data', (event, data) => callback(data)),
+
+    // - once renderer has put data into the DOM and it's visually ready, call this
+    notifyInvoiceRendered: (token) => ipcRenderer.send('invoice-rendered', token),
+
+    generateInvoiceForUser: (userId, workId, type) => ipcRenderer.invoke('generate-invoice-for-user', userId, workId, type),
 });
 
 // Exposing dialog box APIs
@@ -63,4 +97,19 @@ contextBridge.exposeInMainWorld('dataEntryAPI', {
 
     // API to update an existing customer
     updateCustomer: (userId, jobId, formValues) => ipcRenderer.invoke('update-customer', { userId, jobId, formValues })
+});
+
+// Exposing payment entry APIs
+contextBridge.exposeInMainWorld('paymentEntryAPI', {
+    // API to fetch all pending payments
+    getAllPendingPayments: () => ipcRenderer.invoke('get-all-pending-payments'),
+
+    // API to fetch all paid payments
+    getAllPaidPayments: () => ipcRenderer.invoke('get-all-paid-payments'),
+
+    // API to submit a payment
+    submitPayment: (paymentDetails) => ipcRenderer.invoke('submit-payment', paymentDetails),
+
+    // API to update a payment
+    updatePayment: (paymentDetails) => ipcRenderer.invoke('update-payment', paymentDetails)
 });

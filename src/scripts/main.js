@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 01/09/2025
+ * Last Modified: 17/09/2025
 */
 
 // Importing required modules & libraries
@@ -19,6 +19,8 @@ import log from "electron-log";
 import { registerDbHandler } from "./main/ipc/dbHandler.js";
 import  { registerDashboardHandlers } from "./main/ipc/dashboardHandler.js";
 import { registerDataEntryHandlers } from "./main/ipc/dataEntryHandler.js";
+import registerPaymentHandlers from "./main/ipc/paymentHandler.js";
+import registerInvoiceHandlers from "./main/ipc/invoiceHandler.js";
 
 // Logging the meta information
 autoUpdater.logger = log;
@@ -49,23 +51,24 @@ const createWindow = () => {
             contextIsolation: true,
             nodeIntegration: false,
         },
+        icon: path.join(__dirname, '../assets/images/guide-mts-icon.png')
     });
 
     // Loading the main application view
-    // win.loadFile(path.join(__dirname, '../views/index.html'));
-    win.loadFile(path.join(__dirname, '../views/data_entry.html'));
+    win.loadFile(path.join(__dirname, '../views/index.html'));
+    // win.loadFile(path.join(__dirname, '../views/payment_entry.html'));
     win.maximize();
     win.show();
 
     // ❌ No menu on startup (login screen)
-    // Menu.setApplicationMenu(null);
+    Menu.setApplicationMenu(null);
 
     // Check for updates after window is ready
     win.once("ready-to-show", () => {
         console.log("Checking for updates...");
         autoUpdater.checkForUpdatesAndNotify();
     });
-}
+};
 
 // Event listener for when the application is ready
 app.whenReady().then(() => {
@@ -73,6 +76,8 @@ app.whenReady().then(() => {
         registerDbHandler(); // register all db IPC
         registerDashboardHandlers(); // register all dashboard IPC
         registerDataEntryHandlers(); // register all data entry IPC
+        registerPaymentHandlers(); // register all payment entry IPC
+        registerInvoiceHandlers(); // register all invoice IPC
         createWindow();
     } catch (err) {
         console.error('Failed to create window:', err);
@@ -95,8 +100,8 @@ ipcMain.on('show-menu', () => {
 // Handle login validation
 ipcMain.handle('login', async (event, { username, password }) => {
     return username === 'ADMIN' && password === 'ADMIN'
-        ? { success: true }
-        : { success: false };
+        ? { statusCode: 200, success: true, message: 'Login successful' }
+        : { statusCode: 401, success: false, message: 'Login failed' };
 });
 
 // Secure page navigation

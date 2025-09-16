@@ -1,0 +1,184 @@
+<!-- 
+    File: views/index.html
+    Author: Yash Balotiya
+    Description: This page contains all the HTML5 code of the Login Page.
+    Created on: 13/07/2025
+    Last Modified: 15/09/2025
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="../styles/invoice.css">
+</head>
+
+<body>
+    <header>
+        <div id="estdDiv">
+            <b>ESTD: 1971</b>
+            <b id="receiptType"></b>
+            <b>Phone No.: 022 24072677 / 022 24074237</b>
+        </div>
+
+        <div id="companyDetailsDiv">
+            <b>"Work is Worship"</b>
+            <img src="../assets/images/guide-logo.png" alt="Guide MTS Logo">
+            <b>(Government Recognized)</b>
+            <p>178, Chandreshwar Bhavan, Opp. Union Bank of India, Sion (W), Mumbai - 400 022</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="admissionNoDiv">
+            <span>
+                <b>Admission No.:&nbsp;</b>
+                <u id="userId"></u>
+            </span>
+            <span>
+                <b>Customer Name:&nbsp;</b>
+                <u id="customerName"></u>
+            </span>
+            <span>
+                <b>Date:&nbsp;</b>
+                <u id="dateId"></u>
+            </span>
+        </section>
+
+        <section id="studentDetailsDiv">
+            <span></span>
+
+            <span>
+                <b>Payment Details</b>
+
+                <table id="itemsTable">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Date</th>
+                            <th>Work</th>
+                            <th>Payment Mode</th>
+                            <th>Amount Paid</th>
+                            <th>Amount Remaining</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- dynamically filled -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" style="text-align: right;"><b>Total:</b></td>
+                            <td colspan="2"><b id="totalAmount">0</b></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </span>
+
+            <span>
+                <b><i>NOTE: PAYMENT WILL NOT BE REFUNDED UNDER ANY CIRCUMSTANCES</i></b>
+                <p>Manager</p>
+            </span>
+
+            <span>
+                <b><i>CHEQUE SUBJECT TO REALISATION</i></b>
+            </span>
+        </section>
+
+        <!-- rulesSection unchanged -->
+        <section id="rulesSection">
+            <b id="rulesTitle">RULES AND REGULATIONS</b>
+            <div>
+                <ol>
+                    <li>This is a payment receipt only; right of admission is reserved by the management.</li>
+                    <li><b>Money once deposited will not be refunded or adjusted under any circumstances.</b></li>
+                    <li>In case the Candidate wishes to cancel Training, She/he should inform our office Minimum The
+                        Training Timing. our office</li>
+                    <li>There will be two physical appearances of candidate at R.T.0 1)For Learners license (Biometric &
+                        L.L.R Test) while going for learner's license, all original documents should be carried
+                        compulsory and 2) For Permanent license (Driving test).</li>
+                    <li>The management reserves all the rights on learner's license and it shall not to be given to
+                        candidate.</li>
+                    <li><b>The balance amount should be paid minimum 8 days before appearing for driving test.</b></li>
+                    <li>Candidate should compulsorily be present every day for training.</li>
+                    <li>No lessons will be imparted on Friday's and Sunday's.</li>
+                    <li>The driving test will be conducted only According to Appointment available.</li>
+                    <li><b>No driving lessons will be imparted after the candidate appears for driving test.</b></li>
+                    <li>No leave will be granted for more than a week.</li>
+                    <li>Enrollment fees & Training are valid only for six (6) months.</li>
+                    <li><b>Rs 500/-</b> will be charged in Case the candidate Cancels after booking date or fails to
+                        appear on the given date.</li>
+                    <li>In case of any complaint the candidates are requested to inform management.</li>
+                    <li>The candidate shall not act contrary to the instructions given and the provision of motor
+                        vehicle rules, traffic and regulations. Falling which shall disqualify him/her to continue
+                        further with the institution.</li>
+                    <li>After candidate appear and pass Driving Test the Smart card license shall be delivered at
+                        candidates address by R.T.O authority via, Registered AD Postal Service.</li>
+                    <li>We are net responsible if smart card license is not received at your address by post. Please
+                        collect R.T.O dispatched fee receipt from our office for the acknowledgement of the postal
+                        service.</li>
+                    <li>All rules and regulations are binding on every candidate without any reservation thereof and
+                        full co-operation is solicited to maintain high standards of the institution.</li>
+                </ol>
+            </div>
+
+            <div id="agreementDiv">
+                <p>I hereby agree to all the rules & regulations mentioned above.</p>
+
+                <span>
+                    <pre>___________________________</pre>
+                    <b>Signature of the Candidate</b>
+                </span>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        console.log("electronAPI in renderer:", window.electronAPI);
+
+        const params = new URL(location.href).searchParams;
+        const token = params.get('token');
+        console.log(token)
+
+        window.electronAPI.requestInvoiceData(token);
+
+        window.electronAPI.onInvoiceData((data) => {
+            console.log(data)
+            document.getElementById('receiptType').textContent = data.type.toUpperCase() || 'ORIGINAL';
+            document.getElementById('customerName').textContent = data.customer.toUpperCase() || '—';
+            document.getElementById('dateId').textContent = data.date;
+            document.getElementById('userId').textContent = data.admissionNo || '—';
+
+            const tbody = document.querySelector('#itemsTable tbody');
+            tbody.innerHTML = '';
+            data.items.forEach((item, idx) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+        <td>${idx + 1}</td>
+        <td>${item.date || ''}</td>
+        <td>${toSentenceCase(item.desc)}</td>
+        <td>${item.mode.toUpperCase() || ''}</td>
+        <td>${item.paid}</td>
+        <td>${item.remaining}</td>
+    `;
+                tbody.appendChild(row);
+            });
+
+
+            document.getElementById('totalAmount').textContent = data.total;
+
+            console.log(token)
+            // notify main that rendering is done
+            window.electronAPI.notifyInvoiceRendered(token);
+        });
+
+        function toSentenceCase(str) {
+            if (!str) return '';
+            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        }
+    </script>
+</body>
+
+</html>

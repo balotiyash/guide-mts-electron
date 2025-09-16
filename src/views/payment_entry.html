@@ -28,9 +28,16 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../styles/shared.css" />
     <link rel="stylesheet" href="../styles/master_entry.css" />
+    <link rel="stylesheet" href="../styles/payment_entry.css" />
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div id="loadingDiv">
+        <h3>Loading...</h3>
+        <img src="../assets/gifs/loading_animation.gif" alt="Loading Animation">
+    </div>
+
     <!-- Header Section -->
     <header>
         <h1>Payment Management</h1>
@@ -45,8 +52,14 @@
                 <!-- Title -->
                 <div class="table-header">
                     <h2>Pending Fee Payments</h2>
-                    <input type="text" id="payment-date" autocomplete="off" title="Enter text to search"
-                        placeholder="Search..." />
+                    <span>
+                        <input type="text" id="payment-date" autocomplete="off" title="Enter text to search"
+                            placeholder="Search by Name" />
+                        <select name="" id="">
+                            <option value="pending">Pending</option>
+                            <option value="paid">Paid</option>
+                        </select>
+                    </span>
                 </div>
 
                 <!-- Table -->
@@ -56,160 +69,24 @@
                             <th>Name</th>
                             <th>Work</th>
                             <th>Fee Amount</th>
-                            <th>Pending Amount</th>
+                            <th id="tablePendingAmountLabel">Pending Amount</th>
                         </tr>
                     </thead>
                 </table>
 
                 <div class="scrollDiv">
                     <table>
-                        <tbody>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>June 2025</td>
-                                <td>500</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>September 2025</td>
-                                <td>400</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>September 2025</td>
-                                <td>300</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>September 2025</td>
-                                <td>200</td>
-                                <td>CNG</td>
-                            </tr>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>June 2025</td>
-                                <td>500</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>September 2025</td>
-                                <td>400</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>September 2025</td>
-                                <td>300</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>September 2025</td>
-                                <td>200</td>
-                                <td>CNG</td>
-                            </tr>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>June 2025</td>
-                                <td>500</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>September 2025</td>
-                                <td>400</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>September 2025</td>
-                                <td>300</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>September 2025</td>
-                                <td>200</td>
-                                <td>CNG</td>
-                            </tr>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>June 2025</td>
-                                <td>500</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>September 2025</td>
-                                <td>400</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>September 2025</td>
-                                <td>300</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>September 2025</td>
-                                <td>200</td>
-                                <td>CNG</td>
-                            </tr>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>June 2025</td>
-                                <td>500</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>September 2025</td>
-                                <td>400</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>September 2025</td>
-                                <td>300</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>September 2025</td>
-                                <td>200</td>
-                                <td>CNG</td>
-                            </tr>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>June 2025</td>
-                                <td>500</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>September 2025</td>
-                                <td>400</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>September 2025</td>
-                                <td>300</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>September 2025</td>
-                                <td>200</td>
-                                <td>CNG</td>
-                            </tr>
+                        <tbody id="pendingPaymentsTableBody">
+                            <!-- Dynamic Rows -->
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Pagination controls -->
+                <div id="paginationControls" class="pagination">
+                    <button id="prevPageBtn">Previous</button>
+                    <span id="pageInfo"></span>
+                    <button id="nextPageBtn">Next</button>
                 </div>
             </div>
 
@@ -226,15 +103,15 @@
                         <table>
                             <tr>
                                 <th>Name</th>
-                                <td>Yash Balotiya</td>
+                                <td id="formCustomerName">-</td>
                             </tr>
                             <tr>
                                 <th>Total Amount</th>
-                                <td>500</td>
+                                <td id="formChargedAmount">-</td>
                             </tr>
                             <tr>
-                                <th>Pending Amount</th>
-                                <td>0</td>
+                                <th id="formPendingAmountLabel">Pending Amount</th>
+                                <td id="formPendingAmount">-</td>
                             </tr>
                         </table>
 
@@ -242,32 +119,41 @@
                         <div class="label-above">
                             <label for="paymentMode">Payment Mode</label>
                             <select id="paymentMode">
-                                <option value="credit_card">Credit Card</option>
-                                <option value="debit_card">Debit Card</option>
-                                <option value="net_banking">Net Banking</option>
+                                <option value="">Select Payment Method</option>
+                                <option value="cash">Cash</option>
                                 <option value="upi">UPI</option>
+                                <option value="cheque">Cheque</option>
                             </select>
                         </div>
 
                         <!-- Amount Input -->
                         <div class="label-above">
                             <label for="amountInput">Amount Paid</label>
-                            <input type="text" id="amountInput" placeholder="Amount" autocomplete="off"
+                            <input type="number" id="amountInput" placeholder="Amount" autocomplete="off"
                                 title="Enter Amount" />
                         </div>
 
                         <!-- Submit Buttons -->
                         <div class="buttons">
-                            <button type="button" class="btn green">Save</button>
-                            <button type="button" class="btn yellow">Edit</button>
-                            <button type="button" class="btn orange">Clear</button>
-                            <button type="button" class="btn red">Exit</button>
+                            <button type="button" class="btn green" id="submitPaymentBtn">Save</button>
+                            <button type="button" class="btn yellow" id="editBtn">Edit</button>
+                            <button type="button" class="btn orange" id="clearBtn">Clear</button>
+                            <button type="button" class="btn red" id="exitBtn">Exit</button>
+                        </div>
+
+                        <!-- Reciept Printing Buttons -->
+                        <div class="buttons" id="printBtnsDiv">
+                            <button type="button" class="btn green" id="downloadOriginalInvoiceBtn">Original Print</button>
+                            <button type="button" class="btn orange" id="downloadDuplicateInvoiceBtn">Duplicate Print</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Scripts -->
+    <script type="module" src="../scripts/renderer/payment_entry.js"></script>
 </body>
 
 </html>

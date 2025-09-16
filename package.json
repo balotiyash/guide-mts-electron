@@ -1,6 +1,6 @@
 {
     "name": "guide-mts",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "An Electron application for Guide MTS",
     "author": "Yash Balotiya",
     "main": "src/scripts/main.js",
@@ -17,6 +17,8 @@
     "build": {
         "appId": "com.balotiyash.app",
         "productName": "Guide MTS",
+        "copyright": "Copyright © 2025 AlgoDevOpss by Yash Balotiya",
+        "icon": "src/assets/icons/icon",
         "files": [
             "**/*",
             "!node_modules/fsevents/**",
@@ -52,7 +54,7 @@
     },
     "dependencies": {
         "better-sqlite3": "^12.2.0",
-        "electron-log": "^5.4.2",
+        "electron-log": "^5.4.3",
         "electron-store": "^10.1.0",
         "electron-updater": "^6.6.2"
     }

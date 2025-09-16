@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to HELP load customer data into the form.
  * Created on: 31/08/2025
- * Last Modified: 14/09/2025
+ * Last Modified: 15/09/2025
  */
 
 // Fill the form with customer data using mobile number
@@ -157,14 +157,14 @@ const setLabelImage = (source, label, blobKey, imageBlobs) => {
 };
 
 // Convert blob to Base64
-function blobToBase64(blob) {
+const blobToBase64 = (blob) => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onloadend = () => resolve(reader.result.split(",")[1]); // strip prefix
         reader.onerror = reject;
         reader.readAsDataURL(blob);
     });
-}
+};
 
 // Reset image inputs and their associated blobs
 const resetImageInputs = (imageBlobs) => {

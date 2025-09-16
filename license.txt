@@ -1,3 +1,35 @@
-Guide MTS License Agreement
+END USER LICENSE AGREEMENT (EULA)
 
-By installing this application, you agree to the terms and conditions outlined below...
+IMPORTANT: Please read this agreement carefully before installing or using this software.
+
+By installing, copying, or otherwise using this software, you agree to be bound by the terms of this End User License Agreement (EULA). 
+If you do not agree to the terms of this EULA, do not install or use the software.
+
+1. LICENSE
+This software is licensed, not sold. The author grants you a non-exclusive, non-transferable license to use the software for personal or business purposes in accordance with this EULA.
+
+2. RESTRICTIONS
+- You may not reverse engineer, decompile, or disassemble the software.
+- You may not rent, lease, or sell the software or any portion of it.
+- You may not remove or alter any copyright notices or proprietary labels.
+
+3. OWNERSHIP
+All rights, title, and interest in the software remain with the author. This software is protected by applicable copyright and intellectual property laws.
+
+4. WARRANTY DISCLAIMER
+This software is provided "AS IS" without warranties of any kind, express or implied. The author does not warrant that the software will be error-free or that it will meet your requirements.
+
+5. LIMITATION OF LIABILITY
+In no event shall the author be liable for any damages (including, but not limited to, loss of profits, business interruption, or loss of information) arising out of the use or inability to use this software.
+
+6. TERMINATION
+This license will terminate automatically if you fail to comply with the terms of this EULA. Upon termination, you must stop using and destroy all copies of the software.
+
+7. GOVERNING LAW
+This agreement shall be governed by and construed in accordance with the laws of [Your Country/State].
+
+By clicking "I Agree" or installing the software, you acknowledge that you have read and understood this agreement and agree to be bound by its terms.
+
+-------------------------------------------
+Guide MTS
+© 2025 AlgoDevOpss by Yash Balotiya. All Rights Reserved.
