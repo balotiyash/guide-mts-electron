@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: IPC Handlers for Data Entry related operations.
  * Created on: 31/08/2025
- * Last Modified: 14/09/2025
+ * Last Modified: 22/09/2025
 */
 
 // Importing required modules & libraries
@@ -45,4 +45,4 @@ const registerDataEntryHandlers = () => {
 };
 
 // Exporting the register function
-export { registerDataEntryHandlers };
+export default registerDataEntryHandlers;

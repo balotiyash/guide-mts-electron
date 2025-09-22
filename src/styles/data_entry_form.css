@@ -1,8 +1,8 @@
-/* File: styles/data_entry_form.css
+/* File: src/styles/data_entry_form.css
    Author: Yash Balotiya
-   Description: CSS for Customer Data Entry Page specifically starting from name input section and responsiveness.
+   Description: This file contains CSS for Customer Data Entry Page specifically starting from name input section and responsiveness.
    Created on: 09/08/2025
-   Last Modified: 02/09/2025
+   Last Modified: 21/09/2025
 */
 
 /* Name Section */
@@ -107,5 +107,43 @@ table {
 
     .btn {
         padding: 8px;
+    }
+}
+
+@media (max-height: 750px) {
+    header h1 {
+        font-size: large;
+    }
+
+    .imageInput {
+        width: 80px;
+        height: 80px;
+    }
+
+    *,
+    input,
+    select,
+    textarea,
+    label {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-height: 690px) {
+    header h1 {
+        font-size: medium;
+    }
+
+    .imageInput {
+        width: 60px;
+        height: 60px;
+    }
+
+    *,
+    input,
+    select,
+    textarea,
+    label {
+        font-size: 0.7rem;
     }
 }

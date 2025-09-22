@@ -45,7 +45,7 @@ const getWorkDescriptions = async (userId) => {
             SELECT id, work, charged_amount, created_on
             FROM work_descriptions
             WHERE customer_id = ?
-            ORDER BY created_on DESC;`,
+            ORDER BY created_on;`,
         params: [userId],
         type: "all"
     });

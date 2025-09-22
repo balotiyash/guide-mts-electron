@@ -1,13 +1,11 @@
-/* File: styles/data_entry.css
+/* File: src/styles/data_entry.css
    Author: Yash Balotiya
-   Description: CSS for Customer Data Entry Page.
+   Description: This file contains all the CSS code for styling the Data Entry Page.
    Created on: 09/08/2025
-   Last Modified: 14/09/2025
+   Last Modified: 21/09/2025
 */
 
 body {
-    width: 100vw;
-    height: 100vh;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -73,11 +71,8 @@ main {
 }
 
 .imageInput {
-    /* width: 14%; */
-    /* min-height: 130px; */
     width: 15%;
-    aspect-ratio: 1 / 1;
-    /* min-height: 120px; */
+    /* aspect-ratio: 1 / 1; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,12 +92,11 @@ main {
 }
 
 .imageInput:hover {
-    /* border-color: #008CBA; */
     border-color: orange;
 }
 
 .imageInput img {
-    width: 30%;
+    width: 5vh;
 }
 
 .imageInput.withImage {
@@ -115,6 +109,14 @@ main {
 .imageInput.withImage img,
 .imageInput.withImage span {
     display: none;
+}
+
+.imageInput:first-child {
+    aspect-ratio: 1 / 1;
+}
+
+.imageInput:last-child {
+    width: 25%;
 }
 
 /* Horizontal Divider */

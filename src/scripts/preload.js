@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 16/09/2025
+ * Last Modified: 23/09/2025
 */
 
 // Importing required modules from Electron
@@ -33,36 +33,13 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
     // API to show the application menu
     showMenu: () => ipcRenderer.send('show-menu'),
-
-    // ✅ Trigger PDF generation from renderer
-    // generateInvoice: (invoiceData) =>
-    //     ipcRenderer.send('generate-invoice', invoiceData),
-
-    // // ✅ Listen for invoice data inside invoice.html
-    // onInvoiceData: (callback) =>
-    //     ipcRenderer.on('invoice-data', (event, data) => callback(data))
-
-    // Called from payment_entry.js to ask main to generate an invoice (returns a promise)
-    generateInvoice: (invoiceData, type) => ipcRenderer.invoke('generate-invoice', invoiceData, type),
-
-    // Called from the invoice renderer (reciept.html)
-    // - tells main "I'm ready to receive the invoice data" (passes token)
-    requestInvoiceData: (token) => ipcRenderer.send('invoice-ready', token),
-
-    // - renderer registers a callback to receive the actual invoice data
-    onInvoiceData: (callback) => ipcRenderer.on('invoice-data', (event, data) => callback(data)),
-
-    // - once renderer has put data into the DOM and it's visually ready, call this
-    notifyInvoiceRendered: (token) => ipcRenderer.send('invoice-rendered', token),
-
-    generateInvoiceForUser: (userId, workId, type) => ipcRenderer.invoke('generate-invoice-for-user', userId, workId, type),
 });
 
 // Exposing dialog box APIs
 contextBridge.exposeInMainWorld('dialogBoxAPI', {
+    // API to show a dialog box
     showDialogBox: (type, title, message, buttons) => ipcRenderer.invoke('show-dialog-box', { type, title, message, buttons })
 });
-
 
 // Exposing dashboard APIs
 contextBridge.exposeInMainWorld('dashboardAPI', {
@@ -112,4 +89,56 @@ contextBridge.exposeInMainWorld('paymentEntryAPI', {
 
     // API to update a payment
     updatePayment: (paymentDetails) => ipcRenderer.invoke('update-payment', paymentDetails)
+});
+
+// Exposing master entry APIs
+contextBridge.exposeInMainWorld('masterEntryAPI', {
+    // API to fetch all instructors
+    getAllInstructors: () => ipcRenderer.invoke('get-all-instructors'),
+
+    // API to add a new instructor
+    addInstructor: (data) => ipcRenderer.invoke('add-instructor', data),
+    
+    // API to delete an instructor
+    deleteInstructor: (instructorId) => ipcRenderer.invoke('delete-instructor', instructorId),
+    
+    // API to update an instructor
+    updateInstructor: (data) => ipcRenderer.invoke('update-instructor', data),
+});
+
+// Exposing vehicle entry APIs
+contextBridge.exposeInMainWorld('vehicleEntryAPI', {
+    // API to fetch all vehicles
+    getAllVehicles: () => ipcRenderer.invoke('get-all-vehicles'),
+    
+    // API to add a new vehicle
+    addVehicle: (vehicleData) => ipcRenderer.invoke('add-vehicle', vehicleData),
+    
+    // API to delete a vehicle
+    deleteVehicle: (vehicleId) => ipcRenderer.invoke('delete-vehicle', vehicleId),
+    
+    // API to update a vehicle
+    updateVehicle: (vehicleId, vehicleData) => ipcRenderer.invoke('update-vehicle', { vehicleId, vehicleData }),
+});
+    
+// Exposing invoice APIs
+contextBridge.exposeInMainWorld('invoiceAPI', {
+    // Called from payment_entry.js to ask main to generate an invoice (returns a promise)
+    generateInvoice: (invoiceData, type) => ipcRenderer.invoke('generate-invoice', invoiceData, type),
+
+    // Called from the invoice renderer (reciept.html)
+    // - tells main "I'm ready to receive the invoice data" (passes token)
+    requestInvoiceData: (token) => ipcRenderer.send('invoice-ready', token),
+
+    // - renderer registers a callback to receive the actual invoice data
+    onInvoiceData: (callback) => ipcRenderer.on('invoice-data', (event, data) => callback(data)),
+
+    // - once renderer has put data into the DOM and it's visually ready, call this
+    notifyInvoiceRendered: (token) => ipcRenderer.send('invoice-rendered', token),
+
+    // API to generate the invoice for a user (returns a promise) PDF
+    generateInvoiceForUser: (userId, workId, type) => ipcRenderer.invoke('generate-invoice-for-user', userId, workId, type),
+
+    // API to print the invoice directly
+    printInvoiceForUser: (userId, workId, type) => ipcRenderer.invoke('print-invoice-for-user', userId, workId, type),
 });

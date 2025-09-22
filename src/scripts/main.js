@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 17/09/2025
+ * Last Modified: 23/09/2025
 */
 
 // Importing required modules & libraries
@@ -16,11 +16,12 @@ const { autoUpdater } = updater;
 import log from "electron-log";
 
 // Register IPC handlers
-import { registerDbHandler } from "./main/ipc/dbHandler.js";
-import  { registerDashboardHandlers } from "./main/ipc/dashboardHandler.js";
-import { registerDataEntryHandlers } from "./main/ipc/dataEntryHandler.js";
+import registerDbHandler from "./main/ipc/dbHandler.js";
+import  registerDashboardHandlers from "./main/ipc/dashboardHandler.js";
+import registerDataEntryHandlers from "./main/ipc/dataEntryHandler.js";
 import registerPaymentHandlers from "./main/ipc/paymentHandler.js";
 import registerInvoiceHandlers from "./main/ipc/invoiceHandler.js";
+import registerMasterHandlers from "./main/ipc/masterHandler.js";
 
 // Logging the meta information
 autoUpdater.logger = log;
@@ -51,17 +52,17 @@ const createWindow = () => {
             contextIsolation: true,
             nodeIntegration: false,
         },
-        icon: path.join(__dirname, '../assets/images/guide-mts-icon.png')
+        icon: path.join(__dirname, '../assets/images/mts-logo.png')
     });
 
     // Loading the main application view
     win.loadFile(path.join(__dirname, '../views/index.html'));
-    // win.loadFile(path.join(__dirname, '../views/payment_entry.html'));
+    // win.loadFile(path.join(__dirname, '../views/master_entry.html'));
     win.maximize();
     win.show();
 
     // ❌ No menu on startup (login screen)
-    Menu.setApplicationMenu(null);
+    // Menu.setApplicationMenu(null);
 
     // Check for updates after window is ready
     win.once("ready-to-show", () => {
@@ -78,6 +79,7 @@ app.whenReady().then(() => {
         registerDataEntryHandlers(); // register all data entry IPC
         registerPaymentHandlers(); // register all payment entry IPC
         registerInvoiceHandlers(); // register all invoice IPC
+        registerMasterHandlers(); // register all master IPC
         createWindow();
     } catch (err) {
         console.error('Failed to create window:', err);

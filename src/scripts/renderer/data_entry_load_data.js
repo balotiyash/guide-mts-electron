@@ -3,8 +3,12 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to HELP load customer data into the form.
  * Created on: 31/08/2025
- * Last Modified: 15/09/2025
+ * Last Modified: 22/09/2025
  */
+
+// IMporting required modules & libraries
+import { isoToDDMMYYYY } from '../shared.js';
+import { resetImageInputs, setLabelImage, setupImageInputListeners } from '../utilities/dataEntry/dataLoadUtility.js';
 
 // Fill the form with customer data using mobile number
 const fillForm = (data, formElements, imageBlobs) => {
@@ -32,7 +36,21 @@ const fillForm = (data, formElements, imageBlobs) => {
     customerNameInput.value = data.customer_name || "";
 
     // Date of Birth
-    dobInput.value = (data.customer_dob || "").substring(0, 10);
+    // dobInput.value = (data.customer_dob || "").substring(0, 10);
+    // Fill visible input
+    const dobText = document.getElementById("dobInputText");
+    const dobHidden = document.getElementById("dobInput");
+
+    // Convert backend ISO to DD-MM-YYYY for visible input
+    dobText.value = isoToDDMMYYYY(data.customer_dob || "");
+
+    // Keep hidden ISO input for backend submission
+    dobHidden.value = (data.customer_dob || "").substring(0, 10);
+
+    // Trigger Inputmask so placeholder/mask displays
+    if (dobText.inputmask) {
+        dobText.inputmask.setValue(dobText.value);
+    }
 
     // Relation Name
     relationInput.value = data.relation_name || "";
@@ -63,10 +81,22 @@ const fillForm = (data, formElements, imageBlobs) => {
     classInput2.value = data.ll_class_2 || "";
 
     // LL Issued Date
-    issuedOnInput.value = (data.ll_issued_date || "").substring(0, 10);
+    const issuedOnText = document.getElementById("issuedOnInputText");
+    const issuedOnHidden = document.getElementById("issuedOnInput");
+    issuedOnText.value = isoToDDMMYYYY(data.ll_issued_date || "");
+    issuedOnHidden.value = (data.ll_issued_date || "").substring(0, 10);
+    if (issuedOnText.inputmask) {
+        issuedOnText.inputmask.setValue(issuedOnText.value);
+    }
 
     // LL Expiry Date
-    validUntilInput.value = (data.ll_validity_date || "").substring(0, 10);
+    const validUntilText = document.getElementById("validUntilInputText");
+    const validUntilHidden = document.getElementById("validUntilInput");
+    validUntilText.value = isoToDDMMYYYY(data.ll_validity_date || "");
+    validUntilHidden.value = (data.ll_validity_date || "").substring(0, 10);
+    if (validUntilText.inputmask) {
+        validUntilText.inputmask.setValue(validUntilText.value);
+    }
 
     // MDL No
     mdlNoInput.value = data.mdl_no || "mh01 /";
@@ -75,19 +105,43 @@ const fillForm = (data, formElements, imageBlobs) => {
     mdlClassInput.value = data.mdl_class || "";
 
     // MDL Issued Date
-    mdlIssuedInput.value = (data.mdl_issued_date || "").substring(0, 10);
+    const mdlIssuedText = document.getElementById("mdlIssuedInputText");
+    const mdlIssuedHidden = document.getElementById("mdlIssuedInput");
+    mdlIssuedText.value = isoToDDMMYYYY(data.mdl_issued_date || "");
+    mdlIssuedHidden.value = (data.mdl_issued_date || "").substring(0, 10);
+    if (mdlIssuedText.inputmask) {
+        mdlIssuedText.inputmask.setValue(mdlIssuedText.value);
+    }
 
     // MDL Expiry Date
-    mdlValidUntilInput.value = (data.mdl_validity_date || "").substring(0, 10);
+    const mdlValidUntilText = document.getElementById("mdlValidUntilInputText");
+    const mdlValidUntilHidden = document.getElementById("mdlValidUntilInput");
+    mdlValidUntilText.value = isoToDDMMYYYY(data.mdl_validity_date || "");
+    mdlValidUntilHidden.value = (data.mdl_validity_date || "").substring(0, 10);
+    if (mdlValidUntilText.inputmask) {
+        mdlValidUntilText.inputmask.setValue(mdlValidUntilText.value);
+    }
 
     // Endorsement No
     endorsementInput.value = data.endorsement || "";
 
     // Endorsement Issued Date
-    endorsementDatedInput.value = (data.endorsement_date || "").substring(0, 10);
+    const endorsementDatedText = document.getElementById("endorsementDatedInputText");
+    const endorsementDatedHidden = document.getElementById("endorsementDatedInput");
+    endorsementDatedText.value = isoToDDMMYYYY(data.endorsement_date || "");
+    endorsementDatedHidden.value = (data.endorsement_date || "").substring(0, 10);
+    if (endorsementDatedText.inputmask) {
+        endorsementDatedText.inputmask.setValue(endorsementDatedText.value);
+    }
 
     // Endorsement Expiry Date
-    endorsementValidityInput.value = (data.endorsement_validity_date || "").substring(0, 10);
+    const endorsementValidityText = document.getElementById("endorsementValidityInputText");
+    const endorsementValidityHidden = document.getElementById("endorsementValidityInput");
+    endorsementValidityText.value = isoToDDMMYYYY(data.endorsement_validity_date || "");
+    endorsementValidityHidden.value = (data.endorsement_validity_date || "").substring(0, 10);
+    if (endorsementValidityText.inputmask) {
+        endorsementValidityText.inputmask.setValue(endorsementValidityText.value);
+    }
 
     // Vehicle No
     vehicleNoInput.value = data.customer_vehicle_no || "";
@@ -97,105 +151,9 @@ const fillForm = (data, formElements, imageBlobs) => {
     workDescriptionInput.value = "";
 };
 
-// NEW: Function to set up event listeners for image inputs
-const setupImageInputListeners = (imageBlobs) => {
-    const photoInput = document.getElementById("photoInput");
-    const photoInputLabel = document.getElementById("photoInputLabel");
-    const signatureInput = document.getElementById("signatureInput");
-    const signatureInputLabel = document.getElementById("signatureInputLabel");
-
-    // On new photo upload
-    photoInput?.addEventListener("change", () => {
-        const file = photoInput.files[0];
-        if (file) {
-            setLabelImage(file, photoInputLabel, "customerImageInput", imageBlobs);
-        } else {
-            // If user clears selection, reset the image
-            setLabelImage(null, photoInputLabel, "customerImageInput", imageBlobs);
-        }
-    });
-
-    // On new signature upload
-    signatureInput?.addEventListener("change", () => {
-        const file = signatureInput.files[0];
-        if (file) {
-            setLabelImage(file, signatureInputLabel, "customerSignatureInput", imageBlobs);
-        } else {
-            // If user clears selection, reset the image
-            setLabelImage(null, signatureInputLabel, "customerSignatureInput", imageBlobs);
-        }
-    });
-};
-
-
-// Set label background image + store blob
-const setLabelImage = (source, label, blobKey, imageBlobs) => {
-    let imageUrl;
-    let blob = null; // Initialize blob to null
-
-    // Clear previous image and blob if no source is provided (e.g., clearing selection)
-    if (!source) {
-        label.style.backgroundImage = "";
-        label.classList.remove("withImage");
-        imageBlobs[blobKey] = null; // Clear the blob in the storage
-        return; // Exit early
-    }
-
-    if (source instanceof Uint8Array) {
-        blob = new Blob([source], { type: "image/jpeg" }); // Assuming JPEG for DB images
-        imageUrl = URL.createObjectURL(blob);
-    } else if (source instanceof File) {
-        blob = source;
-        imageUrl = URL.createObjectURL(source);
-    }
-
-    if (imageUrl) {
-        label.style.backgroundImage = `url(${imageUrl})`;
-        label.classList.add("withImage");
-        imageBlobs[blobKey] = blob; // Store the blob
-    }
-};
-
-// Convert blob to Base64
-const blobToBase64 = (blob) => {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result.split(",")[1]); // strip prefix
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-    });
-};
-
-// Reset image inputs and their associated blobs
-const resetImageInputs = (imageBlobs) => {
-    const photoInput = document.getElementById("photoInput");
-    const photoInputLabel = document.getElementById("photoInputLabel");
-    const signatureInput = document.getElementById("signatureInput");
-    const signatureInputLabel = document.getElementById("signatureInputLabel");
-
-    // Clear file inputs
-    if (photoInput) photoInput.value = "";
-    if (signatureInput) signatureInput.value = "";
-
-    // Reset photo label and blob
-    if (photoInputLabel) {
-        photoInputLabel.style.backgroundImage = "";
-        photoInputLabel.classList.remove("withImage");
-        imageBlobs.customerImageInput = null;
-    }
-
-    // Reset signature label and blob
-    if (signatureInputLabel) {
-        signatureInputLabel.style.backgroundImage = "";
-        signatureInputLabel.classList.remove("withImage");
-        imageBlobs.customerSignatureInput = null;
-    }
-};
-
 // Export functions
 export {
     fillForm,
-    blobToBase64,
     resetImageInputs,
-    setupImageInputListeners // Export the new function
+    setupImageInputListeners
 };

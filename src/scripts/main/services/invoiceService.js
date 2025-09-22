@@ -1,19 +1,32 @@
+/**
+ * File: src/scripts/main/services/invoiceService.js
+ * Author: Yash Balotiya
+ * Description: This file contains the main Js code for invoice service
+ * Created on: 16/09/2025
+ * Last Modified: 23/09/2025
+ */
+
 // src/services/invoiceService.js
 import { BrowserWindow, dialog, ipcMain } from 'electron';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath, pathToFileURL } from 'url';
 
+// Get __dirname in ES module scope
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function makeToken() {
+// Generate a unique token for each invoice window
+const makeToken = () => {
     return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
 
-async function generateInvoice(invoiceData) {
+// Generate and save invoice as PDF
+const generateInvoice = async (invoiceData) => {
+    // Generate a unique token for the invoice window
     const token = makeToken();
 
+    // Create a hidden BrowserWindow to load the invoice HTML
     const invoiceWin = new BrowserWindow({
         show: false, // keep it hidden while rendering
         webPreferences: {
@@ -23,13 +36,18 @@ async function generateInvoice(invoiceData) {
         }
     });
 
+    // Path to the invoice HTML file
     const htmlPath = path.join(__dirname, '../../../views/invoice.html');
+
     // build file:// URL, append token as query param
     const fileUrl = pathToFileURL(htmlPath).href + `?token=${token}`;
 
+    // Create a hidden BrowserWindow to load the invoice HTML
+    let resolveRendered;
+    const renderedPromise = new Promise((resolve) => (resolveRendered = resolve));
+
     // Handlers specific to this invoice/token
     const onReady = (event, receivedToken) => {
-        console.log(receivedToken)
         if (receivedToken !== token) return;
         // send the actual data to the invoice window that requested it
         try {
@@ -39,15 +57,8 @@ async function generateInvoice(invoiceData) {
         }
     };
 
-    let resolveRendered;
-    let rejectRendered;
-    const renderedPromise = new Promise((resolve, reject) => {
-        resolveRendered = resolve;
-        rejectRendered = reject;
-    });
-
+    // Handle invoice rendered event
     const onRendered = (event, receivedToken) => {
-        console.log(receivedToken)
         if (receivedToken !== token) return;
         resolveRendered();
     };
@@ -58,15 +69,7 @@ async function generateInvoice(invoiceData) {
 
     try {
         await invoiceWin.loadURL(fileUrl);
-
-        // Give renderer a short grace period in case it still needs to paint script-run etc.
-        // Wait up to 10 seconds for the renderer's "invoice-rendered" message
-        const timeoutMs = 10000;
-        const timeout = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Timeout waiting for invoice to render')), timeoutMs);
-        });
-
-        await Promise.race([renderedPromise, timeout]);
+        await renderedPromise;
 
         // Ask user where to save
         const { canceled, filePath: savePath } = await dialog.showSaveDialog({
@@ -75,29 +78,111 @@ async function generateInvoice(invoiceData) {
             filters: [{ name: 'PDF Files', extensions: ['pdf'] }]
         });
 
+        // If user canceled the save dialog, just close and return null
         if (canceled || !savePath) {
             invoiceWin.close();
             return null;
         }
 
-        // Print to PDF
+        // Generate PDF
         const pdfBuffer = await invoiceWin.webContents.printToPDF({
             marginsType: 0,
             printBackground: true,
             landscape: false
         });
 
+        // Save PDF to the selected path
         fs.writeFileSync(savePath, pdfBuffer);
 
+        // Close the window and return the path
         invoiceWin.close();
         return savePath;
     } finally {
-        // Clean up listeners no matter what
+        // Cleanup listeners
         ipcMain.removeListener('invoice-ready', onReady);
         ipcMain.removeListener('invoice-rendered', onRendered);
-        // make extra sure the window is closed
         if (!invoiceWin.isDestroyed()) invoiceWin.close();
     }
 }
 
-export default generateInvoice;
+// Print invoice directly without saving
+const printInvoice = async (invoiceData) => {
+    // Generate a unique token for the invoice window
+    const token = makeToken();
+
+    // Create a hidden BrowserWindow to load the invoice HTML
+    const invoiceWin = new BrowserWindow({
+        width: 800,          // optional, reasonable size
+        height: 600,
+        show: true,          // ✅ must be true for print preview
+        webPreferences: {
+            preload: path.join(__dirname, '../../preload.js'),
+            contextIsolation: true,
+            nodeIntegration: false
+        }
+    });
+
+    // Path to the invoice HTML file
+    const htmlPath = path.join(__dirname, '../../../views/invoice.html');
+
+    // build file:// URL, append token as query param
+    const fileUrl = pathToFileURL(htmlPath).href + `?token=${token}`;
+
+    // Create a hidden BrowserWindow to load the invoice HTML
+    let resolveRendered;
+    const renderedPromise = new Promise((resolve) => (resolveRendered = resolve));
+
+    // Handlers specific to this invoice/token
+    const onReady = (event, receivedToken) => {
+        if (receivedToken !== token) return;
+        try {
+            invoiceWin.webContents.send('invoice-data', invoiceData);
+        } catch (error) {
+            console.error('Error sending invoice data:', error);
+        }
+    };
+
+    // Handle invoice rendered event
+    const onRendered = (event, receivedToken) => {
+        if (receivedToken !== token) return;
+        resolveRendered();
+    };
+
+    // Register listeners *before* loadURL to avoid missing messages
+    ipcMain.on('invoice-ready', onReady);
+    ipcMain.on('invoice-rendered', onRendered);
+
+    try {
+        // Load the invoice HTML into the window
+        await invoiceWin.loadURL(fileUrl);
+        await renderedPromise;
+
+        // ✅ show print preview dialog
+        await new Promise((resolve, reject) => {
+            invoiceWin.webContents.print(
+                { printBackground: true, silent: false }, // silent: false ensures preview dialog
+                (success, errorType) => {
+                    if (!success) {
+                        console.error('Print failed:', errorType);
+                        return reject(new Error(errorType));
+                    }
+                    console.log('Print dialog completed successfully'); // Debug log
+                    resolve();
+                }
+            );
+        });
+
+    } catch (error) {
+        throw error;
+    } finally {
+        ipcMain.removeListener('invoice-ready', onReady);
+        ipcMain.removeListener('invoice-rendered', onRendered);
+        if (!invoiceWin.isDestroyed()) invoiceWin.close();
+    }
+}
+
+// Exporting the functions
+export {
+    generateInvoice,
+    printInvoice
+};

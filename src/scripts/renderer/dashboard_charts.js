@@ -159,4 +159,5 @@ const initCharts = (chart1Data, chart2RevenueData, chart2FuelData, chart3Names, 
     }
 };
 
+// Export the initCharts function
 export default initCharts;

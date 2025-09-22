@@ -1,9 +1,9 @@
 <!-- 
-    File: views/data_entry.html
+    File: src/views/data_entry.html
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Customer Data Entry Page.
     Created on: 09/08/2025
-    Last Modified: 14/09/2025
+    Last Modified: 21/09/2025
 -->
 
 <!DOCTYPE html>
@@ -26,6 +26,7 @@
     ">
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="../scripts/imports/flatpickr.min.css">
     <link rel="stylesheet" href="../styles/shared.css">
     <link rel="stylesheet" href="../styles/data_entry.css" />
     <link rel="stylesheet" href="../styles/data_entry_form.css" />
@@ -57,20 +58,6 @@
         <!-- Photo & Signature Input -->
         <div id="imageInputContainer">
             <!-- Photo Input -->
-            <!-- <label class="imageInput" title="Upload Photo" id="photoInputLabel">
-                <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon">
-                <span>Photo</span>
-                <input type="file" id="photoInput" accept="image/*" hidden />
-            </label> -->
-
-            <!-- Signature Input -->
-            <!-- <label class="imageInput" title="Upload Signature" id="signatureInputLabel">
-                <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon">
-                <span>Signature</span>
-                <input type="file" id="signatureInput" accept="image/*" hidden />
-            </label> -->
-
-            <!-- Photo Input -->
             <label class="imageInput" id="photoInputLabel" data-type="photo">
                 <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon" />
                 <span>Photo</span>
@@ -89,9 +76,6 @@
     <!-- Main Form -->
     <main>
 
-
-        </section>
-
         <!-- Horizontal Divider -->
         <div class="hDivider"></div>
 
@@ -107,7 +91,11 @@
             <!-- Date of Birth Input -->
             <span class="inputContainer">
                 <label for="dobInput">Date of Birth</label>
-                <input type="date" id="dobInput" title="Select date of birth" />
+                <!-- Visible text input for user -->
+                <input type="text" id="dobInputText" placeholder="DD-MM-YYYY" />
+
+                <!-- Hidden native date input for backend -->
+                <input type="date" id="dobInput" name="dob" hidden />
             </span>
 
             <!-- Relation Input -->
@@ -182,13 +170,15 @@
             <!-- Issued on -->
             <span class="inputContainer">
                 <label for="issuedOnInput">Issued on</label>
-                <input type="date" id="issuedOnInput" title="Select issue date" />
+                <input type="text" id="issuedOnInputText" placeholder="DD-MM-YYYY" />
+                <input type="date" id="issuedOnInput" name="issuedOnInput" hidden />
             </span>
 
             <!-- Valid Till -->
             <span class="inputContainer">
                 <label for="validUntilInput">Valid Till</label>
-                <input type="date" id="validUntilInput" title="Select valid till date" />
+                <input type="text" id="validUntilInputText" placeholder="DD-MM-YYYY" />
+                <input type="date" id="validUntilInput" name="validUntilInput" hidden />
             </span>
         </section>
 
@@ -211,17 +201,19 @@
             <!-- Issued on -->
             <span class="inputContainer">
                 <label for="mdlIssuedInput">Issued on</label>
-                <input type="date" id="mdlIssuedInput" title="Select issue date" />
+                <input type="text" id="mdlIssuedInputText" placeholder="DD-MM-YYYY" />
+                <input type="date" id="mdlIssuedInput" name="mdlIssuedInput" hidden />
             </span>
 
             <!-- Valid Till -->
             <span class="inputContainer">
                 <label for="mdlValidUntilInput">Valid Till</label>
-                <input type="date" id="mdlValidUntilInput" title="Select valid till date" />
+                <input type="text" id="mdlValidUntilInputText" placeholder="DD-MM-YYYY" />
+                <input type="date" id="mdlValidUntilInput" name="mdlValidUntilInput" hidden />
             </span>
         </section>
 
-        <!-- Endorsment Section -->
+        <!-- Endorsement Section -->
         <section class="licenseClassSection">
             <!-- License Input -->
             <span class="inputContainer">
@@ -233,13 +225,15 @@
             <!-- Issued on -->
             <span class="inputContainer">
                 <label for="endorsementDatedInput">Endorsement Dated</label>
-                <input type="date" id="endorsementDatedInput" title="Select endorsement dated" />
+                <input type="text" id="endorsementDatedInputText" placeholder="DD-MM-YYYY" />
+                <input type="date" id="endorsementDatedInput" name="endorsementDatedInput" hidden />
             </span>
 
             <!-- Valid Till -->
             <span class="inputContainer">
                 <label for="endorsementValidityInput">Valid Till</label>
-                <input type="date" id="endorsementValidityInput" title="Select valid till date" />
+                <input type="text" id="endorsementValidityInputText" placeholder="DD-MM-YYYY" />
+                <input type="date" id="endorsementValidityInput" name="endorsementValidityInput" hidden />
             </span>
         </section>
 
@@ -271,7 +265,7 @@
         <section class="licenseClassSection">
             <!-- Past Records -->
             <span class="inputContainer">
-                <label for="">Past Records</label>
+                <label>Past Records</label>
 
                 <!-- Table -->
                 <table>
@@ -311,6 +305,8 @@
     </main>
 
     <!-- Scripts -->
+    <script src="../scripts/imports/flatpickr.js"></script>
+    <script src="../scripts/imports/inputmask.js"></script>
     <script type="module" src="../scripts/renderer/data_entry.js"></script>
 </body>
 

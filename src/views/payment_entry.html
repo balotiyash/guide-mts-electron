@@ -1,9 +1,9 @@
 <!-- 
-    File: views/payment_entry.html
+    File: src/views/payment_entry.html
     Author: Yash Balotiya, Ayush Shetty
     Description: This page contains all the HTML5 code of the Payment Entry Page.
     Created on: 09/08/2025
-    Last Modified: 10/08/2025
+    Last Modified: 21/09/2025
 -->
 
 <!DOCTYPE html>
@@ -49,9 +49,11 @@
 
             <!-- Left Container: Payment Table -->
             <div class="table-container">
-                <!-- Title -->
                 <div class="table-header">
+                    <!-- Title -->
                     <h2>Pending Fee Payments</h2>
+
+                    <!-- Search & Select -->
                     <span>
                         <input type="text" id="payment-date" autocomplete="off" title="Enter text to search"
                             placeholder="Search by Name" />
@@ -96,19 +98,23 @@
 
                     <!-- Main Form -->
                     <div class="form-content">
-
                         <!-- Title -->
                         <h2>Fee Payment</h2>
 
                         <table>
+                            <!-- Customer Name -->
                             <tr>
                                 <th>Name</th>
                                 <td id="formCustomerName">-</td>
                             </tr>
+
+                            <!-- Total Amount -->
                             <tr>
                                 <th>Total Amount</th>
                                 <td id="formChargedAmount">-</td>
                             </tr>
+
+                            <!-- Pending Amount -->
                             <tr>
                                 <th id="formPendingAmountLabel">Pending Amount</th>
                                 <td id="formPendingAmount">-</td>
@@ -117,7 +123,10 @@
 
                         <!-- Payment Mode Select -->
                         <div class="label-above">
+                            <!-- Label -->
                             <label for="paymentMode">Payment Mode</label>
+
+                            <!-- Select -->
                             <select id="paymentMode">
                                 <option value="">Select Payment Method</option>
                                 <option value="cash">Cash</option>
@@ -143,8 +152,10 @@
 
                         <!-- Reciept Printing Buttons -->
                         <div class="buttons" id="printBtnsDiv">
-                            <button type="button" class="btn green" id="downloadOriginalInvoiceBtn">Original Print</button>
-                            <button type="button" class="btn orange" id="downloadDuplicateInvoiceBtn">Duplicate Print</button>
+                            <button type="button" class="btn green" id="downloadOriginalInvoiceBtn">Print
+                                Original</button>
+                            <button type="button" class="btn orange" id="downloadDuplicateInvoiceBtn">Print
+                                Duplicate</button>
                         </div>
                     </div>
                 </div>

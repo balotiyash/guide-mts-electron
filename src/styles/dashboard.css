@@ -1,15 +1,10 @@
 /* 
-    File: styles/dashboard.css
+    File: src/styles/dashboard.css
     Author: Yash Balotiya
-    Description: This page contains all the CSS code of the Dashboard Page.
+    Description: This file contains all the CSS code of the Dashboard Page.
     Created on: 05/08/2025
-    Last Modified: 14/09/2025
+    Last Modified: 21/09/2025
 */
-
-body {
-    width: 100vw;
-    height: 100vh;
-}
 
 /* Main Container */
 #mainContainer {
@@ -73,9 +68,6 @@ body {
 
 /* Left Side Buttons */
 .dashboardButton {
-    /* width: 8vw; */
-    /* height: 8vw; */
-    /* width: 7vw; */
     height: 7vw;
     padding: 10px;
     display: flex;
@@ -91,7 +83,6 @@ body {
 }
 
 .dashboardButton:hover {
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 

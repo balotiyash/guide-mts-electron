@@ -1,9 +1,9 @@
 <!-- 
-    File: views/master_entry.html
+    File: src/views/master_entry.html
     Author: Neha Balotia, Yash Balotiya
     Description: This page contains all the HTML5 code of the Master Registration Page.
     Created on: 17/07/2025
-    Last Modified: 10/08/2025
+    Last Modified: 23/09/2025
 -->
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Tab Title -->
-    <title>Guide Motor Training School - Master Registration</title>
+    <title>Guide Motor Training School | Master Registration</title>
 
     <!-- Content Security Policy (adjusted to allow CDN) -->
     <meta http-equiv="Content-Security-Policy" content="
@@ -26,8 +26,24 @@
     ">
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="../scripts/imports/flatpickr.min.css">
     <link rel="stylesheet" href="../styles/shared.css">
     <link rel="stylesheet" href="../styles/master_entry.css" />
+
+    <style>
+        /* Style for Table List */
+        .instructor-name {
+            width: 40%;
+        }
+
+        .instructor-license {
+            width: 35%;
+        }
+
+        .license-expiration {
+            width: 25%;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,16 +57,15 @@
         <div class="panels">
             <!-- Left Container: Instructor Table -->
             <div class="table-container">
-                <!-- <label for="tbl">Registered Instructors</label> -->
                 <h2>Registered Instructors</h2>
 
-                <!-- Instructor Table -->
+                <!-- Instructor Details Table -->
                 <table class="instructor-table" id="tbl">
                     <thead>
                         <tr>
-                            <th>Instructor Name</th>
-                            <th>License Number</th>
-                            <th>Last Updated On</th>
+                            <th class="instructor-name">Instructor Name</th>
+                            <th class="instructor-license">License Number</th>
+                            <th class="license-expiration">Expiry Date</th>
                         </tr>
                     </thead>
                 </table>
@@ -58,166 +73,7 @@
                 <div class="scrollDiv">
                     <table>
                         <tbody>
-                            <tr>
-                                <td>Rajeev Sharma</td>
-                                <td>DL9876</td>
-                                <td>2025-07-25</td>
-                            </tr>
-                            <tr>
-                                <td>Neha Kapoor</td>
-                                <td>DL1234</td>
-                                <td>2025-07-20</td>
-                            </tr>
-                            <tr>
-                                <td>Amit Verma</td>
-                                <td>DL5678</td>
-                                <td>2025-07-18</td>
-                            </tr>
-                            <tr>
-                                <td>Sonal Batra</td>
-                                <td>DL4321</td>
-                                <td>2025-07-10</td>
-                            </tr>
-                            <tr>
-                                <td>Rajeev Sharma</td>
-                                <td>DL9876</td>
-                                <td>2025-07-25</td>
-                            </tr>
-                            <tr>
-                                <td>Neha Kapoor</td>
-                                <td>DL1234</td>
-                                <td>2025-07-20</td>
-                            </tr>
-                            <tr>
-                                <td>Amit Verma</td>
-                                <td>DL5678</td>
-                                <td>2025-07-18</td>
-                            </tr>
-                            <tr>
-                                <td>Sonal Batra</td>
-                                <td>DL4321</td>
-                                <td>2025-07-10</td>
-                            </tr>
-                            <tr>
-                                <td>Rajeev Sharma</td>
-                                <td>DL9876</td>
-                                <td>2025-07-25</td>
-                            </tr>
-                            <tr>
-                                <td>Neha Kapoor</td>
-                                <td>DL1234</td>
-                                <td>2025-07-20</td>
-                            </tr>
-                            <tr>
-                                <td>Amit Verma</td>
-                                <td>DL5678</td>
-                                <td>2025-07-18</td>
-                            </tr>
-                            <tr>
-                                <td>Sonal Batra</td>
-                                <td>DL4321</td>
-                                <td>2025-07-10</td>
-                            </tr>
-                            <tr>
-                                <td>Rajeev Sharma</td>
-                                <td>DL9876</td>
-                                <td>2025-07-25</td>
-                            </tr>
-                            <tr>
-                                <td>Neha Kapoor</td>
-                                <td>DL1234</td>
-                                <td>2025-07-20</td>
-                            </tr>
-                            <tr>
-                                <td>Amit Verma</td>
-                                <td>DL5678</td>
-                                <td>2025-07-18</td>
-                            </tr>
-                            <tr>
-                                <td>Sonal Batra</td>
-                                <td>DL4321</td>
-                                <td>2025-07-10</td>
-                            </tr>
-                            <tr>
-                                <td>Rajeev Sharma</td>
-                                <td>DL9876</td>
-                                <td>2025-07-25</td>
-                            </tr>
-                            <tr>
-                                <td>Neha Kapoor</td>
-                                <td>DL1234</td>
-                                <td>2025-07-20</td>
-                            </tr>
-                            <tr>
-                                <td>Amit Verma</td>
-                                <td>DL5678</td>
-                                <td>2025-07-18</td>
-                            </tr>
-                            <tr>
-                                <td>Sonal Batra</td>
-                                <td>DL4321</td>
-                                <td>2025-07-10</td>
-                            </tr>
-                            <tr>
-                                <td>Rajeev Sharma</td>
-                                <td>DL9876</td>
-                                <td>2025-07-25</td>
-                            </tr>
-                            <tr>
-                                <td>Neha Kapoor</td>
-                                <td>DL1234</td>
-                                <td>2025-07-20</td>
-                            </tr>
-                            <tr>
-                                <td>Amit Verma</td>
-                                <td>DL5678</td>
-                                <td>2025-07-18</td>
-                            </tr>
-                            <tr>
-                                <td>Sonal Batra</td>
-                                <td>DL4321</td>
-                                <td>2025-07-10</td>
-                            </tr>
-                            <tr>
-                                <td>Rajeev Sharma</td>
-                                <td>DL9876</td>
-                                <td>2025-07-25</td>
-                            </tr>
-                            <tr>
-                                <td>Neha Kapoor</td>
-                                <td>DL1234</td>
-                                <td>2025-07-20</td>
-                            </tr>
-                            <tr>
-                                <td>Amit Verma</td>
-                                <td>DL5678</td>
-                                <td>2025-07-18</td>
-                            </tr>
-                            <tr>
-                                <td>Sonal Batra</td>
-                                <td>DL4321</td>
-                                <td>2025-07-10</td>
-                            </tr>
-                            <tr>
-                                <td>Rajeev Sharma</td>
-                                <td>DL9876</td>
-                                <td>2025-07-25</td>
-                            </tr>
-                            <tr>
-                                <td>Neha Kapoor</td>
-                                <td>DL1234</td>
-                                <td>2025-07-20</td>
-                            </tr>
-                            <tr>
-                                <td>Amit Verma</td>
-                                <td>DL5678</td>
-                                <td>2025-07-18</td>
-                            </tr>
-                            <tr>
-                                <td>Sonal Batra</td>
-                                <td>DL4321</td>
-                                <td>2025-07-10</td>
-                            </tr>
+                            <!-- Dynamic Rows will be inserted here -->
                         </tbody>
                     </table>
                 </div>
@@ -248,21 +104,30 @@
                         <!-- License Expiration Date -->
                         <div class="label-above">
                             <label for="license-expiration">License Expiration Date</label>
-                            <input type="date" id="license-expiration" placeholder="YYYY-MM-DD" autocomplete="off" />
+                            <input type="text" id="license-expiration-text" placeholder="DD-MM-YYYY" autocomplete="off" />
+                            <input type="date" id="license-expiration" name="license-expiration" hidden />
                         </div>
 
                         <!-- Form Buttons -->
                         <div class="buttons">
-                            <button type="button" class="btn green">Save</button>
-                            <button type="button" class="btn yellow">Edit</button>
-                            <button type="button" class="btn orange">Clear</button>
-                            <button type="button" class="btn red">Exit</button>
+                            <button type="button" class="btn green" id="save-btn">Save</button>
+                            <button type="button" class="btn yellow" id="edit-btn">Edit</button>
+                            <button type="button" class="btn orange" id="clear-btn">Clear</button>
+                            <button type="button" class="btn red" id="delete-btn">Delete</button>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="btn red" id="exit-btn">Exit</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Scripts -->
+    <script src="../scripts/imports/flatpickr.js"></script>
+    <script src="../scripts/imports/inputmask.js"></script>
+    <script type="module" src="../scripts/renderer/master_entry.js"></script>
 </body>
 
 </html>

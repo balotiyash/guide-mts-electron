@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to handle database-related IPC calls.
  * Created on: 26/08/2025
- * Last Modified: 26/08/2025
+ * Last Modified: 21/09/2025
 */
 
 // Importing required modules & libraries
@@ -19,4 +19,4 @@ const registerDbHandler = () => {
 }
 
 // Exporting the registerDbHandler function
-export { registerDbHandler };
+export default registerDbHandler;

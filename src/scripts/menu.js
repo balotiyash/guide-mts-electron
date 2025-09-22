@@ -1,9 +1,9 @@
 /** 
- * File: ../scripts/menu.js
+ * File: src/scripts/menu.js
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 17/09/2025
+ * Last Modified: 21/09/2025
 */
 
 // Module JS
@@ -36,24 +36,24 @@ const createMenuTemplate = (win) => {
                         win.loadFile(path.join(__dirname, '../views/data_entry.html'));
                     },
                 },
-                // {
-                //     label: 'Master Registration',
-                //     click: () => {
-                //         win.loadFile(path.join(__dirname, '../views/master_entry.html'));
-                //     },
-                // },
-                // {
-                //     label: 'Vehicle Registration',
-                //     click: () => {
-                //         win.loadFile(path.join(__dirname, '../views/car_entry.html'));
-                //     },
-                // },
-                // {
-                //     label: 'Fuel Entry',
-                //     click: () => {
-                //         win.loadFile(path.join(__dirname, '../views/fuel_entry.html'));
-                //     },
-                // },
+                {
+                    label: 'Master Registration',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/master_entry.html'));
+                    },
+                },
+                {
+                    label: 'Vehicle Registration',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/car_entry.html'));
+                    },
+                },
+                {
+                    label: 'Fuel Entry',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/fuel_entry.html'));
+                    },
+                },
             ],
         },
         {
@@ -84,17 +84,17 @@ const createMenuTemplate = (win) => {
         //         },
         //     ],
         // },
-        // {
-        //     label: 'Form-14',
-        //     submenu: [
-        //         {
-        //             label: 'Generate Form',
-        //             click: () => {
-        //                 console.log('Generate Form clicked');
-        //             },
-        //         },
-        //     ],
-        // },
+        {
+            label: 'Form-14',
+            submenu: [
+                {
+                    label: 'Generate Form',
+                    click: () => {
+                        console.log('Generate Form clicked');
+                    },
+                },
+            ],
+        },
         // {
         //     label: 'Tools',
         //     submenu: [
@@ -168,20 +168,20 @@ const createMenuTemplate = (win) => {
         // },
 
         // View menu with DevTools
-        // {
-        //     label: 'View',
-        //     submenu: [
-        //         { role: 'reload' },
-        //         { role: 'forceReload' },
-        //         { role: 'toggleDevTools' }, // Dev Tools toggle
-        //         { type: 'separator' },
-        //         { role: 'resetZoom' },
-        //         { role: 'zoomIn' },
-        //         { role: 'zoomOut' },
-        //         { type: 'separator' },
-        //         { role: 'togglefullscreen' }
-        //     ]
-        // },
+        {
+            label: 'View',
+            submenu: [
+                { role: 'reload' },
+                { role: 'forceReload' },
+                { role: 'toggleDevTools' }, // Dev Tools toggle
+                { type: 'separator' },
+                { role: 'resetZoom' },
+                { role: 'zoomIn' },
+                { role: 'zoomOut' },
+                { type: 'separator' },
+                { role: 'togglefullscreen' }
+            ]
+        },
 
         // Window menu
         // {

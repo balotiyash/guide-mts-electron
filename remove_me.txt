@@ -34,6 +34,8 @@ WHERE customer_id IN (
 )
 ORDER BY customer_id;
 
+electron-icon-maker --input=src/assets/images/mts-logo.png --output=src/assets/icons
+
 Go through all Title tags
 add ; after all functions
 add clgs after every error & success and print try catch error too
@@ -42,3 +44,6 @@ try to remove all async opperattions
 when we are inserting into 2 tables in a singke service then if 1st query was successful and other was unsuccessful then rollback 1st entry
 also log all the actions into logger module import
 make date formatter in dataEntryService function in uutility.js then import it
+use navigation api or location for page navigation
+* mark for all the required feilds
+name functions as handleSubmit

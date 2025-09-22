@@ -1,9 +1,9 @@
 <!-- 
-    File: views/index.html
+    File: src/views/invoice.html
     Author: Yash Balotiya
-    Description: This page contains all the HTML5 code of the Login Page.
-    Created on: 13/07/2025
-    Last Modified: 15/09/2025
+    Description: This page contains all the HTML5 code of the Invoice Page.
+    Created on: 16/09/2025
+    Last Modified: 23/09/2025
 -->
 
 <!DOCTYPE html>
@@ -11,18 +11,35 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Invoice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tab Title -->
+    <title>Guide Motor Training School | Invoice</title>
+
+    <!-- Content Security Policy (adjusted to allow CDN) -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; 
+        style-src 'self' 'unsafe-inline'; 
+        font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
+        img-src 'self' data:;
+    ">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../styles/invoice.css">
 </head>
 
 <body>
+    <!-- Header Section -->
     <header>
+        <!-- Establishment, Receipt Type & Phone No. -->
         <div id="estdDiv">
             <b>ESTD: 1971</b>
             <b id="receiptType"></b>
             <b>Phone No.: 022 24072677 / 022 24074237</b>
         </div>
 
+        <!-- Guide MTS Logo & Details -->
         <div id="companyDetailsDiv">
             <b>"Work is Worship"</b>
             <img src="../assets/images/guide-logo.png" alt="Guide MTS Logo">
@@ -31,28 +48,38 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <main>
+        <!-- Customer Section -->
         <section id="admissionNoDiv">
+            <!-- Admission No. -->
             <span>
                 <b>Admission No.:&nbsp;</b>
                 <u id="userId"></u>
             </span>
+
+            <!-- Customer Name -->
             <span>
                 <b>Customer Name:&nbsp;</b>
                 <u id="customerName"></u>
             </span>
+
+            <!-- Date -->
             <span>
                 <b>Date:&nbsp;</b>
                 <u id="dateId"></u>
             </span>
         </section>
 
+        <!-- Payment Details -->
         <section id="studentDetailsDiv">
             <span></span>
 
             <span>
+                <!-- Payment Details Title -->
                 <b>Payment Details</b>
 
+                <!-- Payment Details Table -->
                 <table id="itemsTable">
                     <thead>
                         <tr>
@@ -68,6 +95,7 @@
                     <tbody>
                         <!-- dynamically filled -->
                     </tbody>
+
                     <tfoot>
                         <tr>
                             <td colspan="4" style="text-align: right;"><b>Total:</b></td>
@@ -77,19 +105,24 @@
                 </table>
             </span>
 
+            <!-- Note Section & Manager Signature -->
             <span>
                 <b><i>NOTE: PAYMENT WILL NOT BE REFUNDED UNDER ANY CIRCUMSTANCES</i></b>
                 <p>Manager</p>
             </span>
 
+            <!-- Cheque Note -->
             <span>
                 <b><i>CHEQUE SUBJECT TO REALISATION</i></b>
             </span>
         </section>
 
-        <!-- rulesSection unchanged -->
+        <!-- Rules Section -->
         <section id="rulesSection">
+            <!-- Rules Title -->
             <b id="rulesTitle">RULES AND REGULATIONS</b>
+
+            <!-- All Rules -->
             <div>
                 <ol>
                     <li>This is a payment receipt only; right of admission is reserved by the management.</li>
@@ -124,6 +157,7 @@
                 </ol>
             </div>
 
+            <!-- Agreement & Signature -->
             <div id="agreementDiv">
                 <p>I hereby agree to all the rules & regulations mentioned above.</p>
 
@@ -135,49 +169,45 @@
         </section>
     </main>
 
+    <!-- Script -->
     <script>
-        console.log("electronAPI in renderer:", window.electronAPI);
-
+        // Fetch token from URL
         const params = new URL(location.href).searchParams;
         const token = params.get('token');
-        console.log(token)
 
-        window.electronAPI.requestInvoiceData(token);
+        // Request invoice data from main process
+        window.invoiceAPI.requestInvoiceData(token);
 
-        window.electronAPI.onInvoiceData((data) => {
-            console.log(data)
+        // Listen for invoice data from main process
+        window.invoiceAPI.onInvoiceData((data) => {
+            // Populate invoice fields
             document.getElementById('receiptType').textContent = data.type.toUpperCase() || 'ORIGINAL';
             document.getElementById('customerName').textContent = data.customer.toUpperCase() || '—';
             document.getElementById('dateId').textContent = data.date;
             document.getElementById('userId').textContent = data.admissionNo || '—';
 
+            // Populate items table
             const tbody = document.querySelector('#itemsTable tbody');
             tbody.innerHTML = '';
             data.items.forEach((item, idx) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-        <td>${idx + 1}</td>
-        <td>${item.date || ''}</td>
-        <td>${toSentenceCase(item.desc)}</td>
-        <td>${item.mode.toUpperCase() || ''}</td>
-        <td>${item.paid}</td>
-        <td>${item.remaining}</td>
-    `;
+                    <td>${idx + 1}</td>
+                    <td>${item.date || ''}</td>
+                    <td>${item.desc.toUpperCase()}</td>
+                    <td>${item.mode.toUpperCase() || ''}</td>
+                    <td>${item.paid}</td>
+                    <td>${item.remaining}</td>
+                `;
                 tbody.appendChild(row);
             });
 
-
+            // Populate total amount
             document.getElementById('totalAmount').textContent = data.total;
 
-            console.log(token)
             // notify main that rendering is done
-            window.electronAPI.notifyInvoiceRendered(token);
+            window.invoiceAPI.notifyInvoiceRendered(token);
         });
-
-        function toSentenceCase(str) {
-            if (!str) return '';
-            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-        }
     </script>
 </body>
 

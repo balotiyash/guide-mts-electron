@@ -1,3 +1,11 @@
+/* File: src/styles/payment_entry.css
+   Author: Yash Balotiya
+   Description: This file contains all the CSS code for styling the Payment Entry Page.
+   Created on: 09/08/2025
+   Last Modified: 21/09/2025
+*/
+
+/* Table Header */
 .table-header span {
     width: 50%;
     display: flex;
@@ -32,6 +40,7 @@
     display: none;
 }
 
+/* Pagination */
 .pagination {
     margin-top: 20px;
     display: flex;
@@ -62,5 +71,4 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* font-weight: bold; */
 }

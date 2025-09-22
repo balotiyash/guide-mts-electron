@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage dashboard-related IPC events.
  * Created on: 26/08/2025
- * Last Modified: 27/08/2025
+ * Last Modified: 21/09/2025
 */
 
 // Importing required modules & libraries
@@ -51,4 +51,4 @@ const registerDashboardHandlers = () => {
 };
 
 // Exporting the registerDashboardHandlers function
-export { registerDashboardHandlers };
+export default registerDashboardHandlers;
