@@ -22,6 +22,7 @@ import registerDataEntryHandlers from "./main/ipc/dataEntryHandler.js";
 import registerPaymentHandlers from "./main/ipc/paymentHandler.js";
 import registerInvoiceHandlers from "./main/ipc/invoiceHandler.js";
 import registerMasterHandlers from "./main/ipc/masterHandler.js";
+import registerVehicleHandlers from "./main/ipc/vehicleHandler.js";
 
 // Logging the meta information
 autoUpdater.logger = log;
@@ -80,6 +81,7 @@ app.whenReady().then(() => {
         registerPaymentHandlers(); // register all payment entry IPC
         registerInvoiceHandlers(); // register all invoice IPC
         registerMasterHandlers(); // register all master IPC
+        registerVehicleHandlers(); // register all vehicle IPC
         createWindow();
     } catch (err) {
         console.error('Failed to create window:', err);

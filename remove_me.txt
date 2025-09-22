@@ -47,3 +47,4 @@ make date formatter in dataEntryService function in uutility.js then import it
 use navigation api or location for page navigation
 * mark for all the required feilds
 name functions as handleSubmit
+format car entry,

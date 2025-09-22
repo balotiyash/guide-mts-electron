@@ -3,7 +3,7 @@
     Author: Ayush Shetty, Yash Balotiya
     Description: This page contains all the HTML5 code of the Car Entry Registration Page.
     Created on: 05/08/2025
-    Last Modified: 21/0908/2025
+    Last Modified: 23/09/2025
 -->
 
 <!DOCTYPE html>
@@ -28,6 +28,31 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../styles/shared.css">
     <link rel="stylesheet" href="../styles/master_entry.css" />
+
+    <style>
+        /* Style for Table List */
+        .vehicle-name {
+            width: 30%;
+        }
+
+        .vehicle-model {
+            width: 30%;
+        }
+
+        .vehicle-number {
+            width: 25%;
+        }
+
+        .fuel-type {
+            width: 15%;
+        }
+
+        @media (max-width: 1950px) {
+            .form-content {
+                height: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -39,170 +64,26 @@
     <!-- Main Content -->
     <main class="container">
         <div class="panels">
-
             <!-- Left Container: Vehicle Table -->
             <div class="table-container">
-
-                <!-- Table Title -->
                 <h2>Registered Vehicles</h2>
+
+                <!-- Vehicle Details Table -->
                 <table class="instructor-table" id="tbl">
                     <thead>
-                        <tr class="active-row">
-                            <th>Vehicle Name</th>
-                            <th>Vehicle Model</th>
-                            <th>Vehicle Number</th>
-                            <th>Fuel Type</th>
+                        <tr>
+                            <th class="vehicle-name">Vehicle Name</th>
+                            <th class="vehicle-model">Vehicle Model</th>
+                            <th class="vehicle-number">Vehicle Number</th>
+                            <th class="fuel-type">Fuel Type</th>
                         </tr>
                     </thead>
                 </table>
 
                 <div class="scrollDiv">
                     <table>
-                        <tbody>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
-                                <td>CNG</td>
-                            </tr>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
-                                <td>CNG</td>
-                            </tr>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
-                                <td>CNG</td>
-                            </tr>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
-                                <td>CNG</td>
-                            </tr>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
-                                <td>CNG</td>
-                            </tr>
-                            <tr>
-                                <td>Maruti Wagonar</td>
-                                <td>2022</td>
-                                <td>MH01DX7424</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Ertiga</td>
-                                <td>2020</td>
-                                <td>MH01DX7425</td>
-                                <td>Diesel</td>
-                            </tr>
-                            <tr>
-                                <td>Brezza</td>
-                                <td>2021</td>
-                                <td>MH01DX7426</td>
-                                <td>Petrol</td>
-                            </tr>
-                            <tr>
-                                <td>Alto</td>
-                                <td>2022</td>
-                                <td>MH01DX7427</td>
-                                <td>CNG</td>
-                            </tr>
+                        <tbody id="vehicle-table-body">
+                            <!-- Dynamic Rows will be inserted here -->
                         </tbody>
                     </table>
                 </div>
@@ -212,53 +93,61 @@
             <div class="form-container right">
                 <div class="form-inner car_form_inner">
 
-                    <!-- Main Form -->
+                    <!-- Main Form Title -->
                     <div class="form-content">
 
-                        <!-- Form Title -->
+                        <!-- Title -->
                         <h2>Vehicle Registration</h2>
 
                         <!-- Vehicle Name -->
                         <div class="label-above">
-                            <label for="name">Vehicle Name</label>
-                            <input type="text" id="name" placeholder="Vehicle Name" autocomplete="off" />
+                            <label for="vehicle-name">Vehicle Name</label>
+                            <input type="text" id="vehicle-name" placeholder="Vehicle Name" autocomplete="off" />
                         </div>
 
                         <!-- Vehicle Model -->
                         <div class="label-above">
-                            <label for="license">Vehicle Model</label>
-                            <input type="text" id="license" placeholder="Vehicle Model" autocomplete="off" />
+                            <label for="vehicle-model">Vehicle Model</label>
+                            <input type="text" id="vehicle-model" placeholder="Vehicle Model" autocomplete="off" />
                         </div>
 
                         <!-- Vehicle Number -->
                         <div class="label-above">
-                            <label for="number">Vehicle Number</label>
-                            <input type="text" id="number" placeholder="Vehicle Number" autocomplete="off" />
+                            <label for="vehicle-number">Vehicle Number</label>
+                            <input type="text" id="vehicle-number" placeholder="Vehicle Number" autocomplete="off" />
                         </div>
 
                         <!-- Fuel Type -->
                         <div class="label-above">
-                            <label for="number">Fuel Type</label>
-                            <select name="fuel" id="fuel">
-                                <option value="Petrol">Petrol</option>
-                                <option value="Diesel">Diesel</option>
-                                <option value="CNG">CNG</option>
-                                <option value="Electric">Electric</option>
+                            <label for="fuel-type">Fuel Type</label>
+                            <select name="fuel-type" id="fuel-type">
+                                <option value="">Select Fuel Type</option>
+                                <option value="petrol">Petrol</option>
+                                <option value="diesel">Diesel</option>
+                                <option value="cng">CNG</option>
+                                <option value="electric">Electric</option>
+                                <option value="hybrid">Hybrid</option>
                             </select>
                         </div>
 
-                        <!-- Submit Buttons -->
+                        <!-- Form Buttons -->
                         <div class="buttons">
-                            <button type="button" class="btn green">Save</button>
-                            <button type="button" class="btn yellow">Edit</button>
-                            <button type="button" class="btn orange">Clear</button>
-                            <button type="button" class="btn red">Exit</button>
+                            <button type="button" class="btn green" id="save-btn">Save</button>
+                            <button type="button" class="btn yellow" id="edit-btn">Edit</button>
+                            <button type="button" class="btn orange" id="clear-btn">Clear</button>
+                            <button type="button" class="btn red" id="delete-btn">Delete</button>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="btn red" id="exit-btn">Exit</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Scripts -->
+    <script type="module" src="../scripts/renderer/car_entry.js"></script>
 </body>
 
 </html>
