@@ -141,6 +141,9 @@ contextBridge.exposeInMainWorld('invoiceAPI', {
 
     // API to print the invoice directly
     printInvoiceForUser: (userId, workId, type) => ipcRenderer.invoke('print-invoice-for-user', userId, workId, type),
+    
+    // API to open invoice in default browser for printing
+    openInvoiceInBrowser: (userId, workId, type) => ipcRenderer.invoke('open-invoice-in-browser', userId, workId, type),
 });
 
 // Exposing fuel entry APIs

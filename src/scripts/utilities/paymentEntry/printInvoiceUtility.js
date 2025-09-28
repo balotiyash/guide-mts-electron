@@ -6,7 +6,7 @@
  * Last Modified: 23/09/2025
  */
 
-// Function to print invoice for a selected user
+// Function to print invoice for a selected user (legacy Electron print dialog)
 const printInvoiceForSelectedUser = async (userId, workId, type) => {
     // Validation
     if (!userId) {
@@ -30,6 +30,39 @@ const printInvoiceForSelectedUser = async (userId, workId, type) => {
         // Catch any unexpected errors
         console.error('Print error:', error);
         window.dialogBoxAPI.showDialogBox('error', 'Error', 'Failed to print invoice.', ['OK']);
+    }
+}
+
+// Function to open invoice in browser for printing (new preferred method)
+const openInvoiceInBrowserForSelectedUser = async (userId, workId, type) => {
+    // Validation
+    if (!userId) {
+        window.dialogBoxAPI.showDialogBox('error', 'No Selection', 'Please select a customer first.', ['OK']);
+        return;
+    }
+    
+    try {
+        // Call browser API
+        const res = await window.invoiceAPI.openInvoiceInBrowser(userId, workId, type);
+
+        // Handle response
+        if (res.success) {
+            console.log('Invoice opened in browser successfully:', res.filePath);
+            // Show success message
+            window.dialogBoxAPI.showDialogBox(
+                'info', 
+                'Invoice Opened', 
+                'Invoice has been opened in your default browser. You can print it from there.', 
+                ['OK']
+            );
+        } else {
+            console.error('Failed to open invoice in browser:', res.error);
+            window.dialogBoxAPI.showDialogBox('error', 'Error', 'Failed to open invoice in browser.', ['OK']);
+        }
+    } catch (error) {
+        // Catch any unexpected errors
+        console.error('Browser open error:', error);
+        window.dialogBoxAPI.showDialogBox('error', 'Error', 'Failed to open invoice in browser.', ['OK']);
     }
 }
 
@@ -58,5 +91,6 @@ const generateInvoiceForSelectedUser = async (userId, workId, type) => {
 // Exporting functions
 export {
     printInvoiceForSelectedUser,
+    openInvoiceInBrowserForSelectedUser,
     generateInvoiceForSelectedUser
 }

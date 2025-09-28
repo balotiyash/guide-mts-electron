@@ -187,10 +187,21 @@ const submitPayment = async (userIdParam, workIdParam) => {
                 // Handle both string and index responses
                 if (choice === 'Yes' || choice === 0) {
                     try {
-                        await window.invoiceAPI.printInvoiceForUser(userIdParam, workIdParam, 'ORIGINAL');
+                        // Use browser-based printing for better user experience
+                        const result = await window.invoiceAPI.openInvoiceInBrowser(userIdParam, workIdParam, 'ORIGINAL');
+                        if (result.success) {
+                            window.dialogBoxAPI.showDialogBox(
+                                'info', 
+                                'Invoice Opened', 
+                                'Invoice has been opened in your default browser. You can print it from there.', 
+                                ['OK']
+                            );
+                        } else {
+                            throw new Error(result.error || 'Failed to open invoice in browser');
+                        }
                     } catch (error) {
                         console.error('Print error:', error);
-                        window.dialogBoxAPI.showDialogBox('error', 'Print Error', 'Failed to print receipt.', ['OK']);
+                        window.dialogBoxAPI.showDialogBox('error', 'Print Error', 'Failed to open receipt in browser.', ['OK']);
                     }
                 }
 

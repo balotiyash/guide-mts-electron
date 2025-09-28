@@ -1,0 +1,70 @@
+/* 
+   File: src/styles/invoice-print.css
+   Author: Yash Balotiya
+   Description: Print-specific styles for invoice when opened in browser
+   Created on: 29/09/2025
+*/
+
+/* Print button styling */
+.print-button {
+    position: fixed !important;
+    top: 10px !important;
+    right: 10px !important;
+    background: #4CAF50 !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    cursor: pointer !important;
+    border-radius: 5px !important;
+    font-size: 14px !important;
+    z-index: 1000 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    font-family: Arial, sans-serif !important;
+}
+
+.print-button:hover {
+    background: #45a049 !important;
+}
+
+/* Print media queries */
+@media print {
+    /* Hide print button when printing */
+    .print-button {
+        display: none !important;
+    }
+    
+    /* Ensure proper print formatting */
+    body {
+        margin: 0 !important;
+        padding: 10px !important;
+    }
+    
+    /* Ensure proper page breaks */
+    header {
+        page-break-inside: avoid !important;
+    }
+    
+    #rulesSection {
+        page-break-inside: avoid !important;
+    }
+    
+    /* Ensure table doesn't break awkwardly */
+    #itemsTable {
+        page-break-inside: avoid !important;
+    }
+}
+
+/* Screen-only styles for better viewing */
+@media screen {
+    body {
+        max-width: 210mm !important;
+        margin: 20px auto !important;
+        background: white !important;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1) !important;
+    }
+    
+    /* Add some breathing room on screen */
+    main {
+        padding: 20px !important;
+    }
+}

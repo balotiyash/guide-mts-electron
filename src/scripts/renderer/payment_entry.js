@@ -8,7 +8,7 @@
 
 // Importing required 
 import { renderRows, renderCurrentPage, submitPayment } from "../utilities/paymentEntry/paymentUtility.js";
-import { printInvoiceForSelectedUser } from "../utilities/paymentEntry/printInvoiceUtility.js";
+import { printInvoiceForSelectedUser, openInvoiceInBrowserForSelectedUser } from "../utilities/paymentEntry/printInvoiceUtility.js";
 
 // On window load
 document.addEventListener('DOMContentLoaded', async () => {
@@ -210,12 +210,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         paymentId = p;
     });
 
-    // Handling invoice print buttons
+    // Handling invoice print buttons - now opens in browser
     document.getElementById('downloadOriginalInvoiceBtn').addEventListener('click', async () => {
-        await printInvoiceForSelectedUser(userId, workId, 'ORIGINAL');
+        await openInvoiceInBrowserForSelectedUser(userId, workId, 'ORIGINAL');
     });
 
     document.getElementById('downloadDuplicateInvoiceBtn').addEventListener('click', async () => {
-        await printInvoiceForSelectedUser(userId, workId, 'DUPLICATE');
+        await openInvoiceInBrowserForSelectedUser(userId, workId, 'DUPLICATE');
     });
 });
