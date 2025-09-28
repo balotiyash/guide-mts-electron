@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Utility functions for handling date fields in the data entry form.
    Created on: 21/09/2025
-   Last Modified: 21/09/2025
+   Last Modified: 28/09/2025
 */
 
 // Importing required modules & libraries
@@ -28,7 +28,9 @@ const dateUtility = () => {
         { textId: "endorsementDatedInputText", hiddenId: "endorsementDatedInput", dataKey: "endorsement_date" },
         { textId: "endorsementValidityInputText", hiddenId: "endorsementValidityInput", dataKey: "endorsement_validity_date" },
         // Master entry date field
-        { textId: "license-expiration-text", hiddenId: "license-expiration", dataKey: "license_expiration_date" }
+        { textId: "license-expiration-text", hiddenId: "license-expiration", dataKey: "license_expiration_date" },
+        // Fuel entry date field
+        { textId: "entrydate_text", hiddenId: "entrydate", dataKey: "entry_date" }
     ];
 
     // Initialize all date fields
@@ -45,23 +47,25 @@ const dateUtility = () => {
             return;
         }
 
-        // Flatpickr
-        // console.log(`Applying Flatpickr to ${textId}`);
-        flatpickr(textInput, {
+        // Flatpickr configuration
+        const flatpickrConfig = {
             dateFormat: "d-m-Y",
             allowInput: true,
             onChange: function (selectedDates) {
                 if (selectedDates.length) {
-                    const isoDate = selectedDates[0].toISOString().split("T")[0];
-                    hiddenInput.value = isoDate;
+                    const dt = selectedDates[0];
+                    const yyyy = dt.getFullYear();
+                    const mm = String(dt.getMonth() + 1).padStart(2, '0');
+                    const dd = String(dt.getDate()).padStart(2, '0');
+                    hiddenInput.value = `${yyyy}-${mm}-${dd}`; // <-- local date, correct
 
                     // Special case: Issued On → auto update Valid Until (+6 months)
                     if (hiddenId === "issuedOnInput") {
-                        const newDate = addMonthsToDate(selectedDates[0], 6);
+                        const newDate = addMonthsToDate(dt, 6);
                         const validUntilText = document.getElementById("validUntilInputText");
                         const validUntilHidden = document.getElementById("validUntilInput");
 
-                        validUntilHidden.value = newDate.toISOString().split("T")[0];
+                        validUntilHidden.value = `${newDate.getFullYear()}-${String(newDate.getMonth() + 1).padStart(2, '0')}-${String(newDate.getDate()).padStart(2, '0')}`;
                         validUntilText.value = isoToDDMMYYYY(validUntilHidden.value);
                         if (validUntilText.inputmask) {
                             validUntilText.inputmask.setValue(validUntilText.value);
@@ -71,7 +75,34 @@ const dateUtility = () => {
                     hiddenInput.value = "";
                 }
             }
-        });
+        };
+
+        // Set default date to today for fuel entry field
+        if (textId === "entrydate_text") {
+            const today = new Date();
+
+            flatpickrConfig.defaultDate = today;
+            flatpickrConfig.allowInput = true;
+
+            flatpickrConfig.onReady = function (selectedDates, dateStr, instance) {
+                // Ensure hidden input is set correctly when flatpickr is ready
+                const dt = selectedDates.length ? selectedDates[0] : today;
+                const yyyy = dt.getFullYear();
+                const mm = String(dt.getMonth() + 1).padStart(2, '0');
+                const dd = String(dt.getDate()).padStart(2, '0');
+                hiddenInput.value = `${yyyy}-${mm}-${dd}`;
+
+                textInput.value = `${dd}-${mm}-${yyyy}`;
+
+                // Only now we can load fuel entry safely
+                if (window.loadExistingFuelEntry) {
+                    window.loadExistingFuelEntry();
+                }
+            };
+        }
+
+        // Apply Flatpickr
+        flatpickr(textInput, flatpickrConfig);
 
         // Inputmask
         const im = new window.Inputmask("99-99-9999", {
@@ -82,15 +113,19 @@ const dateUtility = () => {
         });
         im.mask(textInput);
 
-        // Sync hidden on typing
+        // Sync hidden on typing - debounced to prevent excessive processing
+        let inputTimeout;
         textInput.addEventListener("input", () => {
-            const parts = textInput.value.split("-");
-            if (parts.length === 3) {
-                const [dd, mm, yyyy] = parts;
-                if (dd.length === 2 && mm.length === 2 && yyyy.length === 4) {
-                    hiddenInput.value = `${yyyy}-${mm}-${dd}`;
+            clearTimeout(inputTimeout);
+            inputTimeout = setTimeout(() => {
+                const parts = textInput.value.split("-");
+                if (parts.length === 3) {
+                    const [dd, mm, yyyy] = parts;
+                    if (dd.length === 2 && mm.length === 2 && yyyy.length === 4) {
+                        hiddenInput.value = `${yyyy}-${mm}-${dd}`;
+                    }
                 }
-            }
+            }, 300); // 300ms debounce
         });
     });
 };

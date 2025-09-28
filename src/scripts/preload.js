@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 23/09/2025
+ * Last Modified: 28/09/2025
 */
 
 // Importing required modules from Electron
@@ -141,4 +141,22 @@ contextBridge.exposeInMainWorld('invoiceAPI', {
 
     // API to print the invoice directly
     printInvoiceForUser: (userId, workId, type) => ipcRenderer.invoke('print-invoice-for-user', userId, workId, type),
+});
+
+// Exposing fuel entry APIs
+contextBridge.exposeInMainWorld('fuelEntryAPI', {
+    // API to load fuel data
+    loadFuelData: (month) => ipcRenderer.invoke('load-fuel-data', month),
+
+    // API to load kilometer ran by a vehicle
+    loadKmRan: (vehicleId, date) => ipcRenderer.invoke('load-km-ran', vehicleId, date),
+
+    // API to get existing fuel entry for a specific vehicle and date
+    getFuelEntry: (vehicleId, refuelDate) => ipcRenderer.invoke('get-fuel-entry', { vehicleId, refuelDate }),
+    
+    // API to save fuel entry (add new or update existing)
+    saveFuelEntry: (vehicleId, refuelDate, fuelAmount) => ipcRenderer.invoke('save-fuel-entry', { vehicleId, refuelDate, fuelAmount }),
+
+    // API to save kilometers entry
+    saveKilometersEntry: (vehicleId, refuelDate, kilometers) => ipcRenderer.invoke('save-kilometers-entry', { vehicleId, refuelDate, kilometers })
 });

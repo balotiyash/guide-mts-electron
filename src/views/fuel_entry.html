@@ -3,7 +3,7 @@
     Author: Yash Balotiya, Ayush Shetty
     Description: This page contains all the HTML5 code of the Fuel Entry Page.
     Created on: 05/08/2025
-    Last Modified: 21/09/2025
+    Last Modified: 28/09/2025
 -->
 
 <!DOCTYPE html>
@@ -26,8 +26,28 @@
     ">
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="../scripts/imports/flatpickr.min.css">
     <link rel="stylesheet" href="../styles/shared.css">
     <link rel="stylesheet" href="../styles/master_entry.css" />
+
+    <style>
+        /* Style for Table List */
+        .carName {
+            width: 20%;
+        }
+
+        .kmTotal {
+            width: 20%;
+        }
+
+        .fuelAmount {
+            width: 20%;
+        }
+
+        .fuelType {
+            width: 20%;
+        }
+    </style>
 </head>
 
 <body>
@@ -52,39 +72,26 @@
                 <table class="instructor-table">
                     <thead>
                         <tr class="active-row">
-                            <th>Car Name</th>
-                            <th>Month & Year</th>
-                            <th>Fuel Amount</th>
-                            <th>Fuel Type</th>
+                            <th class="carName">Car Name</th>
+                            <th class="fuelAmount">Fuel Amount</th>
+                            <th class="fuelType">Fuel Type</th>
+                            <th class="kmTotal">KM Ran</th>
+                            <th class="kmTotal">KM Total</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Maruti Wagonar</td>
-                            <td>June 2025</td>
-                            <td>500</td>
-                            <td>Petrol</td>
-                        </tr>
-                        <tr>
-                            <td>Ertiga</td>
-                            <td>September 2025</td>
-                            <td>400</td>
-                            <td>Diesel</td>
-                        </tr>
-                        <tr>
-                            <td>Brezza</td>
-                            <td>September 2025</td>
-                            <td>300</td>
-                            <td>Petrol</td>
-                        </tr>
-                        <tr>
-                            <td>Alto</td>
-                            <td>September 2025</td>
-                            <td>200</td>
-                            <td>CNG</td>
-                        </tr>
-                    </tbody>
                 </table>
+                <div class="scrollDiv">
+                    <table>
+                        <tbody id="fuel-table-body">
+                            <!-- Dynamic rows will be inserted here -->
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: #666; padding: 20px;">
+                                    Loading fuel data...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Right Container: Registration Form -->
@@ -101,36 +108,35 @@
                         <div class="label-above">
                             <label for="name">Vehicle Name</label>
                             <select name="car_name" id="car_name" title="Select Vehicle Name">
-                                <option value="" disabled selected>Select Vehicle Name</option>
-                                <option value="Maruti Wagonar">Maruti Wagonar</option>
-                                <option value="Ertiga">Ertiga</option>
-                                <option value="Brezza">Brezza</option>
-                                <option value="Alto">Alto</option>
+                                <option value="" disabled selected>Loading vehicles...</option>
                             </select>
                         </div>
 
                         <!-- Date Input -->
                         <div class="label-above">
-                            <label for="entrydate">Select Date</label>
-                            <input type="date" id="entrydate" placeholder="Date" autocomplete="off" title="Select Date" />
+                            <label for="entrydate_text">Select Date</label>
+                            <input type="text" id="entrydate_text" placeholder="DD/MM/YYYY" autocomplete="off"
+                                title="Select Date" />
+                            <input type="hidden" id="entrydate" />
                         </div>
 
                         <!-- Amount Input -->
                         <div class="label-above">
                             <label for="amountInput">Amount</label>
-                            <input type="number" id="amountInput" placeholder="Amount" autocomplete="off" title="Enter Amount" />
+                            <input type="number" id="amountInput" placeholder="Amount" autocomplete="off"
+                                title="Enter Amount" />
                         </div>
 
                         <!-- Kilometer Runned Input -->
                         <div class="label-above">
-                            <label for="kmRunnedInput">Kilometer Runned</label>
-                            <input type="number" id="kmRunnedInput" placeholder="Kilometer Runned" autocomplete="off" title="Enter Kilometer Runned" />
+                            <label for="kmRunnedInput">Kilometer Ran</label>
+                            <input type="number" id="kmRunnedInput" placeholder="Kilometer Runned" autocomplete="off"
+                                title="Enter Kilometer Runned" />
                         </div>
 
                         <!-- Submit Buttons -->
                         <div class="buttons">
                             <button type="button" class="btn green">Save</button>
-                            <button type="button" class="btn yellow">Edit</button>
                             <button type="button" class="btn orange">Clear</button>
                             <button type="button" class="btn red">Exit</button>
                         </div>
@@ -139,6 +145,11 @@
             </div>
         </div>
     </main>
+
+    <!-- Scripts -->
+    <script src="../scripts/imports/flatpickr.js"></script>
+    <script src="../scripts/imports/inputmask.js"></script>
+    <script type="module" src="../scripts/renderer/fuel_entry.js"></script>
 </body>
 
 </html>

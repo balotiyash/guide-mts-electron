@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 23/09/2025
+ * Last Modified: 28/09/2025
 */
 
 // Importing required modules & libraries
@@ -23,6 +23,7 @@ import registerPaymentHandlers from "./main/ipc/paymentHandler.js";
 import registerInvoiceHandlers from "./main/ipc/invoiceHandler.js";
 import registerMasterHandlers from "./main/ipc/masterHandler.js";
 import registerVehicleHandlers from "./main/ipc/vehicleHandler.js";
+import registerFuelEntryHandlers from "./main/ipc/fuelEntryHandler.js";
 
 // Logging the meta information
 autoUpdater.logger = log;
@@ -58,7 +59,7 @@ const createWindow = () => {
 
     // Loading the main application view
     win.loadFile(path.join(__dirname, '../views/index.html'));
-    // win.loadFile(path.join(__dirname, '../views/master_entry.html'));
+    // win.loadFile(path.join(__dirname, '../views/fuel_entry.html'));
     win.maximize();
     win.show();
 
@@ -82,6 +83,8 @@ app.whenReady().then(() => {
         registerInvoiceHandlers(); // register all invoice IPC
         registerMasterHandlers(); // register all master IPC
         registerVehicleHandlers(); // register all vehicle IPC
+        registerFuelEntryHandlers(); // register all fuel entry IPC
+
         createWindow();
     } catch (err) {
         console.error('Failed to create window:', err);

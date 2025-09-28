@@ -48,3 +48,4 @@ use navigation api or location for page navigation
 * mark for all the required feilds
 name functions as handleSubmit
 format car entry,
+user friendly errors should be displayed and detailed on console

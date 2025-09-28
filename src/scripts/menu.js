@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 21/09/2025
+ * Last Modified: 24/09/2025
 */
 
 // Module JS
@@ -84,17 +84,17 @@ const createMenuTemplate = (win) => {
         //         },
         //     ],
         // },
-        {
-            label: 'Form-14',
-            submenu: [
-                {
-                    label: 'Generate Form',
-                    click: () => {
-                        console.log('Generate Form clicked');
-                    },
-                },
-            ],
-        },
+        // {
+        //     label: 'Form-14',
+        //     submenu: [
+        //         {
+        //             label: 'Generate Form',
+        //             click: () => {
+        //                 console.log('Generate Form clicked');
+        //             },
+        //         },
+        //     ],
+        // },
         // {
         //     label: 'Tools',
         //     submenu: [

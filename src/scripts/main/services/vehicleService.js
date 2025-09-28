@@ -3,14 +3,14 @@
  * Author: Yash Balotiya
  * Description: This file contains the service functions for vehicle management
  * Created on: 23/09/2025
- * Last Modified: 23/09/2025
+ * Last Modified: 28/09/2025
  */
 
 import { runQuery } from './dbService.js';
 
-const getAllVehicles = async () => {
+const getAllVehicles = () => {
     try {
-        const result = await runQuery({
+        const result = runQuery({
             sql: `SELECT id, vehicle_name, vehicle_model, vehicle_number, vehicle_fuel_type, is_active, created_on, updated_on
                   FROM vehicles 
                   ORDER BY created_on DESC;`,
