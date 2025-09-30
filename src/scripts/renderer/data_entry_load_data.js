@@ -3,15 +3,53 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to HELP load customer data into the form.
  * Created on: 31/08/2025
- * Last Modified: 22/09/2025
+ * Last Modified: 30/09/2025
  */
 
 // IMporting required modules & libraries
-import { isoToDDMMYYYY } from '../shared.js';
+import { isoToDDMMYYYY, sanitizeDate } from '../shared.js';
 import { resetImageInputs, setLabelImage, setupImageInputListeners } from '../utilities/dataEntry/dataLoadUtility.js';
+
+// Helper function to safely load and format date
+const loadDateField = (dateValue, textInputId, hiddenInputId) => {
+    const textInput = document.getElementById(textInputId);
+    const hiddenInput = document.getElementById(hiddenInputId);
+    
+    if (!textInput || !hiddenInput) {
+        console.warn(`Date field elements not found: ${textInputId}, ${hiddenInputId}`);
+        return;
+    }
+    
+    // Sanitize and validate the date
+    const sanitizedDate = sanitizeDate(dateValue);
+    
+    if (sanitizedDate) {
+        // Set the hidden input (ISO format for backend)
+        hiddenInput.value = sanitizedDate;
+        
+        // Convert to DD-MM-YYYY for display
+        const displayDate = isoToDDMMYYYY(sanitizedDate);
+        textInput.value = displayDate;
+        
+        // Trigger Inputmask if available
+        if (textInput.inputmask) {
+            textInput.inputmask.setValue(displayDate);
+        }
+    } else {
+        // Clear both inputs if date is invalid
+        textInput.value = "";
+        hiddenInput.value = "";
+        
+        if (textInput.inputmask) {
+            textInput.inputmask.setValue("");
+        }
+    }
+};
 
 // Fill the form with customer data using mobile number
 const fillForm = (data, formElements, imageBlobs) => {
+    console.log("fillForm called with data:", data); // Debug log
+    
     const { customerIdInput, customerNameInput, dobInput, relationInput, carSelect, instructorSelect, addressInput, licenseInput, classInput, licenseInput2, classInput2, issuedOnInput, validUntilInput, mdlNoInput, mdlClassInput, mdlIssuedInput, mdlValidUntilInput, endorsementInput, endorsementDatedInput, endorsementValidityInput, vehicleNoInput, amountInput, workDescriptionInput } = formElements;
 
     // First, clear any existing images/blobs before loading new ones
@@ -36,21 +74,7 @@ const fillForm = (data, formElements, imageBlobs) => {
     customerNameInput.value = data.customer_name || "";
 
     // Date of Birth
-    // dobInput.value = (data.customer_dob || "").substring(0, 10);
-    // Fill visible input
-    const dobText = document.getElementById("dobInputText");
-    const dobHidden = document.getElementById("dobInput");
-
-    // Convert backend ISO to DD-MM-YYYY for visible input
-    dobText.value = isoToDDMMYYYY(data.customer_dob || "");
-
-    // Keep hidden ISO input for backend submission
-    dobHidden.value = (data.customer_dob || "").substring(0, 10);
-
-    // Trigger Inputmask so placeholder/mask displays
-    if (dobText.inputmask) {
-        dobText.inputmask.setValue(dobText.value);
-    }
+    loadDateField(data.customer_dob, "dobInputText", "dobInput");
 
     // Relation Name
     relationInput.value = data.relation_name || "";
@@ -81,22 +105,10 @@ const fillForm = (data, formElements, imageBlobs) => {
     classInput2.value = data.ll_class_2 || "";
 
     // LL Issued Date
-    const issuedOnText = document.getElementById("issuedOnInputText");
-    const issuedOnHidden = document.getElementById("issuedOnInput");
-    issuedOnText.value = isoToDDMMYYYY(data.ll_issued_date || "");
-    issuedOnHidden.value = (data.ll_issued_date || "").substring(0, 10);
-    if (issuedOnText.inputmask) {
-        issuedOnText.inputmask.setValue(issuedOnText.value);
-    }
+    loadDateField(data.ll_issued_date, "issuedOnInputText", "issuedOnInput");
 
     // LL Expiry Date
-    const validUntilText = document.getElementById("validUntilInputText");
-    const validUntilHidden = document.getElementById("validUntilInput");
-    validUntilText.value = isoToDDMMYYYY(data.ll_validity_date || "");
-    validUntilHidden.value = (data.ll_validity_date || "").substring(0, 10);
-    if (validUntilText.inputmask) {
-        validUntilText.inputmask.setValue(validUntilText.value);
-    }
+    loadDateField(data.ll_validity_date, "validUntilInputText", "validUntilInput");
 
     // MDL No
     mdlNoInput.value = data.mdl_no || "mh01 /";
@@ -105,43 +117,19 @@ const fillForm = (data, formElements, imageBlobs) => {
     mdlClassInput.value = data.mdl_class || "";
 
     // MDL Issued Date
-    const mdlIssuedText = document.getElementById("mdlIssuedInputText");
-    const mdlIssuedHidden = document.getElementById("mdlIssuedInput");
-    mdlIssuedText.value = isoToDDMMYYYY(data.mdl_issued_date || "");
-    mdlIssuedHidden.value = (data.mdl_issued_date || "").substring(0, 10);
-    if (mdlIssuedText.inputmask) {
-        mdlIssuedText.inputmask.setValue(mdlIssuedText.value);
-    }
+    loadDateField(data.mdl_issued_date, "mdlIssuedInputText", "mdlIssuedInput");
 
     // MDL Expiry Date
-    const mdlValidUntilText = document.getElementById("mdlValidUntilInputText");
-    const mdlValidUntilHidden = document.getElementById("mdlValidUntilInput");
-    mdlValidUntilText.value = isoToDDMMYYYY(data.mdl_validity_date || "");
-    mdlValidUntilHidden.value = (data.mdl_validity_date || "").substring(0, 10);
-    if (mdlValidUntilText.inputmask) {
-        mdlValidUntilText.inputmask.setValue(mdlValidUntilText.value);
-    }
+    loadDateField(data.mdl_validity_date, "mdlValidUntilInputText", "mdlValidUntilInput");
 
     // Endorsement No
     endorsementInput.value = data.endorsement || "";
 
     // Endorsement Issued Date
-    const endorsementDatedText = document.getElementById("endorsementDatedInputText");
-    const endorsementDatedHidden = document.getElementById("endorsementDatedInput");
-    endorsementDatedText.value = isoToDDMMYYYY(data.endorsement_date || "");
-    endorsementDatedHidden.value = (data.endorsement_date || "").substring(0, 10);
-    if (endorsementDatedText.inputmask) {
-        endorsementDatedText.inputmask.setValue(endorsementDatedText.value);
-    }
+    loadDateField(data.endorsement_date, "endorsementDatedInputText", "endorsementDatedInput");
 
     // Endorsement Expiry Date
-    const endorsementValidityText = document.getElementById("endorsementValidityInputText");
-    const endorsementValidityHidden = document.getElementById("endorsementValidityInput");
-    endorsementValidityText.value = isoToDDMMYYYY(data.endorsement_validity_date || "");
-    endorsementValidityHidden.value = (data.endorsement_validity_date || "").substring(0, 10);
-    if (endorsementValidityText.inputmask) {
-        endorsementValidityText.inputmask.setValue(endorsementValidityText.value);
-    }
+    loadDateField(data.endorsement_validity_date, "endorsementValidityInputText", "endorsementValidityInput");
 
     // Vehicle No
     vehicleNoInput.value = data.customer_vehicle_no || "";

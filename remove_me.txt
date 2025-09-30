@@ -49,3 +49,5 @@ use navigation api or location for page navigation
 name functions as handleSubmit
 format car entry,
 user friendly errors should be displayed and detailed on console
+
+backup format main.js

@@ -2,11 +2,11 @@
    Author: Yash Balotiya
    Description: Utility functions for handling date fields in the data entry form.
    Created on: 21/09/2025
-   Last Modified: 28/09/2025
+   Last Modified: 30/09/2025
 */
 
 // Importing required modules & libraries
-import { isoToDDMMYYYY } from "../../shared.js";
+import { isoToDDMMYYYY, ddmmyyyyToISO, sanitizeDate } from "../../shared.js";
 
 // Function to initialize and manage date fields
 const dateUtility = () => {
@@ -118,12 +118,21 @@ const dateUtility = () => {
         textInput.addEventListener("input", () => {
             clearTimeout(inputTimeout);
             inputTimeout = setTimeout(() => {
-                const parts = textInput.value.split("-");
-                if (parts.length === 3) {
-                    const [dd, mm, yyyy] = parts;
-                    if (dd.length === 2 && mm.length === 2 && yyyy.length === 4) {
-                        hiddenInput.value = `${yyyy}-${mm}-${dd}`;
+                const inputValue = textInput.value.trim();
+                
+                // Only process if we have a complete date pattern
+                if (inputValue.match(/^\d{2}-\d{2}-\d{4}$/)) {
+                    const isoDate = ddmmyyyyToISO(inputValue);
+                    if (isoDate) {
+                        hiddenInput.value = isoDate;
+                    } else {
+                        // Invalid date, clear hidden input
+                        hiddenInput.value = "";
+                        console.warn(`Invalid date entered: ${inputValue}`);
                     }
+                } else if (inputValue === "") {
+                    // Clear hidden input if text input is empty
+                    hiddenInput.value = "";
                 }
             }, 300); // 300ms debounce
         });

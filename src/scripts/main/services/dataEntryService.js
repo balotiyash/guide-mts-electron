@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Service layer for data entry operations. This file interactes with the database.
  * Created on: 31/08/2025
- * Last Modified: 14/09/2025
+ * Last Modified: 30/09/2025
  */
 
 // Importing required modules & libraries
@@ -34,6 +34,19 @@ const searchByPhoneNumber = async (phoneNumber) => {
         params: [phoneNumber],
         type: "get"
     });
+
+    // Debug: Log the date fields to understand the issue
+    if (result) {
+        console.log("Customer data retrieved from DB:", {
+            customer_dob: result.customer_dob,
+            ll_issued_date: result.ll_issued_date,
+            ll_validity_date: result.ll_validity_date,
+            mdl_issued_date: result.mdl_issued_date,
+            mdl_validity_date: result.mdl_validity_date,
+            endorsement_date: result.endorsement_date,
+            endorsement_validity_date: result.endorsement_validity_date
+        });
+    }
 
     return result;
 }

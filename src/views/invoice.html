@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Invoice Page.
     Created on: 16/09/2025
-    Last Modified: 29/09/2025
+    Last Modified: 30/09/2025
 -->
 
 <!DOCTYPE html>
@@ -84,7 +84,7 @@
                     <thead>
                         <tr>
                             <th>Sr. No.</th>
-                            <th>Date</th>
+                            <th id="dateTh">Date</th>
                             <th>Work</th>
                             <th>Payment Mode</th>
                             <th>Amount Paid</th>
@@ -98,8 +98,10 @@
 
                     <tfoot>
                         <tr>
-                            <td colspan="4" style="text-align: right;"><b>Total:</b></td>
-                            <td colspan="2"><b id="totalAmount">0</b></td>
+                            <td colspan="3" style="text-align: right;"></td>
+                            <td style="text-align: right;"><b>Total:</b></td>
+                            <td><b id="totalAmount">0</b></td>
+                            <td></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -108,7 +110,7 @@
             <!-- Note Section & Manager Signature -->
             <span>
                 <b><i>NOTE: PAYMENT WILL NOT BE REFUNDED UNDER ANY CIRCUMSTANCES</i></b>
-                <p>Manager</p>
+                <p id="managerSign">Manager</p>
             </span>
 
             <!-- Cheque Note -->
@@ -179,45 +181,7 @@
     </main>
 
     <!-- Script -->
-    <script>
-        // Fetch token from URL
-        const params = new URL(location.href).searchParams;
-        const token = params.get('token');
-
-        // Request invoice data from main process
-        window.invoiceAPI.requestInvoiceData(token);
-
-        // Listen for invoice data from main process
-        window.invoiceAPI.onInvoiceData((data) => {
-            // Populate invoice fields
-            document.getElementById('receiptType').textContent = data.type.toUpperCase() || 'ORIGINAL';
-            document.getElementById('customerName').textContent = data.customer.toUpperCase() || '—';
-            document.getElementById('dateId').textContent = data.date;
-            document.getElementById('userId').textContent = data.admissionNo || '—';
-
-            // Populate items table
-            const tbody = document.querySelector('#itemsTable tbody');
-            tbody.innerHTML = '';
-            data.items.forEach((item, idx) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${idx + 1}</td>
-                    <td>${item.date || ''}</td>
-                    <td>${item.desc.toUpperCase()}</td>
-                    <td>${item.mode.toUpperCase() || ''}</td>
-                    <td>${item.paid}</td>
-                    <td>${item.remaining}</td>
-                `;
-                tbody.appendChild(row);
-            });
-
-            // Populate total amount
-            document.getElementById('totalAmount').textContent = data.total;
-
-            // notify main that rendering is done
-            window.invoiceAPI.notifyInvoiceRendered(token);
-        });
-    </script>
+    <script src="../scripts/renderer/invoice.js"></script>
 </body>
 
 </html>

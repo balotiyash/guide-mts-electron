@@ -3,12 +3,13 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 28/09/2025
+ * Last Modified: 30/09/2025
 */
 
 // Importing required modules & libraries
 import { app, BrowserWindow, ipcMain, Menu, screen, dialog } from "electron";
 import path from "path";
+import fs from "fs";
 import createMenuTemplate from "./menu.js";
 import { fileURLToPath } from 'url';
 import updater from "electron-updater";
@@ -137,5 +138,63 @@ ipcMain.handle('show-dialog-box', async (event, { type, title, message, buttons 
     } else {
         console.error('No focused window to show dialog box.');
         return -1;
+    }
+});
+
+// Handle database backup
+ipcMain.handle('backup-database', async (event) => {
+    try {
+        // Import getDbPath function
+        const { getDbPath } = await import('./main/services/dbService.js');
+        
+        // Get current database path
+        const currentDbPath = getDbPath();
+        
+        if (!currentDbPath || !fs.existsSync(currentDbPath)) {
+            return {
+                success: false,
+                message: 'Database file not found. Please ensure the database is properly configured.'
+            };
+        }
+
+        // Generate filename with current date (DD-MM-YYYY format)
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+        const defaultFileName = `GMTS ${day}-${month}-${year}.sqlite3`;
+
+        // Show save dialog
+        const result = await dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
+            title: 'Backup Database',
+            defaultPath: defaultFileName,
+            filters: [
+                { name: 'SQLite Database', extensions: ['sqlite3'] },
+                { name: 'Database Files', extensions: ['db'] },
+                { name: 'All Files', extensions: ['*'] }
+            ]
+        });
+
+        if (result.canceled) {
+            return {
+                success: false,
+                message: 'Backup canceled by user.'
+            };
+        }
+
+        // Copy the database file to the selected location
+        fs.copyFileSync(currentDbPath, result.filePath);
+
+        return {
+            success: true,
+            message: `Database backed up successfully to: ${result.filePath}`,
+            backupPath: result.filePath
+        };
+    } catch (error) {
+        console.error('Backup failed:', error);
+        return {
+            success: false,
+            message: `Backup failed: ${error.message}`
+        };
     }
 });

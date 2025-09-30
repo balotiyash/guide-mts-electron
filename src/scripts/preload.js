@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 28/09/2025
+ * Last Modified: 30/09/2025
 */
 
 // Importing required modules from Electron
@@ -33,6 +33,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
     // API to show the application menu
     showMenu: () => ipcRenderer.send('show-menu'),
+
+    // API to backup the database
+    backupDatabase: () => ipcRenderer.invoke('backup-database'),
 });
 
 // Exposing dialog box APIs
@@ -141,6 +144,9 @@ contextBridge.exposeInMainWorld('invoiceAPI', {
 
     // API to print the invoice directly
     printInvoiceForUser: (userId, workId, type) => ipcRenderer.invoke('print-invoice-for-user', userId, workId, type),
+    
+    // API to open invoice in default browser for printing
+    openInvoiceInBrowser: (userId, workId, type) => ipcRenderer.invoke('open-invoice-in-browser', userId, workId, type),
 });
 
 // Exposing fuel entry APIs

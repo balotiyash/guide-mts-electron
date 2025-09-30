@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage user dashboard functionality for the Guide Motor Training School application.
  * Created on: 08/08/2025
- * Last Modified: 21/09/2025
+ * Last Modified: 30/09/2025
 */
 
 // Importing required modules & libraries
@@ -28,6 +28,59 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('fuelEntryButton').addEventListener('click', () => {
         window.electronAPI.navigateTo('fuel_entry.html');
     });
+
+    // Backup button functionality
+    const backupButtons = document.querySelectorAll('.dashboardButton');
+    const backupButton = Array.from(backupButtons).find(button => 
+        button.querySelector('p').textContent.trim() === 'Backup'
+    );
+    
+    if (backupButton) {
+        backupButton.addEventListener('click', async () => {
+            try {
+                // Show loading state
+                const originalText = backupButton.querySelector('p').textContent;
+                backupButton.querySelector('p').textContent = 'Backing up...';
+                backupButton.style.pointerEvents = 'none';
+                
+                // Call backup API
+                const result = await window.electronAPI.backupDatabase();
+                
+                // Restore button state
+                backupButton.querySelector('p').textContent = originalText;
+                backupButton.style.pointerEvents = 'auto';
+                
+                // Show result dialog
+                if (result.success) {
+                    await window.dialogBoxAPI.showDialogBox(
+                        'info',
+                        'Backup Successful',
+                        result.message,
+                        ['OK']
+                    );
+                } else {
+                    await window.dialogBoxAPI.showDialogBox(
+                        'error',
+                        'Backup Failed',
+                        result.message,
+                        ['OK']
+                    );
+                }
+            } catch (error) {
+                // Restore button state on error
+                backupButton.querySelector('p').textContent = 'Backup';
+                backupButton.style.pointerEvents = 'auto';
+                
+                console.error('Backup error:', error);
+                await window.dialogBoxAPI.showDialogBox(
+                    'error',
+                    'Backup Error',
+                    'An unexpected error occurred while backing up the database.',
+                    ['OK']
+                );
+            }
+        });
+    }
 
     // Set initial month input value
     let now = new Date();
