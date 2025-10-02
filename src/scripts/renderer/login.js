@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Handles user login functionality for the Guide Motor Training School application.
  * Created on: 20/07/2025
- * Last Modified: 16/09/2025
+ * Last Modified: 02/10/2025
 */
 
 // Logging setup
@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('loginBtn');
 
     // Focus on the username input field when the page loads
-    usernameInput.focus();
+    // usernameInput.focus();
+    passwordInput.focus();
 
     // Click event listener for the login button
     loginBtn.addEventListener('click', async () => {

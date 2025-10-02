@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 24/09/2025
+ * Last Modified: 30/09/2025
 */
 
 // Module JS
@@ -95,28 +95,37 @@ const createMenuTemplate = (win) => {
         //         },
         //     ],
         // },
-        // {
-        //     label: 'Tools',
-        //     submenu: [
-        //         {
-        //             label: 'Developer Tools',
-        //             click: () => {
-        //                 win.webContents.openDevTools();
-        //             },
-        //         },
-        //         {
-        //             label: 'Logout',
-        //             click: () => {
-        //                 win.loadFile(path.join(__dirname, '../views/index.html'));
-        //             },
-        //         },{
-        //             label: 'Exit',
-        //             click: () => {
-        //                 app.quit();
-        //             },
-        //         },
-        //     ],
-        // },
+        {
+            label: 'Tools',
+            submenu: [
+                {
+                    label: 'Change Database',
+                    click: () => {
+                        win.webContents.send('change-database-request');
+                    },
+                },
+                { type: 'separator' },
+                {
+                    label: 'Developer Tools',
+                    click: () => {
+                        win.webContents.openDevTools();
+                    },
+                },
+                { type: 'separator' },
+                {
+                    label: 'Logout',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/index.html'));
+                    },
+                },
+                {
+                    label: 'Exit',
+                    click: () => {
+                        app.quit();
+                    },
+                },
+            ],
+        },
         // {
         //     label: 'Help',
         //     submenu: [

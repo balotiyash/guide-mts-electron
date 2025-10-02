@@ -31,11 +31,20 @@ contextBridge.exposeInMainWorld('electronAPI', {
     // API to navigate to a specific page
     navigateTo: (page) => ipcRenderer.send('navigate-to', page),
 
+    // API to load a specific page
+    loadPage: (page) => ipcRenderer.send('load-page', page),
+
     // API to show the application menu
     showMenu: () => ipcRenderer.send('show-menu'),
 
     // API to backup the database
     backupDatabase: () => ipcRenderer.invoke('backup-database'),
+
+    // API to change database
+    changeDatabase: () => ipcRenderer.invoke('change-database'),
+
+    // Listen for change database requests from menu
+    onChangeDatabaseRequest: (callback) => ipcRenderer.on('change-database-request', callback),
 });
 
 // Exposing dialog box APIs
@@ -165,4 +174,10 @@ contextBridge.exposeInMainWorld('fuelEntryAPI', {
 
     // API to save kilometers entry
     saveKilometersEntry: (vehicleId, refuelDate, kilometers) => ipcRenderer.invoke('save-kilometers-entry', { vehicleId, refuelDate, kilometers })
+});
+
+// Exposing Form 14 APIs
+contextBridge.exposeInMainWorld('form14API', {
+    // API to get Form 14 data by date range
+    getForm14Data: (startDate, endDate) => ipcRenderer.invoke('get-form14-data', startDate, endDate)
 });

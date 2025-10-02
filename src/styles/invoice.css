@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: This file contains all the CSS code for styling the Invoice Page.
    Created on: 16/09/2025
-   Last Modified: 30/09/2025
+   Last Modified: 02/10/2025
 */
 
 * {
@@ -15,7 +15,7 @@
 body {
     border: 1px solid #000;
     padding: 20px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 /* Establish, Invoice Type & Phone No. Header STyle */
@@ -93,7 +93,7 @@ header {
     display: flex;
     justify-content: space-between;
     /* margin-top: 60px; */
-    padding: 0 40px;
+    padding: 0 20px;
 }
 
 #dateTh {
@@ -106,7 +106,8 @@ header {
 }
 
 #studentDetailsDiv span:nth-child(4) {
-    padding: 0 90px;
+    /* padding: 0 90px; */
+    padding: 0 65px;
 }
 
 /* Rules Section */

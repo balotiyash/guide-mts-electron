@@ -3,7 +3,7 @@
     Author: Neha Balotia, Yash Balotiya
     Description: This page contains all the HTML5 code of the Master Registration Page.
     Created on: 17/07/2025
-    Last Modified: 23/09/2025
+    Last Modified: 02/10/2025
 -->
 
 <!DOCTYPE html>
@@ -42,6 +42,13 @@
 
         .license-expiration {
             width: 25%;
+        }
+
+        /* Responsive */
+        @media (max-width: 1950px) {
+            .form-content {
+                height: 100%;
+            }
         }
     </style>
 </head>
@@ -104,7 +111,8 @@
                         <!-- License Expiration Date -->
                         <div class="label-above">
                             <label for="license-expiration">License Expiration Date</label>
-                            <input type="text" id="license-expiration-text" placeholder="DD-MM-YYYY" autocomplete="off" />
+                            <input type="text" id="license-expiration-text" placeholder="DD-MM-YYYY"
+                                autocomplete="off" />
                             <input type="date" id="license-expiration" name="license-expiration" hidden />
                         </div>
 

@@ -16,6 +16,9 @@
 */
 
 npm run dist -- -p always
+npm run dist -- -p=always
+npm run dist -- --publish=always
+npx electron-builder --win --x64 --publish always
 
 notepad "$env:APPDATA\guide-mts\logs\main.log"
 
@@ -51,3 +54,4 @@ format car entry,
 user friendly errors should be displayed and detailed on console
 
 backup format main.js
+same for menu main.js

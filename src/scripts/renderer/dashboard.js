@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage user dashboard functionality for the Guide Motor Training School application.
  * Created on: 08/08/2025
- * Last Modified: 30/09/2025
+ * Last Modified: 02/10/2025
 */
 
 // Importing required modules & libraries
@@ -27,6 +27,45 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     document.getElementById('fuelEntryButton').addEventListener('click', () => {
         window.electronAPI.navigateTo('fuel_entry.html');
+    });
+    document.getElementById('form14Button').addEventListener('click', () => {
+        // Show the date selection modal
+        document.getElementById('form14DateModal').style.display = 'block';
+        
+        // Initialize Flatpickr for date inputs
+        if (typeof flatpickr !== 'undefined') {
+            flatpickr("#form14StartDate", {
+                dateFormat: "d-m-Y",
+                allowInput: true
+            });
+            flatpickr("#form14EndDate", {
+                dateFormat: "d-m-Y", 
+                allowInput: true
+            });
+        }
+    });
+
+    // Form 14 modal event listeners
+    document.getElementById('proceedToForm14').addEventListener('click', () => {
+        const startDate = document.getElementById('form14StartDate').value;
+        const endDate = document.getElementById('form14EndDate').value;
+        
+        if (!startDate || !endDate) {
+            alert('Please select both start and end dates.');
+            return;
+        }
+        
+        // Store the selected dates and navigate to Form 14
+        localStorage.setItem('form14StartDate', startDate);
+        localStorage.setItem('form14EndDate', endDate);
+        window.electronAPI.navigateTo('form14.html');
+    });
+
+    document.getElementById('cancelForm14Modal').addEventListener('click', () => {
+        document.getElementById('form14DateModal').style.display = 'none';
+        // Clear the input fields
+        document.getElementById('form14StartDate').value = '';
+        document.getElementById('form14EndDate').value = '';
     });
 
     // Backup button functionality
@@ -140,7 +179,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Date & time updater
-    document.getElementById("currentDate").innerText = now.toLocaleDateString();
+    const formatDateToDDMMYYYY = (date) => {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
+
+    document.getElementById("currentDate").innerText = formatDateToDDMMYYYY(now);
     setInterval(() => {
         now = new Date();
         document.getElementById("currentTime").innerText = now.toLocaleTimeString([], {
@@ -165,5 +211,52 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Reminder button click event
     document.getElementById("reminderButton").addEventListener("click", () => {
         // window.open('reminder.html', '_blank', 'width=600,height=400');
+    });
+
+    // Listen for change database requests from menu
+    window.electronAPI.onChangeDatabaseRequest(async () => {
+        try {
+            // Show confirmation dialog
+            const confirmResult = await window.dialogBoxAPI.showDialogBox(
+                'question',
+                'Change Database',
+                'Are you sure you want to change the database? This will close the current database connection.',
+                ['Yes', 'No']
+            );
+
+            if (confirmResult === 0) { // User clicked 'Yes'
+                // Call change database API
+                const result = await window.electronAPI.changeDatabase();
+                
+                if (result.success) {
+                    // Show success message and reload the dashboard
+                    await window.dialogBoxAPI.showDialogBox(
+                        'info',
+                        'Database Changed',
+                        result.message + '\n\nThe application will now reload with the new database.',
+                        ['OK']
+                    );
+                    
+                    // Reload the current page to refresh with new database
+                    location.reload();
+                } else {
+                    // Show error message
+                    await window.dialogBoxAPI.showDialogBox(
+                        'error',
+                        'Database Change Failed',
+                        result.message,
+                        ['OK']
+                    );
+                }
+            }
+        } catch (error) {
+            console.error('Database change error:', error);
+            await window.dialogBoxAPI.showDialogBox(
+                'error',
+                'Database Change Error',
+                'An unexpected error occurred while changing the database.',
+                ['OK']
+            );
+        }
     });
 });

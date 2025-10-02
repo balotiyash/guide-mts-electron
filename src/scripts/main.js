@@ -25,6 +25,7 @@ import registerInvoiceHandlers from "./main/ipc/invoiceHandler.js";
 import registerMasterHandlers from "./main/ipc/masterHandler.js";
 import registerVehicleHandlers from "./main/ipc/vehicleHandler.js";
 import registerFuelEntryHandlers from "./main/ipc/fuelEntryHandler.js";
+import registerForm14Handlers from "./main/ipc/form14Handler.js";
 
 // Logging the meta information
 autoUpdater.logger = log;
@@ -85,6 +86,7 @@ app.whenReady().then(() => {
         registerMasterHandlers(); // register all master IPC
         registerVehicleHandlers(); // register all vehicle IPC
         registerFuelEntryHandlers(); // register all fuel entry IPC
+        registerForm14Handlers(); // register all form14 IPC
 
         createWindow();
     } catch (err) {
@@ -117,6 +119,25 @@ ipcMain.on('navigate-to', (event, targetPage) => {
     if (win) {
         // win.loadFile(path.join(__dirname, 'src/views', targetPage));
         win.loadFile(path.join(__dirname, '../views', targetPage));
+    }
+});
+
+// Load specific page
+ipcMain.on('load-page', (event, pageName) => {
+    if (win) {
+        const pageMap = {
+            'dashboard': 'dashboard.html',
+            'form14': 'form14.html',
+            'data_entry': 'data_entry.html',
+            'payment_entry': 'payment_entry.html',
+            'master_entry': 'master_entry.html',
+            'car_entry': 'car_entry.html',
+            'fuel_entry': 'fuel_entry.html',
+            'invoice': 'invoice.html'
+        };
+        
+        const fileName = pageMap[pageName] || 'dashboard.html';
+        win.loadFile(path.join(__dirname, '../views', fileName));
     }
 });
 
@@ -195,6 +216,58 @@ ipcMain.handle('backup-database', async (event) => {
         return {
             success: false,
             message: `Backup failed: ${error.message}`
+        };
+    }
+});
+
+// Handle database change
+ipcMain.handle('change-database', async (event) => {
+    try {
+        // Import Store and dialog from dependencies
+        const Store = (await import('electron-store')).default;
+        const store = new Store();
+        
+        // Show open dialog to select new database
+        const result = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), {
+            title: 'Select Database File',
+            filters: [
+                { name: 'SQLite Database', extensions: ['sqlite3'] },
+                { name: 'Database Files', extensions: ['db'] },
+                { name: 'All Files', extensions: ['*'] }
+            ],
+            properties: ['openFile']
+        });
+
+        if (result.canceled) {
+            return {
+                success: false,
+                message: 'Database selection canceled.'
+            };
+        }
+
+        const newDbPath = result.filePaths[0];
+        
+        // Verify the selected file exists
+        if (!fs.existsSync(newDbPath)) {
+            return {
+                success: false,
+                message: 'Selected database file does not exist.'
+            };
+        }
+
+        // Update the database path in storage
+        store.set('dbPath', newDbPath);
+
+        return {
+            success: true,
+            message: `Database changed successfully to: ${newDbPath}`,
+            newDbPath: newDbPath
+        };
+    } catch (error) {
+        console.error('Change database failed:', error);
+        return {
+            success: false,
+            message: `Failed to change database: ${error.message}`
         };
     }
 });

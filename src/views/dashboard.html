@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Dashboard Page after Login.
     Created on: 04/08/2025
-    Last Modified: 21/09/2025
+    Last Modified: 02/10/2025
 -->
 
 <!DOCTYPE html>
@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="../styles/dashboard.css">
     <link rel="stylesheet" href="../styles/dashboard_right.css">
     <link rel="stylesheet" href="../styles/dashboard_responsive.css">
+    <link rel="stylesheet" href="../scripts/imports/flatpickr.min.css">
 </head>
 
 <body>
@@ -37,6 +38,48 @@
     <div id="loadingDiv">
         <h3>Loading...</h3>
         <img src="../assets/gifs/loading_animation.gif" alt="Loading Animation">
+    </div>
+
+    <!-- Date Range Selection Modal for Form 14 -->
+    <div id="form14DateModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Select Date Range for Form 14</h3>
+            <div class="date-inputs">
+                <div class="input-group">
+                    <label for="form14StartDate">Start Date:</label>
+                    <input type="text" id="form14StartDate" placeholder="DD-MM-YYYY" />
+                </div>
+                <div class="input-group">
+                    <label for="form14EndDate">End Date:</label>
+                    <input type="text" id="form14EndDate" placeholder="DD-MM-YYYY" />
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="proceedToForm14">Proceed to Form 14</button>
+                <button id="cancelForm14Modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Date Range Selection Modal for Form 14 -->
+    <div id="form14DateModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Select Date Range for Form 14</h3>
+            <div class="date-inputs">
+                <div class="input-group">
+                    <label for="form14StartDate">Start Date:</label>
+                    <input type="text" id="form14StartDate" placeholder="DD-MM-YYYY" />
+                </div>
+                <div class="input-group">
+                    <label for="form14EndDate">End Date:</label>
+                    <input type="text" id="form14EndDate" placeholder="DD-MM-YYYY" />
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="proceedToForm14">Proceed to Form 14</button>
+                <button id="cancelForm14Modal">Cancel</button>
+            </div>
+        </div>
     </div>
 
     <!-- Main Content -->
@@ -74,7 +117,7 @@
                 </div>
 
                 <!-- Button 4 -->
-                <div class="dashboardButton" id="">
+                <div class="dashboardButton" id="form14Button">
                     <img src="../assets/images/form-14.jpg" alt="Form 14 Image">
                     <p>Form 14</p>
                 </div>
@@ -291,6 +334,7 @@
     </main>
 
     <!-- Scripts -->
+    <script src="../scripts/imports/flatpickr.js"></script>
     <script src="../scripts/imports/chart.umd.js"></script>
     <script type="module" src="../scripts/renderer/dashboard.js"></script>
     <script type="module" src="../scripts/renderer/dashboard_charts.js"></script>
