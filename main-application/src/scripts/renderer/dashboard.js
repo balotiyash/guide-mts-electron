@@ -29,43 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.electronAPI.navigateTo('fuel_entry.html');
     });
     document.getElementById('form14Button').addEventListener('click', () => {
-        // Show the date selection modal
-        document.getElementById('form14DateModal').style.display = 'block';
-        
-        // Initialize Flatpickr for date inputs
-        if (typeof flatpickr !== 'undefined') {
-            flatpickr("#form14StartDate", {
-                dateFormat: "d-m-Y",
-                allowInput: true
-            });
-            flatpickr("#form14EndDate", {
-                dateFormat: "d-m-Y", 
-                allowInput: true
-            });
-        }
-    });
-
-    // Form 14 modal event listeners
-    document.getElementById('proceedToForm14').addEventListener('click', () => {
-        const startDate = document.getElementById('form14StartDate').value;
-        const endDate = document.getElementById('form14EndDate').value;
-        
-        if (!startDate || !endDate) {
-            alert('Please select both start and end dates.');
-            return;
-        }
-        
-        // Store the selected dates and navigate to Form 14
-        localStorage.setItem('form14StartDate', startDate);
-        localStorage.setItem('form14EndDate', endDate);
         window.electronAPI.navigateTo('form14.html');
-    });
-
-    document.getElementById('cancelForm14Modal').addEventListener('click', () => {
-        document.getElementById('form14DateModal').style.display = 'none';
-        // Clear the input fields
-        document.getElementById('form14StartDate').value = '';
-        document.getElementById('form14EndDate').value = '';
     });
 
     // Backup button functionality

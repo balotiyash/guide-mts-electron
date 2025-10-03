@@ -1,0 +1,114 @@
+<!-- 
+    File: src/views/form14.html
+    Author: Yash Balotiya
+    Description: This page contains all the HTML5 code of the Form 14 Page.
+    Created on: 30/09/2025
+    Last Modified: 02/10/2025
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tab Title -->
+    <title>Guide Motor Training School | Form 14</title>
+
+    <!-- Content Security Policy (adjusted to allow CDN) -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; 
+        style-src 'self' 'unsafe-inline'; 
+        font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
+        img-src 'self' data:;
+    ">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../styles/shared.css">
+    <link rel="stylesheet" href="../styles/form14.css">
+    <link rel="stylesheet" href="../scripts/imports/flatpickr.min.css">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>FORM 14 GENERATION</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="panels">
+            <!-- Left Container: Preview Area -->
+            <div class="table-container">
+                <h2>Form 14 Preview</h2>
+                
+                <!-- Loading Screen -->
+                <div id="loadingDiv" style="display: none;">
+                    <h3>Generating Form 14...</h3>
+                    <img src="../assets/gifs/loading_animation.gif" alt="Loading Animation">
+                </div>
+
+                <!-- Preview Area (Placeholder) -->
+                <div class="scrollDiv" id="previewArea">
+                    <!-- Form 14 Content (Initially Hidden) -->
+                    <div id="form14Content" style="display: none;">
+                        <!-- Dynamic content will be generated here -->
+                    </div>
+                    
+                    <div class="preview-placeholder">
+                        <p>Select date range and click "Generate Preview" to see Form 14</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Container: Controls -->
+            <div class="form-container right">
+                <div class="form-inner">
+                    <div class="form-content">
+                        
+                        <!-- Title -->
+                        <h2>Form 14 Controls</h2>
+
+                        <!-- Start Date -->
+                        <div class="label-above">
+                            <label for="startDate">Start Date</label>
+                            <input type="text" id="startDate" placeholder="DD-MM-YYYY" autocomplete="off">
+                        </div>
+                        
+                        <!-- End Date -->
+                        <div class="label-above">
+                            <label for="endDate">End Date</label>
+                            <input type="text" id="endDate" placeholder="DD-MM-YYYY" autocomplete="off">
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="buttons">
+                            <button type="button" class="btn green" id="generatePreview">Generate Preview</button>
+                            <button type="button" class="btn yellow" id="printForm" disabled>Print Form</button>
+                        </div>
+                        
+                        <div class="buttons">
+                            <button type="button" class="btn orange" id="clearForm">Clear</button>
+                            <button type="button" class="btn red" id="backToDashboard">Back to Dashboard</button>
+                        </div>
+
+                        <!-- Form Info -->
+                        <div class="form-info" id="formInfo">
+                            <p><strong>Records Found:</strong> <span id="recordCount">0</span></p>
+                            <p><strong>Pages:</strong> <span id="pageCount">0</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../scripts/imports/flatpickr.js"></script>
+    <script src="../scripts/imports/inputmask.js"></script>
+    <script src="../scripts/renderer/form14.js"></script>
+</body>
+
+</html>

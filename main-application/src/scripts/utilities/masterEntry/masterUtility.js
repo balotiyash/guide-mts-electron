@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the utility functions for master entry page
  * Created on: 22/09/2025
- * Last Modified: 23/09/2025
+ * Last Modified: 03/10/2025
  */
 
 // Import utility functions
@@ -34,7 +34,7 @@ const renderInstructors = async () => {
             tr.innerHTML = `
                 <td class="instructor-name">${instr.instructor_name.toUpperCase()}</td>
                 <td class="instructor-license">${instr.instructor_license_no.toUpperCase()}</td>
-                <td class="license-expiration">${instr.license_expiration_date.toUpperCase()}</td>
+                <td class="license-expiration">${(instr.license_expiration_date && instr.license_expiration_date !== 'null') ? isoToDDMMYYYY(instr.license_expiration_date) : 'NULL'}</td>
             `;
             
             // Add click event listener to load data into form

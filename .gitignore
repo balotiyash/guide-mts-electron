@@ -1,11 +1,11 @@
-node_modules/
-dist/
+main-application/node_modules/
+main-application/dist/
 *.log
 .env
-out/
+main-application/out/
 guide-db-migration/.venv/
 guide-db-migration/29092025_Latest_DB/csv/dump_only_images.sql
 guide-db-migration/29092025_Latest_DB/guide-mts-database.sqlite3
 guide-db-migration/29092025_Latest_DB/guide-mts-database_all.sqlite3
 guide-db-migration/Old DB
-src/database/
+database/
