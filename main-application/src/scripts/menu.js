@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 30/09/2025
+ * Last Modified: 11/10/2025
 */
 
 // Module JS
@@ -21,8 +21,25 @@ const createMenuTemplate = (win) => {
     const isMac = process.platform === 'darwin';
 
     return [
+        // macOS App Menu (only on macOS)
+        ...(isMac ? [{
+            label: app.getName(),
+            submenu: [
+                { role: 'about' },
+                { type: 'separator' },
+                { role: 'services' },
+                { type: 'separator' },
+                { role: 'hide' },
+                { role: 'hideOthers' },
+                { role: 'unhide' },
+                { type: 'separator' },
+                { role: 'quit' }
+            ]
+        }] : []),
+
+        // File Menu
         {
-            label: 'Master',
+            label: 'File',
             submenu: [
                 {
                     label: 'Dashboard',
@@ -30,6 +47,31 @@ const createMenuTemplate = (win) => {
                         win.loadFile(path.join(__dirname, '../views/dashboard.html'));
                     },
                 },
+                { type: 'separator' },
+                {
+                    label: 'Search Customers',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/search_page.html'));
+                    },
+                },
+                { type: 'separator' },
+                ...(isMac ? [
+                    { role: 'close' }
+                ] : [
+                    {
+                        label: 'Exit',
+                        click: () => {
+                            app.quit();
+                        }
+                    }
+                ])
+            ]
+        },
+
+        // Registrations Menu
+        {
+            label: 'Registrations',
+            submenu: [
                 {
                     label: 'Customer Registration',
                     click: () => {
@@ -48,6 +90,19 @@ const createMenuTemplate = (win) => {
                         win.loadFile(path.join(__dirname, '../views/car_entry.html'));
                     },
                 },
+            ],
+        },
+
+        // Management Menu
+        {
+            label: 'Management',
+            submenu: [
+                {
+                    label: 'Payment Management',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/payment_entry.html'));
+                    },
+                },
                 {
                     label: 'Fuel Entry',
                     click: () => {
@@ -56,133 +111,79 @@ const createMenuTemplate = (win) => {
                 },
             ],
         },
+
+        // Reports Menu
         {
-            label: 'Payments',
+            label: 'Reports',
             submenu: [
                 {
-                    label: 'Payment Management',
+                    label: 'Form 14',
                     click: () => {
-                        win.loadFile(path.join(__dirname, '../views/payment_entry.html'));
-                    },
-                },
-                // {
-                //     label: 'Receipts Management',
-                //     click: () => {
-                //         win.loadFile(path.join(__dirname, '../views/receipts.html'));
-                //     },
-                // },
-            ],
-        },
-        // {
-        //     label: 'Reports',
-        //     submenu: [
-        //         {
-        //             label: 'Customer Report',
-        //             click: () => {
-        //                 console.log('Customer Report clicked');
-        //             },
-        //         },
-        //     ],
-        // },
-        // {
-        //     label: 'Form-14',
-        //     submenu: [
-        //         {
-        //             label: 'Generate Form',
-        //             click: () => {
-        //                 console.log('Generate Form clicked');
-        //             },
-        //         },
-        //     ],
-        // },
-        {
-            label: 'Tools',
-            submenu: [
-                {
-                    label: 'Change Database',
-                    click: () => {
-                        win.webContents.send('change-database-request');
+                        win.loadFile(path.join(__dirname, '../views/form14.html'));
                     },
                 },
                 { type: 'separator' },
                 {
-                    label: 'Developer Tools',
+                    label: 'Customer Report',
                     click: () => {
-                        win.webContents.openDevTools();
-                    },
-                },
-                { type: 'separator' },
-                {
-                    label: 'Logout',
-                    click: () => {
-                        win.loadFile(path.join(__dirname, '../views/index.html'));
+                        console.log('Customer Report clicked');
+                        // TODO: Implement customer report functionality
                     },
                 },
                 {
-                    label: 'Exit',
+                    label: 'Balance Report',
                     click: () => {
-                        app.quit();
+                        console.log('Balance Report clicked');
+                        // TODO: Implement balance report functionality
+                    },
+                },
+                {
+                    label: 'Collection Report',
+                    click: () => {
+                        console.log('Collection Report clicked');
+                        // TODO: Implement collection report functionality
                     },
                 },
             ],
         },
-        // {
-        //     label: 'Help',
-        //     submenu: [
-        //         {
-        //             label: 'About',
-        //             click: () => {
-        //                 console.log('About clicked');
-        //             },
-        //         },
-        //     ],
-        // },
-        // ...(isMac ? [{
-        //     label: app.name,
-        //     submenu: [
-        //         { role: 'about' },
-        //         { type: 'separator' },
-        //         { role: 'quit' }
-        //     ]
-        // }] : []),
 
-        // File menu
-        // {
-        //     label: 'File',
-        //     submenu: [
-        //         isMac ? { role: 'close' } : { role: 'quit' }
-        //     ]
-        // },
+        // Edit Menu (standard editing functions)
+        {
+            label: 'Edit',
+            submenu: [
+                { role: 'undo' },
+                { role: 'redo' },
+                { type: 'separator' },
+                { role: 'cut' },
+                { role: 'copy' },
+                { role: 'paste' },
+                ...(isMac ? [
+                    { role: 'pasteAndMatchStyle' },
+                    { role: 'delete' },
+                    { role: 'selectAll' },
+                    { type: 'separator' },
+                    {
+                        label: 'Speech',
+                        submenu: [
+                            { role: 'startSpeaking' },
+                            { role: 'stopSpeaking' }
+                        ]
+                    }
+                ] : [
+                    { role: 'delete' },
+                    { type: 'separator' },
+                    { role: 'selectAll' }
+                ])
+            ]
+        },
 
-        // Edit menu (default roles like copy/paste)
-        // {
-        //     label: 'Edit',
-        //     submenu: [
-        //         { role: 'undo' },
-        //         { role: 'redo' },
-        //         { type: 'separator' },
-        //         { role: 'cut' },
-        //         { role: 'copy' },
-        //         { role: 'paste' },
-        //         ...(isMac ? [
-        //             { role: 'pasteAndMatchStyle' },
-        //             { role: 'delete' },
-        //             { role: 'selectAll' },
-        //         ] : [
-        //             { role: 'delete' },
-        //             { type: 'separator' },
-        //             { role: 'selectAll' },
-        //         ])
-        //     ]
-        // },
-
-        // View menu with DevTools
+        // View Menu
         {
             label: 'View',
             submenu: [
                 { role: 'reload' },
                 { role: 'forceReload' },
-                { role: 'toggleDevTools' }, // Dev Tools toggle
+                { role: 'toggleDevTools' },
                 { type: 'separator' },
                 { role: 'resetZoom' },
                 { role: 'zoomIn' },
@@ -192,36 +193,97 @@ const createMenuTemplate = (win) => {
             ]
         },
 
-        // Window menu
-        // {
-        //     label: 'Window',
-        //     submenu: [
-        //         { role: 'minimize' },
-        //         { role: 'zoom' },
-        //         ...(isMac ? [
-        //             { type: 'separator' },
-        //             { role: 'front' },
-        //             { type: 'separator' },
-        //             { role: 'window' }
-        //         ] : [
-        //             { role: 'close' }
-        //         ])
-        //     ]
-        // },
+        // Window Menu
+        {
+            label: 'Window',
+            submenu: [
+                { role: 'minimize' },
+                { role: 'zoom' },
+                ...(isMac ? [
+                    { type: 'separator' },
+                    { role: 'front' },
+                    { type: 'separator' },
+                    { role: 'window' }
+                ] : [
+                    { role: 'close' }
+                ])
+            ]
+        },
 
-        // Help menu (you can customize this too)
-        // {
-        //     role: 'help',
-        //     submenu: [
-        //         {
-        //             label: 'Learn More',
-        //             click: async () => {
-        //                 const { shell } = require('electron');
-        //                 await shell.openExternal('https://electronjs.org');
-        //             }
-        //         }
-        //     ]
-        // }
+        // Tools Menu
+        {
+            label: 'Tools',
+            submenu: [
+                {
+                    label: 'Reminders',
+                    click: () => {
+                        console.log("Reminders clicked");
+                        // TODO: Implement reminders functionality
+                    }
+                },
+                { type: 'separator' },
+                {
+                    label: 'Change Database',
+                    click: () => {
+                        win.webContents.send('change-database-request');
+                    },
+                },
+                { type: 'separator' },
+                {
+                    label: 'Preferences',
+                    click: () => {
+                        console.log('Preferences clicked');
+                        // TODO: Implement preferences functionality
+                    }
+                },
+                // Only show Exit on non-macOS platforms (macOS handles this in app menu)
+                ...(!isMac ? [
+                    { type: 'separator' },
+                    {
+                        label: 'Exit',
+                        click: () => {
+                            app.quit();
+                        },
+                    }
+                ] : [])
+            ],
+        },
+
+        // Help Menu
+        {
+            label: 'Help',
+            submenu: [
+                {
+                    label: 'About System',
+                    click: () => {
+                        console.log('About System clicked');
+                        // TODO: Show about system dialog
+                    },
+                },
+                {
+                    label: 'About Developer',
+                    click: () => {
+                        console.log('About Developer clicked');
+                        // TODO: Show about developer dialog
+                    }
+                },
+                { type: 'separator' },
+                {
+                    label: 'Learn More',
+                    click: async () => {
+                        const { shell } = await import('electron');
+                        await shell.openExternal('https://electronjs.org');
+                    }
+                },
+                { type: 'separator' },
+                {
+                    label: 'Developer Tools',
+                    click: () => {
+                        win.webContents.toggleDevTools();
+                    }
+                }
+            ],
+        }
     ];
 };
 

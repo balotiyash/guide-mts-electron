@@ -3,7 +3,7 @@
     Author: Neha Balotia, Yash Balotiya
     Description: This file contains all the CSS code of the Login Page.
     Created on: 13/07/2025
-    Last Modified: 21/09/2025
+    Last Modified: 04/10/2025
 */
 
 body {
@@ -56,9 +56,10 @@ footer {
 }
 
 .footer-logo {
-    display: none;
+    /* display: none; */
     width: 100px;
     height: auto;
+    cursor: pointer;
 }
 
 footer h2 {
@@ -73,7 +74,7 @@ footer h2 {
 }
 
 footer div {
-    display: flex;
+    /* display: flex; */
     align-items: center;
     gap: 15px;
     display: none;

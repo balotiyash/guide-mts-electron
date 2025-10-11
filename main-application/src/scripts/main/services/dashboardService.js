@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to interact with the database for the dashboard page.
  * Created on: 26/08/2025
- * Last Modified: 16/08/2025
+ * Last Modified: 11/10/2025
 */
 
 // Importing required modules & libraries
@@ -130,41 +130,15 @@ const getRepeatStudentsCount = () => {
 // Function to get pending payments count
 const getPendingPaymentsCount = () => {
     const result = runQuery({
-        // sql: `
-        //     SELECT COUNT(*) FROM (
-        //     SELECT wd.id AS work_id,
-        //         wd.customer_id,
-        //         wd.work,
-        //         CAST(wd.charged_amount AS REAL) AS charged_amount,
-        //         IFNULL(SUM(CAST(p.amount_paid AS REAL)), 0) AS total_paid,
-        //         CAST(wd.charged_amount AS REAL) - IFNULL(SUM(CAST(p.amount_paid AS REAL)), 0) AS pending_amount
-        //     FROM work_descriptions wd
-        //     LEFT JOIN payments p ON wd.id = p.work_desc_id
-        //     GROUP BY wd.id
-        //     HAVING pending_amount > 0);
-        // `,
-        // sql: `
-        //     SELECT COUNT(*)
-        //     FROM (
-        //         SELECT wd.id AS work_id,
-        //             CAST(wd.charged_amount AS REAL) - IFNULL(SUM(CAST(p.amount_paid AS REAL)), 0) AS pending_amount
-        //         FROM work_descriptions wd
-        //         LEFT JOIN payments p ON wd.id = p.work_desc_id
-        //         GROUP BY wd.id
-        //         HAVING pending_amount > 0
-        //     );
-        // `,
         sql: `
-        SELECT COUNT(*)
-FROM (
-  SELECT wd.id
-  FROM work_descriptions wd
-  JOIN customers c ON c.id = wd.customer_id
-  LEFT JOIN payments p ON wd.id = p.work_desc_id
-  GROUP BY wd.id
-  HAVING (CAST(wd.charged_amount AS REAL) - IFNULL(SUM(CAST(p.amount_paid AS REAL)), 0)) > 0
-);
-`,
+        SELECT COUNT(*) FROM (
+            SELECT wd.id
+            FROM work_descriptions wd
+            JOIN customers c ON c.id = wd.customer_id
+            LEFT JOIN payments p ON wd.id = p.work_desc_id
+            GROUP BY wd.id
+            HAVING (CAST(wd.charged_amount AS REAL) - IFNULL(SUM(CAST(p.amount_paid AS REAL)), 0)) > 0
+        );`,
         params: [],
         type: "get"
     });
@@ -183,4 +157,5 @@ const allDashboardServices = {
     getChart3Data
 };
 
+// Exporting all dashboard services
 export default allDashboardServices;

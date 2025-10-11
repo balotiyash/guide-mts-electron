@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage user dashboard functionality for the Guide Motor Training School application.
  * Created on: 08/08/2025
- * Last Modified: 02/10/2025
+ * Last Modified: 11/10/2025
 */
 
 // Importing required modules & libraries
@@ -31,12 +31,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('form14Button').addEventListener('click', () => {
         window.electronAPI.navigateTo('form14.html');
     });
+    document.getElementById('searchButton').addEventListener('click', () => {
+        window.electronAPI.navigateTo('search_page.html');
+    });
 
     // Backup button functionality
-    const backupButtons = document.querySelectorAll('.dashboardButton');
-    const backupButton = Array.from(backupButtons).find(button => 
-        button.querySelector('p').textContent.trim() === 'Backup'
-    );
+    const backupButton = document.getElementById('backupButton');
     
     if (backupButton) {
         backupButton.addEventListener('click', async () => {

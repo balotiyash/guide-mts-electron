@@ -3,11 +3,14 @@
  * Author: Yash Balotiya
  * Description: This file contains the service functions for vehicle management
  * Created on: 23/09/2025
- * Last Modified: 28/09/2025
+ * Last Modified: 11/10/2025
  */
 
+// Importing required modules & libraries
 import { runQuery } from './dbService.js';
+import { getFormattedDateTime } from '../../shared.js';
 
+// Function to get all vehicles
 const getAllVehicles = () => {
     try {
         const result = runQuery({
@@ -25,21 +28,7 @@ const getAllVehicles = () => {
     }
 };
 
-// Function to get current date and time in 'YYYY-MM-DD HH:MM:SS' format
-const getFormattedDateTime = () => {
-    const now = new Date();
-
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-    const day = String(now.getDate()).padStart(2, '0');
-
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-};
-
+// Function to add a new vehicle
 const addVehicle = async (data) => {
     // Getting the current timestamp
     const now = getFormattedDateTime();
@@ -61,6 +50,7 @@ const addVehicle = async (data) => {
     }
 };
 
+// Function to update vehicle details
 const updateVehicle = async (vehicleId, data) => {
     // Getting the current timestamp
     const now = getFormattedDateTime();
@@ -83,6 +73,7 @@ const updateVehicle = async (vehicleId, data) => {
     }
 };
 
+// Function to delete (soft delete) a vehicle
 const deleteVehicle = async (vehicleId) => {
     // Getting the current timestamp
     const now = getFormattedDateTime();
@@ -105,4 +96,5 @@ const deleteVehicle = async (vehicleId) => {
     }
 };
 
+// Exporting the functions
 export { getAllVehicles, addVehicle, updateVehicle, deleteVehicle };

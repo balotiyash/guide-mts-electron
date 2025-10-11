@@ -1,19 +1,34 @@
+/** 
+ * File: src/scripts/main/ipc/invoiceHandler.js
+ * Author: Yash Balotiya
+ * Description: This file contains the IPC handlers for invoice management
+ * Created on: 30/09/2025
+ * Last Modified: 11/10/2025
+*/
+
 // src/handlers/invoiceHandler.js
 import { ipcMain } from 'electron';
-// import generateInvoice from '../services/invoiceService.js';
 import paymentService from '../services/paymentService.js';
 import { generateInvoice, printInvoice } from '../services/invoiceService.js';
+import { isoToDDMMYYYY, sanitizeDate } from '../../shared.js';
 
-function registerInvoiceHandler() {
+// Registering IPC handlers for invoice operations
+const registerInvoiceHandler = () => {
+    // Generate or Print Invoice for a User
     ipcMain.handle('generate-invoice-for-user', async (event, userId, workId, type) => {
         try {
+            // Fetch customer payments
             const customer = await paymentService.getPaymentsByUserId(userId, workId, type);
+
+            // Validate customer and payments
             if (!customer || !customer.payments || customer.payments.length === 0) {
                 throw new Error('No payments found for this user');
             }
 
+            // Prepare invoice data
             let runningRemaining = parseFloat(customer.payments[0].charged_amount) || 0;
 
+            // Map payments to invoice items
             const items = customer.payments.map((p) => {
                 const paid = parseFloat(p.paid_amount) || 0;
                 runningRemaining -= paid;
@@ -27,18 +42,11 @@ function registerInvoiceHandler() {
                 };
             });
 
-            function formatDate(date) {
-                const d = new Date(date);
-                const day = String(d.getDate()).padStart(2, '0');
-                const month = String(d.getMonth() + 1).padStart(2, '0');
-                const year = d.getFullYear();
-                return `${day}/${month}/${year}`;
-            }
-
+            // Final invoice data structure
             const invoiceData = {
                 customer: customer.name,
                 admissionNo: userId,
-                date: formatDate(new Date()),
+                date: isoToDDMMYYYY(sanitizeDate(new Date()), '/'),
                 items,
                 total: items.reduce((sum, i) => sum + i.paid, 0),
                 type: customer.type
@@ -58,16 +66,21 @@ function registerInvoiceHandler() {
         }
     });
 
+    // Print invoice directly without saving
     ipcMain.handle('print-invoice-for-user', async (event, userId, workId, type) => {
         try {
-            console.log('print-invoice-for-user called with:', { userId, workId, type }); // Debug log
+            // Fetch customer payments
             const customer = await paymentService.getPaymentsByUserId(userId, workId, type);
+
+            // Validate customer and payments
             if (!customer || !customer.payments || customer.payments.length === 0) {
                 throw new Error('No payments found for this user');
             }
 
+            // Prepare invoice data
             let runningRemaining = parseFloat(customer.payments[0].charged_amount) || 0;
 
+            // Map payments to invoice items
             const items = customer.payments.map((p) => {
                 const paid = parseFloat(p.paid_amount) || 0;
                 runningRemaining -= paid;
@@ -81,34 +94,24 @@ function registerInvoiceHandler() {
                 };
             });
 
-            function formatDate(date) {
-                const d = new Date(date);
-                const day = String(d.getDate()).padStart(2, '0');
-                const month = String(d.getMonth() + 1).padStart(2, '0');
-                const year = d.getFullYear();
-                return `${day}/${month}/${year}`;
-            }
-
+            // Final invoice data structure
             const invoiceData = {
                 customer: customer.name,
                 admissionNo: userId,
-                date: formatDate(new Date()),
+                date: isoToDDMMYYYY(sanitizeDate(new Date()), '/'),
                 items,
                 total: items.reduce((sum, i) => sum + i.paid, 0),
                 type: type // Use the passed type ('ORIGINAL' or 'DUPLICATE')
             };
 
-            console.log('Calling printInvoice with data:', invoiceData); // Debug log
             await printInvoice(invoiceData);
-            console.log('printInvoice completed successfully'); // Debug log
             return { success: true };
         } catch (err) {
             console.error('Print invoice error:', err);
             return { success: false, error: err.message };
         }
     });
-
 }
 
-
+// Exporting the function to be used in main.js
 export default registerInvoiceHandler;

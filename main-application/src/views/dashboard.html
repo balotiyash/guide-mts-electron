@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Dashboard Page after Login.
     Created on: 04/08/2025
-    Last Modified: 02/10/2025
+    Last Modified: 11/10/2025
 -->
 
 <!DOCTYPE html>
@@ -63,15 +63,15 @@
                 </div>
 
                 <!-- Button 2 -->
-                <div class="dashboardButton" id="">
-                    <img src="../assets/images/search.jpg" alt="Customer Search Image">
-                    <p>Search</p>
-                </div>
-
-                <!-- Button 3 -->
                 <div class="dashboardButton" id="feesButton">
                     <img src="../assets/images/amount.jpg" alt="Customer Fees Image">
                     <p>Payment</p>
+                </div>
+
+                <!-- Button 3 -->
+                <div class="dashboardButton" id="searchButton">
+                    <img src="../assets/images/search.jpg" alt="Customer Search Image">
+                    <p>Search</p>
                 </div>
 
                 <!-- Button 4 -->
@@ -87,7 +87,7 @@
                 </div>
 
                 <!-- Button 6 -->
-                <div class="dashboardButton" id="">
+                <div class="dashboardButton" id="backupButton">
                     <img src="../assets/images/backup.jpg" alt="Backup Image">
                     <p>Backup</p>
                 </div>
@@ -202,7 +202,8 @@
                     </table>
 
                     <!-- Scrollable Div with Table -->
-                    <div class="scrollDiv" style="display: flex; align-items: center; justify-content: center; color: gray;">
+                    <div class="scrollDiv"
+                        style="display: flex; align-items: center; justify-content: center; color: gray;">
                         <!-- <table>
                             <tbody>
                                 <tr>
@@ -283,7 +284,9 @@
                     <!-- Sent Reminders Button -->
                     <!-- <button>Check Reminders</button> -->
                     <div id="reminderButtonDiv">
-                        <marquee behavior="scroll" direction="left"><pre>Check LL Reminders                  Check Payment Reminders                 Check License Expiry Reminders              Check Birthday Reminders</pre></marquee>
+                        <marquee behavior="scroll" direction="left">
+                            <pre>Check LL Reminders                  Check Payment Reminders                 Check License Expiry Reminders              Check Birthday Reminders</pre>
+                        </marquee>
                         <button id="reminderButton">OK</button>
                     </div>
                 </div>

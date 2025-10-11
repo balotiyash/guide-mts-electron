@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
- * Last Modified: 22/09/2025
+ * Last Modified: 04/10/2025
  */
 
 // Import required modules & libraries
@@ -109,10 +109,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("saveBtn").addEventListener("click", async () => {
         insertDataUtility(formElements, imageBlobs, is_repeat, userId); // Initialize insert data utility
     });
-
+    
     // Handle click event on Update Button
     document.getElementById("updateBtn").addEventListener("click", async () => {
-        if (!is_repeat) {
+        // if (!is_repeat) {
+        if (!userId) {
             await window.dialogBoxAPI.showDialogBox("warning", "No Existing Customer", "Please search and load an existing customer to update.");
             return;
         }
@@ -153,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update validUntilInput based on issuedOnInput (6 months validity)
     document.getElementById("issuedOnInput").addEventListener("change", (e) => {
         const issuedDate = new Date(e.target.value);
-        const validUntilDate = new Date(issuedDate.setDate(issuedDate.getDate() + 180));
+        const validUntilDate = new Date(issuedDate.setDate(issuedDate.getDate() + 179)); // 6 months - 1 day
         document.getElementById("validUntilInput").value = validUntilDate.toISOString().split("T")[0];
     });
 });

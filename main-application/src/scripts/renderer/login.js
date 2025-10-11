@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Handles user login functionality for the Guide Motor Training School application.
  * Created on: 20/07/2025
- * Last Modified: 02/10/2025
+ * Last Modified: 04/10/2025
 */
 
 // Logging setup
@@ -45,6 +45,14 @@ document.addEventListener('DOMContentLoaded', () => {
             passwordInput.value = '';
             usernameInput.focus();
         }
+    });
+
+    // Footer logic
+    let isVisible = false;
+    document.getElementById("footerLogo").addEventListener('click', () => {
+        document.getElementById("footerText").style.display = isVisible ? "none" : "block";
+        document.getElementById("socialLinks").style.display = isVisible ? "none" : "flex";
+        isVisible = !isVisible;
     });
 });
 

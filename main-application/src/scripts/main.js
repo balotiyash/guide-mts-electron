@@ -3,13 +3,12 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 30/09/2025
+ * Last Modified: 11/10/2025
 */
 
 // Importing required modules & libraries
 import { app, BrowserWindow, ipcMain, Menu, screen, dialog } from "electron";
 import path from "path";
-import fs from "fs";
 import createMenuTemplate from "./menu.js";
 import { fileURLToPath } from 'url';
 import updater from "electron-updater";
@@ -26,6 +25,7 @@ import registerMasterHandlers from "./main/ipc/masterHandler.js";
 import registerVehicleHandlers from "./main/ipc/vehicleHandler.js";
 import registerFuelEntryHandlers from "./main/ipc/fuelEntryHandler.js";
 import registerForm14Handlers from "./main/ipc/form14Handler.js";
+import registerSearchHandlers from "./main/ipc/searchHandler.js";
 
 // Logging the meta information
 autoUpdater.logger = log;
@@ -61,12 +61,11 @@ const createWindow = () => {
 
     // Loading the main application view
     win.loadFile(path.join(__dirname, '../views/index.html'));
-    // win.loadFile(path.join(__dirname, '../views/fuel_entry.html'));
     win.maximize();
     win.show();
 
     // ❌ No menu on startup (login screen)
-    // Menu.setApplicationMenu(null);
+    Menu.setApplicationMenu(null);
 
     // Check for updates after window is ready
     win.once("ready-to-show", () => {
@@ -87,6 +86,7 @@ app.whenReady().then(() => {
         registerVehicleHandlers(); // register all vehicle IPC
         registerFuelEntryHandlers(); // register all fuel entry IPC
         registerForm14Handlers(); // register all form14 IPC
+        registerSearchHandlers(); // register all search IPC
 
         createWindow();
     } catch (err) {
@@ -122,25 +122,6 @@ ipcMain.on('navigate-to', (event, targetPage) => {
     }
 });
 
-// Load specific page
-ipcMain.on('load-page', (event, pageName) => {
-    if (win) {
-        const pageMap = {
-            'dashboard': 'dashboard.html',
-            'form14': 'form14.html',
-            'data_entry': 'data_entry.html',
-            'payment_entry': 'payment_entry.html',
-            'master_entry': 'master_entry.html',
-            'car_entry': 'car_entry.html',
-            'fuel_entry': 'fuel_entry.html',
-            'invoice': 'invoice.html'
-        };
-        
-        const fileName = pageMap[pageName] || 'dashboard.html';
-        win.loadFile(path.join(__dirname, '../views', fileName));
-    }
-});
-
 // Show dialog box
 ipcMain.handle('show-dialog-box', async (event, { type, title, message, buttons = ['OK'] }) => {
     const currentWindow = BrowserWindow.getFocusedWindow();
@@ -159,115 +140,5 @@ ipcMain.handle('show-dialog-box', async (event, { type, title, message, buttons 
     } else {
         console.error('No focused window to show dialog box.');
         return -1;
-    }
-});
-
-// Handle database backup
-ipcMain.handle('backup-database', async (event) => {
-    try {
-        // Import getDbPath function
-        const { getDbPath } = await import('./main/services/dbService.js');
-        
-        // Get current database path
-        const currentDbPath = getDbPath();
-        
-        if (!currentDbPath || !fs.existsSync(currentDbPath)) {
-            return {
-                success: false,
-                message: 'Database file not found. Please ensure the database is properly configured.'
-            };
-        }
-
-        // Generate filename with current date (DD-MM-YYYY format)
-        const now = new Date();
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const year = now.getFullYear();
-        const defaultFileName = `GMTS ${day}-${month}-${year}.sqlite3`;
-
-        // Show save dialog
-        const result = await dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
-            title: 'Backup Database',
-            defaultPath: defaultFileName,
-            filters: [
-                { name: 'SQLite Database', extensions: ['sqlite3'] },
-                { name: 'Database Files', extensions: ['db'] },
-                { name: 'All Files', extensions: ['*'] }
-            ]
-        });
-
-        if (result.canceled) {
-            return {
-                success: false,
-                message: 'Backup canceled by user.'
-            };
-        }
-
-        // Copy the database file to the selected location
-        fs.copyFileSync(currentDbPath, result.filePath);
-
-        return {
-            success: true,
-            message: `Database backed up successfully to: ${result.filePath}`,
-            backupPath: result.filePath
-        };
-    } catch (error) {
-        console.error('Backup failed:', error);
-        return {
-            success: false,
-            message: `Backup failed: ${error.message}`
-        };
-    }
-});
-
-// Handle database change
-ipcMain.handle('change-database', async (event) => {
-    try {
-        // Import Store and dialog from dependencies
-        const Store = (await import('electron-store')).default;
-        const store = new Store();
-        
-        // Show open dialog to select new database
-        const result = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), {
-            title: 'Select Database File',
-            filters: [
-                { name: 'SQLite Database', extensions: ['sqlite3'] },
-                { name: 'Database Files', extensions: ['db'] },
-                { name: 'All Files', extensions: ['*'] }
-            ],
-            properties: ['openFile']
-        });
-
-        if (result.canceled) {
-            return {
-                success: false,
-                message: 'Database selection canceled.'
-            };
-        }
-
-        const newDbPath = result.filePaths[0];
-        
-        // Verify the selected file exists
-        if (!fs.existsSync(newDbPath)) {
-            return {
-                success: false,
-                message: 'Selected database file does not exist.'
-            };
-        }
-
-        // Update the database path in storage
-        store.set('dbPath', newDbPath);
-
-        return {
-            success: true,
-            message: `Database changed successfully to: ${newDbPath}`,
-            newDbPath: newDbPath
-        };
-    } catch (error) {
-        console.error('Change database failed:', error);
-        return {
-            success: false,
-            message: `Failed to change database: ${error.message}`
-        };
     }
 });

@@ -55,3 +55,7 @@ user friendly errors should be displayed and detailed on console
 
 backup format main.js
 same for menu main.js
+
+    const { shell } = await import('electron');
+    await shell.openExternal('https://electronjs.org');
+    use this for all URL navigations

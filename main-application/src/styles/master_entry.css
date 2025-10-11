@@ -1,8 +1,9 @@
-/* File: src/styles/master_entry.css
-   Author: Neha Balotia, Yash Balotiya
-   Description: This file contains Styles for the Master Entry Page, Fuel, Car, Payments too.
-   Created on: 27/07/2025
-   Updated: 02/10/2025
+/* 
+    File: src/styles/master_entry.css
+    Author: Neha Balotia, Yash Balotiya
+    Description: This file contains Styles for the Master Entry Page, Fuel, Car, Payments too.
+    Created on: 27/07/2025
+    Updated: 11/10/2025
 */
 
 html,
@@ -96,7 +97,7 @@ label {
     font-size: 16px;
 }
 
-/* Input Fields */
+/* Input Fields  */
 input {
     width: 60%;
 }
@@ -109,7 +110,7 @@ input {
     gap: 8px;
 }
 
-/* Fuel Entry Styles */
+/* ---------- Fuel Entry Styles ---------- */
 .table-header {
     display: flex;
     justify-content: space-between;
@@ -136,7 +137,7 @@ input {
     width: 100%;
 }
 
-/* Car Entry Form Styles */
+/* ---------- Car Entry Form Styles ---------- */
 .car_form_inner {
     height: 500px;
 }
@@ -145,7 +146,7 @@ input {
     width: 60%;
 }
 
-/* Receipt Form Styles */
+/* ---------- Receipt Form Styles ---------- */
 .receipt-inner-form .scrollDiv {
     height: 50%;
 }
@@ -162,15 +163,8 @@ input {
 @media (max-width: 1950px) {
     .form-content {
         height: 80%;
-        /* height: 100%; */
     }
 }
-
-/* @media (max-width: 1600px) {
-    .table-container .scrollDiv {
-        height: 80%;
-    }
-} */
 
 @media (max-height: 760px) {
     .container {

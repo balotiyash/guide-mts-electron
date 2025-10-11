@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code for payment entry page. This is the main page for it.
  * Created on: 16/09/2025
- * Last Modified: 22/09/2025
+ * Last Modified: 11/10/2025
  */
 
 // Importing required 
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // DOM Elements
     const tableBody = document.getElementById("pendingPaymentsTableBody");
     const searchInput = document.getElementById("payment-date");
-    const filterSelect = document.querySelector("select");
+    const filterSelect = document.getElementById("paymentStatusSelect");
 
     // Datasets
     const pendingPaymentData = await window.paymentEntryAPI.getAllPendingPayments();

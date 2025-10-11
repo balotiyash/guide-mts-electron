@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Utility functions for handling date fields in the data entry form.
    Created on: 21/09/2025
-   Last Modified: 30/09/2025
+   Last Modified: 04/10/2025
 */
 
 // Importing required modules & libraries
@@ -15,6 +15,7 @@ const dateUtility = () => {
     const addMonthsToDate = (date, months) => {
         const newDate = new Date(date);
         newDate.setMonth(newDate.getMonth() + months);
+        newDate.setDate(newDate.getDate() - 1); // Subtract 1 day
         return newDate;
     };
 
@@ -30,7 +31,10 @@ const dateUtility = () => {
         // Master entry date field
         { textId: "license-expiration-text", hiddenId: "license-expiration", dataKey: "license_expiration_date" },
         // Fuel entry date field
-        { textId: "entrydate_text", hiddenId: "entrydate", dataKey: "entry_date" }
+        { textId: "entrydate_text", hiddenId: "entrydate", dataKey: "entry_date" },
+        // Search page date fields
+        { textId: "starting-date-text", hiddenId: "starting-date", dataKey: "starting_date" },
+        { textId: "ending-date-text", hiddenId: "ending-date", dataKey: "ending_date" }
     ];
 
     // Initialize all date fields
@@ -119,7 +123,7 @@ const dateUtility = () => {
             clearTimeout(inputTimeout);
             inputTimeout = setTimeout(() => {
                 const inputValue = textInput.value.trim();
-                
+
                 // Only process if we have a complete date pattern
                 if (inputValue.match(/^\d{2}-\d{2}-\d{4}$/)) {
                     const isoDate = ddmmyyyyToISO(inputValue);

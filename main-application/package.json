@@ -1,13 +1,13 @@
 {
     "name": "guide-mts",
-    "version": "1.4.1",
+    "version": "1.5.1",
     "description": "Guide Motor Training School Management System",
     "author": "Yash Balotiya",
     "main": "src/scripts/main.js",
     "type": "module",
     "scripts": {
         "start": "electron .",
-        "dist": "electron-builder --win --x64"
+        "dist": "electron-builder --win --x64 --publish always"
     },
     "devDependencies": {
         "electron": "^37.3.0",

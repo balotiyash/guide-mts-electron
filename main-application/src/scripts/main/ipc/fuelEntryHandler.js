@@ -1,11 +1,12 @@
-// /** 
-//  * File: src/scripts/main/ipc/fuelEntryHandler.js
-//  * Author: Yash Balotiya
-//  * Description: This file contains the IPC handlers for fuel entry management
-//  * Created on: 24/09/2025
-//  * Last Modified: 28/09/2025
-// */
+/** 
+ * File: src/scripts/main/ipc/fuelEntryHandler.js
+ * Author: Yash Balotiya
+ * Description: This file contains the IPC handlers for fuel entry management
+ * Created on: 24/09/2025
+ * Last Modified: 11/10/2025
+*/
 
+// Importing required modules & libraries
 import { ipcMain } from "electron";
 import {
     loadData,

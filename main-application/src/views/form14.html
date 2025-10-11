@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Form 14 Page.
     Created on: 30/09/2025
-    Last Modified: 02/10/2025
+    Last Modified: 11/10/2025
 -->
 
 <!DOCTYPE html>
@@ -27,7 +27,9 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../styles/shared.css">
+    <link rel="stylesheet" href="../styles/master_entry.css">
     <link rel="stylesheet" href="../styles/form14.css">
+    <link rel="stylesheet" href="../styles/form14Table.css">
     <link rel="stylesheet" href="../scripts/imports/flatpickr.min.css">
 </head>
 
@@ -45,8 +47,8 @@
                 <h2>Form 14 Preview</h2>
                 
                 <!-- Loading Screen -->
-                <div id="loadingDiv" style="display: none;">
-                    <h3>Generating Form 14...</h3>
+                <div id="loadingDiv">
+                    <h3>Loading...</h3>
                     <img src="../assets/gifs/loading_animation.gif" alt="Loading Animation">
                 </div>
 
@@ -108,7 +110,7 @@
     <!-- Scripts -->
     <script src="../scripts/imports/flatpickr.js"></script>
     <script src="../scripts/imports/inputmask.js"></script>
-    <script src="../scripts/renderer/form14.js"></script>
+    <script type="module" src="../scripts/renderer/form14.js"></script>
 </body>
 
 </html>

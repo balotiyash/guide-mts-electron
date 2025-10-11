@@ -2,19 +2,25 @@
    Author: Yash Balotiya
    Description: Common shared utilities for both main and renderer processes.
    Created on: 21/09/2025
-   Last Modified: 30/09/2025
+   Last Modified: 11/10/2025
 */
 
-// Utility: convert ISO (yyyy-mm-dd) → dd-mm-yyyy
-const isoToDDMMYYYY = (iso) => {
+// Utility: convert ISO (yyyy-mm-dd) → dd-mm-yyyy or dd/mm/yyyy
+const isoToDDMMYYYY = (iso, separator = '-') => {
     if (!iso || typeof iso !== 'string') return "";
     
     // Handle various date formats
     let parts;
     
-    // Check if it's already in DD-MM-YYYY format
-    if (iso.match(/^\d{2}-\d{2}-\d{4}$/)) {
-        return iso; // Already in correct format
+    // Check if it's already in DD-MM-YYYY or DD/MM/YYYY format
+    if (iso.match(/^\d{2}[-/]\d{2}[-/]\d{4}$/)) {
+        // If separators match, return as is; otherwise convert separator
+        const currentSeparator = iso.includes('/') ? '/' : '-';
+        if (currentSeparator === separator) {
+            return iso;
+        }
+        // Convert separator
+        return iso.replace(/[-/]/g, separator);
     }
     
     // Handle ISO format (YYYY-MM-DD) or datetime (YYYY-MM-DD HH:MM:SS)
@@ -40,7 +46,7 @@ const isoToDDMMYYYY = (iso) => {
             const mm = String(m).padStart(2, '0');
             const yyyy = String(y).padStart(4, '0');
             
-            return `${dd}-${mm}-${yyyy}`;
+            return `${dd}${separator}${mm}${separator}${yyyy}`;
         }
     }
     

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the main Js code for master registration page
  * Created on: 21/09/2025
- * Last Modified: 23/09/2025
+ * Last Modified: 11/10/2025
  */
 
 // Importing required modules & libraries
@@ -18,11 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Verify Flatpickr was applied
     const dateInput = document.getElementById("license-expiration-text");
-    // if (dateInput && dateInput._flatpickr) {
-    //     console.log('Flatpickr successfully applied to license expiration field');
-    // } else {
-    //     console.log('Flatpickr NOT applied to license expiration field');
-    // }
 
     // Call on page load
     renderInstructors();

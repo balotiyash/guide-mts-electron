@@ -1,0 +1,127 @@
+/* 
+    File: src/styles/search_page.css
+    Author: Yash Balotiya
+    Description: Styles for Search Page
+    Created on: 11/10/2025
+    Last Modified: 11/10/2025
+*/
+
+/* Main Page */
+body {
+    padding: 20px;
+}
+
+/* Form Content */
+#formContent {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+#formButtons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#formButtons button {
+    width: 100px;
+    height: 40px;
+}
+
+.scrollDiv {
+    height: 70vh;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.pagination button {
+    padding: 8px 20px;
+    border: none;
+    background-color: brown;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+    background-color: darkred;
+}
+
+.pagination button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+#pageInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Table Widths */
+.w5 {
+    width: 5%;
+}
+
+.w10 {
+    width: 10%;
+}
+
+.w15 {
+    width: 15%;
+}
+
+.w20 {
+    width: 20%;
+}
+
+.w30 {
+    width: 30%;
+}
+
+/* Responsive */
+@media (max-width: 1950px) {
+    .form-content {
+        height: 100%;
+    }
+}
+
+@media (max-height: 1000px) {
+    .scrollDiv {
+        height: 65vh;
+    }
+}
+
+@media (max-height: 800px) {
+    .scrollDiv {
+        height: 60vh;
+    }
+}
+
+@media (max-height: 700px) {
+    .scrollDiv {
+        height: 55vh;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    .table-container h2 {
+        font-size: 16px;
+    }
+}

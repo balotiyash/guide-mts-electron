@@ -1,10 +1,21 @@
+/** 
+ * File: src/scripts/main/ipc/paymentHandler.js
+ * Author: Yash Balotiya
+ * Description: This file contains the IPC handlers for payment management
+ * Created on: 30/09/2025
+ * Last Modified: 11/10/2025
+*/
+
+// Importing required modules & libraries
 import { ipcMain } from "electron";
 import allPaymentService from "../services/paymentService.js";
 
 // Registering IPC handlers for payment entry
 const registerPaymentHandlers = () => {
+    // Handler to get all payments
     ipcMain.handle('get-all-pending-payments', allPaymentService.getAllPendingPayments);
 
+    // Handler to get all paid payments
     ipcMain.handle('get-all-paid-payments', allPaymentService.getAllPaidPayments);
 
     // Handler to submit a payment
@@ -41,4 +52,5 @@ const registerPaymentHandlers = () => {
     });
 };
 
+// Exporting the function to be used in main.js
 export default registerPaymentHandlers;

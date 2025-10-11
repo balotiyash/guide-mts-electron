@@ -1,19 +1,14 @@
+/**
+ * File: src/scripts/main/services/paymentService.js
+ * Author: Yash Balotiya
+ * Description: Service functions for payment processing and management.
+ * Created on: 30/09/2025
+ * Last Modified: 11/10/2025
+ */
+
 // Importing required modules & libraries
 import { runQuery } from "./dbService.js";
-
-const getFormattedDateTime = () => {
-    const now = new Date();
-
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-    const day = String(now.getDate()).padStart(2, '0');
-
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-};
+import { getFormattedDateTime } from "../../shared.js";
 
 // Payment Service Object
 // Function to get all pending payments
@@ -133,21 +128,24 @@ const getPaymentsByUserId = async (userId, workId, type) => {
     if (!customerResult) throw new Error('Customer not found');
 
     let sql = `
-    SELECT 
-    p.id AS payment_id,
-    wd.id AS work_id,
-    wd.work AS work,
-    p.payment_mode,
-    CAST(p.amount_paid AS REAL) AS paid_amount,
-    CAST(wd.charged_amount AS REAL) AS charged_amount,
-    p.created_on AS date
-FROM payments p
-JOIN work_descriptions wd ON wd.id = p.work_desc_id
-WHERE p.customer_id = ? AND p.work_desc_id = ?
-ORDER BY p.created_on ASC
+        SELECT 
+            p.id AS payment_id,
+            wd.id AS work_id,
+            wd.work AS work,
+            p.payment_mode,
+            CAST(p.amount_paid AS REAL) AS paid_amount,
+            CAST(wd.charged_amount AS REAL) AS charged_amount,
+            p.created_on AS date
+        FROM payments p
+        JOIN work_descriptions wd ON wd.id = p.work_desc_id
+        WHERE p.customer_id = ? AND p.work_desc_id = ?
+        ORDER BY p.created_on ASC
     `;
+
+    // If type is 'pending', fetch only pending payments
     const params = [userId, workId];
 
+    // If type is 'pending', modify the query to fetch only pending payments
     const payments = await runQuery({
         sql,
         params,
