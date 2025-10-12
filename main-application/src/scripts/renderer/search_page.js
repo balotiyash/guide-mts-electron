@@ -3,12 +3,13 @@
  * Author: Yash Balotiya
  * Description: Handles the search page form interactions and date field functionality.
  * Created on: 11/10/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 12/10/2025
  */
 
 // Import required modules & libraries
 import dateUtility from "../utilities/dataEntry/dateUtility.js";
 import { isoToDDMMYYYY } from "../shared.js";
+import { initializeSearchUtility, performSearch, exportToCSV, clearSearch } from '../utilities/searchPage/searchUtility.js';
 
 // Global variables
 let allCustomers = [];
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const startingDate = document.getElementById("starting-date");
     const endingDate = document.getElementById("ending-date");
     const searchBtn = document.getElementById("search-btn");
+    const exportBtn = document.getElementById("export-btn");
     const clearBtn = document.getElementById("clear-btn");
     const tableBody = document.getElementById("data-table-body");
 
@@ -41,8 +43,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (pageData.length === 0) {
             tableBody.innerHTML = `<tr><td colspan="8">No customers found.</td></tr>`;
             document.getElementById("paginationControls").style.display = "none";
+            exportBtn.disabled = true;
             return;
         }
+
+        // Enable export button when there's data
+        exportBtn.disabled = false;
 
         // Render rows
         tableBody.innerHTML = "";
@@ -79,82 +85,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         if (!response || !response.success) {
             tableBody.innerHTML = `<tr><td colspan="8">Failed to fetch customer data.</td></tr>`;
+            exportBtn.disabled = true;
             return;
         }
 
         allCustomers = response.data || [];
         filteredCustomers = [...allCustomers];
+        
+        // Initialize utility functions with global references
+        initializeSearchUtility({
+            allCustomers, 
+            filteredCustomers, 
+            currentPage, 
+            exportBtn, 
+            renderCurrentPage,
+            searchSelect, 
+            searchText, 
+            startingDate, 
+            endingDate
+        });
+        
+        // Set initial export button state
+        exportBtn.disabled = filteredCustomers.length === 0;
+        
         renderCurrentPage();
 
     } catch (error) {
         console.error("Error:", error);
         tableBody.innerHTML = `<tr><td colspan="8">Error loading data.</td></tr>`;
+        exportBtn.disabled = true;
     } finally {
         // Hide loading screen
         const loadingDiv = document.getElementById("loadingDiv");
         if (loadingDiv) loadingDiv.style.display = "none";
-    }
-
-    // Search function
-    const performSearch = () => {
-        // Get search criteria
-        const searchType = searchSelect.value.trim();
-        const searchValue = searchText.value.trim().toLowerCase();
-        const startDate = startingDate.value;
-        const endDate = endingDate.value;
-
-        currentPage = 1;
-        filteredCustomers = [...allCustomers];
-
-        // Text search
-        if (searchType && searchValue) {
-            filteredCustomers = filteredCustomers.filter(customer => {
-                switch (searchType) {
-                    case 'customerId':
-                        return customer.id && customer.id.toString().toLowerCase().includes(searchValue);
-                    case 'customerName':
-                        return customer.customer_name && customer.customer_name.toLowerCase().includes(searchValue);
-                    case 'customerPhoneNo':
-                        return customer.mobile_number && customer.mobile_number.toString().includes(searchValue);
-                    default:
-                        return false;
-                }
-            });
-        }
-
-        // Date filter
-        if (startDate || endDate) {
-            filteredCustomers = filteredCustomers.filter(customer => {
-                if (!customer.created_on) return false;
-                const customerDate = new Date(customer.created_on);
-                const start = startDate ? new Date(startDate) : null;
-                const end = endDate ? new Date(endDate) : null;
-
-                if (start && end) return customerDate >= start && customerDate <= end;
-                if (start) return customerDate >= start;
-                if (end) return customerDate <= end;
-                return true;
-            });
-        }
-
-        renderCurrentPage();
-    }
-
-    // Clear function
-    const clearSearch = () => {
-        searchSelect.value = "";
-        searchText.value = "";
-        document.getElementById("starting-date-text").value = "";
-        document.getElementById("ending-date-text").value = "";
-        startingDate.value = "";
-        endingDate.value = "";
-        searchText.placeholder = "Search Text";
-        searchText.type = "text";
-        searchText.removeAttribute("maxlength");
-
-        filteredCustomers = [...allCustomers];
-        currentPage = 1;
-        renderCurrentPage();
     }
 
     // Event listeners
@@ -183,6 +146,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     clearBtn.addEventListener("click", clearSearch);
+
+    exportBtn.addEventListener("click", exportToCSV);
 
     // Pagination
     document.getElementById("prevPageBtn").addEventListener("click", () => {

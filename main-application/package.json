@@ -1,6 +1,6 @@
 {
     "name": "guide-mts",
-    "version": "1.5.1",
+    "version": "1.6.0",
     "description": "Guide Motor Training School Management System",
     "author": "Yash Balotiya",
     "main": "src/scripts/main.js",

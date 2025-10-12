@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 12/10/2025
 */
 
 // Importing required modules from Electron
@@ -41,7 +41,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     changeDatabase: () => ipcRenderer.invoke('change-database'),
 
     // Listen for change database requests from menu
-    onChangeDatabaseRequest: (callback) => ipcRenderer.on('change-database-request', callback),
+    onChangeDatabaseRequest: (callback) => ipcRenderer.on('change-database-request', callback)
 });
 
 // Exposing dialog box APIs
@@ -183,4 +183,10 @@ contextBridge.exposeInMainWorld('form14API', {
 contextBridge.exposeInMainWorld('searchPageAPI', {
     // API to search customers based on criteria
     getAllCustomers: () => ipcRenderer.invoke('get-all-customers'),
+
+    // API to show save dialog
+    showSaveDialog: (options) => ipcRenderer.invoke('show-save-dialog', options),
+
+    // API to write file
+    writeFile: (filePath, content) => ipcRenderer.invoke('write-file', filePath, content),
 });
