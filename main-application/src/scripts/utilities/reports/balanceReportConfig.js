@@ -32,11 +32,6 @@ export const balanceReportConfig = {
     
     // Search field configuration
     searchFields: {
-        customerId: {
-            field: 'customer_id',
-            placeholder: 'Enter Customer ID',
-            type: 'text'
-        },
         customerName: {
             field: 'customer_name',
             placeholder: 'Enter Customer Name',

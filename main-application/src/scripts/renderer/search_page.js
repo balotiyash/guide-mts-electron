@@ -56,6 +56,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             const row = document.createElement("tr");
             const globalIndex = startIndex + index + 1;
             
+            // Add click handler to copy phone number and redirect to data entry
+            row.style.cursor = "pointer";
+            row.addEventListener("click", () => {
+                const phoneNumber = customer.mobile_number || '';
+                if (phoneNumber) {
+                    // Store phone number in localStorage for data entry page
+                    localStorage.setItem('prefillPhoneNumber', phoneNumber);
+                    // Redirect to data entry page
+                    window.electronAPI.navigateTo('data_entry.html');
+                } else {
+                    window.dialogBoxAPI.showDialogBox("info", "Info", "No phone number available for this customer.", ["OK"]);
+                }
+            });
+            
             row.innerHTML = `
                 <td class="w5">${globalIndex}</td>
                 <td class="w5">${customer.id || ''}</td>
@@ -171,11 +185,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         searchText.value = "";
         
         switch(selectedType) {
-            case "customerId":
-                searchText.placeholder = "Enter Customer ID";
-                searchText.type = "text";
-                searchText.removeAttribute("maxlength");
-                break;
             case "customerName":
                 searchText.placeholder = "Enter Customer Name";
                 searchText.type = "text";
@@ -186,6 +195,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 searchText.type = "tel";
                 searchText.maxLength = 10;
                 break;
+            case "customerDOB":
+                searchText.placeholder = "Enter Date of Birth (DD-MM-YYYY)";
+                searchText.type = "text";
+                searchText.removeAttribute("maxlength");
+                break;
             default:
                 searchText.placeholder = "Search Text";
                 searchText.type = "text";
@@ -193,10 +207,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // Phone number validation
+    // Input validation
     searchText.addEventListener("input", () => {
         if (searchSelect.value === "customerPhoneNo") {
             searchText.value = searchText.value.replace(/[^0-9]/g, "");
+        } else if (searchSelect.value === "customerDOB") {
+            // Allow only digits, dashes, and slashes for date input
+            searchText.value = searchText.value.replace(/[^0-9\-\/]/g, "");
         }
     });
 });

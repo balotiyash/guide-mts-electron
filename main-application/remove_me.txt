@@ -52,6 +52,7 @@ use navigation api or location for page navigation
 name functions as handleSubmit
 format car entry,
 user friendly errors should be displayed and detailed on console
+make date either / or - also mask __-__-____ or DD-MM-YYYY
 
 backup format main.js
 same for menu main.js

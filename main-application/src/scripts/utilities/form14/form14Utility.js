@@ -3,8 +3,11 @@
  * Author: Yash Balotiya
  * Description: Form 14 utility functions - ES6 function-based
  * Created on: 11/10/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 12/10/2025
  */
+
+// Import shared date utilities
+import { sanitizeDate } from '../../shared.js';
 
 // Export functions that need access to form14.js variables
 export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, formatDate, clearPreview, showLoading, hideLoading, updateFormInfo, showPreview, initializeDatePickers, handleGeneratePreview) => {
@@ -30,29 +33,19 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
         setTimeout(() => window.print(), 100);
     };
 
-    // Clear form handler
+    // Clear form handler - simply refresh the page
     const handleClearForm = () => {
-        const { startDate, endDate, printBtn } = elements;
-        
-        // Clear date inputs manually since we don't have access to picker instances
-        if (startDate) startDate.value = '';
-        if (endDate) endDate.value = '';
-        clearPreview();
-        
-        if (printBtn) printBtn.disabled = true;
-        currentData.currentData = null;
+        window.location.reload();
     };
 
     // Event listeners setup
     const setupEventListeners = () => {
-        const { generateBtn, printBtn, clearBtn, backBtn, startDate, endDate } = elements;
+        const { generateBtn, printBtn, clearBtn, backBtn } = elements;
         
         generateBtn?.addEventListener('click', handleGeneratePreview);
         printBtn?.addEventListener('click', handlePrintForm);
         clearBtn?.addEventListener('click', handleClearForm);
         backBtn?.addEventListener('click', () => window.electronAPI.navigateTo('dashboard.html'));
-        startDate?.addEventListener('input', clearPreview);
-        endDate?.addEventListener('input', clearPreview);
     };
 
     // Form generation
@@ -67,12 +60,48 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
         const photoSrc = customer_image ? `data:image/jpeg;base64,${customer_image}` : null;
         const signatureSrc = customer_signature ? `data:image/jpeg;base64,${customer_signature}` : null;
         
+        // Calculate completion and passing dates (issue date - 1 day)
+        let calculatedCompletionDate = '';
+        let calculatedPassingDate = '';
+        
+        if (mdl_issued_date) {
+            try {
+                // Use shared utility to sanitize the date
+                const sanitizedIssueDate = sanitizeDate(mdl_issued_date);
+                
+                if (sanitizedIssueDate) {
+                    // Parse the sanitized date (YYYY-MM-DD format)
+                    const issueDate = new Date(sanitizedIssueDate);
+                    
+                    if (!isNaN(issueDate.getTime())) {
+                        // Create a new date object and subtract 1 day
+                        const oneDayBefore = new Date(issueDate);
+                        oneDayBefore.setDate(oneDayBefore.getDate() - 1);
+                        
+                        // Use sanitizeDate again to get proper YYYY-MM-DD format
+                        const oneDayBeforeFormatted = sanitizeDate(oneDayBefore);
+                        
+                        if (oneDayBeforeFormatted) {
+                            calculatedCompletionDate = formatDate(oneDayBeforeFormatted);
+                            calculatedPassingDate = formatDate(oneDayBeforeFormatted);
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error calculating completion/passing dates:', error);
+                // Fallback to empty strings if calculation fails
+                calculatedCompletionDate = '';
+                calculatedPassingDate = '';
+            }
+        }
+        
         // Format dates
         const dates = {
             dob: formatDate(customer_dob),
             enrollment: formatDate(created_on),
-            completion: formatDate(completion_date),
-            passing: formatDate(mdl_issued_date),
+            completion: calculatedCompletionDate, // Using calculated date (issue - 1 day)
+            passing: calculatedPassingDate,       // Using calculated date (issue - 1 day)
+            issue: formatDate(mdl_issued_date),   // Original issue date
             validity: formatDate(mdl_validity_date)
         };
 
@@ -128,7 +157,7 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
                             <th>M. D. L. No.:</th>
                             <td><span class="data-field">${mdl_no || ''}</span></td>
                             <th>Date of Issue:</th>
-                            <td><span class="data-field">${dates.passing}</span></td>
+                            <td><span class="data-field">${dates.issue}</span></td>
                             <th>Valid Up to:</th>
                             <td><span class="data-field">${dates.validity}</span></td>
                         </tr>

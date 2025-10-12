@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Form 14 renderer script - ES6 function-based
  * Created on: 01/10/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 12/10/2025
  */
 
 // Import utilities
@@ -58,7 +58,7 @@ const showPreview = () => {
     }
 };
 
-// Clear content
+// Clear content - simplified (no longer used for clear button)
 const clearPreview = () => {
     const tableContainer = document.querySelector('.table-container');
     const { content, printBtn, recordCount, pageCount } = elements;

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
- * Last Modified: 04/10/2025
+ * Last Modified: 12/10/2025
  */
 
 // Import required modules & libraries
@@ -67,6 +67,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // >>> NEW: Call setupImageInputListeners immediately on DOMContentLoaded <<<
     setupImageInputListeners(imageBlobs);
+
+    // Check for prefilled phone number from search page
+    const prefillPhoneNumber = localStorage.getItem('prefillPhoneNumber');
+    if (prefillPhoneNumber) {
+        // Clear the stored value so it doesn't persist
+        localStorage.removeItem('prefillPhoneNumber');
+        
+        // Simulate typing digit by digit to trigger the auto-search functionality
+        const simulateTyping = async (phoneNumber) => {
+            formElements.phoneInput.value = '';
+            
+            for (let i = 0; i < phoneNumber.length; i++) {
+                // Add one digit at a time
+                formElements.phoneInput.value += phoneNumber[i];
+                
+                // Trigger input event for each digit
+                const inputEvent = new Event('input', { bubbles: true });
+                formElements.phoneInput.dispatchEvent(inputEvent);
+                
+                // Small delay to simulate realistic typing
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+        };
+        
+        // Start the simulation after a small delay to ensure all listeners are set up
+        setTimeout(() => {
+            simulateTyping(prefillPhoneNumber);
+        }, 1);
+    }
 
     // Phone number input validation: Allow only digits and limit to 10 characters
     formElements.phoneInput.addEventListener("input", () => {

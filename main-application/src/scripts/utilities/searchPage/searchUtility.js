@@ -35,12 +35,37 @@ const performSearch = () => {
     if (searchType && searchValue) {
         const filtered = filteredCustomers.filter(customer => {
             switch (searchType) {
-                case 'customerId':
-                    return customer.id && customer.id.toString().toLowerCase().includes(searchValue);
                 case 'customerName':
                     return customer.customer_name && customer.customer_name.toLowerCase().includes(searchValue);
                 case 'customerPhoneNo':
                     return customer.mobile_number && customer.mobile_number.toString().includes(searchValue);
+                case 'customerDOB':
+                    // Handle DOB search with flexible date format matching
+                    if (customer.customer_dob) {
+                        const dobFormatted = isoToDDMMYYYY(customer.customer_dob);
+                        const dobWithSlash = isoToDDMMYYYY(customer.customer_dob, '/');
+                        
+                        // Try to convert user input to different formats for comparison
+                        let userInputISO = '';
+                        
+                        // If user input is in DD-MM-YYYY or DD/MM/YYYY format, convert to YYYY-MM-DD
+                        const userDateMatch = searchValue.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+                        if (userDateMatch) {
+                            const [, day, month, year] = userDateMatch;
+                            userInputISO = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+                        }
+                        
+                        // Check multiple format matches
+                        return dobFormatted.includes(searchValue) || 
+                               dobWithSlash.includes(searchValue) ||
+                               // Check if the original database format matches (YYYY-MM-DD)
+                               customer.customer_dob.includes(searchValue) ||
+                               // Check if converted user input matches database format
+                               (userInputISO && customer.customer_dob.includes(userInputISO)) ||
+                               // Remove separators and do numeric comparison
+                               dobFormatted.replace(/[-/]/g, '').includes(searchValue.replace(/[-/]/g, ''));
+                    }
+                    return false;
                 default:
                     return false;
             }
