@@ -184,9 +184,36 @@ contextBridge.exposeInMainWorld('searchPageAPI', {
     // API to search customers based on criteria
     getAllCustomers: () => ipcRenderer.invoke('get-all-customers'),
 
+    // API to get all balance reports
+    getAllBalanceReports: () => ipcRenderer.invoke('get-all-balance-reports'),
+
     // API to show save dialog
     showSaveDialog: (options) => ipcRenderer.invoke('show-save-dialog', options),
 
     // API to write file
     writeFile: (filePath, content) => ipcRenderer.invoke('write-file', filePath, content),
+});
+
+// Exposing Balance Report APIs
+contextBridge.exposeInMainWorld('balanceReportAPI', {
+    // API to get all balance data
+    getAllBalances: () => ipcRenderer.invoke('get-all-balances'),
+
+    // API to show save dialog
+    showSaveDialog: (options) => ipcRenderer.invoke('balance-show-save-dialog', options),
+
+    // API to write file
+    writeFile: (filePath, content) => ipcRenderer.invoke('balance-write-file', filePath, content),
+});
+
+// Exposing Collection Report APIs
+contextBridge.exposeInMainWorld('collectionReportAPI', {
+    // API to get all collection data
+    getAllCollections: () => ipcRenderer.invoke('get-all-collections'),
+
+    // API to show save dialog
+    showSaveDialog: (options) => ipcRenderer.invoke('collection-show-save-dialog', options),
+
+    // API to write file
+    writeFile: (filePath, content) => ipcRenderer.invoke('collection-write-file', filePath, content),
 });

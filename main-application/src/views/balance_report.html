@@ -1,0 +1,135 @@
+<!-- 
+    File: src/views/balance_report.html
+    Author: Yash Balotiya
+    Description: This page contains all the HTML5 code of the Balance Report Page.
+    Created on: 12/10/2025
+    Last Modified: 12/10/2025
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tab Title -->
+    <title>Guide Motor Training School | Balance Report</title>
+
+    <!-- Content Security Policy (adjusted to allow CDN) -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' https://cdn.jsdelivr.net; 
+        style-src 'self' 'unsafe-inline'; 
+        font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
+        img-src 'self' data:;
+    ">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../scripts/imports/flatpickr.min.css">
+    <link rel="stylesheet" href="../styles/shared.css">
+    <link rel="stylesheet" href="../styles/search_page.css" />
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingDiv">
+        <h3>Loading...</h3>
+        <img src="../assets/gifs/loading_animation.gif" alt="Loading Animation">
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <h1>BALANCE REPORT</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="panels">
+            <!-- Main Form Title -->
+            <div class="form-content" id="formContent">
+                <!-- Search Type -->
+                <div class="label-above">
+                    <label for="searchSelect">Search Type</label>
+                    <select name="" id="searchSelect">
+                        <option value="">Select Search Type</option>
+                        <option value="customerId">Customer ID</option>
+                        <option value="customerName">Customer Name</option>
+                        <option value="mobileNumber">Mobile Number</option>
+                    </select>
+                </div>
+
+                <!-- Input Search -->
+                <div class="label-above">
+                    <label for="searchText">Search Text</label>
+                    <input type="text" id="searchText" placeholder="Search Text" autocomplete="off" />
+                </div>
+
+                <!-- Starting Date -->
+                <div class="label-above">
+                    <label for="starting-date">Starting Date</label>
+                    <input type="text" id="starting-date-text" placeholder="DD-MM-YYYY" autocomplete="off" />
+                    <input type="date" id="starting-date" name="starting-date" hidden />
+                </div>
+
+                <!-- Ending Date -->
+                <div class="label-above">
+                    <label for="ending-date">Ending Date</label>
+                    <input type="text" id="ending-date-text" placeholder="DD-MM-YYYY" autocomplete="off" />
+                    <input type="date" id="ending-date" name="ending-date" hidden />
+                </div>
+
+                <!-- Form Buttons -->
+                <div id="formButtons" class="buttons">
+                    <button type="button" class="btn green" id="search-btn">Search</button>
+                    <button type="button" class="btn yellow" id="export-btn">Export</button>
+                    <button type="button" class="btn orange" id="clear-btn">Clear</button>
+                </div>
+            </div>
+
+            <!-- Table Container -->
+            <div class="table-container">
+                <h2>Search Results</h2>
+
+                <!-- Customer Details Table -->
+                <table class="instructor-table" id="customerTable">
+                    <thead>
+                        <tr>
+                            <th class="w5">Sr. No.</th>
+                            <th class="w5">ID</th>
+                            <th class="w15">Name</th>
+                            <th class="w10">Mobile No.</th>
+                            <th class="w10">Total Amount</th>
+                            <th class="w10">Total Paid</th>
+                            <th class="w10">Balance Amount</th>
+                            <th class="w10">Last Payment Date</th>
+                            <th class="w25">Job</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div class="scrollDiv">
+                    <table>
+                        <tbody id="data-table-body">
+                            <!-- Dynamic Rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination controls -->
+                <div id="paginationControls" class="pagination">
+                    <button id="prevPageBtn">Previous</button>
+                    <span id="pageInfo"></span>
+                    <button id="nextPageBtn">Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../scripts/imports/flatpickr.js"></script>
+    <script src="../scripts/imports/inputmask.js"></script>
+    <script type="module" src="../scripts/renderer/balance_report.js"></script>
+</body>
+
+</html>

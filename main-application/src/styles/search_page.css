@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: Styles for Search Page
     Created on: 11/10/2025
-    Last Modified: 11/10/2025
+    Last Modified: 12/10/2025
 */
 
 /* Main Page */
@@ -83,6 +83,10 @@ body {
 
 .w20 {
     width: 20%;
+}
+
+.w25 {
+    width: 25%;
 }
 
 .w30 {

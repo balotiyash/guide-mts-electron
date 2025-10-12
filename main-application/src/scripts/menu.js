@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 12/10/2025
 */
 
 // Module JS
@@ -37,34 +37,16 @@ const createMenuTemplate = (win) => {
             ]
         }] : []),
 
-        // File Menu
+        // Home Menu
         {
-            label: 'File',
+            label: 'Home',
             submenu: [
                 {
                     label: 'Dashboard',
                     click: () => {
                         win.loadFile(path.join(__dirname, '../views/dashboard.html'));
                     },
-                },
-                { type: 'separator' },
-                {
-                    label: 'Search Customers',
-                    click: () => {
-                        win.loadFile(path.join(__dirname, '../views/search_page.html'));
-                    },
-                },
-                { type: 'separator' },
-                ...(isMac ? [
-                    { role: 'close' }
-                ] : [
-                    {
-                        label: 'Exit',
-                        click: () => {
-                            app.quit();
-                        }
-                    }
-                ])
+                }
             ]
         },
 
@@ -126,89 +108,70 @@ const createMenuTemplate = (win) => {
                 {
                     label: 'Customer Report',
                     click: () => {
-                        console.log('Customer Report clicked');
-                        // TODO: Implement customer report functionality
+                        win.loadFile(path.join(__dirname, '../views/search_page.html'));
                     },
                 },
                 {
                     label: 'Balance Report',
                     click: () => {
-                        console.log('Balance Report clicked');
-                        // TODO: Implement balance report functionality
+                        win.loadFile(path.join(__dirname, '../views/balance_report.html'));
                     },
                 },
                 {
                     label: 'Collection Report',
                     click: () => {
-                        console.log('Collection Report clicked');
-                        // TODO: Implement collection report functionality
+                        win.loadFile(path.join(__dirname, '../views/collection_report.html'));
                     },
                 },
             ],
         },
 
         // Edit Menu (standard editing functions)
-        {
-            label: 'Edit',
-            submenu: [
-                { role: 'undo' },
-                { role: 'redo' },
-                { type: 'separator' },
-                { role: 'cut' },
-                { role: 'copy' },
-                { role: 'paste' },
-                ...(isMac ? [
-                    { role: 'pasteAndMatchStyle' },
-                    { role: 'delete' },
-                    { role: 'selectAll' },
-                    { type: 'separator' },
-                    {
-                        label: 'Speech',
-                        submenu: [
-                            { role: 'startSpeaking' },
-                            { role: 'stopSpeaking' }
-                        ]
-                    }
-                ] : [
-                    { role: 'delete' },
-                    { type: 'separator' },
-                    { role: 'selectAll' }
-                ])
-            ]
-        },
-
-        // View Menu
-        {
-            label: 'View',
-            submenu: [
-                { role: 'reload' },
-                { role: 'forceReload' },
-                { role: 'toggleDevTools' },
-                { type: 'separator' },
-                { role: 'resetZoom' },
-                { role: 'zoomIn' },
-                { role: 'zoomOut' },
-                { type: 'separator' },
-                { role: 'togglefullscreen' }
-            ]
-        },
+        // {
+        //     label: 'Edit',
+        //     submenu: [
+        //         { role: 'undo' },
+        //         { role: 'redo' },
+        //         { type: 'separator' },
+        //         { role: 'cut' },
+        //         { role: 'copy' },
+        //         { role: 'paste' },
+        //         ...(isMac ? [
+        //             { role: 'pasteAndMatchStyle' },
+        //             { role: 'delete' },
+        //             { role: 'selectAll' },
+        //             { type: 'separator' },
+        //             {
+        //                 label: 'Speech',
+        //                 submenu: [
+        //                     { role: 'startSpeaking' },
+        //                     { role: 'stopSpeaking' }
+        //                 ]
+        //             }
+        //         ] : [
+        //             { role: 'delete' },
+        //             { type: 'separator' },
+        //             { role: 'selectAll' }
+        //         ])
+        //     ]
+        // },
 
         // Window Menu
-        {
-            label: 'Window',
-            submenu: [
-                { role: 'minimize' },
-                { role: 'zoom' },
-                ...(isMac ? [
-                    { type: 'separator' },
-                    { role: 'front' },
-                    { type: 'separator' },
-                    { role: 'window' }
-                ] : [
-                    { role: 'close' }
-                ])
-            ]
-        },
+        // {
+        //     label: 'Window',
+        //     submenu: [
+        //         { role: 'minimize' },
+        //         { role: 'zoom' },
+        //         ...(isMac ? [
+        //             { type: 'separator' },
+        //             { role: 'front' },
+        //             { type: 'separator' },
+        //             { role: 'window' }
+        //         ] : [
+        //             { role: 'close' }
+        //         ])
+        //     ]
+        // },
 
         // Tools Menu
         {
@@ -229,13 +192,6 @@ const createMenuTemplate = (win) => {
                     },
                 },
                 { type: 'separator' },
-                {
-                    label: 'Preferences',
-                    click: () => {
-                        console.log('Preferences clicked');
-                        // TODO: Implement preferences functionality
-                    }
-                },
                 // Only show Exit on non-macOS platforms (macOS handles this in app menu)
                 ...(!isMac ? [
                     { type: 'separator' },
@@ -247,6 +203,22 @@ const createMenuTemplate = (win) => {
                     }
                 ] : [])
             ],
+        },
+
+        // View Menu
+        {
+            label: 'View',
+            submenu: [
+                { role: 'reload' },
+                { role: 'forceReload' },
+                { role: 'toggleDevTools' },
+                { type: 'separator' },
+                { role: 'resetZoom' },
+                { role: 'zoomIn' },
+                { role: 'zoomOut' },
+                { type: 'separator' },
+                { role: 'togglefullscreen' }
+            ]
         },
 
         // Help Menu

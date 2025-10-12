@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 12/10/2025
 */
 
 // Importing required modules & libraries
@@ -26,6 +26,8 @@ import registerVehicleHandlers from "./main/ipc/vehicleHandler.js";
 import registerFuelEntryHandlers from "./main/ipc/fuelEntryHandler.js";
 import registerForm14Handlers from "./main/ipc/form14Handler.js";
 import registerSearchHandlers from "./main/ipc/searchHandler.js";
+import registerBalanceReportHandlers from "./main/ipc/balanceReportHandler.js";
+import registerCollectionReportHandlers from "./main/ipc/collectionReportHandler.js";
 
 // Logging the meta information
 autoUpdater.logger = log;
@@ -87,6 +89,8 @@ app.whenReady().then(() => {
         registerFuelEntryHandlers(); // register all fuel entry IPC
         registerForm14Handlers(); // register all form14 IPC
         registerSearchHandlers(); // register all search IPC
+        registerBalanceReportHandlers(); // register all balance report IPC
+        registerCollectionReportHandlers(); // register all collection report IPC
 
         createWindow();
     } catch (err) {
