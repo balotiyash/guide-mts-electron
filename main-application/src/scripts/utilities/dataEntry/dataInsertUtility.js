@@ -2,11 +2,12 @@
    Author: Yash Balotiya
    Description: Utility functions for inserting data from the data entry form into the database.
    Created on: 21/09/2025
-   Last Modified: 22/09/2025
+   Last Modified: 20/10/2025
 */
 
 // Importing required modules & libraries
 import { blobToBase64 } from "../../utilities/dataEntry/dataEntryUtility.js";
+import { sendSMSPrompt } from "../sms/smsUtility.js";
 
 // Function to handle data insertion logic
 const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) => {
@@ -31,6 +32,10 @@ const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) =>
         if (response?.status === "success") {
             // Show success message
             await window.dialogBoxAPI.showDialogBox("info", "Job Created", "A new job has been created for the existing customer.");
+
+            // Send welcome SMS for job creation
+            await sendSMSPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
+            
             window.location.href = "./payment_entry.html";
         } else {
             // Show error message
@@ -43,6 +48,10 @@ const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) =>
         if (response?.status === "success") {
             // Show success message
             await window.dialogBoxAPI.showDialogBox("info", "Customer Created", "The customer has been created successfully.");
+
+            // Send welcome SMS
+            await sendSMSPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
+
             window.location.href = "./payment_entry.html";
         } else {
             // Show error message
@@ -119,5 +128,6 @@ const collectFormValues = async (formElements, imageBlobs) => {
 // Export functions
 export {
     insertDataUtility,
-    collectFormValues
+    collectFormValues,
+    sendSMSPrompt
 };

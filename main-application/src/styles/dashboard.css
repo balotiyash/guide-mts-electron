@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This file contains all the CSS code of the Dashboard Page.
     Created on: 05/08/2025
-    Last Modified: 11/10/2025
+    Last Modified: 18/10/2025
 */
 
 /* Main Container */
@@ -96,4 +96,72 @@
 
 .dashboardButton:nth-child(2) img {
     width: 80%;
+}
+
+/* Floating Bubbles Styles */
+#floatingBubbles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    font-size: 12px;
+    user-select: none;
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
+    will-change: transform, opacity;
+}
+
+.bubble:hover {
+    opacity: 1 !important;
+}
+
+.bubble:nth-child(1) {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.15), rgba(74, 144, 226, 0.35));
+    color: #2c5aa0;
+    font-size: 13px;
+}
+
+.bubble:nth-child(2) {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.15), rgba(245, 166, 35, 0.35));
+    color: #d68910;
+    font-size: 11px;
+}
+
+.bubble:nth-child(3) {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, rgba(82, 196, 26, 0.15), rgba(82, 196, 26, 0.35));
+    color: #389e0d;
+    font-size: 12px;
+}
+
+.bubble:nth-child(4) {
+    width: 110px;
+    height: 110px;
+    background: linear-gradient(135deg, rgba(235, 47, 6, 0.15), rgba(235, 47, 6, 0.35));
+    color: #cf1322;
+    font-size: 13px;
 }

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Service functions for payment processing and management.
  * Created on: 30/09/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 20/10/2025
  */
 
 // Importing required modules & libraries
@@ -20,6 +20,7 @@ const getAllPendingPayments = async () => {
                     wd.id AS work_id,
                     c.customer_name,
                     wd.work,
+                    c.mobile_number,
                     CAST(wd.charged_amount AS REAL) AS charged_amount,
                     (CAST(wd.charged_amount AS REAL) - IFNULL(SUM(CAST(p.amount_paid AS REAL)), 0)) AS pending_amount
                 FROM work_descriptions wd

@@ -3,14 +3,14 @@
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 20/10/2025
  */
 
 // Import required modules & libraries
 import { fillForm, setupImageInputListeners } from "./data_entry_load_data.js";
 import { setDropDownNames, fetchWorkDescriptions } from "../utilities/dataEntry/dataEntryUtility.js";
 import dateUtility from "../utilities/dataEntry/dateUtility.js";
-import { insertDataUtility, collectFormValues } from "../utilities/dataEntry/dataInsertUtility.js";
+import { insertDataUtility, collectFormValues, sendSMSPrompt } from "../utilities/dataEntry/dataInsertUtility.js";
 // import log from "../logger.js";
 
 // Log the loading of the data entry script
@@ -162,6 +162,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (updateResponse?.status === "success") {
             // Show success message
             await window.dialogBoxAPI.showDialogBox("info", "Customer Updated", "The customer has been updated successfully.");
+            
+            // Send SMS for successful update
+            await sendSMSPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
+            
             window.location.reload();
         } else {
             // Show error message

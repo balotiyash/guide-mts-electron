@@ -3,7 +3,7 @@
     Author: Yash Balotiya, Ayush Shetty
     Description: This page contains all the HTML5 code of the Payment Entry Page.
     Created on: 09/08/2025
-    Last Modified: 21/09/2025
+    Last Modified: 20/10/2025
 -->
 
 <!DOCTYPE html>
@@ -16,13 +16,14 @@
     <!-- Tab Title -->
     <title>Guide Motor Training School | Payment Entry</title>
 
-    <!-- Content Security Policy (adjusted to allow CDN) -->
+    <!-- Content Security Policy (adjusted to allow CDN and SMS service) -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self'; 
         script-src 'self' https://cdn.jsdelivr.net; 
         style-src 'self' 'unsafe-inline'; 
         font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
-        img-src 'self' data:;
+        img-src 'self' data: blob:;
+        connect-src 'self' http://www.smsjust.com https://www.smsjust.com;
     ">
 
     <!-- Stylesheets -->
