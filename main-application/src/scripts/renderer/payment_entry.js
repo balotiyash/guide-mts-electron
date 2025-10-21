@@ -1,6 +1,6 @@
 /*
  * File: src/scripts/renderer/payment_entry.js
- * Author: Yash Balotiya
+ * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code for payment entry page. This is the main page for it.
  * Created on: 16/09/2025
  * Last Modified: 21/10/2025
@@ -10,6 +10,7 @@
 import { renderRows, renderCurrentPage, submitPayment } from "../utilities/paymentEntry/paymentUtility.js";
 import { printInvoiceForSelectedUser } from "../utilities/paymentEntry/printInvoiceUtility.js";
 import { paymentState } from "../utilities/paymentEntry/paymentUtility.js";
+import { sendPaymentSMSWithChoice } from "../utilities/sms/smsUtility.js";
 
 // On window load
 document.addEventListener('DOMContentLoaded', async () => {
@@ -129,6 +130,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (paidPayments.length === 0) {
                 const paidData = await window.paymentEntryAPI.getAllPaidPayments();
                 paidPayments = paidData?.data || [];
+
+                paidPayments = paidPayments.map(p => {
+                    const original = allPayments.find(a => a.customer_id === p.customer_id && a.work_id === p.work_id);
+                    return { ...p, mobile_number: original?.mobile_number || null };
+                });
             }
             currentPage = 1;
             const res = renderCurrentPage(currentPage, limit, paidPayments, "", tableBody, (u, w, p) => {
@@ -175,14 +181,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Handle response
         if (response.success) {
             // Confirm Dialog
-            window.dialogBoxAPI.showDialogBox('info', 'Updated', 'Payment updated successfully.', ['OK']);
+            await window.dialogBoxAPI.showDialogBox('info', 'Updated', 'Payment updated successfully.', ['OK']);
 
             // SMS Notification
             const { mobile_number, customerName } = paymentState;
             console.log(mobile_number, customerName);
 
             if (!mobile_number || !customerName) {
-                window.dialogBoxAPI.showDialogBox('error', 'No Selection', 'Please select a record to edit.', ['OK']);
+                await window.dialogBoxAPI.showDialogBox('error', 'No Selection', 'Please select a record to edit.', ['OK']);
                 return;
             }
 

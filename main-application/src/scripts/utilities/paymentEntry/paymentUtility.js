@@ -1,6 +1,6 @@
 /*
  * File: src/scripts/utilities/paymentEntry/paymentUtility.js
- * Author: Yash Balotiya
+ * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code to handle payment entry page utilities
  * Created on: 22/09/2025
  * Last Modified: 21/10/2025
@@ -53,6 +53,7 @@ const renderRows = (tableBody, data, type = "pending", onRowSelect = null) => {
 
         // On row click → fill form
         row.addEventListener("click", () => {
+
             // Selected values
             const selectedUserId = item.customer_id;
             const selectedWorkId = item.work_id;
