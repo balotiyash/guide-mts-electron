@@ -3,12 +3,13 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code for payment entry page. This is the main page for it.
  * Created on: 16/09/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 21/10/2025
  */
 
 // Importing required 
 import { renderRows, renderCurrentPage, submitPayment } from "../utilities/paymentEntry/paymentUtility.js";
 import { printInvoiceForSelectedUser } from "../utilities/paymentEntry/printInvoiceUtility.js";
+import { paymentState } from "../utilities/paymentEntry/paymentUtility.js";
 
 // On window load
 document.addEventListener('DOMContentLoaded', async () => {
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
             if (res && res.totalPages) totalPages = res.totalPages;
         }
-        
+
         // Hide loading indicator
         document.getElementById("loadingDiv").style.display = "none";
     });
@@ -169,11 +170,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // Call update API
-        const response = await window.paymentEntryAPI.updatePayment({paymentId, newAmount, newMode});
+        const response = await window.paymentEntryAPI.updatePayment({ paymentId, newAmount, newMode });
 
         // Handle response
         if (response.success) {
+            // Confirm Dialog
             window.dialogBoxAPI.showDialogBox('info', 'Updated', 'Payment updated successfully.', ['OK']);
+
+            // SMS Notification
+            const { mobile_number, customerName } = paymentState;
+            console.log(mobile_number, customerName);
+
+            if (!mobile_number || !customerName) {
+                window.dialogBoxAPI.showDialogBox('error', 'No Selection', 'Please select a record to edit.', ['OK']);
+                return;
+            }
+
+            await sendPaymentSMSWithChoice(mobile_number, customerName);
+
+            // Reload page to reflect changes
             window.location.reload();
         }
     });

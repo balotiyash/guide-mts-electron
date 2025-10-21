@@ -3,14 +3,17 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to handle payment entry page utilities
  * Created on: 22/09/2025
- * Last Modified: 20/10/2025
+ * Last Modified: 21/10/2025
  */
 
 // Import reusable SMS function
 import { sendPaymentSMSWithChoice } from "../sms/smsUtility.js";
 
-// Mobile number
-let mobile_number = null;
+// Mobile number & customer name of selected user (for SMS)
+export const paymentState = {
+    mobile_number: null,
+    customerName: null
+};
 
 // Function to render rows in the table
 const renderRows = (tableBody, data, type = "pending", onRowSelect = null) => {
@@ -54,7 +57,8 @@ const renderRows = (tableBody, data, type = "pending", onRowSelect = null) => {
             const selectedUserId = item.customer_id;
             const selectedWorkId = item.work_id;
             const selectedPaymentId = item.payment_id || null;
-            mobile_number = item.mobile_number || null;
+            paymentState.mobile_number = item.mobile_number || null;
+            paymentState.customerName = item.customer_name || '-';
 
             // Fill form fields
             const customerNameEl = document.getElementById("formCustomerName");
@@ -155,9 +159,6 @@ const submitPayment = async (userIdParam, workIdParam) => {
     const amountInput = parseFloat(amountInputValue);
     const paymentMode = document.getElementById("paymentMode")?.value.trim().toLowerCase();
     const pendingAmount = parseFloat(document.getElementById("formPendingAmount")?.textContent) || 0;
-    
-    // Get customer details from form (if available)
-    const customerName = document.getElementById("formCustomerName")?.textContent || 'Customer';
 
     // Validations
     if (!userIdParam || !workIdParam) {
@@ -188,8 +189,8 @@ const submitPayment = async (userIdParam, workIdParam) => {
         window.dialogBoxAPI.showDialogBox('info', 'Success', 'Payment submitted successfully.', ['OK'])
             .then(async () => {
                 // Send payment SMS if mobile number is available
-                if (mobile_number) {
-                    await sendPaymentSMSWithChoice(mobile_number, customerName);
+                if (paymentState.mobile_number) {
+                    await sendPaymentSMSWithChoice(paymentState.mobile_number, paymentState.customerName);
                 }
 
                 const choice = await window.dialogBoxAPI.showDialogBox(
