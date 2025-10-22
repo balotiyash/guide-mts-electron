@@ -3,11 +3,13 @@
  * Author: Yash Balotiya
  * Description: Generic utility for all report pages (Balance, Collection, etc.)
  * Created on: 12/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 22/10/2025
  */
 
+// Importing required modules & libraries
 import { isoToDDMMYYYY } from "../../shared.js";
 
+// Generic Report Utility Class
 class GenericReportUtility {
     constructor(config) {
         this.config = config;

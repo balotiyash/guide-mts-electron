@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This file contains all the CSS code for styling the Data Entry Page.
     Created on: 09/08/2025
-    Last Modified: 04/10/2025
+    Last Modified: 22/10/2025
 */
 
 body {
@@ -117,8 +117,8 @@ main {
 }
 
 .imageInput:last-child {
-    /* width: 20%; */
-    height: 50%;
+    width: 20%;
+    height: 65%;
     align-self: flex-end;
 }
 

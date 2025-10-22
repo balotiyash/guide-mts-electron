@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This file contains all the CSS code for styling the Invoice Page.
     Created on: 16/09/2025
-    Last Modified: 03/10/2025
+    Last Modified: 22/10/2025
 */
 
 * {
@@ -139,4 +139,12 @@ header {
     align-items: center;
     margin-bottom: 10px;
     gap: 6px;
+}
+
+#fingerImg {
+    width: 50px;
+    height: auto;
+    margin-right: 8px;
+    position: relative;
+    top: -30px;
 }

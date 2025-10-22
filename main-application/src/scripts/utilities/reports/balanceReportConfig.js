@@ -3,9 +3,10 @@
  * Author: Yash Balotiya
  * Description: Configuration for Balance Report
  * Created on: 12/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 22/10/2025
  */
 
+// Balance Report Configuration
 export const balanceReportConfig = {
     reportType: 'balance',
     reportName: 'Balance Report',

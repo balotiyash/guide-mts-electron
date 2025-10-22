@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 22/10/2025
 */
 
 // Module JS
@@ -126,65 +126,41 @@ const createMenuTemplate = (win) => {
             ],
         },
 
-        // Edit Menu (standard editing functions)
-        // {
-        //     label: 'Edit',
-        //     submenu: [
-        //         { role: 'undo' },
-        //         { role: 'redo' },
-        //         { type: 'separator' },
-        //         { role: 'cut' },
-        //         { role: 'copy' },
-        //         { role: 'paste' },
-        //         ...(isMac ? [
-        //             { role: 'pasteAndMatchStyle' },
-        //             { role: 'delete' },
-        //             { role: 'selectAll' },
-        //             { type: 'separator' },
-        //             {
-        //                 label: 'Speech',
-        //                 submenu: [
-        //                     { role: 'startSpeaking' },
-        //                     { role: 'stopSpeaking' }
-        //                 ]
-        //             }
-        //         ] : [
-        //             { role: 'delete' },
-        //             { type: 'separator' },
-        //             { role: 'selectAll' }
-        //         ])
-        //     ]
-        // },
-
-        // Window Menu
-        // {
-        //     label: 'Window',
-        //     submenu: [
-        //         { role: 'minimize' },
-        //         { role: 'zoom' },
-        //         ...(isMac ? [
-        //             { type: 'separator' },
-        //             { role: 'front' },
-        //             { type: 'separator' },
-        //             { role: 'window' }
-        //         ] : [
-        //             { role: 'close' }
-        //         ])
-        //     ]
-        // },
+        // Reminders Menu
+        {
+            label: 'Reminders',
+            submenu: [
+                {
+                    label: 'Payment Reminders',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/payment_reminders.html'));
+                    },
+                },
+                {
+                    label: 'Birthday Reminders',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/birthday_reminders.html'));
+                    },
+                },
+                {
+                    label: 'LL Test Reminders',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/ll_test_reminders.html'));
+                    },
+                },
+                {
+                    label: 'License Expiry Reminders',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/license_expiry_reminders.html'));
+                    },
+                },
+            ]
+        },
 
         // Tools Menu
         {
             label: 'Tools',
             submenu: [
-                {
-                    label: 'Reminders',
-                    click: () => {
-                        console.log("Reminders clicked");
-                        // TODO: Implement reminders functionality
-                    }
-                },
-                { type: 'separator' },
                 {
                     label: 'Change Database',
                     click: () => {

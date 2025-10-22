@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This file contains all the CSS code of the Dashboard Page.
     Created on: 05/08/2025
-    Last Modified: 18/10/2025
+    Last Modified: 22/10/2025
 */
 
 /* Main Container */
@@ -110,6 +110,10 @@
     overflow: hidden;
 }
 
+#floatingBubbles .bubble {
+    pointer-events: auto;
+}
+
 .bubble {
     position: absolute;
     border-radius: 50%;
@@ -128,10 +132,12 @@
     opacity: 0.8;
     transition: opacity 0.5s ease;
     will-change: transform, opacity;
+    padding: 10px;
 }
 
 .bubble:hover {
     opacity: 1 !important;
+    cursor: pointer;
 }
 
 .bubble:nth-child(1) {

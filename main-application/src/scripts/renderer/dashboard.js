@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage user dashboard functionality for the Guide Motor Training School application.
  * Created on: 08/08/2025
- * Last Modified: 18/10/2025
+ * Last Modified: 22/10/2025
 */
 
 // Importing required modules & libraries
@@ -172,11 +172,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("currentYearCountTxt").innerText = currentYearCount;
     document.getElementById("allTimeCountTxt").innerText = allTimeCount;
     document.getElementById("pendingPaymentsCountTxt").innerText = pendingPaymentsCount;
-
-    // Reminder button click event
-    document.getElementById("reminderButton").addEventListener("click", () => {
-        // window.open('reminder.html', '_blank', 'width=600,height=400');
-    });
 
     // Listen for change database requests from menu
     window.electronAPI.onChangeDatabaseRequest(async () => {
