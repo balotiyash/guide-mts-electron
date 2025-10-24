@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This file contains all the CSS code of the Dashboard Page.
     Created on: 05/08/2025
-    Last Modified: 22/10/2025
+    Last Modified: 24/10/2025
 */
 
 /* Main Container */
@@ -99,7 +99,7 @@
 }
 
 /* Floating Bubbles Styles */
-#floatingBubbles {
+/* #floatingBubbles {
     position: fixed;
     top: 0;
     left: 0;
@@ -170,4 +170,4 @@
     background: linear-gradient(135deg, rgba(235, 47, 6, 0.15), rgba(235, 47, 6, 0.35));
     color: #cf1322;
     font-size: 13px;
-}
+} */

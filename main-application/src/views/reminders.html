@@ -1,0 +1,130 @@
+<!-- 
+    File: src/views/reminders.html
+    Author: Yash Balotiya
+    Description: This page contains all the HTML5 code of the Reminders Page.
+    Created on: 24/10/2025
+    Last Modified: 24/10/2025
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tab Title -->
+    <title>Guide Motor Training School | Reminders</title>
+
+    <!-- Content Security Policy (adjusted to allow CDN) & SMS -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' https://cdn.jsdelivr.net; 
+        style-src 'self' 'unsafe-inline'; 
+        font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
+        img-src 'self' data:;
+        connect-src 'self' http://www.smsjust.com https://www.smsjust.com;
+    ">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../scripts/imports/flatpickr.min.css">
+    <link rel="stylesheet" href="../styles/shared.css">
+    <link rel="stylesheet" href="../styles/reminders.css" />
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingDiv">
+        <h3>Loading...</h3>
+        <img src="../assets/gifs/loading_animation.gif" alt="Loading Animation">
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <h1>REMINDERS</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Birthdays Reminder -->
+        <section class="reminderSection">
+            <span>
+                <!-- Title -->
+                <h2>Birthdays</h2>
+
+                <!-- Send Reminder -->
+                <button id="sendBirthdayReminderBtn" class="reminderBtn">Send SMS</button>
+            </span>
+
+            <!-- Load Data Button -->
+            <button id="loadBirthdayRemindersBtn" class="reminderBtn">Load Data</button>
+
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th class="w5"><input type="checkbox" id="selectAllBirthdayCheckbox"></th>
+                        <th class="w15">Sr. No.</th>
+                        <th class="w35">Name</th>
+                        <th class="w20">DOB</th>
+                        <th class="w20">Mobile No.</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <div class="scrollDiv">
+                <table>
+                    <tbody id="pendingPaymentsTableBody">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- LL Reminder -->
+        <section class="reminderSection">
+            <span>
+                <!-- Title -->
+                <h2>LL Completed</h2>
+
+                <!-- Send Reminder -->
+                <button id="sendLLCompletedReminderBtn" class="reminderBtn">Send SMS</button>
+            </span>
+
+            <!-- Load Data Button -->
+            <button id="loadBirthdayRemindersBtn" class="reminderBtn">Load Data</button>
+
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th class="w5"><input type="checkbox" id="selectAllBirthdayCheckbox"></th>
+                        <th class="w15">Sr. No.</th>
+                        <th class="w35">Name</th>
+                        <th class="w20">DOB</th>
+                        <th class="w20">Mobile No.</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <div class="scrollDiv">
+                <table>
+                    <tbody id="pendingPaymentsTableBody">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Payment Reminder -->
+        <section class="reminderSection"></section>
+
+        <!-- License Expiration Reminder -->
+        <section class="reminderSection"></section>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="../scripts/renderer/reminders.js"></script>
+</body>
+
+</html>

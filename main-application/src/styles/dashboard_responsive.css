@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This file contains all the CSS code of the responsiveness of Dashboard Page.
     Created on: 05/08/2025
-    Last Modified: 22/10/2025
+    Last Modified: 24/10/2025
 */
 
 /* Responsive */
@@ -97,7 +97,7 @@
     }
 
     .rightChild:nth-child(3) {
-        height: 420px;
+        height: 400px;
     }
 }
 

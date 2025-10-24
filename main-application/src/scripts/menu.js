@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 22/10/2025
+ * Last Modified: 24/10/2025
 */
 
 // Module JS
@@ -127,35 +127,35 @@ const createMenuTemplate = (win) => {
         },
 
         // Reminders Menu
-        {
-            label: 'Reminders',
-            submenu: [
-                {
-                    label: 'Payment Reminders',
-                    click: () => {
-                        win.loadFile(path.join(__dirname, '../views/payment_reminders.html'));
-                    },
-                },
-                {
-                    label: 'Birthday Reminders',
-                    click: () => {
-                        win.loadFile(path.join(__dirname, '../views/birthday_reminders.html'));
-                    },
-                },
-                {
-                    label: 'LL Test Reminders',
-                    click: () => {
-                        win.loadFile(path.join(__dirname, '../views/ll_test_reminders.html'));
-                    },
-                },
-                {
-                    label: 'License Expiry Reminders',
-                    click: () => {
-                        win.loadFile(path.join(__dirname, '../views/license_expiry_reminders.html'));
-                    },
-                },
-            ]
-        },
+        // {
+        //     label: 'Reminders',
+        //     submenu: [
+        //         {
+        //             label: 'Payment Reminders',
+        //             click: () => {
+        //                 win.loadFile(path.join(__dirname, '../views/payment_reminders.html'));
+        //             },
+        //         },
+        //         {
+        //             label: 'Birthday Reminders',
+        //             click: () => {
+        //                 win.loadFile(path.join(__dirname, '../views/birthday_reminders.html'));
+        //             },
+        //         },
+        //         {
+        //             label: 'LL Test Reminders',
+        //             click: () => {
+        //                 win.loadFile(path.join(__dirname, '../views/ll_test_reminders.html'));
+        //             },
+        //         },
+        //         {
+        //             label: 'License Expiry Reminders',
+        //             click: () => {
+        //                 win.loadFile(path.join(__dirname, '../views/license_expiry_reminders.html'));
+        //             },
+        //         },
+        //     ]
+        // },
 
         // Tools Menu
         {
@@ -168,6 +168,12 @@ const createMenuTemplate = (win) => {
                     },
                 },
                 { type: 'separator' },
+                {
+                    label: 'Reminders',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/reminders.html'));
+                    },
+                },
                 // Only show Exit on non-macOS platforms (macOS handles this in app menu)
                 ...(!isMac ? [
                     { type: 'separator' },
