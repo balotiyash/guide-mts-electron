@@ -22,6 +22,7 @@ main {
     margin-top: 10px;
 }
 
+/* Reminder Section */
 .reminderSection {
     border: 2px solid orange;
     border-radius: 10px;
@@ -33,6 +34,7 @@ main {
     align-items: center;
     overflow: auto;
     padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .reminderSection span {
@@ -42,22 +44,27 @@ main {
     align-items: center;
 }
 
+/* Table Styles */
 .reminderSection table {
     margin-top: 10px;
 }
 
+/* Load Birthday Reminders Button */
 .reminderBtn#loadBirthdayRemindersBtn {
     display: block;
     margin: 40px auto 0 auto;
 }
 
+/* Scrollable Div */
 .scrollDiv {
     display: none;
-    max-height: 350px;
+    height: 100vh;
+    /* max-height: 350px; */
     overflow-y: auto;
     width: 100%;
 }
 
+/* Reminder Button */
 .reminderBtn {
     padding: 10px 15px;
     background-color: brown;
@@ -76,16 +83,20 @@ main {
 /* Table Widths */
 .w5 {
     width: 5%;
+    /* min-width: 25px; */
 }
 
 .w15 {
     width: 15%;
+    /* min-width: 75px; */
 }
 
 .w20 {
     width: 20%;
+    /* min-width: 100px; */
 }
 
 .w35 {
     width: 35%;
+    /* min-width: 175px; */
 }

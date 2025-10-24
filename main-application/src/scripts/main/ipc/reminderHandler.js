@@ -8,7 +8,7 @@
 
 // Importing required modules & libraries
 import { ipcMain } from "electron";
-import { getBirthdayReminders } from "../services/reminderService.js";
+import { getBirthdayReminders, getLLReminders, getPaymentReminders, getLicenseExpirationReminders } from "../services/reminderService.js";
 
 // Function to register reminder handlers
 const registerReminderHandlers = () => {
@@ -23,4 +23,5 @@ const registerReminderHandlers = () => {
     });
 };
 
+// Exporting the registerReminderHandlers function
 export default registerReminderHandlers;
