@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Reminders Page.
     Created on: 24/10/2025
-    Last Modified: 24/10/2025
+    Last Modified: 25/10/2025
 -->
 
 <!DOCTYPE html>
@@ -33,12 +33,6 @@
 </head>
 
 <body>
-    <!-- Loading Screen -->
-    <div id="loadingDiv">
-        <h3>Loading...</h3>
-        <img src="../assets/gifs/loading_animation.gif" alt="Loading Animation">
-    </div>
-
     <!-- Header Section -->
     <header>
         <h1>REMINDERS</h1>
@@ -55,9 +49,6 @@
                 <!-- Send Reminder -->
                 <button id="sendBirthdayReminderBtn" class="reminderBtn">Send SMS</button>
             </span>
-
-            <!-- Load Data Button -->
-            <button id="loadBirthdayRemindersBtn" class="reminderBtn">Load Data</button>
 
             <!-- Table -->
             <table>
@@ -92,7 +83,7 @@
             </span>
 
             <!-- Load Data Button -->
-            <button id="loadLLCompletedRemindersBtn" class="reminderBtn">Load Data</button>
+            <!-- <button id="loadLLCompletedRemindersBtn" class="reminderBtn">Load Data</button> -->
 
             <!-- Table -->
             <table>
@@ -109,8 +100,8 @@
                 </thead>
             </table>
 
-            <div class="scrollDiv">
-                <table>
+            <div class="scrollDiv" id="llScrollDiv">
+                <table id="llDataTable">
                     <tbody id="llTableBody">
                         <!-- Dynamic Rows -->
                     </tbody>

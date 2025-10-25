@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains utility functions for birthday reminders.
  * Created on: 24/10/2025
- * Last Modified: 24/10/2025
+ * Last Modified: 25/10/2025
  */
 
 // Importing required modules & libraries
@@ -16,22 +16,15 @@ const birthdayReminderUtility = () => {
     const selectAllCheckbox = document.getElementById("selectAllBirthdayCheckbox");
     
     // Elements
-    const loadingDiv = document.getElementById("loadingDiv");
-    const loadBtn = document.getElementById("loadBirthdayRemindersBtn");
     const sendBtn = document.getElementById("sendBirthdayReminderBtn");
     const table = document.querySelector(".reminderSection table");
     const scrollDiv = document.querySelector(".reminderSection .scrollDiv");
     const tbody = document.getElementById("birthdayTableBody");
 
     // Initial state: only show Load Data button, hide table and send button
-    loadingDiv.style.display = "none";
-    table.style.display = "none";
+    // table.style.display = "none";
     scrollDiv.style.display = "none";
     sendBtn.style.display = "none";
-
-    // Center the Load Data button
-    loadBtn.style.margin = "auto";
-    loadBtn.style.display = "block";
 
     // Select-all logic
     if (selectAllCheckbox) {
@@ -44,13 +37,7 @@ const birthdayReminderUtility = () => {
     }
 
     // Load Data button click
-    loadBtn.addEventListener("click", async () => {
-        // Show loading, block UI
-        loadingDiv.style.display = "flex";
-        loadingDiv.style.justifyContent = "center";
-        loadingDiv.style.alignItems = "center";
-        loadBtn.style.display = "none";
-
+    window.addEventListener("load", async () => {
         // Fetch birthday reminders from main process
         let result = { success: false, data: [] };
         try {
@@ -59,10 +46,6 @@ const birthdayReminderUtility = () => {
             result = { success: false, data: [], message: e.message };
         }
 
-
-        // Hide loading
-        loadingDiv.style.display = "none";
-
         if (!result.success || !Array.isArray(result.data) || result.data.length === 0) {
             await window.dialogBoxAPI.showDialogBox(
                 'info',
@@ -70,7 +53,6 @@ const birthdayReminderUtility = () => {
                 result.message || 'No birthday reminders found.',
                 ['OK']
             );
-            loadBtn.style.display = "block";
             return;
         }
 
@@ -139,11 +121,6 @@ const birthdayReminderUtility = () => {
         );
         if (confirm !== 0) return;
 
-        // Show loading
-        loadingDiv.style.display = "flex";
-        loadingDiv.style.justifyContent = "center";
-        loadingDiv.style.alignItems = "center";
-
         // Send SMS to each selected user
         let successCount = 0, failCount = 0;
         for (const cb of checkboxes) {
@@ -159,9 +136,6 @@ const birthdayReminderUtility = () => {
                 failCount++;
             }
         }
-
-        // Hide loading
-        loadingDiv.style.display = "none";
 
         await window.dialogBoxAPI.showDialogBox(
             'info',

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains utility functions for LL reminders.
  * Created on: 24/10/2025
- * Last Modified: 24/10/2025
+ * Last Modified: 25/10/2025
  */
 
 // Importing required modules & libraries
@@ -12,21 +12,18 @@ import { isoToDDMMYYYY } from "../../shared.js";
 // LL Reminder Utility Function
 const llReminderUtility = () => {
     // Getting DOM elements
-    const llLoadBtn = document.getElementById("loadLLCompletedRemindersBtn");
     const llSendBtn = document.getElementById("sendLLCompletedReminderBtn");
-    const llTable = llLoadBtn?.parentElement.querySelector("table");
-    const llScrollDiv = llLoadBtn?.parentElement.querySelector(".scrollDiv");
+    const llTable = document.querySelector("#llDataTable");
+    const llScrollDiv = document.querySelector("#llScrollDiv");
     const llTbody = llScrollDiv?.querySelector("tbody");
     const selectAllLLCheckbox = document.getElementById("selectAllLLCheckbox");
 
     // Loading indicator
-    if (llLoadBtn && llSendBtn && llTable && llScrollDiv && llTbody && selectAllLLCheckbox) {
+    if (llSendBtn && llTable && llScrollDiv && llTbody && selectAllLLCheckbox) {
         // Initial state
         llTable.style.display = "none";
         llScrollDiv.style.display = "none";
         llSendBtn.style.display = "none";
-        llLoadBtn.style.margin = "auto";
-        llLoadBtn.style.display = "block";
 
         // Select-all logic
         selectAllLLCheckbox.addEventListener("change", () => {
@@ -37,13 +34,7 @@ const llReminderUtility = () => {
         });
 
         // Load Data button click
-        llLoadBtn.addEventListener("click", async () => {
-            // Show loading
-            loadingDiv.style.display = "flex";
-            loadingDiv.style.justifyContent = "center";
-            loadingDiv.style.alignItems = "center";
-            llLoadBtn.style.display = "none";
-
+        window.addEventListener("load", async () => {
             // Fetch LL reminders from main process
             let result = { success: false, data: [] };
             try {
@@ -51,9 +42,6 @@ const llReminderUtility = () => {
             } catch (e) {
                 result = { success: false, data: [], message: e.message };
             }
-
-            // Hide loading
-            loadingDiv.style.display = "none";
 
             // Always show table and send button (even if no data)
             llTable.style.display = "table";
