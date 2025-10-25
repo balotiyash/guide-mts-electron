@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 24/10/2025
+ * Last Modified: 25/10/2025
 */
 
 // Importing required modules from Electron
@@ -225,4 +225,7 @@ contextBridge.exposeInMainWorld('reminderAPI', {
 
     // API to get LL reminders
     getLLReminders: () => ipcRenderer.invoke('get-ll-reminders'),
+
+    // API to get Licence Expiry reminders
+    getLicenceExpiryReminders: () => ipcRenderer.invoke('get-licence-expiry-reminders'),
 });

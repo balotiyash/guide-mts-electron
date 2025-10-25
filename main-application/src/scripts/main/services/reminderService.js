@@ -44,11 +44,17 @@ const getLLReminders = async () => {
 // License Expiration Reminder Service
 const getLicenseExpirationReminders = async () => {
     const result = await runQuery({
-        sql: `SELECT id, customer_name, license_expiry_date, mobile_number FROM customers WHERE license_expiry_date IS NOT NULL AND license_expiry_date <= CURRENT_DATE + INTERVAL '30 days'`,
+        sql: `SELECT customer_name, mdl_no, mdl_class, mobile_number FROM customers WHERE DATE(mdl_validity_date) = DATE('now', 'localtime');`,
         params: [],
         type: "all"
     });
-    return result;
+
+    return {
+        status: 200,
+        success: true,
+        data: result,
+        message: 'Fetched Licence Expiry reminders successfully'
+    };
 };
 
 // Payment Reminder Service

@@ -21,6 +21,11 @@ const registerReminderHandlers = () => {
     ipcMain.handle('get-ll-reminders', async () => {
         return await getLLReminders();
     });
+
+    // Handler to get Licence Expiry reminders
+    ipcMain.handle('get-licence-expiry-reminders', async () => {
+        return await getLicenseExpirationReminders();
+    });
 };
 
 // Exporting the registerReminderHandlers function
