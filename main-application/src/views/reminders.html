@@ -119,25 +119,28 @@
                 <h2>Licence</h2>
 
                 <!-- Send Reminder -->
-                <button id="sendLicenceReminderBtn" class="reminderBtn">Send SMS</button>
+                <button id="sendDLReminderBtn" class="reminderBtn">Send SMS</button>
             </span>
 
             <!-- Table with scroll -->
+            <table>
+                <thead>
+                    <tr>
+                        <th class="w5"><input type="checkbox" id="selectAllDLCheckbox"></th>
+                        <th class="w15">Sr. No.</th>
+                        <th class="w20">Name</th>
+                        <th class="w15">MDL No.</th>
+                        <th class="w15">Class</th>
+                        <th class="w15">Validity</th>
+                        <th class="w15">Mobile No.</th>
+                    </tr>
+                </thead>
+            </table>
+
             <div class="scrollDiv" id="dlScrollDiv">
                 <table id="dlDataTable">
-                    <thead>
-                        <tr>
-                            <th class="w5"><input type="checkbox" id="selectAllLicenceExpiryCheckbox"></th>
-                            <th class="w15">Sr. No.</th>
-                            <th class="w20">Name</th>
-                            <th class="w15">Mdl No.</th>
-                            <th class="w15">Class</th>
-                            <th class="w15">Validity</th>
-                            <th class="w15">Mobile No.</th>
-                        </tr>
-                    </thead>
                     <tbody id="dlTableBody">
-                        <!-- Dynamic Rows will be inserted here by JS -->
+                        <!-- Dynamic Rows -->
                     </tbody>
                 </table>
             </div>

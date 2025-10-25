@@ -44,7 +44,7 @@ const getLLReminders = async () => {
 // License Expiration Reminder Service
 const getLicenseExpirationReminders = async () => {
     const result = await runQuery({
-        sql: `SELECT customer_name, mdl_no, mdl_class, mobile_number FROM customers WHERE DATE(mdl_validity_date) = DATE('now', 'localtime');`,
+        sql: `SELECT customer_name, mdl_no, mdl_class, mdl_validity_date, mobile_number FROM customers WHERE DATE(mdl_validity_date) = DATE('now', 'localtime');`,
         params: [],
         type: "all"
     });

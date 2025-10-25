@@ -1,41 +1,41 @@
 /**
- * File: src/scripts/main/utilities/reminders/dlExpiryUtility.js
+ * File: src/scripts/main/utilities/reminders/dlReminderUtility.js
  * Author: Yash Balotiya
- * Description: This file contains utility functions for Licence Expiry reminders.
- * Created on: 24/10/2025
+ * Description: This file contains utility functions for DL reminders.
+ * Created on: 25/10/2025
  * Last Modified: 25/10/2025
  */
 
 // Importing required modules & libraries
 import { isoToDDMMYYYY } from "../../shared.js";
 
-// LL Reminder Utility Function
-const dlExpiryUtility = () => {
+// DL Reminder Utility Function
+const dlReminderUtility = () => {
     // Getting DOM elements
-    const dlSendBtn = document.getElementById("sendLicenceReminderBtn");
+    const dlSendBtn = document.getElementById("sendDLReminderBtn");
     const dlTable = document.querySelector("#dlDataTable");
     const dlScrollDiv = document.querySelector("#dlScrollDiv");
-    const dlTbody = dlScrollDiv?.querySelector("dlTablebody");
-    const selectAllLicenceExpiryCheckbox = document.getElementById("selectAllLicenceExpiryCheckbox");
+    const dlTbody = dlScrollDiv?.querySelector("tbody");
+    const selectAllDLCheckbox = document.getElementById("selectAllDLCheckbox");
 
     // Loading indicator
-    if (dlSendBtn && dlTable && dlScrollDiv && dlTbody && selectAllLicenceExpiryCheckbox) {
+    if (dlSendBtn && dlTable && dlScrollDiv && dlTbody && selectAllDLCheckbox) {
         // Initial state
         dlTable.style.display = "none";
         dlScrollDiv.style.display = "none";
         dlSendBtn.style.display = "none";
 
         // Select-all logic
-        selectAllLicenceExpiryCheckbox.addEventListener("change", () => {
+        selectAllDLCheckbox.addEventListener("change", () => {
             const checkboxes = dlTbody.querySelectorAll(".dlCheckbox");
             checkboxes.forEach(cb => {
-                cb.checked = selectAllLicenceExpiryCheckbox.checked;
+                cb.checked = selectAllDLCheckbox.checked;
             });
         });
 
         // Load Data button click
         window.addEventListener("load", async () => {
-            // Fetch Licence Expiry reminders from main process
+            // Fetch DL reminders from main process
             let result = { success: false, data: [] };
             try {
                 result = await window.reminderAPI.getLicenceExpiryReminders();
@@ -53,35 +53,35 @@ const dlExpiryUtility = () => {
             if (result.success && Array.isArray(result.data) && result.data.length > 0) {
                 result.data.forEach((row, idx) => {
                     const customerName = (row.customer_name || '').toUpperCase();
-                    const mdlNo = (row.mdl_no || '').toUpperCase();
-                    const mdlClass = (row.mdl_class || '').toUpperCase();
-                    const mdlValidityDate = (row.mdl_validity_date || '');
+                    const dlNo = (row.mdl_no || '').toUpperCase();
+                    const dlClass = (row.mdl_class || '').toUpperCase();
+                    const dlValidityDate = row.mdl_validity_date ? isoToDDMMYYYY(row.mdl_validity_date) : '';
                     const mobileNumber = row.mobile_number || '';
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
                         <td class="w5"><input type='checkbox' class='dlCheckbox' checked></td>
                         <td class="w15">${idx + 1}</td>
                         <td class="w20">${customerName}</td>
-                        <td class="w15">${mdlNo}</td>
-                        <td class="w15">${mdlClass}</td>
-                        <td class="w15">${mdlValidityDate}</td>
+                        <td class="w15">${dlNo}</td>
+                        <td class="w15">${dlClass}</td>
+                        <td class="w15">${dlValidityDate}</td>
                         <td class="w15">${mobileNumber}</td>
                     `;
                     dlTbody.appendChild(tr);
                 });
             } else {
                 const tr = document.createElement("tr");
-                tr.innerHTML = `<td colspan='7' style='text-align:center;'>No records found</td>`;
+                tr.innerHTML = `<td colspan='5' style='text-align:center;'>No records found</td>`;
                 dlTbody.appendChild(tr);
             }
 
             // After rendering, update select-all checkbox state and add event listeners
             const checkboxes = dlTbody.querySelectorAll('.dlCheckbox');
-            selectAllLicenceExpiryCheckbox.checked = checkboxes.length > 0 && Array.from(checkboxes).every(cb => cb.checked);
+            selectAllDLCheckbox.checked = checkboxes.length > 0 && Array.from(checkboxes).every(cb => cb.checked);
             checkboxes.forEach(cb => {
                 cb.addEventListener('change', () => {
                     const allChecked = Array.from(checkboxes).every(c => c.checked);
-                    selectAllLicenceExpiryCheckbox.checked = allChecked;
+                    selectAllDLCheckbox.checked = allChecked;
                 });
             });
         });
@@ -101,12 +101,12 @@ const dlExpiryUtility = () => {
             await window.dialogBoxAPI.showDialogBox(
                 'info',
                 'No SMS API',
-                'No SMS API found for Licence Expiry reminders.',
+                'No SMS API found for DL Expiry reminders.',
                 ['OK']
             );
         });
     }
 };
 
-// Exporting the dlExpiryUtility function
-export default dlExpiryUtility;
+// Exporting the dlReminderUtility function
+export default dlReminderUtility;
