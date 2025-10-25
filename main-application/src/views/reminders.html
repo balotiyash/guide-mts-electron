@@ -82,9 +82,6 @@
                 <button id="sendLLCompletedReminderBtn" class="reminderBtn">Send SMS</button>
             </span>
 
-            <!-- Load Data Button -->
-            <!-- <button id="loadLLCompletedRemindersBtn" class="reminderBtn">Load Data</button> -->
-
             <!-- Table -->
             <table>
                 <thead>
@@ -110,7 +107,38 @@
         </section>
 
         <!-- Payment Reminder -->
-        <section class="reminderSection"></section>
+        <section class="reminderSection">
+            <span>
+                <!-- Title -->
+                <h2>Payment</h2>
+
+                <!-- Send Reminder -->
+                <button id="sendPaymentReminderBtn" class="reminderBtn">Send SMS</button>
+            </span>
+
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th class="w5"><input type="checkbox" id="selectAllPaymentCheckbox"></th>
+                        <th class="w15">Sr. No.</th>
+                        <th class="w20">Name</th>
+                        <th class="w15">Total Fees</th>
+                        <th class="w15">Pending Amount</th>
+                        <th class="w15">Work</th>
+                        <th class="w15">Phone No.</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <div class="scrollDiv" id="paymentScrollDiv">
+                <table id="paymentDataTable">
+                    <tbody id="paymentTableBody">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
         <!-- License Expiration Reminder -->
         <section class="reminderSection">

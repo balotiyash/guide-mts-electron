@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the IPC handlers for reminder functionality
  * Created on: 24/10/2025
- * Last Modified: 24/10/2025
+ * Last Modified: 25/10/2025
  */
 
 // Importing required modules & libraries
@@ -20,6 +20,11 @@ const registerReminderHandlers = () => {
     // Handler to get LL reminders
     ipcMain.handle('get-ll-reminders', async () => {
         return await getLLReminders();
+    });
+
+    // Handler to get payment reminders
+    ipcMain.handle('get-payment-reminders', async () => {
+        return await getPaymentReminders();
     });
 
     // Handler to get Licence Expiry reminders

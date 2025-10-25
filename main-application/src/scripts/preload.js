@@ -226,6 +226,9 @@ contextBridge.exposeInMainWorld('reminderAPI', {
     // API to get LL reminders
     getLLReminders: () => ipcRenderer.invoke('get-ll-reminders'),
 
+    // API to get payment reminders
+    getPaymentReminders: () => ipcRenderer.invoke('get-payment-reminders'),
+
     // API to get Licence Expiry reminders
-    getLicenceExpiryReminders: () => ipcRenderer.invoke('get-licence-expiry-reminders'),
+    getLicenceExpiryReminders: () => ipcRenderer.invoke('get-licence-expiry-reminders')
 });

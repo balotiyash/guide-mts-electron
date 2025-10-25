@@ -41,6 +41,40 @@ const getLLReminders = async () => {
     };
 };
 
+// Payment Reminder Service
+const getPaymentReminders = async () => {
+    const result = await runQuery({
+        sql: `
+            SELECT 
+                c.customer_name,
+                c.mobile_number,
+                w.work AS work_description,
+                CAST(w.charged_amount AS REAL) AS charged_amount,
+                (CAST(w.charged_amount AS REAL) - IFNULL(SUM(CAST(p.amount_paid AS REAL)), 0)) AS pending_amount
+            FROM customers c
+            JOIN work_descriptions w 
+                ON w.customer_id = c.id
+            LEFT JOIN payments p 
+                ON p.customer_id = c.id
+            WHERE 
+                date(c.ll_issued_date) <= date('now', '-11 days', 'localtime')
+            GROUP BY 
+                c.id, w.id
+            HAVING 
+                pending_amount > 0;
+        `,
+        params: [],
+        type: "all"
+    });
+
+    return {
+        status: 200,
+        success: true,
+        data: result,
+        message: 'Fetched payment reminders successfully'
+    };
+};
+
 // License Expiration Reminder Service
 const getLicenseExpirationReminders = async () => {
     const result = await runQuery({
@@ -55,16 +89,6 @@ const getLicenseExpirationReminders = async () => {
         data: result,
         message: 'Fetched Licence Expiry reminders successfully'
     };
-};
-
-// Payment Reminder Service
-const getPaymentReminders = async () => {
-    const result = await runQuery({
-        sql: `SELECT id, customer_name, due_date, mobile_number FROM payments WHERE due_date IS NOT NULL AND due_date <= CURRENT_DATE + INTERVAL '7 days'`,
-        params: [],
-        type: "all"
-    });
-    return result;
 };
 
 // Exporting all reminder services
