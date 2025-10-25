@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the IPC handlers for reminder functionality.
  * Created on: 24/10/2025
- * Last Modified: 24/10/2025
+ * Last Modified: 25/10/2025
  */
 
 // Importing required modules & libraries
@@ -28,7 +28,7 @@ const getBirthdayReminders = async () => {
 // LL Reminder Service
 const getLLReminders = async () => {
     const result = await runQuery({
-        sql: `SELECT customer_name, ll_no_1, ll_no_2, ll_class_1, ll_class_2, ll_issued_date, mobile_number FROM customers WHERE date(ll_issued_date) = date('now', '-14 days', 'localtime');`,
+        sql: `SELECT customer_name, ll_no_1, ll_no_2, ll_class_1, ll_class_2, ll_issued_date, mobile_number FROM customers WHERE date(ll_issued_date) = date('now', '-29 days', 'localtime');`,
         params: [],
         type: "all"
     });
