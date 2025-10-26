@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains utility functions for payment reminders.
  * Created on: 25/10/2025
- * Last Modified: 25/10/2025
+ * Last Modified: 26/10/2025
  */
 
 // Importing required modules & libraries
@@ -69,12 +69,12 @@ const paymentReminderUtility = () => {
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
                         <td class="w5"><input type='checkbox' class='paymentCheckbox' checked></td>
-                        <td class="w15">${idx + 1}</td>
+                        <td class="w5">${idx + 1}</td>
                         <td class="w20">${row.customer_name.toUpperCase()}</td>
-                        <td class="w15">${row.charged_amount}</td>
-                        <td class="w15">${row.pending_amount}</td>
-                        <td class="w15">${row.work_description.toUpperCase()}</td>
-                        <td class="w15">${row.mobile_number}</td>
+                        <td class="w10">${row.charged_amount}</td>
+                        <td class="w10">${row.pending_amount}</td>
+                        <td class="w40">${row.work_description.toUpperCase()}</td>
+                        <td class="w10">${row.mobile_number}</td>
                     `;
                     tbody.appendChild(tr);
                 });

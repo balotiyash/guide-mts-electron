@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: Styles for Reminders Page
     Created on: 24/10/2025
-    Last Modified: 24/10/2025
+    Last Modified: 26/10/2025
 */
 
 /* Main Page */
@@ -49,12 +49,6 @@ main {
     margin-top: 10px;
 }
 
-/* Load Birthday Reminders Button */
-.reminderBtn#loadBirthdayRemindersBtn {
-    display: block;
-    margin: 40px auto 0 auto;
-}
-
 /* Scrollable Div */
 .scrollDiv {
     display: none;
@@ -83,20 +77,30 @@ main {
 /* Table Widths */
 .w5 {
     width: 5%;
-    /* min-width: 25px; */
+    min-width: 25px;
+}
+
+.w10 {
+    width: 10%;
+    min-width: 50px;
 }
 
 .w15 {
     width: 15%;
-    /* min-width: 75px; */
+    min-width: 75px;
 }
 
 .w20 {
     width: 20%;
-    /* min-width: 100px; */
+    min-width: 100px;
 }
 
 .w35 {
     width: 35%;
-    /* min-width: 175px; */
+    min-width: 175px;
+}
+
+.w40 {
+    width: 40%;
+    min-width: 200px;
 }
