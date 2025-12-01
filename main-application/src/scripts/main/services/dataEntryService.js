@@ -3,13 +3,13 @@
  * Author: Yash Balotiya
  * Description: Service layer for data entry operations. This file interactes with the database.
  * Created on: 31/08/2025
- * Last Modified: 30/09/2025
+ * Last Modified: 01/12/2025
  */
 
 // Importing required modules & libraries
 import { runQuery } from "./dbService.js";
 import { getFormattedDateTime } from "../../shared.js";
-import { insertIntoWorkDescriptions, updateCustomer } from "./dataEntryService2.js";
+import { insertIntoWorkDescriptions, updateCustomer, deleteUser } from "./dataEntryService2.js";
 
 // Fetching Dropdown Names for vehicles & instructors
 const getDropDownNames = async (value) => {
@@ -150,7 +150,8 @@ const allDataEntryService = {
     createCustomer,
     insertIntoWorkDescriptions,
     updateCustomer,
-    getWorkDescriptions
+    getWorkDescriptions,
+    deleteUser
 };
 
 // Exporting all data entry service functions

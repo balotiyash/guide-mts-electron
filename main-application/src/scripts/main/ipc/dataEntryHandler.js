@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: IPC Handlers for Data Entry related operations.
  * Created on: 31/08/2025
- * Last Modified: 22/09/2025
+ * Last Modified: 01/12/2025
 */
 
 // Importing required modules & libraries
@@ -41,6 +41,11 @@ const registerDataEntryHandlers = () => {
     // Updating an existing customer
     ipcMain.handle("update-customer", async (event, { userId, jobId, formValues }) => {
         return allDataEntryService.updateCustomer(userId, jobId, formValues);
+    });
+
+    // Deleting a user
+    ipcMain.handle("delete-user", async (event, userId) => {
+        return allDataEntryService.deleteUser(userId);
     });
 };
 

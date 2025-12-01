@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Additional service layer functions for data entry operations (work descriptions and updates).
  * Created on: 11/10/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 01/12/2025
  */
 
 // Importing required modules & libraries
@@ -152,5 +152,44 @@ const updateCustomer = async (userId, jobId, formValues) => {
     }
 };
 
+// Deleting a user
+const deleteUser = async (userId) => {
+    try {
+        // Deleting from payments table
+        await runQuery({
+            sql: `DELETE FROM payments WHERE customer_id = ?;`,
+            params: [userId],
+            type: "run"
+        });
+
+        // Deleting from work_descriptions table
+        await runQuery({
+            sql: `DELETE FROM work_descriptions WHERE customer_id = ?;`,
+            params: [userId],
+            type: "run"
+        });
+
+        // Deleting from customers table
+        await runQuery({
+            sql: `DELETE FROM customers WHERE id = ?;`,
+            params: [userId],
+            type: "run"
+        });
+
+        return {
+            status: "success",
+            statusCode: 200,
+            message: "User deleted successfully."
+        };
+    } catch (error) {
+        console.error("Error deleting user:", error);
+        return {
+            status: "error",
+            statusCode: 500,
+            message: "Failed to delete user."
+        };
+    }
+};
+
 // Exporting functions
-export { insertIntoWorkDescriptions, updateCustomer };
+export { insertIntoWorkDescriptions, updateCustomer, deleteUser };

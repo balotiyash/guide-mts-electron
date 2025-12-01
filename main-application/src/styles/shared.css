@@ -2,7 +2,7 @@
    Author: Neha Balotia, Yash Balotiya
    Description: This file contains all the shared CSS styles used across the application.
    Created on: 27/07/2025
-   Last Modified: 21/09/2025
+   Last Modified: 01/12/2025
 */
 
 /* Global Styles */
@@ -130,6 +130,11 @@ h6 {
     color: #dc3545;
 }
 
+.btn.black {
+    border-color: #000000;
+    color: #000000;
+}
+
 .btn.yellow:hover {
     background-color: #ffc107;
     color: white;
@@ -147,6 +152,11 @@ h6 {
 
 .btn.red:hover {
     background-color: #dc3545;
+    color: white;
+}
+
+.btn.black:hover {
+    background-color: #000000;
     color: white;
 }
 

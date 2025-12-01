@@ -181,6 +181,30 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.reload();
     });
 
+    // Handle click event on Delete Button
+    document.getElementById("deleteBtn").addEventListener("click", async () => {
+        if (!userId) {
+            await window.dialogBoxAPI.showDialogBox("warning", "No Existing Customer", "Please search and load an existing customer to delete.");
+            return;
+        }
+
+        const response = await window.dialogBoxAPI.showDialogBox("warning", "Delete Entry", "Are you sure you want to delete this entry? This action cannot be undone.", ["Delete", "Cancel"]);
+
+        if (response !== 0) return; // 0 = "Delete", 1 = "Cancel"
+
+        // API call to delete customer
+        const deleteResponse = await window.dataEntryAPI.deleteUser(userId);
+
+        if (deleteResponse?.status === "success") {
+            // Show success message
+            await window.dialogBoxAPI.showDialogBox("info", "Customer Deleted", "The customer has been deleted successfully.");
+            window.location.reload();
+        } else {
+            // Show error message
+            await window.dialogBoxAPI.showDialogBox("error", "Deletion Failed", `Failed to delete the customer.`);
+        }
+    });
+
     // Handling click event on Exit button
     document.getElementById("exitBtn").addEventListener("click", async () => window.location.href = "dashboard.html");
 

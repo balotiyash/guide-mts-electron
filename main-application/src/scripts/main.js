@@ -17,7 +17,7 @@ import log from "electron-log";
 
 // Register IPC handlers
 import registerDbHandler from "./main/ipc/dbHandler.js";
-import  registerDashboardHandlers from "./main/ipc/dashboardHandler.js";
+import registerDashboardHandlers from "./main/ipc/dashboardHandler.js";
 import registerDataEntryHandlers from "./main/ipc/dataEntryHandler.js";
 import registerPaymentHandlers from "./main/ipc/paymentHandler.js";
 import registerInvoiceHandlers from "./main/ipc/invoiceHandler.js";
