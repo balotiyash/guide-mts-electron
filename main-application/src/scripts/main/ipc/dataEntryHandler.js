@@ -47,6 +47,11 @@ const registerDataEntryHandlers = () => {
     ipcMain.handle("delete-user", async (event, userId) => {
         return allDataEntryService.deleteUser(userId);
     });
+
+    // Deleting a job
+    ipcMain.handle("delete-job", async (event, jobId) => {
+        return allDataEntryService.deleteJob(jobId);
+    });
 };
 
 // Exporting the register function

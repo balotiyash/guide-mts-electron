@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This file contains CSS for Customer Data Entry Page specifically starting from name input section and responsiveness.
     Created on: 09/08/2025
-    Last Modified: 30/09/2025
+    Last Modified: 01/12/2025
 */
 
 /* Name Section */
@@ -67,11 +67,26 @@ table {
 }
 
 .workCol {
-    width: 70%;
+    width: 65%;
+}
+
+.deleteCol {
+    width: 5%;
 }
 
 .scrollDiv {
     height: 150px;
+}
+
+.deleteIcon {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.deleteIcon:hover {
+    transform: scale(1.2);
 }
 
 /* Button Section */

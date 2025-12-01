@@ -86,6 +86,9 @@ contextBridge.exposeInMainWorld('dataEntryAPI', {
 
     // API to delete user
     deleteUser: (userId) => ipcRenderer.invoke('delete-user', userId),
+
+    // API to delete job
+    deleteJob: (jobId) => ipcRenderer.invoke('delete-job', jobId),
 });
 
 // Exposing payment entry APIs

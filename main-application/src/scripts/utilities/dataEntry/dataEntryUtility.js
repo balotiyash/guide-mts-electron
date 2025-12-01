@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Common utility functions for data entry operations.
    Created on: 21/09/2025
-   Last Modified: 21/09/2025
+   Last Modified: 01/12/2025
 */
 
 // Function to set vehicle names in the select dropdown
@@ -76,6 +76,7 @@ const fetchWorkDescriptions = async (userId, onJobSelected) => {
             <td class="tableCol">${new Date(item.created_on).toLocaleDateString('en-GB')}</td>
             <td class="workCol">${item.work.toUpperCase()}</td>
             <td class="tableCol">₹${item.charged_amount}</td>
+            <td class="deleteCol"><img src="../assets/svgs/trash-can-regular-full.svg" alt="Delete" class="deleteIcon" data-job-id="${item.id}"></td>
         `;
 
         // Add click event to fill inputs
@@ -92,6 +93,37 @@ const fetchWorkDescriptions = async (userId, onJobSelected) => {
             // Notify the parent about the selected job
             if (onJobSelected && typeof onJobSelected === 'function') {
                 onJobSelected(item.id);
+            }
+        });
+
+        // Click event for delete icon
+        const deleteIcon = tr.querySelector('.deleteIcon');
+        deleteIcon.addEventListener("click", async (event) => {
+            // Prevent the row click event
+            event.stopPropagation();
+
+            const jobId = deleteIcon.getAttribute("data-job-id");
+
+            // Confirm deletion
+            const response = await window.dialogBoxAPI.showDialogBox(
+                "warning",
+                "Confirm Deletion",
+                "Are you sure you want to delete this job? This action cannot be undone.",
+                ["Delete", "Cancel"]
+            );
+
+            if (response === 0) { // If 'Delete' is clicked
+                const deleteResult = await window.dataEntryAPI.deleteJob(jobId);
+                if (deleteResult.status === "success") {
+                    tr.remove();
+                } else {
+                    await window.dialogBoxAPI.showDialogBox(
+                        "error",
+                        "Deletion Failed",
+                        "Failed to delete the job. Please try again.",
+                        ["OK"]
+                    );
+                }
             }
         });
 

@@ -143,6 +143,36 @@ const createCustomer = async (formValues) => {
     }
 };
 
+// Function to delete a job
+const deleteJob = async (jobId) => {
+    try {
+        await runQuery({
+            sql: "DELETE FROM payments WHERE work_desc_id = ?;",
+            params: [jobId],
+            type: "run"
+        });
+
+        await runQuery({
+            sql: "DELETE FROM work_descriptions WHERE id = ?;",
+            params: [jobId],
+            type: "run"
+        });
+
+        return {
+            status: "success",
+            statusCode: 200,
+            message: "Job deleted successfully."
+        };
+    } catch (error) {
+        console.error("Error deleting job:", error);
+        return {
+            status: "error",
+            statusCode: 500,
+            message: "Failed to delete job."
+        };
+    }
+};
+
 // Exporting all data entry service functions
 const allDataEntryService = {
     getDropDownNames,
@@ -151,7 +181,8 @@ const allDataEntryService = {
     insertIntoWorkDescriptions,
     updateCustomer,
     getWorkDescriptions,
-    deleteUser
+    deleteUser,
+    deleteJob
 };
 
 // Exporting all data entry service functions
