@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Utility functions for handling date fields in the data entry form.
    Created on: 21/09/2025
-   Last Modified: 04/10/2025
+   Last Modified: 02/12/2025
 */
 
 // Importing required modules & libraries
@@ -28,13 +28,19 @@ const dateUtility = () => {
         { textId: "mdlValidUntilInputText", hiddenId: "mdlValidUntilInput", dataKey: "mdl_validity_date" },
         { textId: "endorsementDatedInputText", hiddenId: "endorsementDatedInput", dataKey: "endorsement_date" },
         { textId: "endorsementValidityInputText", hiddenId: "endorsementValidityInput", dataKey: "endorsement_validity_date" },
+        
         // Master entry date field
         { textId: "license-expiration-text", hiddenId: "license-expiration", dataKey: "license_expiration_date" },
+        
         // Fuel entry date field
         { textId: "entrydate_text", hiddenId: "entrydate", dataKey: "entry_date" },
+        
         // Search page date fields
         { textId: "starting-date-text", hiddenId: "starting-date", dataKey: "starting_date" },
-        { textId: "ending-date-text", hiddenId: "ending-date", dataKey: "ending_date" }
+        { textId: "ending-date-text", hiddenId: "ending-date", dataKey: "ending_date" },
+        
+        // Payment entry date field
+        { textId: "payment-date-text", hiddenId: "payment-date", dataKey: "payment_date" }
     ];
 
     // Initialize all date fields

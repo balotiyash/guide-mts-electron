@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code for payment entry page. This is the main page for it.
  * Created on: 16/09/2025
- * Last Modified: 21/10/2025
+ * Last Modified: 02/12/2025
  */
 
 // Importing required 
@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById("printBtnsDiv").style.display = "flex";
             document.getElementById("tablePendingAmountLabel").innerHTML = "Paid Amount";
             document.getElementById("formPendingAmountLabel").innerHTML = "Paid Amount";
+            document.getElementById("payment-date-text").value = "";
             tableBody.innerHTML = "";
 
             // Fetch paid payments only once
@@ -163,10 +164,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Get new values
         const newAmount = parseFloat(document.getElementById("amountInput").value);
         const newMode = document.getElementById("paymentMode").value.trim().toLowerCase();
+        const newPaymentDate = document.getElementById("payment-date").value + " " + new Date().toTimeString().split(" ")[0];
 
         // Validation
         if (!paymentId) {
             window.dialogBoxAPI.showDialogBox('error', 'No Selection', 'Please select a record to edit.', ['OK']);
+            return;
+        }
+
+        if (!newMode) {
+            window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Please select a payment mode.', ['OK']);
+            return;
+        }
+
+        if (!newPaymentDate) {
+            window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Please select a payment date.', ['OK']);
             return;
         }
 
@@ -176,7 +188,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // Call update API
-        const response = await window.paymentEntryAPI.updatePayment({ paymentId, newAmount, newMode });
+        const response = await window.paymentEntryAPI.updatePayment({ paymentId, newAmount, newMode, newPaymentDate });
 
         // Handle response
         if (response.success) {
@@ -185,7 +197,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // SMS Notification
             const { mobile_number, customerName } = paymentState;
-            console.log(mobile_number, customerName);
 
             if (!mobile_number || !customerName) {
                 await window.dialogBoxAPI.showDialogBox('error', 'No Selection', 'Please select a record to edit.', ['OK']);

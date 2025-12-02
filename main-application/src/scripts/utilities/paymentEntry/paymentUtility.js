@@ -3,11 +3,17 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code to handle payment entry page utilities
  * Created on: 22/09/2025
- * Last Modified: 21/10/2025
+ * Last Modified: 02/12/2025
  */
 
 // Import reusable SMS function
 import { sendPaymentSMSWithChoice } from "../sms/smsUtility.js";
+import dateUtility from "../dataEntry/dateUtility.js";
+import { isoToDDMMYYYY } from "../../shared.js";
+
+dateUtility(); // Initialize date utility for payment date fields
+const paymentDateText = document.getElementById("payment-date-text");
+paymentDateText.value = isoToDDMMYYYY(new Date().toISOString());
 
 // Mobile number & customer name of selected user (for SMS)
 export const paymentState = {
@@ -80,6 +86,12 @@ const renderRows = (tableBody, data, type = "pending", onRowSelect = null) => {
                 } else {
                     paymentModeSelect.selectedIndex = 0;
                 }
+            }
+
+            // Set payment date
+            if (paymentDateText) {
+                paymentDateText.value = isoToDDMMYYYY(item.created_on.split(" ")[0]);
+                document.getElementById("payment-date").value = item.created_on.split(" ")[0];
             }
 
             // Set amount input for paid payments (for editing)
@@ -159,6 +171,7 @@ const submitPayment = async (userIdParam, workIdParam) => {
     const amountInputValue = document.getElementById("amountInput")?.value;
     const amountInput = parseFloat(amountInputValue);
     const paymentMode = document.getElementById("paymentMode")?.value.trim().toLowerCase();
+    const paymentDate = document.getElementById("payment-date")?.value + " " + new Date().toLocaleTimeString();
     const pendingAmount = parseFloat(document.getElementById("formPendingAmount")?.textContent) || 0;
 
     // Validations
@@ -182,7 +195,8 @@ const submitPayment = async (userIdParam, workIdParam) => {
         userId: userIdParam,
         workId: workIdParam,
         amount: amountInput,
-        mode: paymentMode
+        mode: paymentMode,
+        paymentDate: paymentDate
     });
 
     // Handle response

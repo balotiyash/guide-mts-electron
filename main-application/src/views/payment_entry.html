@@ -3,7 +3,7 @@
     Author: Yash Balotiya, Ayush Shetty
     Description: This page contains all the HTML5 code of the Payment Entry Page.
     Created on: 09/08/2025
-    Last Modified: 20/10/2025
+    Last Modified: 02/12/2025
 -->
 
 <!DOCTYPE html>
@@ -27,6 +27,7 @@
     ">
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="../scripts/imports/flatpickr.min.css">
     <link rel="stylesheet" href="../styles/shared.css" />
     <link rel="stylesheet" href="../styles/master_entry.css" />
     <link rel="stylesheet" href="../styles/payment_entry.css" />
@@ -136,6 +137,13 @@
                             </select>
                         </div>
 
+                        <!-- Date -->
+                        <div class="label-above">
+                            <label for="payment-date">Payment Date</label>
+                            <input type="text" id="payment-date-text" placeholder="DD-MM-YYYY" autocomplete="off" />
+                            <input type="date" id="payment-date" name="payment-date" hidden />
+                        </div>
+
                         <!-- Amount Input -->
                         <div class="label-above">
                             <label for="amountInput">Amount Paid</label>
@@ -165,6 +173,9 @@
     </main>
 
     <!-- Scripts -->
+    <script src="../scripts/imports/flatpickr.js"></script>
+    <script src="../scripts/imports/inputmask.js"></script>
+    <script type="module" src="../scripts/shared.js"></script>
     <script type="module" src="../scripts/renderer/payment_entry.js"></script>
 </body>
 

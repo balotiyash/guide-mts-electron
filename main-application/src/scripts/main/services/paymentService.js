@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Service functions for payment processing and management.
  * Created on: 30/09/2025
- * Last Modified: 20/10/2025
+ * Last Modified: 02/12/2025
  */
 
 // Importing required modules & libraries
@@ -76,14 +76,14 @@ const getAllPaidPayments = async () => {
 };
 
 // Function to submit a payment
-const submitPayment = async (userId, workId, amount, mode) => {
+const submitPayment = async (userId, workId, amount, mode, paymentDate) => {
     const now = getFormattedDateTime();
     const result = await runQuery({
         sql: `
             INSERT INTO payments (customer_id, work_desc_id, payment_mode, amount_paid, created_on, updated_on)
             VALUES (?, ?, ?, ?, ?, ?);
         `,
-        params: [userId, workId, mode, amount, now, now],
+        params: [userId, workId, mode, amount, paymentDate, now],
         type: "run"
     });
 
@@ -96,15 +96,15 @@ const submitPayment = async (userId, workId, amount, mode) => {
 };
 
 // Function to update a payment
-const updatePayment = async (paymentId, amount, mode) => {
+const updatePayment = async (paymentId, amount, mode, paymentDate) => {
     const now = getFormattedDateTime();
     const result = await runQuery({
         sql: `
             UPDATE payments 
-    SET amount_paid = ?, payment_mode = ?, updated_on = datetime('now')
-    WHERE id = ?
+            SET amount_paid = ?, payment_mode = ?, created_on = ?, updated_on = ?
+            WHERE id = ?
         `,
-        params: [amount, mode, paymentId],
+        params: [amount, mode, paymentDate, now, paymentId],
         type: "run"
     });
 

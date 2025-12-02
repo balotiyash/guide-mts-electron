@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the IPC handlers for payment management
  * Created on: 30/09/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 02/12/2025
 */
 
 // Importing required modules & libraries
@@ -20,9 +20,9 @@ const registerPaymentHandlers = () => {
 
     // Handler to submit a payment
     ipcMain.handle('submit-payment', async (event, paymentDetails) => {
-        const { userId, workId, amount, mode } = paymentDetails;
+        const { userId, workId, amount, mode, paymentDate } = paymentDetails;
         // Basic validation
-        if (!userId || !workId || !amount || !mode) {
+        if (!userId || !workId || !amount || !mode || !paymentDate) {
             return {
                 status: 400,
                 success: false,
@@ -30,15 +30,15 @@ const registerPaymentHandlers = () => {
             };
         }
         // Insert payment into the database
-        const result = await allPaymentService.submitPayment(userId, workId, amount, mode);
+        const result = await allPaymentService.submitPayment(userId, workId, amount, mode, paymentDate);
         return result;
     });
 
     // Handler to update a payment
     ipcMain.handle('update-payment', async (event, paymentDetails) => {
-        const { paymentId, newAmount, newMode } = paymentDetails;
+        const { paymentId, newAmount, newMode, newPaymentDate } = paymentDetails;
         // Basic validation
-        if (!paymentId || !newAmount || !newMode) {
+        if (!paymentId || !newAmount || !newMode || !newPaymentDate) {
             return {
                 status: 400,
                 success: false,
@@ -47,7 +47,7 @@ const registerPaymentHandlers = () => {
         }
 
         // Update payment in the database
-        const result = await allPaymentService.updatePayment(paymentId, newAmount, newMode);
+        const result = await allPaymentService.updatePayment(paymentId, newAmount, newMode, newPaymentDate);
         return result;
     });
 };
