@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Service for Form 14 data operations
  * Created on: 01/10/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 03/12/2025
  */
 
 // Importing required modules & libraries
@@ -69,11 +69,11 @@ const getForm14Data = async (startDate, endDate) => {
             FROM customers c
             LEFT JOIN payments p ON c.id = p.customer_id
             WHERE DATE(c.created_on) BETWEEN ? AND ?
-            AND c.vehicle_id IS NOT NULL 
-            AND c.instructor_id IS NOT NULL
+            AND c.ll_no_1 IS NOT NULL
+            AND c.ll_class_1 IS NOT NULL
             GROUP BY c.id
             ORDER BY c.created_on ASC
-        `;
+            `;
 
         const result = await runQuery({
             sql: query,
