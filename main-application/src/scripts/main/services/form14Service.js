@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Service for Form 14 data operations
  * Created on: 01/10/2025
- * Last Modified: 03/12/2025
+ * Last Modified: 07/12/2025
  */
 
 // Importing required modules & libraries
@@ -33,14 +33,14 @@ const processBlobData = (blobData) => {
 };
 
 // Get Form 14 data for a date range
-const getForm14Data = async (startDate, endDate) => {
+const getForm14Data = async (startDate, endDate, searchType, searchName) => {
     try {
         // Convert DD-MM-YYYY to YYYY-MM-DD for database query
         const startDateSQL = ddmmyyyyToISO(startDate);
         const endDateSQL = ddmmyyyyToISO(endDate);
 
         const query = `
-            SELECT 
+                SELECT 
                 c.id,
                 c.mobile_number,
                 c.customer_image,
@@ -68,7 +68,7 @@ const getForm14Data = async (startDate, endDate) => {
                 MAX(p.created_on) as completion_date
             FROM customers c
             LEFT JOIN payments p ON c.id = p.customer_id
-            WHERE DATE(c.created_on) BETWEEN ? AND ?
+            ${searchType === 'name' ? 'WHERE c.customer_name LIKE ?' : 'WHERE DATE(c.created_on) BETWEEN ? AND ?'}
             AND c.ll_no_1 IS NOT NULL
             AND c.ll_class_1 IS NOT NULL
             GROUP BY c.id
@@ -77,7 +77,7 @@ const getForm14Data = async (startDate, endDate) => {
 
         const result = await runQuery({
             sql: query,
-            params: [startDateSQL, endDateSQL],
+            params: searchType === 'name' ? [`%${searchName}%`] : [startDateSQL, endDateSQL],
             type: 'all'
         });
         

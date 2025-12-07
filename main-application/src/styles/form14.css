@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: Styles for Form 14 Generation Page
     Created on: 30/09/2025
-    Last Modified: 11/10/2025
+    Last Modified: 07/12/2025
 */
 
 /* Override table container for form 14 specific styling */
@@ -149,4 +149,9 @@
 
 .print-header p {
     margin: 1px 0;
+}
+
+/* Form */
+#nameInputDiv {
+    display: none;
 }

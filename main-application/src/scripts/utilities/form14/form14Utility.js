@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Form 14 utility functions - ES6 function-based
  * Created on: 11/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 07/12/2025
  */
 
 // Import shared date utilities
@@ -53,7 +53,7 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
         const {
             customer_image, customer_signature, customer_dob, created_on, completion_date,
             mdl_issued_date, mdl_validity_date, ll_class_1, ll_class_2, ll_no_1, ll_no_2,
-            id, customer_name, relation_name, address, mdl_no
+            id, customer_name, relation_name, address, mdl_no, endorsement, endorsement_date
         } = student;
 
         // Convert BLOBs to base64 strings for image display
@@ -108,7 +108,8 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
         // Combine vehicle classes and LL numbers
         const vehicleClass = [ll_class_1, ll_class_2].filter(Boolean).join(' & ') || '';
         const llNumbers = [ll_no_1, ll_no_2].filter(Boolean).join(' & ') || '';
-        const formattedAddress = (address || '').replace(/,/g, ',\n').trim().toUpperCase();
+        // const formattedAddress = (address || '').replace(/,/g, ',\n').trim().toUpperCase();
+        const formattedAddress = (address || '-').trim().toUpperCase();
 
         return `
             <div class="form-entry">
@@ -117,7 +118,7 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
                         <tr>
                             <th class="col-1">Enrollment No.:</th>
                             <td class="col-2"><span class="data-field">${id || ''}</span></td>
-                            <th class="col-3">Name:</th>
+                            <th class="col-3" >Name:</th>
                             <td class="col-4" colspan="3"><span class="data-field">${(customer_name || '').toUpperCase()}</span></td>
                             <td class="photo-cell" rowspan="7">
                                 ${photoSrc ? `<img src="${photoSrc}" alt="Student Photo" class="student-photo">` : '<div class="student-photo" style="border: 1px solid black; background-color: #f5f5f5;"></div>'}
@@ -128,36 +129,38 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
                             </td>
                         </tr>
                         <tr>
+                            <th>Date of Birth:</th>
+                            <td><span class="data-field">${dates.dob}</span></td>
                             <th>Son / Wife / Daughter of:</th>
-                            <td colspan="5"><span class="data-field">${(relation_name || '').toUpperCase()}</span></td>
+                            <td colspan="3"><span class="data-field">${(relation_name || '').toUpperCase()}</span></td>
                         </tr>
                         <tr>
                             <th>Address:</th>
                             <td colspan="5"><span class="address-field">${formattedAddress}</span></td>
                         </tr>
                         <tr>
-                            <th>Date of Birth:</th>
-                            <td><span class="data-field">${dates.dob}</span></td>
+                            <th>L. L. R. No.:</th>
+                            <td colspan="2"><span class="data-field">${llNumbers}</span></td>
                             <th>Class of Vehicle:</th>
-                            <td colspan="3"><span class="data-field">${vehicleClass}</span></td>
+                            <td colspan="2"><span class="data-field">${vehicleClass}</span></td>
                         </tr>
                         <tr>
                             <th>Date of Enrollment:</th>
-                            <td><span class="data-field">${dates.enrollment}</span></td>
-                            <th>L. L. R. No.:</th>
-                            <td colspan="3"><span class="data-field">${llNumbers}</span></td>
-                        </tr>
-                        <tr>
+                            <td colspan="2"><span class="data-field">${dates.enrollment}</span></td>
                             <th>Date of Completion:</th>
-                            <td><span class="data-field">${dates.completion}</span></td>
-                            <th>Date of Passing Test:</th>
-                            <td colspan="3"><span class="data-field">${dates.passing}</span></td>
+                            <td colspan="2"><span class="data-field">${dates.completion}</span></td>
                         </tr>
                         <tr>
                             <th>M. D. L. No.:</th>
-                            <td><span class="data-field">${mdl_no || ''}</span></td>
+                            <td colspan="2"><span class="data-field">${mdl_no || ''}</span></td>
                             <th>Date of Issue:</th>
-                            <td><span class="data-field">${dates.issue}</span></td>
+                            <td colspan="2"><span class="data-field">${dates.issue}</span></td>
+                        </tr>
+                        <tr>
+                            <th>Endorsement (If Any):</th>
+                            <td><span class="data-field">${endorsement || ''}</span></td>
+                            <th>Endorsement Dated:</th>
+                            <td><span class="data-field">${endorsement_date || ''}</span></td>
                             <th>Valid Up to:</th>
                             <td><span class="data-field">${dates.validity}</span></td>
                         </tr>

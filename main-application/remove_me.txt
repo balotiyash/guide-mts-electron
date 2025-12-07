@@ -56,6 +56,8 @@ make date either / or - also mask __-__-____ or DD-MM-YYYY
 make all dialog box question, infoe etc correct
 add exit button in all pages
 remove all data driven console logs to prevent data leak and add informative console logs for error handling
+make everything consistent like name: or name
+alert used in form14.js
 
 backup format main.js
 same for menu main.js

@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Form 14 Page.
     Created on: 30/09/2025
-    Last Modified: 11/10/2025
+    Last Modified: 07/12/2025
 -->
 
 <!DOCTYPE html>
@@ -73,16 +73,31 @@
                         <!-- Title -->
                         <h2>Form 14 Controls</h2>
 
-                        <!-- Start Date -->
+                        <!-- Search Type -->
                         <div class="label-above">
+                            <label for="searchType">Search Type</label>
+                            <select id="searchType">
+                                <option value="dateRange" selected>Date Range</option>
+                                <option value="name">Name</option>
+                            </select>
+                        </div>
+
+                        <!-- Start Date -->
+                        <div class="label-above" id="startDateDiv">
                             <label for="startDate">Start Date</label>
                             <input type="text" id="startDate" placeholder="DD-MM-YYYY" autocomplete="off">
                         </div>
                         
                         <!-- End Date -->
-                        <div class="label-above">
+                        <div class="label-above" id="endDateDiv">
                             <label for="endDate">End Date</label>
                             <input type="text" id="endDate" placeholder="DD-MM-YYYY" autocomplete="off">
+                        </div>
+
+                        <!-- Search Name -->
+                        <div class="label-above" id="nameInputDiv">
+                            <label for="searchName">Name</label>
+                            <input type="text" id="searchName" placeholder="Enter Name" title="Enter Name">
                         </div>
 
                         <!-- Action Buttons -->

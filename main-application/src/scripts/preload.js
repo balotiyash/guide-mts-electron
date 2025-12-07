@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 01/12/2025
+ * Last Modified: 07/12/2025
 */
 
 // Importing required modules from Electron
@@ -182,7 +182,7 @@ contextBridge.exposeInMainWorld('fuelEntryAPI', {
 // Exposing Form 14 APIs
 contextBridge.exposeInMainWorld('form14API', {
     // API to get Form 14 data by date range
-    getForm14Data: (startDate, endDate) => ipcRenderer.invoke('get-form14-data', startDate, endDate)
+    getForm14Data: (startDate, endDate, searchType, searchName) => ipcRenderer.invoke('get-form14-data', startDate, endDate, searchType, searchName)
 });
 
 // Exposing Search Page APIs
