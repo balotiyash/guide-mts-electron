@@ -3,7 +3,7 @@
     Author: Neha Balotia, Yash Balotiya
     Description: This file contains Styles for the Master Entry Page, Fuel, Car, Payments too.
     Created on: 27/07/2025
-    Last Modified: 07/12/2025
+    Last Modified: 08/12/2025
 */
 
 html,
@@ -98,8 +98,7 @@ label {
 }
 
 /* Input Fields  */
-input,
-select {
+input {
     width: 60%;
 }
 
