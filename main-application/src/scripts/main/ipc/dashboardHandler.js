@@ -3,12 +3,16 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage dashboard-related IPC events.
  * Created on: 26/08/2025
- * Last Modified: 21/09/2025
+ * Last Modified: 08/12/2025
 */
 
 // Importing required modules & libraries
 import { ipcMain } from "electron";
 import allDashboardServices from "../services/dashboardService.js";
+import Store from "electron-store";
+
+// Initializing Electron Store for configuration management
+const store = new Store();
 
 // Registering dashboard-related IPC handlers
 const registerDashboardHandlers = () => {
@@ -47,6 +51,21 @@ const registerDashboardHandlers = () => {
     // Getting pending payments count
     ipcMain.handle("get-pending-payments-count", (event) => {
         return allDashboardServices.getPendingPaymentsCount();
+    });
+
+    // Setting host address
+    ipcMain.handle("set-host", (event, hostAddress) => {
+        store.set('hostAddress', hostAddress);
+        return {
+            success: true,
+            message: 'Host address saved successfully.',
+        };
+    });
+
+    // Getting host address
+    ipcMain.handle("get-host", (event) => {
+        const hostAddress = store.get('hostAddress');
+        return hostAddress;
     });
 };
 

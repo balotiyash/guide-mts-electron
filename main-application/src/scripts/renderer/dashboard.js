@@ -3,12 +3,13 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage user dashboard functionality for the Guide Motor Training School application.
  * Created on: 08/08/2025
- * Last Modified: 22/10/2025
+ * Last Modified: 08/12/2025
 */
 
 // Importing required modules & libraries
 import initCharts from "./dashboard_charts.js";
 import { initFloatingBubbles } from "../utilities/dashboard/dashboardUtility.js";
+import { checkClientServerInfo } from "../utilities/dashboard/clientServerUtility.js";
 // import log from "../logger.js";
 
 // Log the loading of the dashboard script
@@ -18,6 +19,12 @@ import { initFloatingBubbles } from "../utilities/dashboard/dashboardUtility.js"
 document.addEventListener("DOMContentLoaded", async () => {
     // Get the database path
     const dbPath = await window.electronAPI.getDbPath();
+
+    // Check client/server info
+    checkClientServerInfo();
+
+    // Get the host address
+    const hostAddress = await window.electronAPI.getHost();
 
     // Navigation buttons
     document.getElementById('registrationButton').addEventListener('click', () => {
@@ -38,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Backup button functionality
     const backupButton = document.getElementById('backupButton');
-    
+
     if (backupButton) {
         backupButton.addEventListener('click', async () => {
             try {
@@ -46,14 +53,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const originalText = backupButton.querySelector('p').textContent;
                 backupButton.querySelector('p').textContent = 'Backing up...';
                 backupButton.style.pointerEvents = 'none';
-                
+
                 // Call backup API
                 const result = await window.electronAPI.backupDatabase();
-                
+
                 // Restore button state
                 backupButton.querySelector('p').textContent = originalText;
                 backupButton.style.pointerEvents = 'auto';
-                
+
                 // Show result dialog
                 if (result.success) {
                     await window.dialogBoxAPI.showDialogBox(
@@ -74,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 // Restore button state on error
                 backupButton.querySelector('p').textContent = 'Backup';
                 backupButton.style.pointerEvents = 'auto';
-                
+
                 console.error('Backup error:', error);
                 await window.dialogBoxAPI.showDialogBox(
                     'error',
@@ -98,9 +105,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             chart2Raw,
             chart3Raw
         ] = await Promise.all([
-            window.dashboardAPI.getChart1Data(year).catch(() => []),
-            window.dashboardAPI.getChart2Data(year).catch(() => []),
-            window.dashboardAPI.getChart3Data(year).catch(() => [])
+            // Chart 1 data
+            fetch(`http://${hostAddress}:3000/api/v1/dashboard/chart-data?chartNo=1&year=${year}`)
+                .then(res => res.json())
+                .catch(() => []),
+
+            // Chart 2 data
+            fetch(`http://${hostAddress}:3000/api/v1/dashboard/chart-data?chartNo=2&year=${year}`)
+                .then(res => res.json())
+                .catch(() => []),
+
+            // Chart 3 data
+            fetch(`http://${hostAddress}:3000/api/v1/dashboard/chart-data?chartNo=3&year=${year}`)
+                .then(res => res.json())
+                .catch(() => [])
         ]);
 
         document.getElementById("loadingDiv").style.display = "none";
@@ -161,10 +179,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Dashboard stats
     const [repeatStudentsCount, currentYearCount, allTimeCount, pendingPaymentsCount] = await Promise.all([
-        window.dashboardAPI.getRepeatStudentsCount(),
-        window.dashboardAPI.getCurrentYearCount(),
-        window.dashboardAPI.getAllTimeCount(),
-        window.dashboardAPI.getPendingPaymentsCount()
+        fetch(`http://${hostAddress}:3000/api/v1/dashboard/repeat-students-count`)
+            .then(res => res.json())
+            .then(data => data.count),
+        fetch(`http://${hostAddress}:3000/api/v1/dashboard/current-year-count`)
+            .then(res => res.json())
+            .then(data => data.count),
+        fetch(`http://${hostAddress}:3000/api/v1/dashboard/all-time-count`)
+            .then(res => res.json())
+            .then(data => data.count),
+        fetch(`http://${hostAddress}:3000/api/v1/dashboard/pending-payments-count`)
+            .then(res => res.json())
+            .then(data => data.count)
     ]);
 
     // Update DOM elements with the fetched counts
@@ -187,7 +213,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (confirmResult === 0) { // User clicked 'Yes'
                 // Call change database API
                 const result = await window.electronAPI.changeDatabase();
-                
+
                 if (result.success) {
                     // Show success message and reload the dashboard
                     await window.dialogBoxAPI.showDialogBox(
@@ -196,7 +222,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         result.message + '\n\nThe application will now reload with the new database.',
                         ['OK']
                     );
-                    
+
                     // Reload the current page to refresh with new database
                     location.reload();
                 } else {

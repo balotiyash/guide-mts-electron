@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 24/10/2025
+ * Last Modified: 08/12/2025
 */
 
 // Module JS
@@ -126,37 +126,6 @@ const createMenuTemplate = (win) => {
             ],
         },
 
-        // Reminders Menu
-        // {
-        //     label: 'Reminders',
-        //     submenu: [
-        //         {
-        //             label: 'Payment Reminders',
-        //             click: () => {
-        //                 win.loadFile(path.join(__dirname, '../views/payment_reminders.html'));
-        //             },
-        //         },
-        //         {
-        //             label: 'Birthday Reminders',
-        //             click: () => {
-        //                 win.loadFile(path.join(__dirname, '../views/birthday_reminders.html'));
-        //             },
-        //         },
-        //         {
-        //             label: 'LL Test Reminders',
-        //             click: () => {
-        //                 win.loadFile(path.join(__dirname, '../views/ll_test_reminders.html'));
-        //             },
-        //         },
-        //         {
-        //             label: 'License Expiry Reminders',
-        //             click: () => {
-        //                 win.loadFile(path.join(__dirname, '../views/license_expiry_reminders.html'));
-        //             },
-        //         },
-        //     ]
-        // },
-
         // Tools Menu
         {
             label: 'Tools',
@@ -165,6 +134,18 @@ const createMenuTemplate = (win) => {
                     label: 'Change Database',
                     click: () => {
                         win.webContents.send('change-database-request');
+                    },
+                },
+                {
+                    label: 'Backup Database',
+                    click: () => {
+                        win.webContents.send('backup-database');
+                    },
+                },
+                {
+                    label: 'Change Archictecture',
+                    click: () => {
+                        win.webContents.send('change-architecture-request');
                     },
                 },
                 { type: 'separator' },

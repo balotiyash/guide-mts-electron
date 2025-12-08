@@ -1,0 +1,93 @@
+<!-- 
+    File: src/views/client_name.html
+    Author: Yash Balotiya
+    Description: This page contains all the HTML5 code of the Client Architecture Setup Page.
+    Created on: 08/12/2025
+    Last Modified: 08/12/2025
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tab Title -->
+    <title>Guide Motor Training School | Client Architecture Setup</title>
+
+    <!-- Content Security Policy (adjusted to allow CDN) -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; 
+        style-src 'self' 'unsafe-inline'; 
+        font-src https://fonts.googleapis.com https://fonts.gstatic.com; 
+        img-src 'self' data:;
+    ">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="../styles/shared.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            text-align: center;
+        }
+
+        input {
+            width: 50%;
+            text-transform: none;
+        }
+
+        #saveButton {
+            width: 150px;
+            height: 40px;
+        }
+
+        p {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Client Architecture Setup Page -->
+    <h1>Setup Client Architecture</h1>
+
+    <!-- Input for Server Machine Name -->
+    <input type="text" id="clientName" placeholder="Enter Server Machine Name">
+
+    <!-- Save Button -->
+    <button class="btn green" id="saveButton">Save</button>
+
+    <!-- Message Paragraph -->
+    <p id="msgPara"></p>
+
+    <!-- Script -->
+    <script type="module">
+        // Event listener for Save Button
+        document.getElementById('saveButton').addEventListener('click', async () => {
+
+            // Getting client machine name
+            const clientName = document.getElementById('clientName').value.trim();
+
+            if (clientName) {
+                // Setting host address via IPC
+                await window.electronAPI.setHost(clientName);
+                window.close();
+            } else {
+                // Showing error message
+                document.getElementById('msgPara').style.display = 'block';
+                document.getElementById('msgPara').textContent = 'Please enter a valid client machine name.';
+
+                setTimeout(() => {
+                    document.getElementById('msgPara').style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+
+</html>

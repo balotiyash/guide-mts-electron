@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 26/10/2025
+ * Last Modified: 08/12/2025
 */
 
 // Importing required modules & libraries
@@ -14,6 +14,7 @@ import { fileURLToPath } from 'url';
 import updater from "electron-updater";
 const { autoUpdater } = updater;
 import log from "electron-log";
+import { startApiServer } from "./server.js";
 
 // Register IPC handlers
 import registerDbHandler from "./main/ipc/dbHandler.js";
@@ -78,7 +79,7 @@ const createWindow = () => {
 };
 
 // Event listener for when the application is ready
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
     try {
         registerDbHandler(); // register all db IPC
         registerDashboardHandlers(); // register all dashboard IPC
@@ -94,6 +95,10 @@ app.whenReady().then(() => {
         registerCollectionReportHandlers(); // register all collection report IPC
         registerReminderHandlers(); // register all reminder IPC
 
+        // Start the Express API server
+        await startApiServer();
+
+        // Create the main application window
         createWindow();
     } catch (err) {
         console.error('Failed to create window:', err);
@@ -126,6 +131,25 @@ ipcMain.on('navigate-to', (event, targetPage) => {
         // win.loadFile(path.join(__dirname, 'src/views', targetPage));
         win.loadFile(path.join(__dirname, '../views', targetPage));
     }
+});
+
+// Open client setup window for setting host address
+ipcMain.on('open-client-setup', () => {
+    const setupWindow = new BrowserWindow({
+        width: 500,
+        height: 400,
+        parent: win,
+        modal: true,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true,
+            nodeIntegration: false,
+        },
+        icon: path.join(__dirname, '../assets/images/mts-logo.png')
+    });
+
+    setupWindow.loadFile(path.join(__dirname, '../views/client_name.html'));
+    setupWindow.setMenu(null);
 });
 
 // Show dialog box
