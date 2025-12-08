@@ -58,6 +58,7 @@ add exit button in all pages
 remove all data driven console logs to prevent data leak and add informative console logs for error handling
 make everything consistent like name: or name
 alert used in form14.js
+backup db from navbar not working in other pages
 
 backup format main.js
 same for menu main.js
