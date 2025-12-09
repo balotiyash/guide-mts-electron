@@ -90,8 +90,12 @@ const renderRows = (tableBody, data, type = "pending", onRowSelect = null) => {
 
             // Set payment date
             if (paymentDateText) {
-                paymentDateText.value = isoToDDMMYYYY(item.created_on.split(" ")[0]);
-                document.getElementById("payment-date").value = item.created_on.split(" ")[0];
+                try {
+                    paymentDateText.value = isoToDDMMYYYY(item.created_on.split(" ")[0]);
+                    document.getElementById("payment-date").value = item.created_on.split(" ")[0];
+                } catch (error) {
+                    console.warn("Expected error while setting payment date:", error);
+                }
             }
 
             // Set amount input for paid payments (for editing)

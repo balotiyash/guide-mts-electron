@@ -1,6 +1,6 @@
 {
     "name": "guide-mts",
-    "version": "1.10.0",
+    "version": "1.9.1",
     "description": "Guide Motor Training School Management System",
     "author": "Yash Balotiya",
     "main": "src/scripts/main.js",
@@ -56,7 +56,7 @@
         ]
     },
     "dependencies": {
-        "better-sqlite3": "^12.5.1",
+        "better-sqlite3": "^12.5.0",
         "cors": "^2.8.5",
         "electron-log": "^5.4.3",
         "electron-store": "^10.1.0",
