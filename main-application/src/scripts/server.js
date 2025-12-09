@@ -18,6 +18,7 @@ import paymentRoutes from './routes/payment.routes.js';
 import form14Routes from './routes/form14.routes.js';
 import reportRoutes from './routes/report.routes.js';
 import reminderRoutes from './routes/reminder.routes.js';
+import dataEntryRoutes from './routes/dataEntry.routes.js';
 
 // Function to start the API server
 export const startApiServer = async () => {
@@ -32,7 +33,9 @@ export const startApiServer = async () => {
     const host = store.get('hostAddress') || 'localhost';
 
     // Middleware setup
-    app.use(express.json());
+    // Increase body size limit to handle large image uploads (e.g., 50MB)
+    app.use(express.json({ limit: '50mb' }));
+    app.use(express.urlencoded({ limit: '50mb', extended: true }));
     app.use(cors()); // optional if you only call from Electron, but harmless
 
     // Setting up API routes
@@ -41,6 +44,9 @@ export const startApiServer = async () => {
 
     // Dashboard routes
     apiRouter.use('/dashboard', dashboardRoutes);
+
+    // Data Entry routes
+    apiRouter.use('/data-entry', dataEntryRoutes);
 
     // Payment routes
     apiRouter.use('/payments', paymentRoutes);

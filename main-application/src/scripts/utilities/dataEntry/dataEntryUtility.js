@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Common utility functions for data entry operations.
    Created on: 21/09/2025
-   Last Modified: 01/12/2025
+   Last Modified: 09/12/2025
 */
 
 // Function to set vehicle names in the select dropdown
@@ -12,7 +12,13 @@ const setDropDownNames = async (value) => {
     let placeholder = "";
 
     // Fetch data based on the type (vehicles or instructors)
-    const data = await window.dataEntryAPI.getDropDownNames(value);
+    // const data = await window.dataEntryAPI.getDropDownNames(value);
+    const data = await fetch(`http://${await window.electronAPI.getHost()}:3000/api/v1/data-entry/dropdown-names/${value}`)
+        .then(response => response.json())
+        .catch(error => {
+            console.error("Error fetching dropdown names:", error);
+            return [];
+        });
 
     // Set the select element and its properties based on the type
     if (value === "vehicles") {
@@ -43,7 +49,13 @@ const setDropDownNames = async (value) => {
 // Fetching work descriptions for a user
 const fetchWorkDescriptions = async (userId, onJobSelected) => {
     // Fetch work descriptions from the API
-    const workDescriptions = await window.dataEntryAPI.getWorkDescriptions(userId);
+    // const workDescriptions = await window.dataEntryAPI.getWorkDescriptions(userId);
+    const workDescriptions = await fetch(`http://${await window.electronAPI.getHost()}:3000/api/v1/data-entry/work-descriptions/${userId}`)
+        .then(response => response.json())
+        .catch(error => {
+            console.error("Error fetching work descriptions:", error);
+            return [];
+        });
 
     // Populate the table with work descriptions
     const tbody = document.querySelector(".scrollDiv table tbody");
@@ -113,7 +125,16 @@ const fetchWorkDescriptions = async (userId, onJobSelected) => {
             );
 
             if (response === 0) { // If 'Delete' is clicked
-                const deleteResult = await window.dataEntryAPI.deleteJob(jobId);
+                // const deleteResult = await window.dataEntryAPI.deleteJob(jobId);
+                const deleteResult = await fetch(`http://${await window.electronAPI.getHost()}:3000/api/v1/data-entry/delete-job/${jobId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .catch(error => {
+                    console.error("Error deleting job:", error);
+                    return { status: "error" };
+                });
+
                 if (deleteResult.status === "success") {
                     tr.remove();
                 } else {
@@ -134,7 +155,49 @@ const fetchWorkDescriptions = async (userId, onJobSelected) => {
     return workDescriptions.length > 0 ? workDescriptions[0].id : null;
 };
 
-// Convert blob to Base64
+// Compress and convert blob to Base64
+const compressAndConvertImage = async (blob, maxWidth = 800, quality = 0.7) => {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        img.onload = () => {
+            // Calculate new dimensions while maintaining aspect ratio
+            let width = img.width;
+            let height = img.height;
+            
+            if (width > maxWidth) {
+                height = (height * maxWidth) / width;
+                width = maxWidth;
+            }
+            
+            // Set canvas dimensions
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Draw and compress image
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            // Convert to base64 with compression
+            canvas.toBlob(
+                (compressedBlob) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result.split(",")[1]); // strip prefix
+                    reader.onerror = reject;
+                    reader.readAsDataURL(compressedBlob);
+                },
+                'image/jpeg',
+                quality
+            );
+        };
+        
+        img.onerror = reject;
+        img.src = URL.createObjectURL(blob);
+    });
+};
+
+// Convert blob to Base64 (without compression)
 const blobToBase64 = (blob) => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -148,5 +211,6 @@ const blobToBase64 = (blob) => {
 export {
     setDropDownNames,
     fetchWorkDescriptions,
+    compressAndConvertImage,
     blobToBase64
 };

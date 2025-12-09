@@ -2,11 +2,11 @@
    Author: Yash Balotiya
    Description: Utility functions for inserting data from the data entry form into the database.
    Created on: 21/09/2025
-   Last Modified: 20/10/2025
+   Last Modified: 09/12/2025
 */
 
 // Importing required modules & libraries
-import { blobToBase64 } from "../../utilities/dataEntry/dataEntryUtility.js";
+import { compressAndConvertImage } from "../../utilities/dataEntry/dataEntryUtility.js";
 import { sendSMSPrompt } from "../sms/smsUtility.js";
 
 // Function to handle data insertion logic
@@ -20,14 +20,34 @@ const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) =>
     // Collect form values
     let formValues = await collectFormValues(formElements, imageBlobs);
 
+    // If validation failed, collectFormValues returns undefined
+    if (!formValues) return;
+
     if (!formValues.amountInput || !formValues.workDescriptionInput) {
         await window.dialogBoxAPI.showDialogBox("error", "Missing Fields", "Please fill in all required fields.");
+        return;
     }
 
     // API call
     if (is_repeat) {
         // If form is being filled with existing data, update the record
-        const response = await window.dataEntryAPI.createJob(userId, formValues.workDescriptionInput, formValues.amountInput);
+        // const response = await window.dataEntryAPI.createJob(userId, formValues.workDescriptionInput, formValues.amountInput);
+        const response = await fetch(`http://${await window.electronAPI.getHost()}:3000/api/v1/data-entry/create-job`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: userId,
+                workDescriptionInput: formValues.workDescriptionInput,
+                amountInput: formValues.amountInput
+            })
+        })
+        .then(response => response.json())
+        .catch(error => {
+            console.error("Error creating job:", error);
+            return { status: "error" };
+        });
 
         if (response?.status === "success") {
             // Show success message
@@ -43,7 +63,19 @@ const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) =>
         }
     } else {
         // If new form, create a new record
-        const response = await window.dataEntryAPI.createCustomer(formValues);
+        // const response = await window.dataEntryAPI.createCustomer(formValues);
+        const response = await fetch(`http://${await window.electronAPI.getHost()}:3000/api/v1/data-entry/create-customer`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formValues)
+        })
+        .then(response => response.json())
+        .catch(error => {
+            console.error("Error creating customer:", error);
+            return { status: "error" };
+        });
 
         if (response?.status === "success") {
             // Show success message
@@ -109,15 +141,15 @@ const collectFormValues = async (formElements, imageBlobs) => {
         return;
     }
 
-    // Attach images (convert to Base64 if blobs exist)
+    // Attach images (compress and convert to Base64 if blobs exist)
     if (imageBlobs.customerImageInput) {
-        formValues.customerImageInput = await blobToBase64(imageBlobs.customerImageInput);
+        formValues.customerImageInput = await compressAndConvertImage(imageBlobs.customerImageInput, 800, 0.7);
     } else {
         formValues.customerImageInput = null; // Ensure null if no image selected
     }
 
     if (imageBlobs.customerSignatureInput) {
-        formValues.customerSignatureInput = await blobToBase64(imageBlobs.customerSignatureInput);
+        formValues.customerSignatureInput = await compressAndConvertImage(imageBlobs.customerSignatureInput, 600, 0.7);
     } else {
         formValues.customerSignatureInput = null; // Ensure null if no signature selected
     }

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to HELP load customer data into the form.
  * Created on: 31/08/2025
- * Last Modified: 30/09/2025
+ * Last Modified: 09/12/2025
  */
 
 // IMporting required modules & libraries
@@ -63,12 +63,41 @@ const fillForm = (data, formElements, imageBlobs) => {
     const photoInputLabel = document.getElementById("photoInputLabel");
     const signatureInputLabel = document.getElementById("signatureInputLabel");
 
-    if (data?.customer_image instanceof Uint8Array) {
-        setLabelImage(data.customer_image, photoInputLabel, "customerImageInput", imageBlobs);
+    // Convert Buffer-like objects to Uint8Array if needed
+    const convertToUint8Array = (data) => {
+        if (!data) return null;
+        if (data instanceof Uint8Array) return data;
+        // If it's a buffer-like object (serialized from HTTP response)
+        if (data.type === 'Buffer' && Array.isArray(data.data)) {
+            return new Uint8Array(data.data);
+        }
+        // If it's an object with numeric keys
+        if (typeof data === 'object' && !Array.isArray(data)) {
+            const values = Object.values(data);
+            if (values.length > 0 && typeof values[0] === 'number') {
+                return new Uint8Array(values);
+            }
+        }
+        return null;
+    };
+
+    const customerImage = convertToUint8Array(data?.customer_image);
+    const customerSignature = convertToUint8Array(data?.customer_signature);
+
+    if (customerImage) {
+        setLabelImage(customerImage, photoInputLabel, "customerImageInput", imageBlobs);
     }
-    if (data?.customer_signature instanceof Uint8Array) {
-        setLabelImage(data.customer_signature, signatureInputLabel, "customerSignatureInput", imageBlobs);
+    if (customerSignature) {
+        setLabelImage(customerSignature, signatureInputLabel, "customerSignatureInput", imageBlobs);
     }
+
+    // OLD CODE: Direct Uint8Array check (works with IPC but not with HTTP API)
+    // if (data?.customer_image instanceof Uint8Array) {
+    //     setLabelImage(data.customer_image, photoInputLabel, "customerImageInput", imageBlobs);
+    // }
+    // if (data?.customer_signature instanceof Uint8Array) {
+    //     setLabelImage(data.customer_signature, signatureInputLabel, "customerSignatureInput", imageBlobs);
+    // }
 
     // Name
     customerNameInput.value = data.customer_name || "";

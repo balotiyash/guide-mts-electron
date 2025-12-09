@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
- * Last Modified: 20/10/2025
+ * Last Modified: 09/12/2025
  */
 
 // Import required modules & libraries
@@ -17,7 +17,10 @@ import { insertDataUtility, collectFormValues, sendSMSPrompt } from "../utilitie
 // log.info("Data entry script loaded.");
 
 // On load
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+    // Get the host address
+    const hostAddress = await window.electronAPI.getHost();
+
     // Flag to check if the form is being filled with existing data
     let is_repeat = false;
     let userId = null;
@@ -107,7 +110,28 @@ document.addEventListener("DOMContentLoaded", () => {
         // Check if the phone number is valid
         if (formElements.phoneInput.value.length === 10) {
             // Search for customer by phone number
-            const result = await window.dataEntryAPI.searchByPhoneNumber(formElements.phoneInput.value);
+            // const result = await window.dataEntryAPI.searchByPhoneNumber(formElements.phoneInput.value);
+            const result = await fetch(`http://${hostAddress}:3000/api/v1/data-entry/search-customer/${formElements.phoneInput.value}`)
+                .then(async response => {
+                    if (!response.ok) {
+                        return null;
+                    }
+                    // Check if response has content before parsing
+                    const text = await response.text();
+                    if (!text || text.trim() === '') {
+                        return null;
+                    }
+                    try {
+                        return JSON.parse(text);
+                    } catch (e) {
+                        console.error("Invalid JSON response:", text);
+                        return null;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error searching customer by phone number:", error);
+                    return null;
+                });
 
             // If a customer is found, then update the UI with the customer details
             if (result) {
@@ -157,7 +181,27 @@ document.addEventListener("DOMContentLoaded", () => {
         let formValues = await collectFormValues(formElements, imageBlobs);
 
         // API call
-        const updateResponse = await window.dataEntryAPI.updateCustomer(userId, jobId, formValues);
+        // const updateResponse = await window.dataEntryAPI.updateCustomer(userId, jobId, formValues);
+        const updateResponse = await fetch(`http://${hostAddress}:3000/api/v1/data-entry/update-customer`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: userId,
+                jobId: jobId,
+                formValues: formValues
+            })
+        })
+        .then(async response => {
+            if (!response.ok) return { status: "error" };
+            const text = await response.text();
+            return text ? JSON.parse(text) : { status: "error" };
+        })
+        .catch(error => {
+            console.error("Error updating customer:", error);
+            return { status: "error" };
+        });
 
         if (updateResponse?.status === "success") {
             // Show success message
@@ -193,7 +237,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response !== 0) return; // 0 = "Delete", 1 = "Cancel"
 
         // API call to delete customer
-        const deleteResponse = await window.dataEntryAPI.deleteUser(userId);
+        // const deleteResponse = await window.dataEntryAPI.deleteUser(userId);
+        const deleteResponse = await fetch(`http://${hostAddress}:3000/api/v1/data-entry/delete-user/${userId}`, {
+            method: 'DELETE'
+        })
+        .then(async response => {
+            if (!response.ok) return { status: "error" };
+            const text = await response.text();
+            return text ? JSON.parse(text) : { status: "error" };
+        })
+        .catch(error => {
+            console.error("Error deleting customer:", error);
+            return { status: "error" };
+        });
 
         if (deleteResponse?.status === "success") {
             // Show success message
