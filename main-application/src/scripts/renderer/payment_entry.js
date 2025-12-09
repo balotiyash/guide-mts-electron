@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code for payment entry page. This is the main page for it.
  * Created on: 16/09/2025
- * Last Modified: 02/12/2025
+ * Last Modified: 09/12/2025
  */
 
 // Importing required 
@@ -14,6 +14,9 @@ import { sendPaymentSMSWithChoice } from "../utilities/sms/smsUtility.js";
 
 // On window load
 document.addEventListener('DOMContentLoaded', async () => {
+    // Get the host address
+    const hostAddress = await window.electronAPI.getHost();
+
     // State
     let userId = null;
     let workId = null;
@@ -30,7 +33,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const filterSelect = document.getElementById("paymentStatusSelect");
 
     // Datasets
-    const pendingPaymentData = await window.paymentEntryAPI.getAllPendingPayments();
+    // const pendingPaymentData = await window.paymentEntryAPI.getAllPendingPayments();
+    const pendingPaymentData = await fetch(`http://${hostAddress}:3000/api/v1/payments/pending-payments`).then(res => res.json());
 
     // Hide loading after data fetch
     document.getElementById("loadingDiv").style.display = "none";
@@ -129,7 +133,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Fetch paid payments only once
             if (paidPayments.length === 0) {
-                const paidData = await window.paymentEntryAPI.getAllPaidPayments();
+                // const paidData = await window.paymentEntryAPI.getAllPaidPayments();
+                const paidData = await fetch(`http://${hostAddress}:3000/api/v1/payments/paid-payments`).then(res => res.json());
                 paidPayments = paidData?.data || [];
 
                 paidPayments = paidPayments.map(p => {

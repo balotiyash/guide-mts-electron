@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code to handle payment entry page utilities
  * Created on: 22/09/2025
- * Last Modified: 02/12/2025
+ * Last Modified: 09/12/2025
  */
 
 // Import reusable SMS function
@@ -90,8 +90,12 @@ const renderRows = (tableBody, data, type = "pending", onRowSelect = null) => {
 
             // Set payment date
             if (paymentDateText) {
-                paymentDateText.value = isoToDDMMYYYY(item.created_on.split(" ")[0]);
-                document.getElementById("payment-date").value = item.created_on.split(" ")[0];
+                try {
+                    paymentDateText.value = isoToDDMMYYYY(item.created_on.split(" ")[0]);
+                    document.getElementById("payment-date").value = item.created_on.split(" ")[0];
+                } catch (error) {
+                    console.warn("Expected error for pending payment date:", error);
+                }
             }
 
             // Set amount input for paid payments (for editing)

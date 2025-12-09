@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains utility functions for payment reminders.
  * Created on: 25/10/2025
- * Last Modified: 26/10/2025
+ * Last Modified: 09/12/2025
  */
 
 // Importing required modules & libraries
@@ -41,7 +41,10 @@ const paymentReminderUtility = () => {
         // Fetch payment reminders from main process
         let result = { success: false, data: [] };
         try {
-            result = await window.reminderAPI.getPaymentReminders();
+            // result = await window.reminderAPI.getPaymentReminders();
+            const hostAddress = await window.electronAPI.getHost();
+            const response = await fetch(`http://${hostAddress}:3000/api/v1/reminders/payment-reminders`);
+            result = await response.json();
         } catch (e) {
             result = { success: false, data: [], message: e.message };
         }

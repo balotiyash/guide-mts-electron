@@ -25,6 +25,7 @@ notepad "$env:APPDATA\guide-mts\logs\main.log"
 npm list electron
 npm install --save-dev electron-rebuild
 npx electron-rebuild
+npx electron-rebuild -f -w better-sqlite3
 
 -- To fetch all repeat customers
 SELECT * 

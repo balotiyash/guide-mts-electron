@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the search page form interactions and date field functionality.
  * Created on: 11/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 09/12/2025
  */
 
 // Import required modules & libraries
@@ -19,6 +19,10 @@ const limit = 100;
 
 // On load
 document.addEventListener("DOMContentLoaded", async () => {
+    // Get the host address
+    const hostAddress = await window.electronAPI.getHost();
+
+    // Initialize date utility
     dateUtility();
 
     // Get elements
@@ -95,7 +99,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         // Fetch data
-        const response = await window.searchPageAPI.getAllCustomers();
+        // const response = await window.searchPageAPI.getAllCustomers();
+        const response = await fetch(`http://${hostAddress}:3000/api/v1/reports/customers`).then(res => res.json());
         
         if (!response || !response.success) {
             tableBody.innerHTML = `<tr><td colspan="8">Failed to fetch customer data.</td></tr>`;
@@ -196,7 +201,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 searchText.maxLength = 10;
                 break;
             case "customerDOB":
-                searchText.placeholder = "Enter Date of Birth (DD-MM-YYYY)";
+                searchText.placeholder = "Enter DOB (DD-MM-YYYY)";
                 searchText.type = "text";
                 searchText.removeAttribute("maxlength");
                 break;

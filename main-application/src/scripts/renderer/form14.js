@@ -3,12 +3,20 @@
  * Author: Yash Balotiya
  * Description: Form 14 renderer script - ES6 function-based
  * Created on: 01/10/2025
- * Last Modified: 07/12/2025
+ * Last Modified: 09/12/2025
  */
 
 // Import utilities
 import { initializeDateRangePickers, clearDatePickers, isValidDateFormat, parseDateString } from '../utilities/form14/datePickerUtility.js';
 import createInitFunction from '../utilities/form14/form14Utility.js';
+
+let hostAddress = 'localhost';
+
+// Get host address on DOM load
+document.addEventListener('DOMContentLoaded', async () => {
+    // Get the host address
+    hostAddress = await window.electronAPI.getHost();
+});
 
 // State variables - using object to allow mutation in utility
 const state = {
@@ -161,11 +169,17 @@ const handleGeneratePreview = async () => {
     try {
         showLoading();
 
-        if (!window.form14API) {
-            throw new Error('Form14 API not available. Please restart the application.');
+        // if (!window.form14API) {
+        //     throw new Error('Form14 API not available. Please restart the application.');
+        // }
+
+        // const form14Data = await window.form14API.getForm14Data(startDateValue, endDateValue, searchTypeValue, searchNameValue);
+        const response = await fetch(`http://${hostAddress}:3000/api/v1/form14/data?startDate=${encodeURIComponent(startDateValue)}&endDate=${encodeURIComponent(endDateValue)}&searchType=${encodeURIComponent(searchTypeValue)}&searchName=${encodeURIComponent(searchNameValue)}`);
+        if (!response.ok) {
+            throw new Error(`Server responded with status ${response.status}`);
         }
 
-        const form14Data = await window.form14API.getForm14Data(startDateValue, endDateValue, searchTypeValue, searchNameValue);
+        const form14Data = await response.json();
 
         if (!form14Data?.length) {
             alert('No records found for the selected date range.');

@@ -3,8 +3,14 @@
  * Author: Yash Balotiya
  * Description: Configuration for Collection Report
  * Created on: 12/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 09/12/2025
  */
+
+// Function to get host address from Electron main process
+const getHostAddress = async () => {
+    const hostAddress = await window.electronAPI.getHost();
+    return hostAddress || 'localhost';
+};
 
 export const collectionReportConfig = {
     reportType: 'collection',
@@ -12,7 +18,8 @@ export const collectionReportConfig = {
     
     // API methods
     api: {
-        getData: () => window.collectionReportAPI.getAllCollections(),
+        // getData: () => window.collectionReportAPI.getAllCollections(),
+        getData: async () => await fetch(`http://${await getHostAddress()}:3000/api/v1/reports/collections`).then(res => res.json()),
         showSaveDialog: (options) => window.collectionReportAPI.showSaveDialog(options),
         writeFile: (filePath, content) => window.collectionReportAPI.writeFile(filePath, content)
     },

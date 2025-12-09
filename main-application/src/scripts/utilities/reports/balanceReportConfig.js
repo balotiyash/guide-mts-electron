@@ -3,8 +3,14 @@
  * Author: Yash Balotiya
  * Description: Configuration for Balance Report
  * Created on: 12/10/2025
- * Last Modified: 22/10/2025
+ * Last Modified: 09/12/2025
  */
+
+// Function to get host address from Electron main process
+const getHostAddress = async () => {
+    const hostAddress = await window.electronAPI.getHost();
+    return hostAddress || 'localhost';
+};
 
 // Balance Report Configuration
 export const balanceReportConfig = {
@@ -13,7 +19,8 @@ export const balanceReportConfig = {
     
     // API methods
     api: {
-        getData: () => window.balanceReportAPI.getAllBalances(),
+        // getData: () => window.balanceReportAPI.getAllBalances(),
+        getData: async () => await fetch(`http://${await getHostAddress()}:3000/api/v1/reports/balances`).then(res => res.json()),
         showSaveDialog: (options) => window.balanceReportAPI.showSaveDialog(options),
         writeFile: (filePath, content) => window.balanceReportAPI.writeFile(filePath, content)
     },
