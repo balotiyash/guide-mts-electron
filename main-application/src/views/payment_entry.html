@@ -3,7 +3,7 @@
     Author: Yash Balotiya, Ayush Shetty
     Description: This page contains all the HTML5 code of the Payment Entry Page.
     Created on: 09/08/2025
-    Last Modified: 09/12/2025
+    Last Modified: 16/12/2025
 -->
 
 <!DOCTYPE html>
@@ -59,7 +59,7 @@
                     <span>
                         <input type="text" id="payment-date" autocomplete="off" title="Enter text to search"
                             placeholder="Search by Name" />
-                        <select id="paymentStatusSelect">
+                        <select id="paymentStatusSelect" title="Filter by Payment Status">
                             <option value="pending">Pending</option>
                             <option value="paid">Paid</option>
                         </select>
@@ -88,9 +88,9 @@
 
                 <!-- Pagination controls -->
                 <div id="paginationControls" class="pagination">
-                    <button id="prevPageBtn">Previous</button>
+                    <button id="prevPageBtn" title="Go to Previous page">Previous</button>
                     <span id="pageInfo"></span>
-                    <button id="nextPageBtn">Next</button>
+                    <button id="nextPageBtn" title="Go to Next page">Next</button>
                 </div>
             </div>
 
@@ -106,19 +106,19 @@
                         <table>
                             <!-- Customer Name -->
                             <tr>
-                                <th>Name</th>
+                                <th title="Name of the customer">Name</th>
                                 <td id="formCustomerName">-</td>
                             </tr>
 
                             <!-- Total Amount -->
                             <tr>
-                                <th>Total Amount</th>
+                                <th title="Total fee amount charged">Total Amount</th>
                                 <td id="formChargedAmount">-</td>
                             </tr>
 
                             <!-- Pending Amount -->
                             <tr>
-                                <th id="formPendingAmountLabel">Pending Amount</th>
+                                <th id="formPendingAmountLabel" title="Pending fee amount">Pending Amount</th>
                                 <td id="formPendingAmount">-</td>
                             </tr>
                         </table>
@@ -129,7 +129,7 @@
                             <label for="paymentMode">Payment Mode</label>
 
                             <!-- Select -->
-                            <select id="paymentMode">
+                            <select id="paymentMode" title="Select Payment Method">
                                 <option value="">Select Payment Method</option>
                                 <option value="cash">Cash</option>
                                 <option value="upi">UPI</option>
@@ -140,7 +140,7 @@
                         <!-- Date -->
                         <div class="label-above">
                             <label for="payment-date">Payment Date</label>
-                            <input type="text" id="payment-date-text" placeholder="DD-MM-YYYY" autocomplete="off" />
+                            <input type="text" id="payment-date-text" placeholder="DD-MM-YYYY" autocomplete="off" title="Enter Payment Date" />
                             <input type="date" id="payment-date" name="payment-date" hidden />
                         </div>
 
@@ -148,22 +148,22 @@
                         <div class="label-above">
                             <label for="amountInput">Amount Paid</label>
                             <input type="number" id="amountInput" placeholder="Amount" autocomplete="off"
-                                title="Enter Amount" />
+                                title="Enter Amount Paid" />
                         </div>
 
                         <!-- Submit Buttons -->
                         <div class="buttons">
-                            <button type="button" class="btn green" id="submitPaymentBtn">Save</button>
-                            <button type="button" class="btn yellow" id="editBtn">Edit</button>
-                            <button type="button" class="btn orange" id="clearBtn">Clear</button>
-                            <button type="button" class="btn red" id="exitBtn">Exit</button>
+                            <button type="button" class="btn green" id="submitPaymentBtn" title="Save payment details">Save</button>
+                            <button type="button" class="btn yellow" id="editBtn" title="Edit payment details">Edit</button>
+                            <button type="button" class="btn orange" id="clearBtn" title="Clear form fields">Clear</button>
+                            <button type="button" class="btn black" id="exitBtn" title="Exit the payment form">Exit</button>
                         </div>
 
                         <!-- Reciept Printing Buttons -->
                         <div class="buttons" id="printBtnsDiv">
-                            <button type="button" class="btn green" id="downloadOriginalInvoiceBtn">Print
+                            <button type="button" class="btn green" id="downloadOriginalInvoiceBtn" title="Print Original Invoice">Print
                                 Original</button>
-                            <button type="button" class="btn orange" id="downloadDuplicateInvoiceBtn">Print
+                            <button type="button" class="btn orange" id="downloadDuplicateInvoiceBtn" title="Print Duplicate Invoice">Print
                                 Duplicate</button>
                         </div>
                     </div>

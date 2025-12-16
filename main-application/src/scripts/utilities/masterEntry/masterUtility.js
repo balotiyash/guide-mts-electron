@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the utility functions for master entry page
  * Created on: 22/09/2025
- * Last Modified: 03/10/2025
+ * Last Modified: 16/12/2025
  */
 
 // Import utility functions
@@ -29,6 +29,7 @@ const renderInstructors = async () => {
             // add a data-id attribute to store the instructor id
             tr.setAttribute('id', instr.id);
             tr.style.cursor = 'pointer';
+            tr.title = 'Click to load details';
 
             // Populate the row with instructor details
             tr.innerHTML = `

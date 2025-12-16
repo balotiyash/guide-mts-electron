@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Customer Data Entry Page.
     Created on: 09/08/2025
-    Last Modified: 09/12/2025
+    Last Modified: 10/12/2025
 -->
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Tab Title -->
-    <title>Guide MTS | Customer Data Entry</title>
+    <title>Guide Motor Training School | Customer Data Entry</title>
 
     <!-- Content Security Policy (adjusted to allow CDN and SMS service) -->
     <meta http-equiv="Content-Security-Policy" content="
@@ -59,14 +59,14 @@
         <!-- Photo & Signature Input -->
         <div id="imageInputContainer">
             <!-- Photo Input -->
-            <label class="imageInput" id="photoInputLabel" data-type="photo">
+            <label class="imageInput" id="photoInputLabel" data-type="photo" title="Upload Photo">
                 <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon" />
                 <span>Photo</span>
                 <input type="file" id="photoInput" accept="image/*" hidden />
             </label>
 
             <!-- Signature Input -->
-            <label class="imageInput" id="signatureInputLabel" data-type="signature">
+            <label class="imageInput" id="signatureInputLabel" data-type="signature" title="Upload Signature">
                 <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon" />
                 <span>Signature</span>
                 <input type="file" id="signatureInput" accept="image/*" hidden />
@@ -93,7 +93,7 @@
             <span class="inputContainer">
                 <label for="dobInput">Date of Birth</label>
                 <!-- Visible text input for user -->
-                <input type="text" id="dobInputText" placeholder="DD-MM-YYYY" />
+                <input type="text" id="dobInputText" placeholder="DD-MM-YYYY" title="Enter date of birth in DD-MM-YYYY format" />
 
                 <!-- Hidden native date input for backend -->
                 <input type="date" id="dobInput" name="dob" hidden />
@@ -129,14 +129,14 @@
                     <!-- Licence Input -->
                     <span class="inputContainer">
                         <label for="licenseInput">LL No-01</label>
-                        <input type="text" id="licenseInput" placeholder="Enter license number"
-                            title="Enter license number" value="MH01 /" autocomplete="off" />
+                        <input type="text" id="licenseInput" placeholder="Enter learning license number 01"
+                            title="Enter learning license number 01" value="MH01 /" autocomplete="off" />
                     </span>
 
                     <!-- Class Input -->
                     <span class="inputContainer">
                         <label for="classInput">Class 1</label>
-                        <input type="text" id="classInput" placeholder="Enter class 1" title="Enter class 1"
+                        <input type="text" id="classInput" placeholder="Enter LL class 1" title="Enter LL class 1"
                             autocomplete="off" />
                     </span>
                 </span>
@@ -157,28 +157,28 @@
             <!-- License Input -->
             <span class="inputContainer">
                 <label for="licenseInput2">LL No-02</label>
-                <input type="text" id="licenseInput2" placeholder="Enter license number" title="Enter license number"
+                <input type="text" id="licenseInput2" placeholder="Enter learning license number 02" title="Enter learning license number 02"
                     value="MH01 /" autocomplete="off" />
             </span>
 
             <!-- Class Input -->
             <span class="inputContainer">
                 <label for="classInput2">Class 2</label>
-                <input type="text" id="classInput2" placeholder="Enter class 2" title="Enter class 2"
+                <input type="text" id="classInput2" placeholder="Enter LL class 2" title="Enter LL class 2"
                     autocomplete="off" />
             </span>
 
             <!-- Issued on -->
             <span class="inputContainer">
                 <label for="issuedOnInput">Issued on</label>
-                <input type="text" id="issuedOnInputText" placeholder="DD-MM-YYYY" />
+                <input type="text" id="issuedOnInputText" placeholder="DD-MM-YYYY" title="Enter LL issued on date in DD-MM-YYYY format" />
                 <input type="date" id="issuedOnInput" name="issuedOnInput" hidden />
             </span>
 
             <!-- Valid Till -->
             <span class="inputContainer">
                 <label for="validUntilInput">Valid Till</label>
-                <input type="text" id="validUntilInputText" placeholder="DD-MM-YYYY" />
+                <input type="text" id="validUntilInputText" placeholder="DD-MM-YYYY" title="Enter LL valid till date in DD-MM-YYYY format" />
                 <input type="date" id="validUntilInput" name="validUntilInput" hidden />
             </span>
         </section>
@@ -188,28 +188,28 @@
             <!-- License Input -->
             <span class="inputContainer">
                 <label for="mdlNoInput">MDL Number</label>
-                <input type="text" id="mdlNoInput" placeholder="Enter mdl number" title="Enter mdl number"
+                <input type="text" id="mdlNoInput" placeholder="Enter MDL number" title="Enter MDL number"
                     autocomplete="off" value="MH01 " />
             </span>
 
             <!-- Class Input -->
             <span class="inputContainer">
                 <label for="mdlClassInput">Class</label>
-                <input type="text" id="mdlClassInput" placeholder="Enter class" title="Enter class"
+                <input type="text" id="mdlClassInput" placeholder="Enter MDL class" title="Enter MDL class"
                     autocomplete="off" />
             </span>
 
             <!-- Issued on -->
             <span class="inputContainer">
                 <label for="mdlIssuedInput">Issued on</label>
-                <input type="text" id="mdlIssuedInputText" placeholder="DD-MM-YYYY" />
+                <input type="text" id="mdlIssuedInputText" placeholder="DD-MM-YYYY" title="Enter MDL issued on date in DD-MM-YYYY format" />
                 <input type="date" id="mdlIssuedInput" name="mdlIssuedInput" hidden />
             </span>
 
             <!-- Valid Till -->
             <span class="inputContainer">
                 <label for="mdlValidUntilInput">Valid Till</label>
-                <input type="text" id="mdlValidUntilInputText" placeholder="DD-MM-YYYY" />
+                <input type="text" id="mdlValidUntilInputText" placeholder="DD-MM-YYYY" title="Enter MDL valid till date in DD-MM-YYYY format" />
                 <input type="date" id="mdlValidUntilInput" name="mdlValidUntilInput" hidden />
             </span>
         </section>
@@ -220,20 +220,20 @@
             <span class="inputContainer">
                 <label for="endorsementInput">Endorsement (If Any)</label>
                 <input type="text" id="endorsementInput" placeholder="Enter endorsement details"
-                    title="Enter endorsement" autocomplete="off" />
+                    title="Enter endorsement if any" autocomplete="off" />
             </span>
 
             <!-- Issued on -->
             <span class="inputContainer">
                 <label for="endorsementDatedInput">Endorsement Dated</label>
-                <input type="text" id="endorsementDatedInputText" placeholder="DD-MM-YYYY" />
+                <input type="text" id="endorsementDatedInputText" placeholder="DD-MM-YYYY" title="Enter endorsement date in DD-MM-YYYY format" />
                 <input type="date" id="endorsementDatedInput" name="endorsementDatedInput" hidden />
             </span>
 
             <!-- Valid Till -->
             <span class="inputContainer">
                 <label for="endorsementValidityInput">Valid Till</label>
-                <input type="text" id="endorsementValidityInputText" placeholder="DD-MM-YYYY" />
+                <input type="text" id="endorsementValidityInputText" placeholder="DD-MM-YYYY" title="Enter endorsement valid till date in DD-MM-YYYY format" />
                 <input type="date" id="endorsementValidityInput" name="endorsementValidityInput" hidden />
             </span>
         </section>
@@ -299,11 +299,11 @@
 
         <!-- Buttons Section -->
         <section class="buttonSection">
-            <button type="button" class="btn green" id="saveBtn">Save</button>
-            <button type="button" class="btn yellow" id="updateBtn">Update</button>
-            <button type="button" class="btn orange" id="clearBtn">Clear</button>
-            <button type="button" class="btn red" id="deleteBtn">Delete</button>
-            <button type="button" class="btn black" id="exitBtn">Exit</button>
+            <button type="button" class="btn green" id="saveBtn" title="Save the current data entry">Save</button>
+            <button type="button" class="btn yellow" id="updateBtn" title="Update the selected data entry">Update</button>
+            <button type="button" class="btn orange" id="clearBtn" title="Clear all input fields">Clear</button>
+            <button type="button" class="btn red" id="deleteBtn" title="Delete the selected data entry">Delete</button>
+            <button type="button" class="btn black" id="exitBtn" title="Exit the data entry form">Exit</button>
         </section>
     </main>
 

@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Form 14 Page.
     Created on: 30/09/2025
-    Last Modified: 09/12/2025
+    Last Modified: 16/12/2025
 -->
 
 <!DOCTYPE html>
@@ -77,7 +77,7 @@
                         <!-- Search Type -->
                         <div class="label-above" id="searchTypeSelect">
                             <label for="searchType">Search Type</label>
-                            <select id="searchType">
+                            <select id="searchType" title="Select Search Type">
                                 <option value="dateRange" selected>Date Range</option>
                                 <option value="name">Name</option>
                             </select>
@@ -86,30 +86,30 @@
                         <!-- Start Date -->
                         <div class="label-above" id="startDateDiv">
                             <label for="startDate">Start Date</label>
-                            <input type="text" id="startDate" placeholder="DD-MM-YYYY" autocomplete="off">
+                            <input type="text" id="startDate" placeholder="DD-MM-YYYY" autocomplete="off" title="Select Start Date">
                         </div>
                         
                         <!-- End Date -->
                         <div class="label-above" id="endDateDiv">
                             <label for="endDate">End Date</label>
-                            <input type="text" id="endDate" placeholder="DD-MM-YYYY" autocomplete="off">
+                            <input type="text" id="endDate" placeholder="DD-MM-YYYY" autocomplete="off" title="Select End Date">
                         </div>
 
                         <!-- Search Name -->
                         <div class="label-above" id="nameInputDiv">
                             <label for="searchName">Name</label>
-                            <input type="text" id="searchName" placeholder="Enter Name" title="Enter Name">
+                            <input type="text" id="searchName" placeholder="Enter Name" title="Enter Search Name">
                         </div>
 
                         <!-- Action Buttons -->
                         <div class="buttons">
-                            <button type="button" class="btn green" id="generatePreview">Generate Preview</button>
-                            <button type="button" class="btn yellow" id="printForm" disabled>Print Form</button>
+                            <button type="button" class="btn green" id="generatePreview" title="Generate preview of Form 14">Generate Preview</button>
+                            <button type="button" class="btn yellow" id="printForm" disabled title="Print the generated Form 14">Print Form</button>
                         </div>
                         
                         <div class="buttons">
-                            <button type="button" class="btn orange" id="clearForm">Clear</button>
-                            <button type="button" class="btn red" id="backToDashboard">Back to Dashboard</button>
+                            <button type="button" class="btn orange" id="clearForm" title="Clear all input fields">Clear</button>
+                            <button type="button" class="btn black" id="backToDashboard" title="Return to the dashboard">Back to Dashboard</button>
                         </div>
 
                         <!-- Form Info -->

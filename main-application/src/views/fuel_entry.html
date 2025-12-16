@@ -3,7 +3,7 @@
     Author: Yash Balotiya, Ayush Shetty
     Description: This page contains all the HTML5 code of the Fuel Entry Page.
     Created on: 05/08/2025
-    Last Modified: 02/10/2025
+    Last Modified: 16/12/2025
 -->
 
 <!DOCTYPE html>
@@ -63,7 +63,7 @@
                 <!-- Title -->
                 <div class="table-header">
                     <h2>Vehicle Fuel Records</h2>
-                    <input type="month" id="fuel-date" autocomplete="off" title="Select Date" />
+                    <input type="month" id="fuel-date" autocomplete="off" title="Select Month and Year" />
                 </div>
 
                 <!-- Table -->
@@ -114,7 +114,7 @@
                         <div class="label-above">
                             <label for="entrydate_text">Select Date</label>
                             <input type="text" id="entrydate_text" placeholder="DD/MM/YYYY" autocomplete="off"
-                                title="Select Date" />
+                                title="Select Refuel Date" />
                             <input type="hidden" id="entrydate" />
                         </div>
 
@@ -122,21 +122,21 @@
                         <div class="label-above">
                             <label for="amountInput">Amount</label>
                             <input type="number" id="amountInput" placeholder="Amount" autocomplete="off"
-                                title="Enter Amount" />
+                                title="Enter Fuel Amount" />
                         </div>
 
                         <!-- Kilometer Runned Input -->
                         <div class="label-above">
                             <label for="kmRunnedInput">Kilometer Ran</label>
-                            <input type="number" id="kmRunnedInput" placeholder="Kilometer Runned" autocomplete="off"
-                                title="Enter Kilometer Runned" />
+                            <input type="number" id="kmRunnedInput" placeholder="Kilometer Ran" autocomplete="off"
+                                title="Enter Kilometer Ran" />
                         </div>
 
                         <!-- Submit Buttons -->
                         <div class="buttons">
-                            <button type="button" class="btn green">Save</button>
-                            <button type="button" class="btn orange">Clear</button>
-                            <button type="button" class="btn red">Exit</button>
+                            <button type="button" class="btn green" title="Save fuel entry details">Save</button>
+                            <button type="button" class="btn orange" title="Clear form fields">Clear</button>
+                            <button type="button" class="btn black" title="Exit the fuel entry form">Exit</button>
                         </div>
                     </div>
                 </div>

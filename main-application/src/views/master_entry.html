@@ -3,7 +3,7 @@
     Author: Neha Balotia, Yash Balotiya
     Description: This page contains all the HTML5 code of the Master Registration Page.
     Created on: 17/07/2025
-    Last Modified: 02/10/2025
+    Last Modified: 16/12/2025
 -->
 
 <!DOCTYPE html>
@@ -99,32 +99,32 @@
                         <!-- Instructor Name -->
                         <div class="label-above">
                             <label for="name">Instructor Name</label>
-                            <input type="text" id="name" placeholder="Instructor Name" autocomplete="off" />
+                            <input type="text" id="name" placeholder="Instructor Name" autocomplete="off" title="Enter instructor's name" />
                         </div>
 
                         <!-- License Number -->
                         <div class="label-above">
                             <label for="license">License Number</label>
-                            <input type="text" id="license" placeholder="License Number" autocomplete="off" />
+                            <input type="text" id="license" placeholder="License Number" autocomplete="off" title="Enter instructor's license number" />
                         </div>
 
                         <!-- License Expiration Date -->
                         <div class="label-above">
                             <label for="license-expiration">License Expiration Date</label>
                             <input type="text" id="license-expiration-text" placeholder="DD-MM-YYYY"
-                                autocomplete="off" />
+                                autocomplete="off" title="Enter license expiration date in DD-MM-YYYY format" />
                             <input type="date" id="license-expiration" name="license-expiration" hidden />
                         </div>
 
                         <!-- Form Buttons -->
                         <div class="buttons">
-                            <button type="button" class="btn green" id="save-btn">Save</button>
-                            <button type="button" class="btn yellow" id="edit-btn">Edit</button>
-                            <button type="button" class="btn orange" id="clear-btn">Clear</button>
-                            <button type="button" class="btn red" id="delete-btn">Delete</button>
+                            <button type="button" class="btn green" id="save-btn" title="Save instructor details">Save</button>
+                            <button type="button" class="btn yellow" id="edit-btn" title="Edit instructor details">Edit</button>
+                            <button type="button" class="btn orange" id="clear-btn" title="Clear form fields">Clear</button>
+                            <button type="button" class="btn red" id="delete-btn" title="Delete instructor">Delete</button>
                         </div>
                         <div class="buttons">
-                            <button type="button" class="btn red" id="exit-btn">Exit</button>
+                            <button type="button" class="btn black" id="exit-btn" title="Exit the registration form">Exit</button>
                         </div>
                     </div>
                 </div>

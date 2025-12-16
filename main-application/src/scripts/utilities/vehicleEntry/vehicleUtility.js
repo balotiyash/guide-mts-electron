@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the utility functions for vehicle entry page
  * Created on: 23/09/2025
- * Last Modified: 23/09/2025
+ * Last Modified: 16/12/2025
  */
 
 // Global variable to track selected vehicle ID
@@ -31,6 +31,7 @@ const renderVehicles = async () => {
                     // add a data-id attribute to store the vehicle id
                     tr.setAttribute('id', vehicle.id);
                     tr.style.cursor = 'pointer';
+                    tr.title = 'Click to load vehicle details';
 
                     // Populate the row with vehicle details
                     tr.innerHTML = `

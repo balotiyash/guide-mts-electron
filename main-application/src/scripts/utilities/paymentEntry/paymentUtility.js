@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code to handle payment entry page utilities
  * Created on: 22/09/2025
- * Last Modified: 09/12/2025
+ * Last Modified: 16/12/2025
  */
 
 // Import reusable SMS function
@@ -40,6 +40,7 @@ const renderRows = (tableBody, data, type = "pending", onRowSelect = null) => {
     data.forEach(item => {
         // Create row
         const row = document.createElement("tr");
+        row.title = "Click to select";
 
         if (type === "pending") {
             row.innerHTML = `

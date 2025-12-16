@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: Collection Report page using generic report system
     Created on: 12/10/2025
-    Last Modified: 09/12/2025
+    Last Modified: 16/12/2025
 -->
 
 <!DOCTYPE html>
@@ -52,7 +52,7 @@
                 <!-- Search Type -->
                 <div class="label-above">
                     <label for="searchSelect">Search Type</label>
-                    <select name="" id="searchSelect">
+                    <select name="" id="searchSelect" title="Select Search Type">
                         <option value="">Select Search Type</option>
                         <option value="customerName">Customer Name</option>
                         <option value="mobileNumber">Mobile Number</option>
@@ -63,28 +63,28 @@
                 <!-- Input Search -->
                 <div class="label-above">
                     <label for="searchText">Search Text</label>
-                    <input type="text" id="searchText" placeholder="Search Text" autocomplete="off" />
+                    <input type="text" id="searchText" placeholder="Search Text" autocomplete="off" title="Enter text to search" />
                 </div>
 
                 <!-- Starting Date -->
                 <div class="label-above">
                     <label for="starting-date">Starting Date</label>
-                    <input type="text" id="starting-date-text" placeholder="DD-MM-YYYY" autocomplete="off" />
+                    <input type="text" id="starting-date-text" placeholder="DD-MM-YYYY" autocomplete="off" title="Select Starting Date" />
                     <input type="date" id="starting-date" name="starting-date" hidden />
                 </div>
 
                 <!-- Ending Date -->
                 <div class="label-above">
                     <label for="ending-date">Ending Date</label>
-                    <input type="text" id="ending-date-text" placeholder="DD-MM-YYYY" autocomplete="off" />
+                    <input type="text" id="ending-date-text" placeholder="DD-MM-YYYY" autocomplete="off" title="Select Ending Date" />
                     <input type="date" id="ending-date" name="ending-date" hidden />
                 </div>
 
                 <!-- Form Buttons -->
                 <div id="formButtons" class="buttons">
-                    <button type="button" class="btn green" id="search-btn">Search</button>
-                    <button type="button" class="btn yellow" id="export-btn">Export</button>
-                    <button type="button" class="btn orange" id="clear-btn">Clear</button>
+                    <button type="button" class="btn green" id="search-btn" title="Search records">Search</button>
+                    <button type="button" class="btn yellow" id="export-btn" title="Export search results">Export</button>
+                    <button type="button" class="btn orange" id="clear-btn" title="Clear all input fields">Clear</button>
                 </div>
             </div>
 
@@ -118,9 +118,9 @@
 
                 <!-- Pagination controls -->
                 <div id="paginationControls" class="pagination">
-                    <button id="prevPageBtn">Previous</button>
+                    <button id="prevPageBtn" title="Go to Previous page">Previous</button>
                     <span id="pageInfo"></span>
-                    <button id="nextPageBtn">Next</button>
+                    <button id="nextPageBtn" title="Go to Next page">Next</button>
                 </div>
             </div>
         </div>
