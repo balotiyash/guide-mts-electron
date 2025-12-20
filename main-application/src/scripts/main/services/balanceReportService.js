@@ -3,14 +3,16 @@
  * Author: Yash Balotiya
  * Description: Service functions for balance report data
  * Created on: 12/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 20/12/2025
  */
 
+// Importing required modeules & libraries
 import { runQuery } from './dbService.js';
 
 // Function to get all balance data
 export const getAllBalances = async () => {
     try {
+        // SQL query to fetch balance data
         const query = `
             SELECT
                 c.id AS customer_id,

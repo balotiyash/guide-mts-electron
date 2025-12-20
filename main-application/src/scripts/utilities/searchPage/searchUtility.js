@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Contains utility functions for the search page.
  * Created on: 11/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 20/12/2025
  */
 
 // Import required utilities
@@ -171,7 +171,7 @@ const exportToCSV = async () => {
         console.error("Export error:", error);
         window.dialogBoxAPI.showDialogBox("error", "Export Error", `An error occurred while exporting: ${error.message}`, ["OK"]);
     }
-}
+};
 
 // Clear function
 const clearSearch = () => {

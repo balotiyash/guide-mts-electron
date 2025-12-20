@@ -3,9 +3,10 @@
  * Author: Yash Balotiya
  * Description: Collection Report page using generic report system
  * Created on: 12/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 20/12/2025
  */
 
+// Import necessary modules and libraries
 import dateUtility from "../utilities/dataEntry/dateUtility.js";
 import GenericReportUtility from "../utilities/reports/genericReportUtility.js";
 import { collectionReportConfig } from "../utilities/reports/collectionReportConfig.js";
@@ -40,4 +41,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Initialize the generic report utility
     const reportUtility = new GenericReportUtility(config);
     await reportUtility.initialize();
+
+    // Exit button functionality
+    document.getElementById("exitBtn").addEventListener("click", () => {
+        window.location.href = "dashboard.html";
+    });
 });

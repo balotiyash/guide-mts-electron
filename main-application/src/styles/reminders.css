@@ -3,12 +3,23 @@
     Author: Yash Balotiya
     Description: Styles for Reminders Page
     Created on: 24/10/2025
-    Last Modified: 26/10/2025
+    Last Modified: 20/12/2025
 */
 
 /* Main Page */
 body {
     padding: 20px;
+}
+
+/* Header Section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#exitBtn {
+    width: 200px;
 }
 
 /* Main Section */

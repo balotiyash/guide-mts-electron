@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to handle database-related IPC calls.
  * Created on: 26/08/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 20/12/2025
 */
 
 // Importing required modules & libraries
@@ -26,7 +26,7 @@ const registerDbHandler = () => {
     ipcMain.handle('change-database', async (event) => {
         return await changeDatabase();
     });
-}
+};
 
 // Exporting the registerDbHandler function
 export default registerDbHandler;

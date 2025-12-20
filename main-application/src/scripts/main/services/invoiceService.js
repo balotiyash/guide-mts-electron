@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the main Js code for invoice service
  * Created on: 16/09/2025
- * Last Modified: 23/09/2025
+ * Last Modified: 20/12/2025
  */
 
 // src/services/invoiceService.js
@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 // Generate a unique token for each invoice window
 const makeToken = () => {
     return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-}
+};
 
 // Generate and save invoice as PDF
 const generateInvoice = async (invoiceData) => {
@@ -103,7 +103,7 @@ const generateInvoice = async (invoiceData) => {
         ipcMain.removeListener('invoice-rendered', onRendered);
         if (!invoiceWin.isDestroyed()) invoiceWin.close();
     }
-}
+};
 
 // Print invoice directly without saving
 const printInvoice = async (invoiceData) => {
@@ -179,7 +179,7 @@ const printInvoice = async (invoiceData) => {
         ipcMain.removeListener('invoice-rendered', onRendered);
         if (!invoiceWin.isDestroyed()) invoiceWin.close();
     }
-}
+};
 
 // Exporting the functions
 export {

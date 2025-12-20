@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to manage the database.
  * Created on: 26/08/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 20/12/2025
 */
 
 // Importing required modules & libraries
@@ -45,7 +45,7 @@ const getDbPath = () => {
 const connectDb = () => {
     const dbPath = getDbPath();
     return new Database(dbPath);
-}
+};
 
 // Running a database query
 const runQuery = ({ sql, params = [], type = 'all' }) => {
@@ -82,7 +82,7 @@ const runQuery = ({ sql, params = [], type = 'all' }) => {
 
     // Returning the result
     return result;
-}
+};
 
 // Backup database function
 const backupDatabase = async () => {

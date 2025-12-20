@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Generic utility for all report pages (Balance, Collection, etc.)
  * Created on: 12/10/2025
- * Last Modified: 22/10/2025
+ * Last Modified: 20/12/2025
  */
 
 // Importing required modules & libraries
@@ -105,7 +105,7 @@ class GenericReportUtility {
         // Handle empty state
         if (pageData.length === 0) {
             tableBody.innerHTML = `<tr><td colspan="${this.config.columns.length}">No data found.</td></tr>`;
-            paginationControls.style.display = "none";
+            // paginationControls.style.display = "none";
             exportBtn.disabled = true;
             return;
         }
@@ -143,7 +143,7 @@ class GenericReportUtility {
         pageInfo.textContent = `Page ${this.currentPage} of ${totalPages}`;
         prevPageBtn.disabled = this.currentPage === 1;
         nextPageBtn.disabled = this.currentPage === totalPages;
-        paginationControls.style.display = totalPages > 1 ? "flex" : "none";
+        // paginationControls.style.display = totalPages > 1 ? "flex" : "none";
     }
 
     // Perform search based on criteria
@@ -449,6 +449,7 @@ class GenericReportUtility {
         return path.split('.').reduce((current, key) => current?.[key], obj);
     }
 
+    // Function to format values based on specified format
     formatValue(value, format) {
         switch (format) {
             case 'uppercase':
@@ -464,6 +465,7 @@ class GenericReportUtility {
         }
     }
 
+    // Loading and error handling
     showLoading() {
         const { tableBody } = this.config.elements;
         tableBody.innerHTML = `<tr><td colspan="${this.config.columns.length}">Loading...</td></tr>`;
@@ -472,15 +474,18 @@ class GenericReportUtility {
         if (loadingDiv) loadingDiv.style.display = "flex";
     }
 
+    // Show error message in the table
     showError(message) {
         const { tableBody } = this.config.elements;
         tableBody.innerHTML = `<tr><td colspan="${this.config.columns.length}">${message}</td></tr>`;
     }
 
+    // Hide loading indicator
     hideLoading() {
         const loadingDiv = document.getElementById("loadingDiv");
         if (loadingDiv) loadingDiv.style.display = "none";
     }
 }
 
+// Exporting the GenericReportUtility class
 export default GenericReportUtility;

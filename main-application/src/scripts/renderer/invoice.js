@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file handles the rendering of invoice data in the invoice window.
  * Created on: 16/09/2025
- * Last Modified: 30/09/2025
+ * Last Modified: 20/12/2025
 */
 
 // Date formatting function to handle multiple date formats
@@ -37,7 +37,7 @@ const formatDateToDDMMYYYY = (dateString) => {
         console.error('Error formatting date:', error);
         return '';
     }
-}
+};
 
 // Fetch token from URL
 const params = new URL(location.href).searchParams;

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the utility functions for master entry page
  * Created on: 22/09/2025
- * Last Modified: 16/12/2025
+ * Last Modified: 20/12/2025
  */
 
 // Import utility functions
@@ -75,6 +75,7 @@ const renderInstructors = async () => {
     }
 };
 
+// Function to handle form submission for adding a new instructor
 const handleSubmit = async () => {
     // Fetching values from the form
     const name = document.getElementById("name").value.trim().toLowerCase();
@@ -106,6 +107,7 @@ const handleSubmit = async () => {
     }
 };
 
+// Function to handle form submission for updating an existing instructor
 const handleUpdate = async () => {
     // Fetching values from the form
     const name = document.getElementById("name").value.trim().toLowerCase();
@@ -140,11 +142,12 @@ const handleUpdate = async () => {
     }
 };
 
-// Exporting the functions
+// Function to get the currently selected instructor ID
 const getSelectedInstructorId = () => {
     return selectedInstructorId;
 };
 
+// Exporting the functions
 export {
     renderInstructors,
     handleSubmit,

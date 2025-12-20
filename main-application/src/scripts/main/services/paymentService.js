@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Service functions for payment processing and management.
  * Created on: 30/09/2025
- * Last Modified: 02/12/2025
+ * Last Modified: 20/12/2025
  */
 
 // Importing required modules & libraries
@@ -42,7 +42,7 @@ const getAllPendingPayments = async () => {
         data: result,
         message: 'Fetched all pending payments successfully'
     };
-}
+};
 
 // Function to get paid payments with pagination
 const getAllPaidPayments = async () => {

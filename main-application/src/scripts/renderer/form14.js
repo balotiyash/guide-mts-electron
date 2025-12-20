@@ -3,25 +3,34 @@
  * Author: Yash Balotiya
  * Description: Form 14 renderer script - ES6 function-based
  * Created on: 01/10/2025
- * Last Modified: 09/12/2025
+ * Last Modified: 20/12/2025
  */
 
 // Import utilities
 import { initializeDateRangePickers, clearDatePickers, isValidDateFormat, parseDateString } from '../utilities/form14/datePickerUtility.js';
 import createInitFunction from '../utilities/form14/form14Utility.js';
 
+// Host address variable
 let hostAddress = 'localhost';
 
 // Get host address on DOM load
 document.addEventListener('DOMContentLoaded', async () => {
     // Get the host address
     hostAddress = await window.electronAPI.getHost();
+
+    try {
+        init();
+    } catch (error) {
+        console.error('Error in DOMContentLoaded:', error);
+        alert('An error occurred while loading the page: ' + error.message);
+    }
 });
 
 // State variables - using object to allow mutation in utility
 const state = {
     currentData: null
 };
+
 const STUDENTS_PER_PAGE = 3;
 
 // DOM elements cache
@@ -224,13 +233,3 @@ const init = createInitFunction(
     initializeDatePickers,
     handleGeneratePreview
 );
-
-// Initialize on DOM load
-document.addEventListener('DOMContentLoaded', () => {
-    try {
-        init();
-    } catch (error) {
-        console.error('Error in DOMContentLoaded:', error);
-        alert('An error occurred while loading the page: ' + error.message);
-    }
-});

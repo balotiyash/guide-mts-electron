@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to handle invoice printing and generation for payment entry page.
  * Created on: 22/09/2025
- * Last Modified: 23/09/2025
+ * Last Modified: 20/12/2025
  */
 
 // Function to print invoice for a selected user
@@ -31,7 +31,7 @@ const printInvoiceForSelectedUser = async (userId, workId, type) => {
         console.error('Print error:', error);
         window.dialogBoxAPI.showDialogBox('error', 'Error', 'Failed to print invoice.', ['OK']);
     }
-}
+};
 
 // Function to generate invoice for a selected user and save as file PDF
 const generateInvoiceForSelectedUser = async (userId, workId, type) => {
@@ -59,4 +59,4 @@ const generateInvoiceForSelectedUser = async (userId, workId, type) => {
 export {
     printInvoiceForSelectedUser,
     generateInvoiceForSelectedUser
-}
+};

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Logs user activity in the renderer process of an Electron app.
  * Created on: 15/09/2025
- * Last Modified: 15/09/2025
+ * Last Modified: 20/12/2025
 */
 
 // logger.js (put this in a shared folder)
@@ -52,4 +52,5 @@ window.addEventListener("unhandledrejection", (e) => {
     log.error("Unhandled rejection:", e.reason);
 });
 
+// Export the logger for use in other modules
 export default log;

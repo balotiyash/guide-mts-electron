@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the utility functions for vehicle entry page
  * Created on: 23/09/2025
- * Last Modified: 16/12/2025
+ * Last Modified: 20/12/2025
  */
 
 // Global variable to track selected vehicle ID
@@ -182,11 +182,12 @@ const clearForm = () => {
     selectedVehicleId = null;
 };
 
-// Exporting the functions
+// Function to get the currently selected vehicle ID
 const getSelectedVehicleId = () => {
     return selectedVehicleId;
 };
 
+// Exporting the functions
 export {
     renderVehicles,
     handleSubmit,

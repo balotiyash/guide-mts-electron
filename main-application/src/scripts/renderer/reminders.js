@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains main entry point JS code for reminders page.
  * Created on: 24/10/2025
- * Last Modified: 25/10/2025
+ * Last Modified: 20/12/2025
  */
 
 // Importing required modules & libraries
@@ -25,4 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Licence Expiry Reminder Section
     dlExpiryUtility();
+
+    // Exit Button Functionality
+    document.getElementById('exitBtn').addEventListener('click', () => {
+        window.location.href = 'dashboard.html'; // Redirect to dashboard page
+    });
 });

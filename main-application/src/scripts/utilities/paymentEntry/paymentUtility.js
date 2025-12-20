@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code to handle payment entry page utilities
  * Created on: 22/09/2025
- * Last Modified: 16/12/2025
+ * Last Modified: 20/12/2025
  */
 
 // Import reusable SMS function
@@ -115,7 +115,7 @@ const renderRows = (tableBody, data, type = "pending", onRowSelect = null) => {
     });
 
     // no return — selection is communicated via the onRowSelect callback
-}
+};
 
 // ------------------------------
 // Paid: Client-Side Pagination + Search
@@ -155,7 +155,7 @@ const renderCurrentPage = (currentPage, limit, paidPayments, searchQuery = "", t
     }
 
     return { totalPages, totalRecords };
-}
+};
 
 // Update pagination controls
 const updatePaginationControls = (currentPage, totalPages, totalRecords = 0) => {
@@ -168,7 +168,7 @@ const updatePaginationControls = (currentPage, totalPages, totalRecords = 0) => 
     if (pageInfoEl) pageInfoEl.textContent = `Page ${currentPage} of ${totalPages} (${totalRecords} records)`;
     if (prevBtn) prevBtn.disabled = currentPage <= 1;
     if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
-}
+};
 
 // Function to handle payment submission
 const submitPayment = async (userIdParam, workIdParam) => {
@@ -243,4 +243,4 @@ export {
     renderRows,
     renderCurrentPage,
     submitPayment
-}
+};

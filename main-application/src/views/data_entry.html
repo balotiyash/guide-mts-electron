@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Customer Data Entry Page.
     Created on: 09/08/2025
-    Last Modified: 10/12/2025
+    Last Modified: 20/12/2025
 -->
 
 <!DOCTYPE html>
@@ -62,14 +62,14 @@
             <label class="imageInput" id="photoInputLabel" data-type="photo" title="Upload Photo">
                 <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon" />
                 <span>Photo</span>
-                <input type="file" id="photoInput" accept="image/*" hidden />
+                <input type="file" id="photoInput" accept="image/*" autocomplete="off" hidden />
             </label>
 
             <!-- Signature Input -->
             <label class="imageInput" id="signatureInputLabel" data-type="signature" title="Upload Signature">
                 <img src="../assets/svgs/arrow-up-from-bracket-solid-full.svg" alt="Upload Icon" />
                 <span>Signature</span>
-                <input type="file" id="signatureInput" accept="image/*" hidden />
+                <input type="file" id="signatureInput" accept="image/*" autocomplete="off" hidden />
             </label>
         </div>
     </header>
@@ -93,7 +93,7 @@
             <span class="inputContainer">
                 <label for="dobInput">Date of Birth</label>
                 <!-- Visible text input for user -->
-                <input type="text" id="dobInputText" placeholder="DD-MM-YYYY" title="Enter date of birth in DD-MM-YYYY format" />
+                <input type="text" id="dobInputText" placeholder="DD-MM-YYYY" title="Enter date of birth in DD-MM-YYYY format" autocomplete="off" />
 
                 <!-- Hidden native date input for backend -->
                 <input type="date" id="dobInput" name="dob" hidden />
@@ -147,7 +147,7 @@
                 <!-- Address Input -->
                 <span class="inputContainer addressInputSpan">
                     <label for="addressInput">Address</label>
-                    <textarea id="addressInput" placeholder="Enter full address" title="Enter full address"></textarea>
+                    <textarea id="addressInput" placeholder="Enter full address" title="Enter full address" autocomplete="off"></textarea>
                 </span>
             </div>
         </section>
@@ -171,14 +171,14 @@
             <!-- Issued on -->
             <span class="inputContainer">
                 <label for="issuedOnInput">Issued on</label>
-                <input type="text" id="issuedOnInputText" placeholder="DD-MM-YYYY" title="Enter LL issued on date in DD-MM-YYYY format" />
+                <input type="text" id="issuedOnInputText" placeholder="DD-MM-YYYY" title="Enter LL issued on date in DD-MM-YYYY format" autocomplete="off" />
                 <input type="date" id="issuedOnInput" name="issuedOnInput" hidden />
             </span>
 
             <!-- Valid Till -->
             <span class="inputContainer">
                 <label for="validUntilInput">Valid Till</label>
-                <input type="text" id="validUntilInputText" placeholder="DD-MM-YYYY" title="Enter LL valid till date in DD-MM-YYYY format" />
+                <input type="text" id="validUntilInputText" placeholder="DD-MM-YYYY" title="Enter LL valid till date in DD-MM-YYYY format" autocomplete="off" />
                 <input type="date" id="validUntilInput" name="validUntilInput" hidden />
             </span>
         </section>
@@ -202,14 +202,14 @@
             <!-- Issued on -->
             <span class="inputContainer">
                 <label for="mdlIssuedInput">Issued on</label>
-                <input type="text" id="mdlIssuedInputText" placeholder="DD-MM-YYYY" title="Enter MDL issued on date in DD-MM-YYYY format" />
+                <input type="text" id="mdlIssuedInputText" placeholder="DD-MM-YYYY" title="Enter MDL issued on date in DD-MM-YYYY format" autocomplete="off" />
                 <input type="date" id="mdlIssuedInput" name="mdlIssuedInput" hidden />
             </span>
 
             <!-- Valid Till -->
             <span class="inputContainer">
                 <label for="mdlValidUntilInput">Valid Till</label>
-                <input type="text" id="mdlValidUntilInputText" placeholder="DD-MM-YYYY" title="Enter MDL valid till date in DD-MM-YYYY format" />
+                <input type="text" id="mdlValidUntilInputText" placeholder="DD-MM-YYYY" title="Enter MDL valid till date in DD-MM-YYYY format" autocomplete="off" />
                 <input type="date" id="mdlValidUntilInput" name="mdlValidUntilInput" hidden />
             </span>
         </section>
@@ -226,14 +226,14 @@
             <!-- Issued on -->
             <span class="inputContainer">
                 <label for="endorsementDatedInput">Endorsement Dated</label>
-                <input type="text" id="endorsementDatedInputText" placeholder="DD-MM-YYYY" title="Enter endorsement date in DD-MM-YYYY format" />
+                <input type="text" id="endorsementDatedInputText" placeholder="DD-MM-YYYY" title="Enter endorsement date in DD-MM-YYYY format" autocomplete="off" />
                 <input type="date" id="endorsementDatedInput" name="endorsementDatedInput" hidden />
             </span>
 
             <!-- Valid Till -->
             <span class="inputContainer">
                 <label for="endorsementValidityInput">Valid Till</label>
-                <input type="text" id="endorsementValidityInputText" placeholder="DD-MM-YYYY" title="Enter endorsement valid till date in DD-MM-YYYY format" />
+                <input type="text" id="endorsementValidityInputText" placeholder="DD-MM-YYYY" title="Enter endorsement valid till date in DD-MM-YYYY format" autocomplete="off" />
                 <input type="date" id="endorsementValidityInput" name="endorsementValidityInput" hidden />
             </span>
         </section>

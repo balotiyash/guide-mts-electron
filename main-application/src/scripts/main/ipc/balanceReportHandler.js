@@ -3,12 +3,14 @@
  * Author: Yash Balotiya
  * Description: IPC handlers for balance report functionality
  * Created on: 12/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 20/12/2025
  */
 
+// Importing required modules & libraries
 import { ipcMain, BrowserWindow, dialog } from 'electron';
 import { getAllBalances } from '../services/balanceReportService.js';
 
+// Register IPC handlers for balance report functionality
 const registerBalanceReportHandlers = () => {
     // Handler to get all balance data
     ipcMain.handle('get-all-balances', async () => {
@@ -40,4 +42,5 @@ const registerBalanceReportHandlers = () => {
     });
 };
 
+// Exporting the register function
 export default registerBalanceReportHandlers;

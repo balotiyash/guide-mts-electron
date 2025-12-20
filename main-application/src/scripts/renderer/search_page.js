@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the search page form interactions and date field functionality.
  * Created on: 11/10/2025
- * Last Modified: 09/12/2025
+ * Last Modified: 20/12/2025
  */
 
 // Import required modules & libraries
@@ -220,5 +220,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             // Allow only digits, dashes, and slashes for date input
             searchText.value = searchText.value.replace(/[^0-9\-\/]/g, "");
         }
+    });
+
+    // Exit button functionality
+    document.getElementById("exitBtn").addEventListener("click", () => {
+        window.location.href = "dashboard.html";
     });
 });

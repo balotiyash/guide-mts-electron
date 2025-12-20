@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Form 14 utility functions - ES6 function-based
  * Created on: 11/10/2025
- * Last Modified: 07/12/2025
+ * Last Modified: 20/12/2025
  */
 
 // Import shared date utilities
@@ -102,7 +102,8 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
             completion: calculatedCompletionDate, // Using calculated date (issue - 1 day)
             passing: calculatedPassingDate,       // Using calculated date (issue - 1 day)
             issue: formatDate(mdl_issued_date),   // Original issue date
-            validity: formatDate(mdl_validity_date)
+            validity: formatDate(mdl_validity_date),
+            endorsement: formatDate(endorsement_date)
         };
 
         // Combine vehicle classes and LL numbers
@@ -130,39 +131,39 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
                         </tr>
                         <tr>
                             <th>Date of Birth:</th>
-                            <td><span class="data-field">${dates.dob}</span></td>
+                            <td><span class="data-field">${dates.dob || ''}</span></td>
                             <th>Son / Wife / Daughter of:</th>
                             <td colspan="3"><span class="data-field">${(relation_name || '').toUpperCase()}</span></td>
                         </tr>
                         <tr>
                             <th>Address:</th>
-                            <td colspan="5"><span class="address-field">${formattedAddress}</span></td>
+                            <td colspan="5"><span class="address-field">${formattedAddress || ''}</span></td>
                         </tr>
                         <tr>
                             <th>L. L. R. No.:</th>
-                            <td colspan="2"><span class="data-field">${llNumbers}</span></td>
+                            <td colspan="2"><span class="data-field">${llNumbers || ''}</span></td>
                             <th>Class of Vehicle:</th>
-                            <td colspan="2"><span class="data-field">${vehicleClass}</span></td>
+                            <td colspan="2"><span class="data-field">${vehicleClass || ''}</span></td>
                         </tr>
                         <tr>
                             <th>Date of Enrollment:</th>
-                            <td colspan="2"><span class="data-field">${dates.enrollment}</span></td>
+                            <td colspan="2"><span class="data-field">${dates.enrollment || ''}</span></td>
                             <th>Date of Completion:</th>
-                            <td colspan="2"><span class="data-field">${dates.completion}</span></td>
+                            <td colspan="2"><span class="data-field">${dates.completion || ''}</span></td>
                         </tr>
                         <tr>
                             <th>M. D. L. No.:</th>
                             <td colspan="2"><span class="data-field">${mdl_no || ''}</span></td>
                             <th>Date of Issue:</th>
-                            <td colspan="2"><span class="data-field">${dates.issue}</span></td>
+                            <td colspan="2"><span class="data-field">${dates.issue || ''}</span></td>
                         </tr>
                         <tr>
                             <th>Endorsement (If Any):</th>
                             <td><span class="data-field">${endorsement || ''}</span></td>
                             <th>Endorsement Dated:</th>
-                            <td><span class="data-field">${endorsement_date || ''}</span></td>
+                            <td><span class="data-field">${dates.endorsement || ''}</span></td>
                             <th>Valid Up to:</th>
-                            <td><span class="data-field">${dates.validity}</span></td>
+                            <td><span class="data-field">${dates.validity || ''}</span></td>
                         </tr>
                     </tbody>
                 </table>

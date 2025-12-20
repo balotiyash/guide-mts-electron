@@ -12,12 +12,8 @@ npx electron-rebuild -f -w better-sqlite3
 
 electron-icon-maker --input=src/assets/images/mts-logo.png --output=src/assets/icons
 
-Go through all Title tags
-auto complete off
-check label nav
-form 14 date and print button
-search pages exit button
-add ; after all functions
+dialog box texts
+check all dates and make it uniform either / or - all in prints or inputs
 add clgs after every error & success and print try catch error too
 add * mark on all compulsory form
 try to remove all async opperattions

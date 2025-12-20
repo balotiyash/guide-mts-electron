@@ -3,9 +3,10 @@
  * Author: Yash Balotiya
  * Description: Balance Report page using generic report system
  * Created on: 12/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 20/12/2025
  */
 
+// Import necessary modules & libraries
 import dateUtility from "../utilities/dataEntry/dateUtility.js";
 import GenericReportUtility from "../utilities/reports/genericReportUtility.js";
 import { balanceReportConfig } from "../utilities/reports/balanceReportConfig.js";
@@ -42,4 +43,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Initialize the generic report utility
     const reportUtility = new GenericReportUtility(config);
     await reportUtility.initialize();
+
+    // Exit button functionality
+    document.getElementById("exitBtn").addEventListener("click", () => {
+        window.location.href = "dashboard.html";
+    });
 });

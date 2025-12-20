@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 08/12/2025
+ * Last Modified: 20/12/2025
 */
 
 // Module JS
@@ -131,6 +131,13 @@ const createMenuTemplate = (win) => {
             label: 'Tools',
             submenu: [
                 {
+                    label: 'Reminders',
+                    click: () => {
+                        win.loadFile(path.join(__dirname, '../views/reminders.html'));
+                    },
+                },
+                { type: 'separator' },
+                {
                     label: 'Change Database',
                     click: () => {
                         win.webContents.send('change-database-request');
@@ -146,13 +153,6 @@ const createMenuTemplate = (win) => {
                     label: 'Change Archictecture',
                     click: () => {
                         win.webContents.send('change-architecture-request');
-                    },
-                },
-                { type: 'separator' },
-                {
-                    label: 'Reminders',
-                    click: () => {
-                        win.loadFile(path.join(__dirname, '../views/reminders.html'));
                     },
                 },
                 // Only show Exit on non-macOS platforms (macOS handles this in app menu)

@@ -3,12 +3,14 @@
  * Author: Yash Balotiya
  * Description: IPC handlers for collection report functionality
  * Created on: 12/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 20/12/2025
  */
 
+// Import required modules & libraries
 import { ipcMain, BrowserWindow, dialog } from 'electron';
 import { getAllCollections } from '../services/collectionReportService.js';
 
+// Register IPC handlers for collection report functionality
 const registerCollectionReportHandlers = () => {
     // Handler to get all collection data
     ipcMain.handle('get-all-collections', async () => {
@@ -40,4 +42,5 @@ const registerCollectionReportHandlers = () => {
     });
 };
 
+// Export the registration function
 export default registerCollectionReportHandlers;

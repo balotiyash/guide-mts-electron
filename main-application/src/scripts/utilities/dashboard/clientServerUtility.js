@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Utility functions for client-server architecture setup in the dashboard.
  * Created on: 08/12/2025
- * Last Modified: 08/12/2025
+ * Last Modified: 20/12/2025
 */
 
 // Function to check client-server information
@@ -24,7 +24,7 @@ const setHostAddress = async () => {
         'question',
         'Architecture Type',
         'Please specify whether this installation is for Client or Server architecture.',
-        ['Client', 'Server']
+        ['Client-Server', 'Standalone Server']
     );
 
     // If user chooses Client, open client setup window; if Server, set host to localhost

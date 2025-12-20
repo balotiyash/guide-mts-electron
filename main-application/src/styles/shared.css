@@ -2,7 +2,7 @@
    Author: Neha Balotia, Yash Balotiya
    Description: This file contains all the shared CSS styles used across the application.
    Created on: 27/07/2025
-   Last Modified: 01/12/2025
+   Last Modified: 20/12/2025
 */
 
 /* Global Styles */
@@ -111,8 +111,10 @@ h6 {
 }
 
 .btn.yellow {
-    border-color: #ffc107;
-    color: #ffc107;
+    /* border-color: #ffc107; */
+    /* color: #ffc107; */
+    border-color: blueviolet;
+    color: blueviolet;
 }
 
 .btn.orange {
@@ -136,7 +138,8 @@ h6 {
 }
 
 .btn.yellow:hover {
-    background-color: #ffc107;
+    /* background-color: #ffc107; */
+    background-color: blueviolet;
     color: white;
 }
 

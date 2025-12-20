@@ -3,14 +3,16 @@
  * Author: Yash Balotiya
  * Description: Service functions for collection report data
  * Created on: 12/10/2025
- * Last Modified: 12/10/2025
+ * Last Modified: 20/12/2025
  */
 
+// Import required modules & libraries
 import { runQuery } from './dbService.js';
 
 // Function to get all collection data
 export const getAllCollections = async () => {
     try {
+        // SQL query to fetch collection data
         const query = `
             SELECT 
                 p.id as payment_id,

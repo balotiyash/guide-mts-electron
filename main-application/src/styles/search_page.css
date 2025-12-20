@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: Styles for Search Page
     Created on: 11/10/2025
-    Last Modified: 12/10/2025
+    Last Modified: 20/12/2025
 */
 
 /* Main Page */
@@ -39,11 +39,12 @@ body {
 .pagination {
     margin-top: 20px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    /* justify-content: flex-end; */
     gap: 10px;
 }
 
-.pagination button {
+.navBtns {
     padding: 8px 20px;
     border: none;
     background-color: brown;
@@ -53,13 +54,33 @@ body {
     transition: background-color 0.3s;
 }
 
-.pagination button:hover {
+.pagination span:first-child {
+    display: flex;
+    gap: 10px;
+    /* align-items: center; */
+}
+
+.navBtns:hover {
     background-color: darkred;
 }
 
-.pagination button:disabled {
+.navBtns:disabled {
     background: #ccc;
     cursor: not-allowed;
+}
+
+#exitBtn {
+    width: 200px;
+    border: 2px solid black;
+    color: black;
+    background-color: white;
+    justify-self: right;
+    font-weight: bold;
+}
+
+#exitBtn:hover {
+    background-color: black;
+    color: white;
 }
 
 #pageInfo {

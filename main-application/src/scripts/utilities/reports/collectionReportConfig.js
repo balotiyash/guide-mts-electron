@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Configuration for Collection Report
  * Created on: 12/10/2025
- * Last Modified: 09/12/2025
+ * Last Modified: 20/12/2025
  */
 
 // Function to get host address from Electron main process
@@ -12,6 +12,7 @@ const getHostAddress = async () => {
     return hostAddress || 'localhost';
 };
 
+// Collection Report Configuration Object
 export const collectionReportConfig = {
     reportType: 'collection',
     reportName: 'Collection Report',
