@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the main Js code for invoice service
  * Created on: 16/09/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 21/12/2025
  */
 
 // src/services/invoiceService.js
@@ -105,16 +105,14 @@ const generateInvoice = async (invoiceData) => {
     }
 };
 
-// Print invoice directly without saving
+// Print invoice directly without saving - Using PDF preview for better Windows support
 const printInvoice = async (invoiceData) => {
     // Generate a unique token for the invoice window
     const token = makeToken();
 
     // Create a hidden BrowserWindow to load the invoice HTML
     const invoiceWin = new BrowserWindow({
-        width: 800,          // optional, reasonable size
-        height: 600,
-        show: true,          // ✅ must be true for print preview
+        show: false,
         webPreferences: {
             preload: path.join(__dirname, '../../preload.js'),
             contextIsolation: true,
@@ -157,19 +155,49 @@ const printInvoice = async (invoiceData) => {
         await invoiceWin.loadURL(fileUrl);
         await renderedPromise;
 
-        // ✅ show print preview dialog
-        await new Promise((resolve, reject) => {
-            invoiceWin.webContents.print(
-                { printBackground: true, silent: false }, // silent: false ensures preview dialog
-                (success, errorType) => {
-                    if (!success) {
-                        console.error('Print failed:', errorType);
-                        return reject(new Error(errorType));
-                    }
-                    console.log('Print dialog completed successfully'); // Debug log
-                    resolve();
+        // Generate PDF in memory
+        const pdfBuffer = await invoiceWin.webContents.printToPDF({
+            marginsType: 0,
+            printBackground: true,
+            landscape: false
+        });
+
+        // Save to temporary file
+        const tempDir = path.join(__dirname, '../../../temp');
+        if (!fs.existsSync(tempDir)) {
+            fs.mkdirSync(tempDir, { recursive: true });
+        }
+        
+        const tempPdfPath = path.join(tempDir, `invoice-preview-${Date.now()}.pdf`);
+        fs.writeFileSync(tempPdfPath, pdfBuffer);
+
+        // Close the invoice rendering window
+        invoiceWin.close();
+
+        // Create a new window to display the PDF with preview
+        const previewWin = new BrowserWindow({
+            width: 900,
+            height: 700,
+            title: 'Invoice Preview - Print using Ctrl+P',
+            webPreferences: {
+                plugins: true,
+                contextIsolation: true,
+                nodeIntegration: false
+            }
+        });
+
+        // Load the PDF in the preview window
+        await previewWin.loadFile(tempPdfPath);
+
+        // Clean up temp file when window closes
+        previewWin.on('closed', () => {
+            try {
+                if (fs.existsSync(tempPdfPath)) {
+                    fs.unlinkSync(tempPdfPath);
                 }
-            );
+            } catch (error) {
+                console.error('Error cleaning up temp PDF:', error);
+            }
         });
 
     } catch (error) {

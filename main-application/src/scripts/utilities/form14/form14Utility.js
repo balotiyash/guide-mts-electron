@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Form 14 utility functions - ES6 function-based
  * Created on: 11/10/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 21/12/2025
  */
 
 // Import shared date utilities
@@ -13,18 +13,28 @@ import { sanitizeDate } from '../../shared.js';
 export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, formatDate, clearPreview, showLoading, hideLoading, updateFormInfo, showPreview, initializeDatePickers, handleGeneratePreview) => {
     
     // Print form handler
-    const handlePrintForm = () => {
+    const handlePrintForm = async () => {
         console.log('Print button clicked, currentData:', currentData.currentData);
         
         // Check if there's data to print
         if (!currentData.currentData) {
-            alert('No form data to print. Please generate a preview first.');
+            await window.dialogBoxAPI.showDialogBox(
+                'warning',
+                'No Data',
+                'No form data to print. Please generate a preview first.',
+                ['OK']
+            );
             return;
         }
         
         // Check if preview is visible
         if (elements.content?.style.display === 'none') {
-            alert('Preview is not visible. Please generate the preview first.');
+            await window.dialogBoxAPI.showDialogBox(
+                'warning',
+                'Preview Not Visible',
+                'The preview is not visible. Please generate the preview first.',
+                ['OK']
+            );
             return;
         }
         

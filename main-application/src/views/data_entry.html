@@ -3,7 +3,7 @@
     Author: Yash Balotiya
     Description: This page contains all the HTML5 code of the Customer Data Entry Page.
     Created on: 09/08/2025
-    Last Modified: 20/12/2025
+    Last Modified: 21/12/2025
 -->
 
 <!DOCTYPE html>
@@ -43,7 +43,7 @@
 
                 <!-- Phone Input -->
                 <span class="inputContainer phoneInputSpan">
-                    <label for="phoneInput">Mobile Number</label>
+                    <label for="phoneInput">Mobile Number <span class="redColor">*</span></label>
                     <input type="tel" id="phoneInput" placeholder="Enter mobile number" title="Enter mobile number"
                         autocomplete="off" maxlength="10" />
                 </span>
@@ -84,14 +84,14 @@
         <section class="nameSection">
             <!-- Name Input -->
             <span class="inputContainer">
-                <label for="nameInput">Name</label>
+                <label for="nameInput">Name <span class="redColor">*</span></label>
                 <input type="text" id="nameInput" placeholder="Enter full name" title="Enter full name"
                     autocomplete="off" />
             </span>
 
             <!-- Date of Birth Input -->
             <span class="inputContainer">
-                <label for="dobInput">Date of Birth</label>
+                <label for="dobInput">Date of Birth <span class="redColor">*</span></label>
                 <!-- Visible text input for user -->
                 <input type="text" id="dobInputText" placeholder="DD-MM-YYYY" title="Enter date of birth in DD-MM-YYYY format" autocomplete="off" />
 
@@ -101,7 +101,7 @@
 
             <!-- Relation Input -->
             <span class="inputContainer">
-                <label for="relationInput">Son / Daughter / Wife of</label>
+                <label for="relationInput">Son / Daughter / Wife of <span class="redColor">*</span></label>
                 <input type="text" id="relationInput" placeholder="Enter relation's full name"
                     title="Enter relation's full name" autocomplete="off" />
             </span>
@@ -146,7 +146,7 @@
             <div>
                 <!-- Address Input -->
                 <span class="inputContainer addressInputSpan">
-                    <label for="addressInput">Address</label>
+                    <label for="addressInput">Address <i class="redColor">*</i></label>
                     <textarea id="addressInput" placeholder="Enter full address" title="Enter full address" autocomplete="off"></textarea>
                 </span>
             </div>
@@ -249,14 +249,14 @@
 
             <!-- Amount -->
             <span class="inputContainer">
-                <label for="amountInput">Amount</label>
+                <label for="amountInput">Amount <span class="redColor">*</span></label>
                 <input type="number" id="amountInput" placeholder="Enter amount" title="Enter amount"
                     autocomplete="off" />
             </span>
 
             <!-- Work Description -->
             <span class="inputContainer">
-                <label for="workDescriptionInput">Work Description</label>
+                <label for="workDescriptionInput">Work Description <span class="redColor">*</span></label>
                 <input type="text" id="workDescriptionInput" placeholder="Enter work description"
                     title="Enter work description" autocomplete="off" />
             </span>

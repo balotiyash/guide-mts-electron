@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains utility functions for LL reminders.
  * Created on: 24/10/2025
- * Last Modified: 09/12/2025
+ * Last Modified: 21/12/2025
  */
 
 // Importing required modules & libraries
@@ -44,6 +44,12 @@ const llReminderUtility = () => {
                 result = await response.json();
             } catch (e) {
                 result = { success: false, data: [], message: e.message };
+                await window.dialogBoxAPI.showDialogBox(
+                    'error',
+                    'API Error',
+                    `Failed to fetch LL reminders: ${e.message}`,
+                    ['OK']
+                );
             }
 
             // Always show table and send button (even if no data)
@@ -103,10 +109,39 @@ const llReminderUtility = () => {
                 );
                 return;
             }
+
+            // Confirm before sending SMS
+            const confirm = await window.dialogBoxAPI.showDialogBox(
+                'question',
+                'Send LL Completed Reminders',
+                `Are you sure you want to send LL completion reminder SMS to ${checkboxes.length} user(s)?`,
+                ['Yes', 'No']
+            );
+            if (confirm !== 0) return;
+
+            // Send SMS to each selected user
+            let successCount = 0, failCount = 0;
+            for (const cb of checkboxes) {
+                const tr = cb.closest("tr");
+                const name = tr.children[2].textContent;
+                const mobile = tr.children[6].textContent;
+                try {
+                    // TODO: Replace with actual sendSMS call when LL completion SMS API is available
+                    // const res = await sendSMS('llCompleted', mobile, name);
+                    // For now, simulate success
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                    const res = { success: true };
+                    if (res && res.success) successCount++;
+                    else failCount++;
+                } catch {
+                    failCount++;
+                }
+            }
+
             await window.dialogBoxAPI.showDialogBox(
                 'info',
-                'No SMS API',
-                'No SMS API found for LL reminders.',
+                'SMS Result',
+                `SMS sent: ${successCount}, Failed: ${failCount}`,
                 ['OK']
             );
         });

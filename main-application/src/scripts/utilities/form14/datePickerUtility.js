@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Reusable utility functions for initializing date pickers (single and range)
    Created on: 11/10/2025
-   Last Modified: 11/10/2025
+   Last Modified: 21/12/2025
 */
 
 // Functions to initialize date pickers using Flatpickr and Inputmask
@@ -30,8 +30,10 @@ const initializeSingleDatePicker = (element, options = {}) => {
     // Apply input mask if not disabled
     if (!options.disableInputMask) {
         Inputmask('99-99-9999', {
-            placeholder: 'DD-MM-YYYY',
-            clearMaskOnLostFocus: false
+            placeholder: '__-__-____',
+            showMaskOnHover: false,
+            showMaskOnFocus: true,
+            clearMaskOnLostFocus: true
         }).mask(elementRef);
     }
 
@@ -103,8 +105,10 @@ const initializeDateRangePickers = (config) => {
     // Apply input masks if not disabled
     if (!options.disableInputMask) {
         const maskConfig = {
-            placeholder: 'DD-MM-YYYY',
-            clearMaskOnLostFocus: false
+            placeholder: '__-__-____',
+            showMaskOnHover: false,
+            showMaskOnFocus: true,
+            clearMaskOnLostFocus: true
         };
         
         Inputmask('99-99-9999', maskConfig).mask([startRef, endRef]);

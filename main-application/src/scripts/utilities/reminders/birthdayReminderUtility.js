@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains utility functions for birthday reminders.
  * Created on: 24/10/2025
- * Last Modified: 09/12/2025
+ * Last Modified: 21/12/2025
  */
 
 // Importing required modules & libraries
@@ -47,16 +47,12 @@ const birthdayReminderUtility = () => {
             result = await response.json();
         } catch (e) {
             result = { success: false, data: [], message: e.message };
-        }
-
-        if (!result.success || !Array.isArray(result.data) || result.data.length === 0) {
             await window.dialogBoxAPI.showDialogBox(
-                'info',
-                'No Data',
-                result.message || 'No birthday reminders found.',
+                'error',
+                'API Error',
+                `Failed to fetch birthday reminders: ${e.message}`,
                 ['OK']
             );
-            return;
         }
 
         // Show table and send button

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Utility functions for client-server architecture setup in the dashboard.
  * Created on: 08/12/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 21/12/2025
 */
 
 // Function to check client-server information
@@ -23,7 +23,7 @@ const setHostAddress = async () => {
     let response = await window.dialogBoxAPI.showDialogBox(
         'question',
         'Architecture Type',
-        'Please specify whether this installation is for Client or Server architecture.',
+        'Please specify whether this installation is for Client-Server or Standalone Server architecture.',
         ['Client-Server', 'Standalone Server']
     );
 

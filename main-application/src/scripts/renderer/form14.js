@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Form 14 renderer script - ES6 function-based
  * Created on: 01/10/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 21/12/2025
  */
 
 // Import utilities
@@ -22,7 +22,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         init();
     } catch (error) {
         console.error('Error in DOMContentLoaded:', error);
-        alert('An error occurred while loading the page: ' + error.message);
+        await window.dialogBoxAPI.showDialogBox(
+            'error',
+            'Error',
+            `An error occurred while loading the page: ${error.message}`,
+            ['OK']
+        );
     }
 });
 
@@ -74,7 +79,7 @@ const formatDate = (dateString) => {
         : new Date(dateString);
 
     return isNaN(date.getTime()) ? '' :
-        `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+        `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${date.getFullYear()}`;
 };
 
 // UI state management
@@ -155,22 +160,42 @@ const handleGeneratePreview = async () => {
 
     if (searchTypeValue === 'dateRange') {
         if (!startDateValue || !endDateValue) {
-            alert('Please select both start and end dates.');
+            await window.dialogBoxAPI.showDialogBox(
+                'warning',
+                'Incomplete Dates',
+                'Please select both start and end dates.',
+                ['OK']
+            );
             return;
         }
 
         if (!isValidDateFormat(startDateValue, 'd-m-Y') || !isValidDateFormat(endDateValue, 'd-m-Y')) {
-            alert('Please enter dates in DD-MM-YYYY format.');
+            await window.dialogBoxAPI.showDialogBox(
+                'warning',
+                'Invalid Date Format',
+                'Please enter dates in DD-MM-YYYY format.',
+                ['OK']
+            );
             return;
         }
 
         if (parseDateString(startDateValue) > parseDateString(endDateValue)) {
-            alert('Start date cannot be later than end date.');
+            await window.dialogBoxAPI.showDialogBox(
+                'warning',
+                'Invalid Date Range',
+                'Start date cannot be later than end date.',
+                ['OK']
+            );
             return;
         }
     } else if (searchTypeValue === 'name') {
         if (!searchNameValue) {
-            alert('Please enter a name to search.');
+            await window.dialogBoxAPI.showDialogBox(
+                'warning',
+                'No Name Entered',
+                'Please enter a name to search.',
+                ['OK']
+            );
             return;
         }
     }
@@ -191,7 +216,12 @@ const handleGeneratePreview = async () => {
         const form14Data = await response.json();
 
         if (!form14Data?.length) {
-            alert('No records found for the selected date range.');
+            await window.dialogBoxAPI.showDialogBox(
+                'info',
+                'No Records',
+                'No records found for the selected criteria.',
+                ['OK']
+            );
             hideLoading();
             return;
         }
@@ -215,7 +245,12 @@ const handleGeneratePreview = async () => {
 
     } catch (error) {
         console.error('Error generating Form 14 preview:', error);
-        alert('Error generating Form 14: ' + error.message);
+        await window.dialogBoxAPI.showDialogBox(
+            'error',
+            'Error',
+            `An error occurred while generating Form 14: ${error.message}`,
+            ['OK']
+        );
         hideLoading();
     }
 };

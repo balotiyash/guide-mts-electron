@@ -2,7 +2,7 @@
    Author: Neha Balotia, Yash Balotiya
    Description: This file contains all the shared CSS styles used across the application.
    Created on: 27/07/2025
-   Last Modified: 20/12/2025
+   Last Modified: 21/12/2025
 */
 
 /* Global Styles */
@@ -199,4 +199,9 @@ tbody tr:hover {
 
 ::-webkit-scrollbar-track {
     background-color: #eee;
+}
+
+/* Red Color Class */
+.redColor {
+    color: red;
 }

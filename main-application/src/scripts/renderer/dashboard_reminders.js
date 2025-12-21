@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles all reminder rendering for the dashboard, including rotation and click persistence.
  * Created on: 26/10/2025
- * Last Modified: 26/10/2025
+ * Last Modified: 21/12/2025
  */
 
 // --- Configuration ---
@@ -61,12 +61,12 @@ const handleReminderClick = async (reminder) => {
         userChoice = await window.dialogBoxAPI.showDialogBox(
             'question',
             `${title} Reminder`,
-            `Do you want to see today's ${title.toLowerCase()} reminders?`,
+            `Do you want to see today's '${title.toUpperCase()}' reminders?`,
             ['Yes', 'No']
         );
     } catch {
         // Fallback (browser mode)
-        userChoice = confirm(`Do you want to see today's ${title} reminders?`) ? 0 : 1;
+        userChoice = confirm(`Do you want to see today's '${title.toUpperCase()}' reminders?`) ? 0 : 1;
     }
 
     // ✅ Always mark as acknowledged, regardless of Yes or No

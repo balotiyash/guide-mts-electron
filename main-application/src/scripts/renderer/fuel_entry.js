@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the renderer process script for the Fuel Entry page.
  * Created on: 24/09/2025
- * Last Modified: 28/09/2025
+ * Last Modified: 21/12/2025
  */
 
 // Importing required modules & libraries
@@ -100,7 +100,7 @@ const setupFormEventListeners = () => {
     const dateTextInput = document.getElementById('entrydate_text');
     const saveButton = document.querySelector('.btn.green');
     const clearButton = document.querySelector('.btn.orange');
-    const exitButton = document.querySelector('.btn.red');
+    const exitButton = document.querySelector('.btn.black');
 
     // Vehicle selection change
     vehicleSelect.addEventListener('change', () => loadExistingFuelEntry());

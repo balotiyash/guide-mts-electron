@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage user dashboard functionality for the Guide Motor Training School application.
  * Created on: 08/08/2025
- * Last Modified: 08/12/2025
+ * Last Modified: 21/12/2025
 */
 
 // Importing required modules & libraries
@@ -247,5 +247,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Initialize floating bubbles
-    initFloatingBubbles();
+    // initFloatingBubbles();
 });

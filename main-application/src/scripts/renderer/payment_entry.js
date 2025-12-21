@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code for payment entry page. This is the main page for it.
  * Created on: 16/09/2025
- * Last Modified: 09/12/2025
+ * Last Modified: 21/12/2025
  */
 
 // Importing required 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // DOM Elements
     const tableBody = document.getElementById("pendingPaymentsTableBody");
-    const searchInput = document.getElementById("payment-date");
+    const searchInput = document.getElementById("searchInputTxt");
     const filterSelect = document.getElementById("paymentStatusSelect");
 
     // Datasets
@@ -192,6 +192,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
+        // Get charged amount to validate edited amount doesn't exceed it
+        const chargedAmount = parseFloat(document.getElementById("formChargedAmount")?.textContent) || 0;
+        if (newAmount > chargedAmount) {
+            await window.dialogBoxAPI.showDialogBox('error', 'Invalid Amount', `Amount cannot exceed pending amount of ₹${chargedAmount}`, ['OK']);
+            return;
+        }
+
         // Call update API
         const response = await window.paymentEntryAPI.updatePayment({ paymentId, newAmount, newMode, newPaymentDate });
 
@@ -220,7 +227,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ------------------------------
     document.getElementById("clearBtn").addEventListener("click", () => {
         // Confirm before clearing
-        window.dialogBoxAPI.showDialogBox('question', 'Confirm Clear', 'Clear the form?', ['Yes', 'No'])
+        window.dialogBoxAPI.showDialogBox('question', 'Confirm Clear', 'Do you want to clear the form?', ['Yes', 'No'])
             .then(result => {
                 if (result === 0) {
                     userId = null;
