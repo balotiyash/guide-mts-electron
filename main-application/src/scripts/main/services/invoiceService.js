@@ -7,7 +7,7 @@
  */
 
 // src/services/invoiceService.js
-import { BrowserWindow, dialog, ipcMain } from 'electron';
+import { BrowserWindow, dialog, ipcMain, app } from 'electron';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath, pathToFileURL } from 'url';
@@ -15,6 +15,22 @@ import { fileURLToPath, pathToFileURL } from 'url';
 // Get __dirname in ES module scope
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Helper function to get the correct path for resources in both dev and production
+const getResourcePath = (relativePath) => {
+    if (app.isPackaged) {
+        // In production, files are unpacked to app.asar.unpacked
+        return path.join(process.resourcesPath, 'app.asar.unpacked', 'src', relativePath);
+    } else {
+        // In development, convert from src-relative to __dirname-relative
+        if (relativePath.startsWith('scripts/')) {
+            return path.join(__dirname, '../../preload.js');
+        } else if (relativePath.startsWith('views/')) {
+            return path.join(__dirname, '../../../views', path.basename(relativePath));
+        }
+        return path.join(__dirname, relativePath);
+    }
+};
 
 // Generate a unique token for each invoice window
 const makeToken = () => {
@@ -30,14 +46,14 @@ const generateInvoice = async (invoiceData) => {
     const invoiceWin = new BrowserWindow({
         show: false, // keep it hidden while rendering
         webPreferences: {
-            preload: path.join(__dirname, '../../preload.js'),
+            preload: getResourcePath('scripts/preload.js'),
             contextIsolation: true,
             nodeIntegration: false
         }
     });
 
     // Path to the invoice HTML file
-    const htmlPath = path.join(__dirname, '../../../views/invoice.html');
+    const htmlPath = getResourcePath('views/invoice.html');
 
     // build file:// URL, append token as query param
     const fileUrl = pathToFileURL(htmlPath).href + `?token=${token}`;
@@ -114,19 +130,19 @@ const printInvoice = async (invoiceData) => {
     const invoiceWin = new BrowserWindow({
         show: false,
         webPreferences: {
-            preload: path.join(__dirname, '../../preload.js'),
+            preload: getResourcePath('scripts/preload.js'),
             contextIsolation: true,
             nodeIntegration: false
         }
     });
 
     // Path to the invoice HTML file
-    const htmlPath = path.join(__dirname, '../../../views/invoice.html');
+    const htmlPath = getResourcePath('views/invoice.html');
 
     // build file:// URL, append token as query param
     const fileUrl = pathToFileURL(htmlPath).href + `?token=${token}`;
 
-    // Create a hidden BrowserWindow to load the invoice HTML
+    // Promise for rendering completion
     let resolveRendered;
     const renderedPromise = new Promise((resolve) => (resolveRendered = resolve));
 
@@ -162,8 +178,10 @@ const printInvoice = async (invoiceData) => {
             landscape: false
         });
 
-        // Save to temporary file
-        const tempDir = path.join(__dirname, '../../../temp');
+        // Save to temporary file (use app data directory for production)
+        const tempDir = app.isPackaged 
+            ? path.join(app.getPath('userData'), 'temp')
+            : path.join(__dirname, '../../../temp');
         if (!fs.existsSync(tempDir)) {
             fs.mkdirSync(tempDir, { recursive: true });
         }

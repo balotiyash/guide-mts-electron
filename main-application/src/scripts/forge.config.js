@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Forge configuration file for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 25/08/2025
+ * Last Modified: 21/12/2025
 */
 
 // Module imports
@@ -13,7 +13,9 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 // module.exports = {
 export default {
     packagerConfig: {
-        asar: true,
+        asar: {
+            unpack: "**/{views,temp}/**"
+        },
     },
     rebuildConfig: {},
     makers: [

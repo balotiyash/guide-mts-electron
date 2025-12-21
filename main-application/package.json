@@ -1,6 +1,6 @@
 {
     "name": "guide-mts",
-    "version": "1.10.0",
+    "version": "2.0.0",
     "description": "Guide Motor Training School Management System",
     "author": "Yash Balotiya",
     "main": "src/scripts/main.js",
@@ -28,6 +28,13 @@
             "!out/**",
             "!dist/**",
             "!src/database/**"
+        ],
+        "asarUnpack": [
+            "src/views/**",
+            "src/scripts/preload.js",
+            "src/scripts/renderer/**",
+            "src/styles/**",
+            "src/assets/**"
         ],
         "mac": {
             "target": "dmg"

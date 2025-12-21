@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to handle invoice printing and generation for payment entry page.
  * Created on: 22/09/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 21/12/2025
  */
 
 // Function to print invoice for a selected user
@@ -20,10 +20,8 @@ const printInvoiceForSelectedUser = async (userId, workId, type) => {
 
         // Handle response
         if (res.success) {
-            // console.log('Invoice printed successfully');
             // No need to show success dialog since print dialog handles user interaction
         } else {
-            // console.error('Print failed:', res.error);
             window.dialogBoxAPI.showDialogBox('error', 'Error', 'Failed to print invoice.', ['OK']);
         }
     } catch (error) {
