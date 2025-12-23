@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Service functions for collection report data
  * Created on: 12/10/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 22/12/2025
  */
 
 // Import required modules & libraries
@@ -34,15 +34,20 @@ export const getAllCollections = async () => {
                 p.created_on DESC, p.id DESC
         `;
 
+        // Execute the query
         const collections = runQuery({ sql: query, params: [], type: 'all' });
 
+        // Return the fetched data
         return {
             success: true,
             data: collections,
             message: 'Collection data retrieved successfully'
         };
     } catch (error) {
+        // Handle any errors
         console.error('Error fetching collection data:', error);
+        
+        // Return error response
         return {
             success: false,
             data: [],

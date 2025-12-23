@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Service functions for balance report data
  * Created on: 12/10/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 22/12/2025
  */
 
 // Importing required modeules & libraries
@@ -83,15 +83,20 @@ export const getAllBalances = async () => {
                 ORDER BY c.id DESC
         `;
 
+        // Executing the query
         const balances = runQuery({ sql: query, params: [], type: 'all' });
 
+        // Returning the fetched balance data
         return {
             success: true,
             data: balances,
             message: 'Balance data retrieved successfully'
         };
     } catch (error) {
+        // Handling errors
         console.error('Error fetching balance data:', error);
+        
+        // Returning error response
         return {
             success: false,
             data: [],
