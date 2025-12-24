@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the renderer process script for the Fuel Entry page.
  * Created on: 24/09/2025
- * Last Modified: 21/12/2025
+ * Last Modified: 24/12/2025
  */
 
 // Importing required modules & libraries
@@ -14,9 +14,7 @@ import dateUtility from "../utilities/dataEntry/dateUtility.js";
 let currentVehicleId = null;
 let currentDate = null;
 
-/**
- * Function to load existing fuel entry when vehicle and date are selected
- */
+// Function to load existing fuel entry when vehicle and date are selected
 const loadExistingFuelEntry = async () => {
     // Loading HTML elements
     const vehicleSelect = document.getElementById('car_name');

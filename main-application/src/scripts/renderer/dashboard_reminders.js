@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles all reminder rendering for the dashboard, including rotation and click persistence.
  * Created on: 26/10/2025
- * Last Modified: 21/12/2025
+ * Last Modified: 24/12/2025
  */
 
 // --- Configuration ---
@@ -21,9 +21,7 @@ let currentReminderIndex = 0;
 let acknowledgedReminders = {};
 let rotationTimer = null;
 
-/**
- * Utility: Today's date in YYYY-MM-DD
- */
+// Utility: Today's date in YYYY-MM-DD
 const getTodayDateString = () => {
     return new Date().toISOString().split('T')[0];
 };
@@ -127,9 +125,7 @@ const rotateReminder = () => {
     updateReminderDisplay();
 };
 
-/**
- * Main Init
- */
+// Main Init
 window.addEventListener('DOMContentLoaded', () => {
     loadReminderStatus();
 

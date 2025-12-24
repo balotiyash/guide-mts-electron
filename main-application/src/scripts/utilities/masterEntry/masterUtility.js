@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the utility functions for master entry page
  * Created on: 22/09/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 24/12/2025
  */
 
 // Import utility functions
@@ -153,4 +153,4 @@ export {
     handleSubmit,
     handleUpdate,
     getSelectedInstructorId
-}
+};

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to interact with the database for the dashboard page.
  * Created on: 26/08/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 24/12/2025
 */
 
 // Importing required modules & libraries
@@ -11,6 +11,7 @@ import { runQuery } from "./dbService.js";
 
 // Function to get data for Chart 1
 const getChart1Data = (selectedYear) => {
+    // Get monthly registrations data
     const result = runQuery({
         sql: `
             SELECT strftime('%m', created_on) AS month,
@@ -65,6 +66,7 @@ const getChart2Data = (selectedYear) => {
 
 // Function to get data for Chart 3
 const getChart3Data = (selectedYear) => {
+    // Get vehicle usage data
     const result = runQuery({
         sql: `
             SELECT 

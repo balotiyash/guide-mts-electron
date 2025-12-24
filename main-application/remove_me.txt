@@ -24,8 +24,6 @@ user friendly errors should be displayed and detailed on console
 make all dialog box question, infoe etc correct
 remove all data driven console logs to prevent data leak and add informative console logs for error handling
 make everything consistent like name: or name
-remove all unnecessary comments
-add proper comments
 backup db from navbar not working in other pages
 registration form freezes - network tab issue
 

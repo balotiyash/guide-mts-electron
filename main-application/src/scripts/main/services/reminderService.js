@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the IPC handlers for reminder functionality.
  * Created on: 24/10/2025
- * Last Modified: 05/11/2025
+ * Last Modified: 24/12/2025
  */
 
 // Importing required modules & libraries
@@ -12,7 +12,11 @@ import { runQuery } from "./dbService.js";
 // Birthday Reminder Service
 const getBirthdayReminders = async () => {
     const result = await runQuery({
-        sql: `SELECT customer_name, customer_dob, mobile_number FROM customers WHERE strftime('%m-%d', customer_dob) = strftime('%m-%d', 'now', 'localtime');`,
+        sql: `
+            SELECT customer_name, customer_dob, mobile_number
+            FROM customers
+            WHERE strftime('%m-%d', customer_dob) = strftime('%m-%d', 'now', 'localtime');
+        `,
         params: [],
         type: "all"
     });
@@ -28,7 +32,11 @@ const getBirthdayReminders = async () => {
 // LL Reminder Service
 const getLLReminders = async () => {
     const result = await runQuery({
-        sql: `SELECT customer_name, ll_no_1, ll_no_2, ll_class_1, ll_class_2, ll_issued_date, mobile_number FROM customers WHERE date(ll_issued_date) = date('now', '-30 days', 'localtime');`,
+        sql: `
+        SELECT customer_name, ll_no_1, ll_no_2, ll_class_1, ll_class_2, ll_issued_date, mobile_number
+        FROM customers
+        WHERE date(ll_issued_date) = date('now', '-30 days', 'localtime');
+    `,
         params: [],
         type: "all"
     });
@@ -78,7 +86,11 @@ const getPaymentReminders = async () => {
 // License Expiration Reminder Service
 const getLicenseExpirationReminders = async () => {
     const result = await runQuery({
-        sql: `SELECT customer_name, mdl_no, mdl_class, mdl_validity_date, mobile_number FROM customers WHERE DATE(mdl_validity_date) = DATE('now', 'localtime');`,
+        sql: `
+            SELECT customer_name, mdl_no, mdl_class, mdl_validity_date, mobile_number
+            FROM customers
+            WHERE DATE(mdl_validity_date) = DATE('now', 'localtime');
+        `,
         params: [],
         type: "all"
     });

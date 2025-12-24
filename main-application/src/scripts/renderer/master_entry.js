@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the main Js code for master registration page
  * Created on: 21/09/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 24/12/2025
  */
 
 // Importing required modules & libraries
@@ -13,7 +13,6 @@ import dateUtility from "../utilities/dataEntry/dateUtility.js"; // Reuse existi
 // On window load
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize date fields with Flatpickr and inputmask (reused from data entry)
-    // console.log('Initializing date utility...');
     dateUtility();
     
     // Verify Flatpickr was applied

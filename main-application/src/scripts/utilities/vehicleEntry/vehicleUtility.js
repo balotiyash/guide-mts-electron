@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the utility functions for vehicle entry page
  * Created on: 23/09/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 24/12/2025
  */
 
 // Global variable to track selected vehicle ID
@@ -94,6 +94,7 @@ const renderVehicles = async () => {
     }
 };
 
+// Function to handle form submission for adding a vehicle
 const handleSubmit = async () => {
     // Fetching values from the form
     const vehicleName = document.getElementById("vehicle-name").value.trim();
@@ -130,6 +131,7 @@ const handleSubmit = async () => {
     }
 };
 
+// Function to handle form submission for updating a vehicle
 const handleUpdate = async () => {
     // Fetching values from the form
     const vehicleName = document.getElementById("vehicle-name").value.trim();
@@ -193,4 +195,4 @@ export {
     handleSubmit,
     handleUpdate,
     getSelectedVehicleId
-}
+};

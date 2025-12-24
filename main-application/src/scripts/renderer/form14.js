@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Form 14 renderer script - ES6 function-based
  * Created on: 01/10/2025
- * Last Modified: 21/12/2025
+ * Last Modified: 24/12/2025
  */
 
 // Import utilities
@@ -55,6 +55,7 @@ const elements = {
     searchName: document.getElementById('searchName')
 };
 
+// Search type change handler
 elements.searchType.addEventListener('change', () => {
     const selectedType = elements.searchType.value;
 
@@ -158,7 +159,9 @@ const handleGeneratePreview = async () => {
     const searchTypeValue = elements.searchType?.value;
     const searchNameValue = elements.searchName?.value?.trim();
 
+    // Input validation
     if (searchTypeValue === 'dateRange') {
+        // Validate date inputs
         if (!startDateValue || !endDateValue) {
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
@@ -169,6 +172,7 @@ const handleGeneratePreview = async () => {
             return;
         }
 
+        // Validate date formats
         if (!isValidDateFormat(startDateValue, 'd-m-Y') || !isValidDateFormat(endDateValue, 'd-m-Y')) {
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
@@ -179,6 +183,7 @@ const handleGeneratePreview = async () => {
             return;
         }
 
+        // Validate date range
         if (parseDateString(startDateValue) > parseDateString(endDateValue)) {
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
@@ -189,6 +194,7 @@ const handleGeneratePreview = async () => {
             return;
         }
     } else if (searchTypeValue === 'name') {
+        // Validate name input
         if (!searchNameValue) {
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
