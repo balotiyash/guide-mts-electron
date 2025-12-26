@@ -13,7 +13,6 @@ npx electron-rebuild -f -w better-sqlite3
 electron-icon-maker --input=src/assets/images/mts-logo.png --output=src/assets/icons
 
 add clgs after every error & success and print try catch error too
-try to remove all async opperattions
 when we are inserting into 2 tables in a singke service then if 1st query was successful and other was unsuccessful then rollback 1st entry
 also log all the actions into logger module import
 make date formatter in dataEntryService function in uutility.js then import it
@@ -26,6 +25,11 @@ remove all data driven console logs to prevent data leak and add informative con
 make everything consistent like name: or name
 backup db from navbar not working in other pages
 registration form freezes - network tab issue
+sort master and vehicle list by name
+paid payment is not sorted in dec order
+paid payment on select payment date is not auto filling
+
+when no result found in balance report remove popup
 
 backup format main.js
 same for menu main.js

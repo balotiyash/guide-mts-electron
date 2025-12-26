@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: IPC Handlers for Data Entry related operations.
  * Created on: 31/08/2025
- * Last Modified: 01/12/2025
+ * Last Modified: 26/12/2025
 */
 
 // Importing required modules & libraries
@@ -14,18 +14,18 @@ import allDataEntryService from "../services/dataEntryService.js";
 const registerDataEntryHandlers = () => {
     
     // Fetching Dropdown Names for vehicles & instructors
-    ipcMain.handle("get-drop-down-names", (event, value) => {
-        return allDataEntryService.getDropDownNames(value);
+    ipcMain.handle("get-drop-down-names", async (event, value) => {
+        return await allDataEntryService.getDropDownNames(value);
     });
 
     // Searching for customer by phone number
-    ipcMain.handle("search-by-phone-number", (event, phoneNumber) => {
-        return allDataEntryService.searchByPhoneNumber(phoneNumber);
+    ipcMain.handle("search-by-phone-number", async (event, phoneNumber) => {
+        return await allDataEntryService.searchByPhoneNumber(phoneNumber);
     });
 
     // Fetching work descriptions for a user
-    ipcMain.handle("get-work-descriptions", (event, userId) => {
-        return allDataEntryService.getWorkDescriptions(userId);
+    ipcMain.handle("get-work-descriptions", async (event, userId) => {
+        return await allDataEntryService.getWorkDescriptions(userId);
     });
 
     // Creating a new customer

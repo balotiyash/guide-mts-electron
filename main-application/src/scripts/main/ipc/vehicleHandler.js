@@ -3,14 +3,14 @@
  * Author: Yash Balotiya
  * Description: This file contains the IPC handlers for vehicle management
  * Created on: 23/09/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 26/12/2025
  */
 
 // Importing required modules & libraries
 import { ipcMain } from 'electron';
 import { getAllVehicles, addVehicle, updateVehicle, deleteVehicle } from '../services/vehicleService.js';
 
-const registerVehicleHandlers = async () => {
+const registerVehicleHandlers = () => {
     // Handler to get all vehicles
     ipcMain.handle('get-all-vehicles', async () => {
         return await getAllVehicles();
