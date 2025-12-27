@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains main entry point JS code for reminders page.
  * Created on: 24/10/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 27/12/2025
  */
 
 // Importing required modules & libraries
@@ -28,6 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Exit Button Functionality
     document.getElementById('exitBtn').addEventListener('click', () => {
-        window.location.href = 'dashboard.html'; // Redirect to dashboard page
+        window.electronAPI.navigateTo("dashboard.html");
     });
 });

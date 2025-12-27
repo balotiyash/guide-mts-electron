@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
- * Last Modified: 09/12/2025
+ * Last Modified: 27/12/2025
  */
 
 // Import required modules & libraries
@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Handling click event on Exit button
-    document.getElementById("exitBtn").addEventListener("click", async () => window.location.href = "dashboard.html");
+    document.getElementById("exitBtn").addEventListener("click", async () => window.electronAPI.navigateTo("dashboard.html"));
 
     // Update validUntilInput based on issuedOnInput (6 months validity)
     document.getElementById("issuedOnInput").addEventListener("change", (e) => {

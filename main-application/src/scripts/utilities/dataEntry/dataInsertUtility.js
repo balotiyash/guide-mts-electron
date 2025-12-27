@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Utility functions for inserting data from the data entry form into the database.
    Created on: 21/09/2025
-   Last Modified: 09/12/2025
+   Last Modified: 27/12/2025
 */
 
 // Importing required modules & libraries
@@ -56,7 +56,7 @@ const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) =>
             // Send welcome SMS for job creation
             await sendSMSPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
             
-            window.location.href = "./payment_entry.html";
+            window.electronAPI.navigateTo("payment_entry.html");
         } else {
             // Show error message
             await window.dialogBoxAPI.showDialogBox("error", "Creation Failed", `Failed to create a new job for the existing customer.`);
@@ -84,7 +84,7 @@ const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) =>
             // Send welcome SMS
             await sendSMSPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
 
-            window.location.href = "./payment_entry.html";
+            window.electronAPI.navigateTo("payment_entry.html");
         } else {
             // Show error message
             await window.dialogBoxAPI.showDialogBox("error", "Creation Failed", `Failed to create the customer.`);

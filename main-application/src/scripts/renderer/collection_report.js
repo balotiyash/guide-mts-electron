@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Collection Report page using generic report system
  * Created on: 12/10/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 27/12/2025
  */
 
 // Import necessary modules and libraries
@@ -44,6 +44,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Exit button functionality
     document.getElementById("exitBtn").addEventListener("click", () => {
-        window.location.href = "dashboard.html";
+        window.electronAPI.navigateTo("dashboard.html");
     });
 });

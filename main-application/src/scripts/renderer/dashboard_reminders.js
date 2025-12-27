@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles all reminder rendering for the dashboard, including rotation and click persistence.
  * Created on: 26/10/2025
- * Last Modified: 24/12/2025
+ * Last Modified: 27/12/2025
  */
 
 // --- Configuration ---
@@ -73,13 +73,7 @@ const handleReminderClick = async (reminder) => {
     updateReminderDisplay();
 
     // If user clicked "Yes", navigate to reminders page
-    if (userChoice === 0) {
-        if (window.electronAPI && window.electronAPI.navigateTo) {
-            window.electronAPI.navigateTo(page);
-        } else {
-            window.location.href = page;
-        }
-    }
+    if (userChoice === 0) window.electronAPI.navigateTo(page);
 };
 
 // Show one bar (rotating every 30s) or 'no reminders' if all done

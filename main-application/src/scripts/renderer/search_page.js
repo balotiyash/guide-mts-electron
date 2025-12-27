@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the search page form interactions and date field functionality.
  * Created on: 11/10/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 27/12/2025
  */
 
 // Import required modules & libraries
@@ -156,6 +156,17 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
+        // If search text is provided but no search type selected
+        if (searchValue && !searchType) {
+            window.dialogBoxAPI.showDialogBox(
+                "info", 
+                "Search Type Required", 
+                "Please select a search type for the entered search text.", 
+                ["OK"]
+            );
+            return;
+        }
+
         if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
             window.dialogBoxAPI.showDialogBox("info", "Info", "Starting date cannot be after ending date.", ["OK"]);
             return;
@@ -224,6 +235,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Exit button functionality
     document.getElementById("exitBtn").addEventListener("click", () => {
-        window.location.href = "dashboard.html";
+        window.electronAPI.navigateTo("dashboard.html");
     });
 });

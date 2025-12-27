@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Generic utility for all report pages (Balance, Collection, etc.)
  * Created on: 12/10/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 27/12/2025
  */
 
 // Importing required modules & libraries
@@ -261,22 +261,15 @@ class GenericReportUtility {
         const totalRecords = this.allData.length;
         const filteredRecords = this.filteredData.length;
         
-        if (filteredRecords === 0) {
-            window.dialogBoxAPI.showDialogBox(
-                "info", 
-                "No Results Found", 
-                "No records match your search criteria. Please try different search parameters.", 
-                ["OK"]
-            );
-        } else if (filteredRecords < totalRecords) {
-            // Optional: Show search success message
-            // window.dialogBoxAPI.showDialogBox(
-            //     "info", 
-            //     "Search Complete", 
-            //     `Found ${filteredRecords} records out of ${totalRecords} total records.`, 
-            //     ["OK"]
-            // );
-        }
+        // Removed dialog box for no results - just show empty table message
+        // if (filteredRecords === 0) {
+        //     window.dialogBoxAPI.showDialogBox(
+        //         "info", 
+        //         "No Results Found", 
+        //         "No records match your search criteria. Please try different search parameters.", 
+        //         ["OK"]
+        //     );
+        // }
     }
 
     // Export data to CSV

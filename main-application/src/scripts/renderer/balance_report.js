@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Balance Report page using generic report system
  * Created on: 12/10/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 27/12/2025
  */
 
 // Import necessary modules & libraries
@@ -46,6 +46,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Exit button functionality
     document.getElementById("exitBtn").addEventListener("click", () => {
-        window.location.href = "dashboard.html";
+        window.electronAPI.navigateTo("dashboard.html");
     });
 });

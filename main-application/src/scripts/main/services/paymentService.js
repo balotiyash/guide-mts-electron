@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Service functions for payment processing and management.
  * Created on: 30/09/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 27/12/2025
  */
 
 // Importing required modules & libraries
@@ -61,7 +61,7 @@ const getAllPaidPayments = async () => {
             FROM payments p
             JOIN customers c ON c.id = p.customer_id
             JOIN work_descriptions wd ON wd.id = p.work_desc_id
-            ORDER BY p.created_on DESC;
+            ORDER BY p.updated_on DESC;
         `,
         params: [],
         type: "all"

@@ -3,11 +3,11 @@
  * Author: Yash Balotiya
  * Description: Service layer for data entry operations. This file interactes with the database.
  * Created on: 31/08/2025
- * Last Modified: 24/12/2025
+ * Last Modified: 27/12/2025
  */
 
 // Importing required modules & libraries
-import { runQuery } from "./dbService.js";
+import { runQuery, runTransaction } from "./dbService.js";
 import { getFormattedDateTime } from "../../shared.js";
 import { insertIntoWorkDescriptions, updateCustomer, deleteUser } from "./dataEntryService2.js";
 
@@ -61,56 +61,83 @@ const createCustomer = async (formValues) => {
     const now = getFormattedDateTime();
 
     try {
-        // Inserting into Customers Table
-        const result1 = await runQuery({
-            sql: `
-            INSERT INTO customers (
-                mobile_number, customer_image, customer_signature, customer_name, customer_dob,
-                relation_name, vehicle_id, instructor_id, address, ll_no_1, ll_class_1,
-                ll_no_2, ll_class_2, ll_issued_date, ll_validity_date,
-                mdl_no, mdl_class, mdl_issued_date, mdl_validity_date,
-                endorsement, endorsement_date, endorsement_validity_date,
-                customer_vehicle_no, created_on, updated_on
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-        `,
-            params: [
-                formValues.phoneInput,
-                formValues.customerImageInput ? Buffer.from(formValues.customerImageInput, "base64") : null,
-                formValues.customerSignatureInput ? Buffer.from(formValues.customerSignatureInput, "base64") : null,
-                formValues.customerNameInput,
-                formValues.dobInput,
-                formValues.relationInput,
-                formValues.carSelect, // <-- Corrected
-                formValues.instructorSelect, // <-- Corrected
-                formValues.addressInput,
-                formValues.licenseInput,
-                formValues.classInput,
-                formValues.licenseInput2,
-                formValues.classInput2,
-                formValues.issuedOnInput,
-                formValues.validUntilInput,
-                formValues.mdlNoInput,
-                formValues.mdlClassInput,
-                formValues.mdlIssuedInput,
-                formValues.mdlValidUntilInput,
-                formValues.endorsementInput,
-                formValues.endorsementDatedInput,
-                formValues.endorsementValidityInput,
-                formValues.vehicleNoInput,
-                now,
-                now
-            ],
-            type: "run"
-        });
+        const queries = [
+            {
+                sql: `
+                INSERT INTO customers (
+                    mobile_number, customer_image, customer_signature, customer_name, customer_dob,
+                    relation_name, vehicle_id, instructor_id, address, ll_no_1, ll_class_1,
+                    ll_no_2, ll_class_2, ll_issued_date, ll_validity_date,
+                    mdl_no, mdl_class, mdl_issued_date, mdl_validity_date,
+                    endorsement, endorsement_date, endorsement_validity_date,
+                    customer_vehicle_no, created_on, updated_on
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                `,
+                params: [
+                    formValues.phoneInput,
+                    formValues.customerImageInput ? Buffer.from(formValues.customerImageInput, "base64") : null,
+                    formValues.customerSignatureInput ? Buffer.from(formValues.customerSignatureInput, "base64") : null,
+                    formValues.customerNameInput,
+                    formValues.dobInput,
+                    formValues.relationInput,
+                    formValues.carSelect,
+                    formValues.instructorSelect,
+                    formValues.addressInput,
+                    formValues.licenseInput,
+                    formValues.classInput,
+                    formValues.licenseInput2,
+                    formValues.classInput2,
+                    formValues.issuedOnInput,
+                    formValues.validUntilInput,
+                    formValues.mdlNoInput,
+                    formValues.mdlClassInput,
+                    formValues.mdlIssuedInput,
+                    formValues.mdlValidUntilInput,
+                    formValues.endorsementInput,
+                    formValues.endorsementDatedInput,
+                    formValues.endorsementValidityInput,
+                    formValues.vehicleNoInput,
+                    now,
+                    now
+                ],
+                type: "run"
+            }
+        ];
 
-        // Inserting into Work Descriptions Table
-        // Only insert if work description or amount is present
+        // Execute customer insertion first
+        const [result1] = await runTransaction(queries);
+
+        // Add work description query if needed
         if (formValues.workDescriptionInput || formValues.amountInput) {
-            const workResult = await insertIntoWorkDescriptions(result1.lastInsertRowid, formValues.workDescriptionInput, formValues.amountInput);
-            
-            if (workResult.status === "error") {
-                return workResult; // Return the error if insertion into work_descriptions fails
+            const workQueries = [
+                {
+                    sql: `
+                    INSERT INTO work_descriptions (customer_id, work, charged_amount, created_on, updated_on)
+                    VALUES (?, ?, ?, ?, ?);
+                    `,
+                    params: [
+                        result1.lastInsertRowid,
+                        formValues.workDescriptionInput,
+                        formValues.amountInput,
+                        now,
+                        now
+                    ],
+                    type: "run"
+                }
+            ];
+
+            // Execute work description insertion in separate transaction
+            // This allows customer to be created even if work description fails
+            try {
+                await runTransaction(workQueries);
+            } catch (workError) {
+                console.error("Error creating work description:", workError);
+                return {
+                    status: "error",
+                    statusCode: 500,
+                    message: "Customer created but failed to add work description."
+                };
             }
         }
 
@@ -133,17 +160,21 @@ const createCustomer = async (formValues) => {
 // Function to delete a job
 const deleteJob = async (jobId) => {
     try {
-        await runQuery({
-            sql: "DELETE FROM payments WHERE work_desc_id = ?;",
-            params: [jobId],
-            type: "run"
-        });
+        // Use transaction to ensure both deletions succeed or both fail
+        const queries = [
+            {
+                sql: "DELETE FROM payments WHERE work_desc_id = ?;",
+                params: [jobId],
+                type: "run"
+            },
+            {
+                sql: "DELETE FROM work_descriptions WHERE id = ?;",
+                params: [jobId],
+                type: "run"
+            }
+        ];
 
-        await runQuery({
-            sql: "DELETE FROM work_descriptions WHERE id = ?;",
-            params: [jobId],
-            type: "run"
-        });
+        await runTransaction(queries);
 
         return {
             status: "success",

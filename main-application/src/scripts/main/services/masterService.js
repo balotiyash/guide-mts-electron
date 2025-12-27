@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the main service functions for master registration page
  * Created on: 21/09/2025
- * Last Modified: 23/09/2025
+ * Last Modified: 27/12/2025
  */
 
 // Importing required modules & libraries
@@ -16,7 +16,8 @@ const getAllInstructors = async () => {
         const result = await runQuery({
             sql: `SELECT id, instructor_name, instructor_license_no, license_expiration_date
                   FROM instructors 
-                  WHERE is_active = 'true';`,
+                  WHERE is_active = 'true'
+                  ORDER BY instructor_name ASC;`,
             params: [],
             type: "all" // fetch all matching rows
         });

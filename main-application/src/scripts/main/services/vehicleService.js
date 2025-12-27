@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the service functions for vehicle management
  * Created on: 23/09/2025
- * Last Modified: 11/10/2025
+ * Last Modified: 27/12/2025
  */
 
 // Importing required modules & libraries
@@ -16,7 +16,7 @@ const getAllVehicles = () => {
         const result = runQuery({
             sql: `SELECT id, vehicle_name, vehicle_model, vehicle_number, vehicle_fuel_type, is_active, created_on, updated_on
                   FROM vehicles 
-                  ORDER BY created_on DESC;`,
+                  ORDER BY vehicle_name ASC;`,
             params: [],
             type: "all" // fetch all matching rows
         });

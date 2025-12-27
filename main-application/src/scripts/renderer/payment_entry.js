@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code for payment entry page. This is the main page for it.
  * Created on: 16/09/2025
- * Last Modified: 21/12/2025
+ * Last Modified: 27/12/2025
  */
 
 // Importing required 
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Exit button
     document.getElementById("exitBtn").addEventListener("click", () => {
-        window.location.href = "./dashboard.html";
+        window.electronAPI.navigateTo("dashboard.html");
     });
 
     // ✅ Initial render (pending by default)

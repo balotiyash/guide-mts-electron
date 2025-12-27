@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the main Js code for car registration page
  * Created on: 23/09/2025
- * Last Modified: 23/09/2025
+ * Last Modified: 27/12/2025
  */
 
 // Importing required modules & libraries
@@ -53,6 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Exit button
     document.getElementById("exit-btn").addEventListener("click", () => {
-        window.location.href = "dashboard.html";
+        window.electronAPI.navigateTo("dashboard.html");
     });
 });

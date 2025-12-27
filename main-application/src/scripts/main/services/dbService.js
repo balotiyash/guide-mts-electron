@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to manage the database.
  * Created on: 26/08/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 27/12/2025
 */
 
 // Importing required modules & libraries
@@ -82,6 +82,65 @@ const runQuery = ({ sql, params = [], type = 'all' }) => {
 
     // Returning the result
     return result;
+};
+
+// Running multiple queries in a transaction with automatic rollback on error
+const runTransaction = async (queries) => {
+    // Validate queries array
+    if (!Array.isArray(queries) || queries.length === 0) {
+        throw new Error('Queries must be a non-empty array');
+    }
+
+    const db = connectDb();
+    const results = [];
+
+    try {
+        // Begin transaction
+        db.prepare('BEGIN TRANSACTION').run();
+
+        // Execute all queries in sequence
+        for (const query of queries) {
+            const { sql, params = [], type = 'run' } = query;
+
+            if (!sql || typeof sql !== 'string') {
+                throw new Error('Each query must have a valid SQL string');
+            }
+
+            const stmt = db.prepare(sql);
+            let result = null;
+
+            switch (type) {
+                case 'get':
+                    result = stmt.get(...params);
+                    break;
+                case 'all':
+                    result = stmt.all(...params);
+                    break;
+                case 'run':
+                    result = stmt.run(...params);
+                    break;
+                default:
+                    throw new Error(`Unsupported query type: ${type}`);
+            }
+
+            results.push(result);
+        }
+
+        // Commit transaction if all queries succeeded
+        db.prepare('COMMIT').run();
+        db.close();
+
+        return results;
+    } catch (error) {
+        // Rollback transaction on any error
+        try {
+            db.prepare('ROLLBACK').run();
+        } catch (rollbackError) {
+            console.error('Rollback failed:', rollbackError);
+        }
+        db.close();
+        throw error;
+    }
 };
 
 // Backup database function
@@ -188,4 +247,4 @@ const changeDatabase = async () => {
 };
 
 // Exporting the functions
-export { getDbPath, connectDb, runQuery, backupDatabase, changeDatabase };
+export { getDbPath, connectDb, runQuery, runTransaction, backupDatabase, changeDatabase };
