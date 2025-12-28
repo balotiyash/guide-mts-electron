@@ -18,9 +18,7 @@ make date formatter in dataEntryService function in uutility.js then import it
 user friendly errors should be displayed and detailed on console
 make all dialog box question, infoe etc correct
 remove all data driven console logs to prevent data leak and add informative console logs for error handling
-backup db from navbar not working in other pages
 registration form freezes - network tab issue
-paid payment on select payment date is not auto filling
 
 backup format main.js
 same for menu main.js

@@ -3,18 +3,28 @@
  * Author: Yash Balotiya
  * Description: Form 14 renderer script - ES6 function-based
  * Created on: 01/10/2025
- * Last Modified: 24/12/2025
+ * Last Modified: 28/12/2025
  */
 
 // Import utilities
 import { initializeDateRangePickers, clearDatePickers, isValidDateFormat, parseDateString } from '../utilities/form14/datePickerUtility.js';
 import createInitFunction from '../utilities/form14/form14Utility.js';
+import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 
 // Host address variable
 let hostAddress = 'localhost';
 
 // Get host address on DOM load
 document.addEventListener('DOMContentLoaded', async () => {
+    // Setup backup database listener for menu bar
+    setupBackupDatabaseListener();
+    
+    // Setup change database listener for menu bar
+    setupChangeDatabaseListener();
+    
+    // Setup change architecture listener for menu bar
+    setupChangeArchitectureListener();
+    
     // Get the host address
     hostAddress = await window.electronAPI.getHost();
 

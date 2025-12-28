@@ -3,14 +3,23 @@
  * Author: Yash Balotiya
  * Description: This file contains the main Js code for car registration page
  * Created on: 23/09/2025
- * Last Modified: 27/12/2025
+ * Last Modified: 28/12/2025
  */
 
 // Importing required modules & libraries
 import { handleSubmit, handleUpdate, renderVehicles, getSelectedVehicleId } from "../utilities/vehicleEntry/vehicleUtility.js";
+import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 
 // On window load
 document.addEventListener('DOMContentLoaded', () => {
+    // Setup backup database listener for menu bar
+    setupBackupDatabaseListener();
+    
+    // Setup change database listener for menu bar
+    setupChangeDatabaseListener();
+    
+    // Setup change architecture listener for menu bar
+    setupChangeArchitectureListener();
     // Call on page load
     renderVehicles();
 

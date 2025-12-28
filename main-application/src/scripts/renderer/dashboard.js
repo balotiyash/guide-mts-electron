@@ -3,14 +3,15 @@
  * Author: Yash Balotiya
  * Description: This file contains the JS code to manage user dashboard functionality for the Guide Motor Training School application.
  * Created on: 08/08/2025
- * Last Modified: 24/12/2025
+ * Last Modified: 28/12/2025
 */
 
 // Importing required modules & libraries
-import initCharts from "./dashboard_charts.js";
 // import { initFloatingBubbles } from "../utilities/dashboard/dashboardUtility.js";
-import { checkClientServerInfo } from "../utilities/dashboard/clientServerUtility.js";
 // import log from "../logger.js";
+import initCharts from "./dashboard_charts.js";
+import { checkClientServerInfo } from "../utilities/dashboard/clientServerUtility.js";
+import { setupBackupDatabaseListener, performBackupDatabase, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 
 // Log the loading of the dashboard script
 // log.info("Dashboard script loaded.");
@@ -19,6 +20,15 @@ import { checkClientServerInfo } from "../utilities/dashboard/clientServerUtilit
 document.addEventListener("DOMContentLoaded", async () => {
     // Get the database path
     const dbPath = await window.electronAPI.getDbPath();
+
+    // Setup backup database listener for menu bar
+    setupBackupDatabaseListener();
+
+    // Setup change database listener for menu bar
+    setupChangeDatabaseListener();
+
+    // Setup change architecture listener for menu bar
+    setupChangeArchitectureListener();
 
     // Check client/server info
     checkClientServerInfo();
@@ -43,52 +53,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.electronAPI.navigateTo('search_page.html');
     });
 
-    // Backup button functionality
+    // Backup button functionality - reuse shared backup handler
     const backupButton = document.getElementById('backupButton');
-
     if (backupButton) {
         backupButton.addEventListener('click', async () => {
+            // Show loading state
+            const originalText = backupButton.querySelector('p').textContent;
+            backupButton.querySelector('p').textContent = 'Backing up...';
+            backupButton.style.pointerEvents = 'none';
+
             try {
-                // Show loading state
-                const originalText = backupButton.querySelector('p').textContent;
-                backupButton.querySelector('p').textContent = 'Backing up...';
-                backupButton.style.pointerEvents = 'none';
-
-                // Call backup API
-                const result = await window.electronAPI.backupDatabase();
-
+                await performBackupDatabase();
+            } finally {
                 // Restore button state
                 backupButton.querySelector('p').textContent = originalText;
                 backupButton.style.pointerEvents = 'auto';
-
-                // Show result dialog
-                if (result.success) {
-                    await window.dialogBoxAPI.showDialogBox(
-                        'info',
-                        'Backup Successful',
-                        result.message,
-                        ['OK']
-                    );
-                } else {
-                    await window.dialogBoxAPI.showDialogBox(
-                        'error',
-                        'Backup Failed',
-                        result.message,
-                        ['OK']
-                    );
-                }
-            } catch (error) {
-                // Restore button state on error
-                backupButton.querySelector('p').textContent = 'Backup';
-                backupButton.style.pointerEvents = 'auto';
-
-                console.error('Backup error:', error);
-                await window.dialogBoxAPI.showDialogBox(
-                    'error',
-                    'Backup Error',
-                    'An unexpected error occurred while backing up the database.',
-                    ['OK']
-                );
             }
         });
     }
@@ -198,53 +177,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("currentYearCountTxt").innerText = currentYearCount;
     document.getElementById("allTimeCountTxt").innerText = allTimeCount;
     document.getElementById("pendingPaymentsCountTxt").innerText = pendingPaymentsCount;
-
-    // Listen for change database requests from menu
-    window.electronAPI.onChangeDatabaseRequest(async () => {
-        try {
-            // Show confirmation dialog
-            const confirmResult = await window.dialogBoxAPI.showDialogBox(
-                'question',
-                'Change Database',
-                'Are you sure you want to change the database? This will close the current database connection.',
-                ['Yes', 'No']
-            );
-
-            if (confirmResult === 0) { // User clicked 'Yes'
-                // Call change database API
-                const result = await window.electronAPI.changeDatabase();
-
-                if (result.success) {
-                    // Show success message and reload the dashboard
-                    await window.dialogBoxAPI.showDialogBox(
-                        'info',
-                        'Database Changed',
-                        result.message + '\n\nThe application will now reload with the new database.',
-                        ['OK']
-                    );
-
-                    // Reload the current page to refresh with new database
-                    location.reload();
-                } else {
-                    // Show error message
-                    await window.dialogBoxAPI.showDialogBox(
-                        'error',
-                        'Database Change Failed',
-                        result.message,
-                        ['OK']
-                    );
-                }
-            }
-        } catch (error) {
-            console.error('Database change error:', error);
-            await window.dialogBoxAPI.showDialogBox(
-                'error',
-                'Database Change Error',
-                'An unexpected error occurred while changing the database.',
-                ['OK']
-            );
-        }
-    });
 
     // Initialize floating bubbles
     // initFloatingBubbles();

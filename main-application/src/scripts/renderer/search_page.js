@@ -3,12 +3,12 @@
  * Author: Yash Balotiya
  * Description: Handles the search page form interactions and date field functionality.
  * Created on: 11/10/2025
- * Last Modified: 27/12/2025
+ * Last Modified: 28/12/2025
  */
 
 // Import required modules & libraries
 import dateUtility from "../utilities/dataEntry/dateUtility.js";
-import { isoToDDMMYYYY } from "../shared.js";
+import { isoToDDMMYYYY, setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 import { initializeSearchUtility, performSearch, exportToCSV, clearSearch } from '../utilities/searchPage/searchUtility.js';
 
 // Global variables
@@ -19,6 +19,15 @@ const limit = 100;
 
 // On load
 document.addEventListener("DOMContentLoaded", async () => {
+    // Setup backup database listener for menu bar
+    setupBackupDatabaseListener();
+    
+    // Setup change database listener for menu bar
+    setupChangeDatabaseListener();
+    
+    // Setup change architecture listener for menu bar
+    setupChangeArchitectureListener();
+    
     // Get the host address
     const hostAddress = await window.electronAPI.getHost();
 

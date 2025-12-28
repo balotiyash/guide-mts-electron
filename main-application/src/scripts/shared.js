@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Common shared utilities for both main and renderer processes.
    Created on: 21/09/2025
-   Last Modified: 11/10/2025
+   Last Modified: 28/12/2025
 */
 
 // Utility: convert ISO (yyyy-mm-dd) → dd-mm-yyyy or dd/mm/yyyy
@@ -118,10 +118,159 @@ const sanitizeDate = (dateInput) => {
     return `${year}-${month}-${day}`;
 };
 
+// Core backup database function - handles API call and dialogs
+// Can be reused by both menu bar and button clicks
+const performBackupDatabase = async () => {
+    try {
+        // Call backup API
+        const result = await window.electronAPI.backupDatabase();
+
+        // Show result dialog
+        if (result.success) {
+            await window.dialogBoxAPI.showDialogBox(
+                'info',
+                'Backup Successful',
+                result.message,
+                ['OK']
+            );
+        } else {
+            await window.dialogBoxAPI.showDialogBox(
+                'error',
+                'Backup Failed',
+                result.message,
+                ['OK']
+            );
+        }
+    } catch (error) {
+        console.error('Backup error:', error);
+        await window.dialogBoxAPI.showDialogBox(
+            'error',
+            'Backup Error',
+            'An unexpected error occurred while backing up the database.',
+            ['OK']
+        );
+    }
+};
+
+// Global backup database handler for menu bar integration
+// This function should be called once when a page loads to enable backup from menu
+const setupBackupDatabaseListener = () => {
+    if (typeof window !== 'undefined' && window.electronAPI && window.electronAPI.onBackupDatabaseRequest) {
+        window.electronAPI.onBackupDatabaseRequest(performBackupDatabase);
+    }
+};
+
+// Core change database function - handles confirmation, API call and dialogs
+// Can be reused by both menu bar and button clicks
+const performChangeDatabase = async () => {
+    try {
+        // Show confirmation dialog
+        const confirmResult = await window.dialogBoxAPI.showDialogBox(
+            'question',
+            'Change Database',
+            'Are you sure you want to change the database? This will close the current database connection.',
+            ['Yes', 'No']
+        );
+
+        if (confirmResult === 0) { // User clicked 'Yes'
+            // Call change database API
+            const result = await window.electronAPI.changeDatabase();
+
+            if (result.success) {
+                // Show success message and reload the page
+                await window.dialogBoxAPI.showDialogBox(
+                    'info',
+                    'Database Changed',
+                    result.message + '\n\nThe application will now reload with the new database.',
+                    ['OK']
+                );
+
+                // Reload the current page to refresh with new database
+                location.reload();
+            } else {
+                // Show error message
+                await window.dialogBoxAPI.showDialogBox(
+                    'error',
+                    'Database Change Failed',
+                    result.message,
+                    ['OK']
+                );
+            }
+        }
+    } catch (error) {
+        console.error('Database change error:', error);
+        await window.dialogBoxAPI.showDialogBox(
+            'error',
+            'Database Change Error',
+            'An unexpected error occurred while changing the database.',
+            ['OK']
+        );
+    }
+};
+
+// Global change database handler for menu bar integration
+// This function should be called once when a page loads to enable change database from menu
+const setupChangeDatabaseListener = () => {
+    if (typeof window !== 'undefined' && window.electronAPI && window.electronAPI.onChangeDatabaseRequest) {
+        window.electronAPI.onChangeDatabaseRequest(performChangeDatabase);
+    }
+};
+
+// Core change architecture function - handles user selection dialog and navigation
+// Can be reused by both menu bar and button clicks
+const performChangeArchitecture = async () => {
+    try {
+        // Show architecture selection dialog
+        const response = await window.dialogBoxAPI.showDialogBox(
+            'question',
+            'Architecture Type',
+            'Please specify whether this installation is for Client-Server or Standalone Server architecture.',
+            ['Client-Server', 'Standalone Server']
+        );
+
+        // If user chooses Client-Server (0), open client setup window
+        if (response === 0) {
+            window.electronAPI.openClientSetup();
+        } 
+        // If user chooses Standalone Server (1), set host to localhost
+        else if (response === 1) {
+            await window.electronAPI.setHost('localhost');
+            await window.dialogBoxAPI.showDialogBox(
+                'info',
+                'Architecture Set',
+                'Architecture has been set to Standalone Server.',
+                ['OK']
+            );
+        }
+    } catch (error) {
+        console.error('Architecture change error:', error);
+        await window.dialogBoxAPI.showDialogBox(
+            'error',
+            'Architecture Change Error',
+            'An unexpected error occurred while changing the architecture.',
+            ['OK']
+        );
+    }
+};
+
+// Global change architecture handler for menu bar integration
+// This function should be called once when a page loads to enable change architecture from menu
+const setupChangeArchitectureListener = () => {
+    if (typeof window !== 'undefined' && window.electronAPI && window.electronAPI.onChangeArchitectureRequest) {
+        window.electronAPI.onChangeArchitectureRequest(performChangeArchitecture);
+    }
+};
+
 // Export utilities
 export {
     isoToDDMMYYYY,
     getFormattedDateTime,
     ddmmyyyyToISO,
-    sanitizeDate
+    sanitizeDate,
+    performBackupDatabase,
+    setupBackupDatabaseListener,
+    performChangeDatabase,
+    setupChangeDatabaseListener,
+    performChangeArchitecture,
+    setupChangeArchitectureListener
 };

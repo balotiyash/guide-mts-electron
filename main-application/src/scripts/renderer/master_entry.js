@@ -3,15 +3,25 @@
  * Author: Yash Balotiya
  * Description: This file contains the main Js code for master registration page
  * Created on: 21/09/2025
- * Last Modified: 27/12/2025
+ * Last Modified: 28/12/2025
  */
 
 // Importing required modules & libraries
 import { handleSubmit, handleUpdate, renderInstructors, getSelectedInstructorId } from "../utilities/masterEntry/masterUtility.js";
 import dateUtility from "../utilities/dataEntry/dateUtility.js"; // Reuse existing date utility
+import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 
 // On window load
 document.addEventListener('DOMContentLoaded', () => {
+    // Setup backup database listener for menu bar
+    setupBackupDatabaseListener();
+    
+    // Setup change database listener for menu bar
+    setupChangeDatabaseListener();
+    
+    // Setup change architecture listener for menu bar
+    setupChangeArchitectureListener();
+    
     // Initialize date fields with Flatpickr and inputmask (reused from data entry)
     dateUtility();
     

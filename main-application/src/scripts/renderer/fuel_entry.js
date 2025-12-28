@@ -3,12 +3,13 @@
  * Author: Yash Balotiya
  * Description: This file contains the renderer process script for the Fuel Entry page.
  * Created on: 24/09/2025
- * Last Modified: 24/12/2025
+ * Last Modified: 28/12/2025
  */
 
 // Importing required modules & libraries
 import { loadData, populateVehicleDropdown, saveFuelEntry } from "../utilities/fuelEntry/fuelEntryUtility.js";
 import dateUtility from "../utilities/dataEntry/dateUtility.js";
+import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 
 // Global variables to track current state
 let currentVehicleId = null;
@@ -54,6 +55,15 @@ window.loadExistingFuelEntry = loadExistingFuelEntry;
 
 // On page load
 document.addEventListener('DOMContentLoaded', async () => {
+    // Setup backup database listener for menu bar
+    setupBackupDatabaseListener();
+    
+    // Setup change database listener for menu bar
+    setupChangeDatabaseListener();
+    
+    // Setup change architecture listener for menu bar
+    setupChangeArchitectureListener();
+    
     // Initialize date fields with Flatpickr and inputmask
     dateUtility();
 

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
- * Last Modified: 27/12/2025
+ * Last Modified: 28/12/2025
  */
 
 // Import required modules & libraries
@@ -11,6 +11,7 @@ import { fillForm, setupImageInputListeners } from "./data_entry_load_data.js";
 import { setDropDownNames, fetchWorkDescriptions } from "../utilities/dataEntry/dataEntryUtility.js";
 import dateUtility from "../utilities/dataEntry/dateUtility.js";
 import { insertDataUtility, collectFormValues, sendSMSPrompt } from "../utilities/dataEntry/dataInsertUtility.js";
+import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 // import log from "../logger.js";
 
 // Log the loading of the data entry script
@@ -18,6 +19,14 @@ import { insertDataUtility, collectFormValues, sendSMSPrompt } from "../utilitie
 
 // On load
 document.addEventListener("DOMContentLoaded", async () => {
+    // Setup backup database listener for menu bar
+    setupBackupDatabaseListener();
+    
+    // Setup change database listener for menu bar
+    setupChangeDatabaseListener();
+    
+    // Setup change architecture listener for menu bar
+    setupChangeArchitectureListener();
     // Get the host address
     const hostAddress = await window.electronAPI.getHost();
 

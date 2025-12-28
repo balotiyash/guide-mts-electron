@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code for payment entry page. This is the main page for it.
  * Created on: 16/09/2025
- * Last Modified: 27/12/2025
+ * Last Modified: 28/12/2025
  */
 
 // Importing required 
@@ -11,9 +11,18 @@ import { renderRows, renderCurrentPage, submitPayment } from "../utilities/payme
 import { printInvoiceForSelectedUser } from "../utilities/paymentEntry/printInvoiceUtility.js";
 import { paymentState } from "../utilities/paymentEntry/paymentUtility.js";
 import { sendPaymentSMSWithChoice } from "../utilities/sms/smsUtility.js";
+import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 
 // On window load
 document.addEventListener('DOMContentLoaded', async () => {
+    // Setup backup database listener for menu bar
+    setupBackupDatabaseListener();
+    
+    // Setup change database listener for menu bar
+    setupChangeDatabaseListener();
+    
+    // Setup change architecture listener for menu bar
+    setupChangeArchitectureListener();
     // Get the host address
     const hostAddress = await window.electronAPI.getHost();
 
@@ -169,7 +178,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Get new values
         const newAmount = parseFloat(document.getElementById("amountInput").value);
         const newMode = document.getElementById("paymentMode").value.trim().toLowerCase();
-        const newPaymentDate = document.getElementById("payment-date").value + " " + new Date().toTimeString().split(" ")[0];
+        const paymentDateValue = document.getElementById("payment-date").value;
+        const newPaymentDate = paymentDateValue + " " + new Date().toTimeString().split(" ")[0];
 
         // Validation
         if (!paymentId) {
@@ -177,13 +187,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        if (!newMode) {
-            window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Please select a payment mode.', ['OK']);
+        if (!paymentDateValue || paymentDateValue.trim() === '') {
+            window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Please select a payment date.', ['OK']);
             return;
         }
 
-        if (!newPaymentDate) {
-            window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Please select a payment date.', ['OK']);
+        if (!newMode) {
+            window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Please select a payment mode.', ['OK']);
             return;
         }
 

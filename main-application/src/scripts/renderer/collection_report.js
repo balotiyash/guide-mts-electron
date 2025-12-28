@@ -3,16 +3,26 @@
  * Author: Yash Balotiya
  * Description: Collection Report page using generic report system
  * Created on: 12/10/2025
- * Last Modified: 27/12/2025
+ * Last Modified: 28/12/2025
  */
 
 // Import necessary modules and libraries
 import dateUtility from "../utilities/dataEntry/dateUtility.js";
 import GenericReportUtility from "../utilities/reports/genericReportUtility.js";
 import { collectionReportConfig } from "../utilities/reports/collectionReportConfig.js";
+import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 
 // Initialize when DOM is loaded
 document.addEventListener("DOMContentLoaded", async () => {
+    // Setup backup database listener for menu bar
+    setupBackupDatabaseListener();
+    
+    // Setup change database listener for menu bar
+    setupChangeDatabaseListener();
+    
+    // Setup change architecture listener for menu bar
+    setupChangeArchitectureListener();
+    
     // Initialize date utility
     dateUtility();
     
