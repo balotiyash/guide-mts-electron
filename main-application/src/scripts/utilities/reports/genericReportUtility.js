@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Generic utility for all report pages (Balance, Collection, etc.)
  * Created on: 12/10/2025
- * Last Modified: 27/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Importing required modules & libraries
@@ -160,10 +160,9 @@ class GenericReportUtility {
         
         if (!hasSearchCriteria) {
             window.dialogBoxAPI.showDialogBox(
-                "info", 
+                "warning", 
                 "Search Required", 
-                "Please select at least one search parameter:\n• Search Type with Search Text\n• Starting Date\n• Ending Date\n• Date Range", 
-                ["OK"]
+                "Please select at least one search parameter:\n• Search Type with Search Text\n• Starting Date\n• Ending Date\n• Date Range"
             );
             return;
         }
@@ -171,10 +170,9 @@ class GenericReportUtility {
         // If search type is selected, search text is required
         if (searchType && !searchValue) {
             window.dialogBoxAPI.showDialogBox(
-                "info", 
+                "warning", 
                 "Search Text Required", 
-                "Please enter search text for the selected search type.", 
-                ["OK"]
+                "Please enter search text for the selected search type."
             );
             return;
         }
@@ -182,10 +180,9 @@ class GenericReportUtility {
         // If search text is provided but no search type selected
         if (searchValue && !searchType) {
             window.dialogBoxAPI.showDialogBox(
-                "info", 
+                "warning", 
                 "Search Type Required", 
-                "Please select a search type for the entered search text.", 
-                ["OK"]
+                "Please select a search type for the entered search text."
             );
             return;
         }
@@ -197,10 +194,9 @@ class GenericReportUtility {
             
             if (start > end) {
                 window.dialogBoxAPI.showDialogBox(
-                    "info", 
+                    "warning", 
                     "Invalid Date Range", 
-                    "Starting date cannot be after ending date.", 
-                    ["OK"]
+                    "Starting date cannot be after ending date."
                 );
                 return;
             }
@@ -266,8 +262,7 @@ class GenericReportUtility {
         //     window.dialogBoxAPI.showDialogBox(
         //         "info", 
         //         "No Results Found", 
-        //         "No records match your search criteria. Please try different search parameters.", 
-        //         ["OK"]
+        //         "No records match your search criteria. Please try different search parameters."
         //     );
         // }
     }
@@ -279,8 +274,7 @@ class GenericReportUtility {
                 window.dialogBoxAPI.showDialogBox(
                     "info", 
                     "No Data to Export", 
-                    "No data available to export. Please perform a search to filter data or ensure there are records available.", 
-                    ["OK"]
+                    "No data available to export. Please perform a search to filter data or ensure there are records available."
                 );
                 return;
             }
@@ -332,16 +326,15 @@ class GenericReportUtility {
                 window.dialogBoxAPI.showDialogBox(
                     "info",
                     "Export Successful",
-                    `${this.config.reportName} data exported successfully!\nLocation: ${filePath}\nRecords exported: ${this.filteredData.length}`,
-                    ["OK"]
+                    `${this.config.reportName} data exported successfully!\nLocation: ${filePath}\nRecords exported: ${this.filteredData.length}`
                 );
             } else {
-                window.dialogBoxAPI.showDialogBox("error", "Export Failed", `Failed to export data: ${writeResult.error}`, ["OK"]);
+                window.dialogBoxAPI.showDialogBox("error", "Export Failed", `Failed to export data: ${writeResult.error}`);
             }
 
         } catch (error) {
             console.error("Export error:", error);
-            window.dialogBoxAPI.showDialogBox("error", "Export Error", `An error occurred while exporting: ${error.message}`, ["OK"]);
+            window.dialogBoxAPI.showDialogBox("error", "Export Error", `An error occurred while exporting: ${error.message}`);
         }
     }
 
@@ -377,8 +370,7 @@ class GenericReportUtility {
         window.dialogBoxAPI.showDialogBox(
             "info", 
             "Search Cleared", 
-            "All search criteria have been cleared. Showing all records.", 
-            ["OK"]
+            "All search criteria have been cleared. Showing all records."
         );
     }
 

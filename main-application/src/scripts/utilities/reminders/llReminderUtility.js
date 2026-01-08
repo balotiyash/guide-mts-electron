@@ -47,8 +47,7 @@ const llReminderUtility = () => {
                 await window.dialogBoxAPI.showDialogBox(
                     'error',
                     'API Error',
-                    `Failed to fetch LL reminders: ${e.message}`,
-                    ['OK']
+                    `Failed to fetch LL reminders: ${e.message}`
                 );
             }
 
@@ -104,8 +103,7 @@ const llReminderUtility = () => {
                 await window.dialogBoxAPI.showDialogBox(
                     'warning',
                     'No Selection',
-                    'Please select at least one user to send SMS.',
-                    ['OK']
+                    'Please select at least one user to send SMS.'
                 );
                 return;
             }
@@ -141,8 +139,7 @@ const llReminderUtility = () => {
             await window.dialogBoxAPI.showDialogBox(
                 'info',
                 'SMS Result',
-                `SMS sent: ${successCount}, Failed: ${failCount}`,
-                ['OK']
+                `SMS sent: ${successCount}, Failed: ${failCount}`
             );
         });
     }

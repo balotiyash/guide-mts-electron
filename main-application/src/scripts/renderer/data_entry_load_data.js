@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to HELP load customer data into the form.
  * Created on: 31/08/2025
- * Last Modified: 09/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // IMporting required modules & libraries
@@ -47,9 +47,7 @@ const loadDateField = (dateValue, textInputId, hiddenInputId) => {
 };
 
 // Fill the form with customer data using mobile number
-const fillForm = (data, formElements, imageBlobs) => {
-    console.log("fillForm called with data:", data); // Debug log
-    
+const fillForm = (data, formElements, imageBlobs) => {    
     const { customerIdInput, customerNameInput, dobInput, relationInput, carSelect, instructorSelect, addressInput, licenseInput, classInput, licenseInput2, classInput2, issuedOnInput, validUntilInput, mdlNoInput, mdlClassInput, mdlIssuedInput, mdlValidUntilInput, endorsementInput, endorsementDatedInput, endorsementValidityInput, vehicleNoInput, amountInput, workDescriptionInput } = formElements;
 
     // First, clear any existing images/blobs before loading new ones

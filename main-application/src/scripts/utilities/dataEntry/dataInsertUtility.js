@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Utility functions for inserting data from the data entry form into the database.
    Created on: 21/09/2025
-   Last Modified: 27/12/2025
+   Last Modified: 08/01/2026
 */
 
 // Importing required modules & libraries
@@ -12,10 +12,10 @@ import { sendSMSPrompt } from "../sms/smsUtility.js";
 // Function to handle data insertion logic
 const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) => {
     // Show confirmation dialog
-    const response = await window.dialogBoxAPI.showDialogBox("question", "Save New Entry", "Do you want to save new entry?", ["OK", "Cancel"]);
+    const response = await window.dialogBoxAPI.showDialogBox("question", "Save New Entry", "Do you want to save new entry?", ["Yes", "No"]);
 
     // User confirmed, proceed with saving
-    if (response !== 0) return; // 0 = "OK", 1 = "Cancel"
+    if (response !== 0) return; // 0 = "Yes", 1 = "No"
 
     // Collect form values
     let formValues = await collectFormValues(formElements, imageBlobs);
@@ -24,7 +24,7 @@ const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) =>
     if (!formValues) return;
 
     if (!formValues.amountInput || !formValues.workDescriptionInput) {
-        await window.dialogBoxAPI.showDialogBox("error", "Missing Fields", "Please fill in all required fields.");
+        await window.dialogBoxAPI.showDialogBox("warning", "Missing Fields", "Please fill in all required fields.");
         return;
     }
 
@@ -125,19 +125,19 @@ const collectFormValues = async (formElements, imageBlobs) => {
     // Phone number validation
     const digitsOnly = formValues.phoneInput?.replace(/\D/g, '');
     if (!digitsOnly || digitsOnly.length !== 10) {
-        await window.dialogBoxAPI.showDialogBox("error", "Invalid Phone Number", "Please enter a valid 10-digit phone number.");
+        await window.dialogBoxAPI.showDialogBox("warning", "Invalid Phone Number", "Please enter a valid 10-digit phone number.");
         return;
     }
 
     // Customer name and DOB validation
     if (!formValues.customerNameInput || !formValues.dobInput || !formValues.relationInput || !formValues.addressInput) {
-        await window.dialogBoxAPI.showDialogBox("error", "Missing Fields", "Please fill in all required fields.");
+        await window.dialogBoxAPI.showDialogBox("warning", "Missing Fields", "Please fill in all required fields.");
         return;
     }
 
     // Validate 18+
     if (new Date().getFullYear() - new Date(formValues.dobInput).getFullYear() < 18) {
-        await window.dialogBoxAPI.showDialogBox("error", "Invalid Age", "Customer must be at least 18 years old.");
+        await window.dialogBoxAPI.showDialogBox("warning", "Invalid Age", "Customer must be at least 18 years old.");
         return;
     }
 

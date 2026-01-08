@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the main Js code for car registration page
  * Created on: 23/09/2025
- * Last Modified: 28/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Importing required modules & libraries
@@ -39,23 +39,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const vehicleId = getSelectedVehicleId();
         
         if (!vehicleId) {
-            await window.dialogBoxAPI.showDialogBox('error', 'Selection Error', 'Please select a vehicle to delete.', ['OK']);
+            await window.dialogBoxAPI.showDialogBox('error', 'Selection Error', 'Please select a vehicle to delete.');
             return;
         }
 
         // Confirm deletion
-        const confirmResult = await window.dialogBoxAPI.showDialogBox('question', 'Confirm Deletion', 'Are you sure you want to delete this vehicle? This action cannot be undone.', ['Yes', 'No']);
+        const confirmResult = await window.dialogBoxAPI.showDialogBox('warning', 'Confirm Deletion', 'Are you sure you want to delete this vehicle? This action cannot be undone.', ['Yes', 'No']);
         
         if (confirmResult === 0) {
             try {
                 await window.vehicleEntryAPI.deleteVehicle(vehicleId);
-                await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Vehicle deleted successfully.', ['OK']);
+                await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Vehicle deleted successfully.');
                 
                 // Clear form and refresh list
                 window.location.reload();
             } catch (error) {
                 console.error('Delete error:', error);
-                await window.dialogBoxAPI.showDialogBox('error', 'Error', 'An error occurred while deleting the vehicle.', ['OK']);
+                await window.dialogBoxAPI.showDialogBox('error', 'Error', 'An error occurred while deleting the vehicle.');
             }
         }
     });

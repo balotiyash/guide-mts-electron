@@ -183,29 +183,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Validation
         if (!paymentId) {
-            window.dialogBoxAPI.showDialogBox('error', 'No Selection', 'Please select a record to edit.', ['OK']);
+            window.dialogBoxAPI.showDialogBox('info', 'No Selection', 'Please select a record to edit.');
             return;
         }
 
         if (!paymentDateValue || paymentDateValue.trim() === '') {
-            window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Please select a payment date.', ['OK']);
+            window.dialogBoxAPI.showDialogBox('info', 'Invalid Input', 'Please select a payment date.');
             return;
         }
 
         if (!newMode) {
-            window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Please select a payment mode.', ['OK']);
+            window.dialogBoxAPI.showDialogBox('info', 'Invalid Input', 'Please select a payment mode.');
             return;
         }
 
         if (!newAmount || newAmount <= 0) {
-            window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Please enter a valid amount.', ['OK']);
+            window.dialogBoxAPI.showDialogBox('info', 'Invalid Input', 'Please enter a valid amount.');
             return;
         }
 
         // Get charged amount to validate edited amount doesn't exceed it
         const chargedAmount = parseFloat(document.getElementById("formChargedAmount")?.textContent) || 0;
         if (newAmount > chargedAmount) {
-            await window.dialogBoxAPI.showDialogBox('error', 'Invalid Amount', `Amount cannot exceed pending amount of ₹${chargedAmount}`, ['OK']);
+            await window.dialogBoxAPI.showDialogBox('info', 'Invalid Amount', `Amount cannot exceed pending amount of ₹${chargedAmount}`);
             return;
         }
 
@@ -215,13 +215,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Handle response
         if (response.success) {
             // Confirm Dialog
-            await window.dialogBoxAPI.showDialogBox('info', 'Updated', 'Payment updated successfully.', ['OK']);
+            await window.dialogBoxAPI.showDialogBox('info', 'Updated', 'Payment updated successfully.');
 
             // SMS Notification
             const { mobile_number, customerName } = paymentState;
 
             if (!mobile_number || !customerName) {
-                await window.dialogBoxAPI.showDialogBox('error', 'No Selection', 'Please select a record to edit.', ['OK']);
+                await window.dialogBoxAPI.showDialogBox('info', 'No Selection', 'Please select a record to edit.');
                 return;
             }
 

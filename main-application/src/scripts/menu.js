@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 08/01/2026
 */
 
 // Module JS
@@ -198,8 +198,10 @@ const createMenuTemplate = (win) => {
                 {
                     label: 'About Developer',
                     click: () => {
-                        console.log('About Developer clicked');
-                        // TODO: Show about developer dialog
+                        click: async () => {
+                        const { shell } = await import('electron');
+                        await shell.openExternal('https://algodevopss.in/');
+                    }
                     }
                 },
                 { type: 'separator' },

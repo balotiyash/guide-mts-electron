@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the utility functions for vehicle entry page
  * Created on: 23/09/2025
- * Last Modified: 24/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Global variable to track selected vehicle ID
@@ -104,7 +104,7 @@ const handleSubmit = async () => {
 
     // Basic validation
     if (!vehicleName || !vehicleModel || !vehicleNumber || !fuelType) {
-        await window.dialogBoxAPI.showDialogBox('error', 'Validation Error', 'Please fill in all fields.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please fill in all fields.');
         return;
     }
 
@@ -119,7 +119,7 @@ const handleSubmit = async () => {
     try {
         // Call the API to add the vehicle
         await window.vehicleEntryAPI.addVehicle(vehicleData);
-        await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Vehicle added successfully.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Vehicle added successfully.');
         
         // Clear the form
         clearForm();
@@ -127,7 +127,7 @@ const handleSubmit = async () => {
         renderVehicles(); // Refresh the list
     } catch (error) {
         console.error('Add vehicle error:', error);
-        await window.dialogBoxAPI.showDialogBox('error', 'Error', 'Failed to add vehicle.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('error', 'Error', 'Failed to add vehicle.');
     }
 };
 
@@ -141,7 +141,7 @@ const handleUpdate = async () => {
 
     // Basic validation
     if (!selectedVehicleId || !vehicleName || !vehicleModel || !vehicleNumber || !fuelType) {
-        await window.dialogBoxAPI.showDialogBox('error', 'Validation Error', 'Please select a vehicle and fill in all fields.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please select a vehicle and fill in all fields.');
         return;
     }
 
@@ -156,7 +156,7 @@ const handleUpdate = async () => {
     try {
         // Call the API to update the vehicle
         await window.vehicleEntryAPI.updateVehicle(selectedVehicleId, vehicleData);
-        await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Vehicle updated successfully.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Vehicle updated successfully.');
         
         // Clear selection and form
         selectedVehicleId = null;
@@ -165,7 +165,7 @@ const handleUpdate = async () => {
         renderVehicles(); // Refresh the list
     } catch (error) {
         console.error('Update vehicle error:', error);
-        await window.dialogBoxAPI.showDialogBox('error', 'Error', 'Failed to update vehicle.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('error', 'Error', 'Failed to update vehicle.');
     }
 };
 

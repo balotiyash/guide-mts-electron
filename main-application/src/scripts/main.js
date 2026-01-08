@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 08/12/2025
+ * Last Modified: 08/01/2026
 */
 
 // Importing required modules & libraries
@@ -153,7 +153,7 @@ ipcMain.on('open-client-setup', () => {
 });
 
 // Show dialog box
-ipcMain.handle('show-dialog-box', async (event, { type, title, message, buttons = ['OK'] }) => {
+ipcMain.handle('show-dialog-box', async (event, { type, title, message, buttons = ['Ok'] }) => {
     const currentWindow = BrowserWindow.getFocusedWindow();
 
     if (currentWindow) {

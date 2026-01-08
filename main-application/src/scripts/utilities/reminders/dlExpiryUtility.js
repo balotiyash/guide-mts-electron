@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains utility functions for DL reminders.
  * Created on: 25/10/2025
- * Last Modified: 21/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Importing required modules & libraries
@@ -47,8 +47,7 @@ const dlReminderUtility = () => {
                 await window.dialogBoxAPI.showDialogBox(
                     'error',
                     'API Error',
-                    `Failed to fetch DL expiry reminders: ${e.message}`,
-                    ['OK']
+                    `Failed to fetch DL expiry reminders: ${e.message}`
                 );
             }
 
@@ -102,8 +101,7 @@ const dlReminderUtility = () => {
                 await window.dialogBoxAPI.showDialogBox(
                     'warning',
                     'No Selection',
-                    'Please select at least one user to send SMS.',
-                    ['OK']
+                    'Please select at least one user to send SMS.'
                 );
                 return;
             }
@@ -139,8 +137,7 @@ const dlReminderUtility = () => {
             await window.dialogBoxAPI.showDialogBox(
                 'info',
                 'SMS Result',
-                `SMS sent: ${successCount}, Failed: ${failCount}`,
-                ['OK']
+                `SMS sent: ${successCount}, Failed: ${failCount}`
             );
         });
     }

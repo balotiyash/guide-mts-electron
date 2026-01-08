@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the utility functions for master entry page
  * Created on: 22/09/2025
- * Last Modified: 24/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Import utility functions
@@ -84,7 +84,7 @@ const handleSubmit = async () => {
 
     // Basic validation
     if (!name || !licenseNo || !expirationDate) {
-        await window.dialogBoxAPI.showDialogBox('error', 'Validation Error', 'Please fill in all fields.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please fill in all fields.');
         return;
     }
 
@@ -93,7 +93,7 @@ const handleSubmit = async () => {
 
     // Handle the response
     if (response.status === "success") {
-        await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Instructor added successfully.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Instructor added successfully.');
         
         // Clear the form
         document.getElementById("name").value = "";
@@ -103,7 +103,7 @@ const handleSubmit = async () => {
         
         renderInstructors(); // Refresh the list
     } else {
-        await window.dialogBoxAPI.showDialogBox('error', 'Error', response.message || 'Failed to add instructor.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('error', 'Error', response.message || 'Failed to add instructor.');
     }
 };
 
@@ -116,7 +116,7 @@ const handleUpdate = async () => {
 
     // Basic validation
     if (!selectedInstructorId || !name || !licenseNo || !expirationDate) {
-        await window.dialogBoxAPI.showDialogBox('error', 'Validation Error', 'Please select an instructor and fill in all fields.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('error', 'Validation Error', 'Please select an instructor and fill in all fields.');
         return;
     }
 
@@ -125,7 +125,7 @@ const handleUpdate = async () => {
 
     // Handle the response
     if (response.status === "success") {
-        await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Instructor updated successfully.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Instructor updated successfully.');
         
         // Clear selection
         selectedInstructorId = null;
@@ -138,7 +138,7 @@ const handleUpdate = async () => {
         
         renderInstructors(); // Refresh the list
     } else {
-        await window.dialogBoxAPI.showDialogBox('error', 'Error', response.message || 'Failed to update instructor.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('error', 'Error', response.message || 'Failed to update instructor.');
     }
 };
 

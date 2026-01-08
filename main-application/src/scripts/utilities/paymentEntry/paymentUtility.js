@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code to handle payment entry page utilities
  * Created on: 22/09/2025
- * Last Modified: 28/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Import reusable SMS function
@@ -182,22 +182,22 @@ const submitPayment = async (userIdParam, workIdParam) => {
 
     // Validations
     if (!userIdParam || !workIdParam) {
-        window.dialogBoxAPI.showDialogBox('error', 'No Selection', 'Please select a pending payment.', ['OK']);
+        window.dialogBoxAPI.showDialogBox('warning', 'No Selection', 'Please select a pending payment.');
         return;
     }
 
     if (!paymentDateValue || paymentDateValue.trim() === '') {
-        window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Please select a payment date.', ['OK']);
+        window.dialogBoxAPI.showDialogBox('warning', 'Invalid Input', 'Please select a payment date.');
         return;
     }
 
     if (!amountInput || !paymentMode) {
-        window.dialogBoxAPI.showDialogBox('error', 'Invalid Input', 'Enter amount & select mode.', ['OK']);
+        window.dialogBoxAPI.showDialogBox('warning', 'Invalid Input', 'Enter amount & select mode.');
         return;
     }
 
     if (amountInput <= 0 || amountInput > pendingAmount) {
-        window.dialogBoxAPI.showDialogBox('error', 'Invalid Amount', 'Please enter a valid amount.', ['OK']);
+        window.dialogBoxAPI.showDialogBox('warning', 'Invalid Amount', 'Please enter a valid amount.');
         return;
     }
 
@@ -212,7 +212,7 @@ const submitPayment = async (userIdParam, workIdParam) => {
 
     // Handle response
     if (response && response.success) {
-        window.dialogBoxAPI.showDialogBox('info', 'Success', 'Payment submitted successfully.', ['OK'])
+        window.dialogBoxAPI.showDialogBox('info', 'Success', 'Payment submitted successfully.')
             .then(async () => {
                 // Send payment SMS if mobile number is available
                 if (paymentState.mobile_number) {
@@ -232,7 +232,7 @@ const submitPayment = async (userIdParam, workIdParam) => {
                         await window.invoiceAPI.printInvoiceForUser(userIdParam, workIdParam, 'ORIGINAL');
                     } catch (error) {
                         console.error('Print error:', error);
-                        window.dialogBoxAPI.showDialogBox('error', 'Print Error', 'Failed to print receipt.', ['OK']);
+                        window.dialogBoxAPI.showDialogBox('error', 'Print Error', 'Failed to print receipt.');
                     }
                 }
 
@@ -240,7 +240,7 @@ const submitPayment = async (userIdParam, workIdParam) => {
                 window.location.reload();
             });
     } else {
-        window.dialogBoxAPI.showDialogBox('error', 'Submission Failed', 'Failed to submit payment.', ['OK']);
+        window.dialogBoxAPI.showDialogBox('error', 'Submission Failed', 'Failed to submit payment.');
     }
 };
 

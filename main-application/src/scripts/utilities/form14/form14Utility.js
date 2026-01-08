@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Form 14 utility functions - ES6 function-based
  * Created on: 11/10/2025
- * Last Modified: 24/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Import shared date utilities
@@ -19,8 +19,7 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
                 'No Data',
-                'No form data to print. Please generate a preview first.',
-                ['OK']
+                'No form data to print. Please generate a preview first.'
             );
             return;
         }
@@ -30,8 +29,7 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
                 'Preview Not Visible',
-                'The preview is not visible. Please generate the preview first.',
-                ['OK']
+                'The preview is not visible. Please generate the preview first.'
             );
             return;
         }
@@ -221,7 +219,6 @@ export const createForm14Handlers = (elements, currentData, STUDENTS_PER_PAGE, f
 // Main initialization function
 const createInitFunction = (elements, currentData, formatDate, clearPreview, showLoading, hideLoading, updateFormInfo, showPreview, initializeDatePickers, handleGeneratePreview) => {
     return () => {
-        console.log('Form14 page DOM loaded - ES6 Function-based');
         hideLoading();
         initializeDatePickers();
         

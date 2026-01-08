@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Form 14 renderer script - ES6 function-based
  * Created on: 01/10/2025
- * Last Modified: 28/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Import utilities
@@ -35,8 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await window.dialogBoxAPI.showDialogBox(
             'error',
             'Error',
-            `An error occurred while loading the page: ${error.message}`,
-            ['OK']
+            `An error occurred while loading the page: ${error.message}`
         );
     }
 });
@@ -103,7 +102,6 @@ const showPreview = () => {
     if (elements.content && tableContainer) {
         elements.content.style.display = 'block';
         tableContainer.classList.add('has-content');
-        console.log('Preview displayed successfully');
     }
 };
 
@@ -176,8 +174,7 @@ const handleGeneratePreview = async () => {
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
                 'Incomplete Dates',
-                'Please select both start and end dates.',
-                ['OK']
+                'Please select both start and end dates.'
             );
             return;
         }
@@ -187,8 +184,7 @@ const handleGeneratePreview = async () => {
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
                 'Invalid Date Format',
-                'Please enter dates in DD-MM-YYYY format.',
-                ['OK']
+                'Please enter dates in DD-MM-YYYY format.'
             );
             return;
         }
@@ -198,8 +194,7 @@ const handleGeneratePreview = async () => {
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
                 'Invalid Date Range',
-                'Start date cannot be later than end date.',
-                ['OK']
+                'Start date cannot be later than end date.'
             );
             return;
         }
@@ -209,8 +204,7 @@ const handleGeneratePreview = async () => {
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
                 'No Name Entered',
-                'Please enter a name to search.',
-                ['OK']
+                'Please enter a name to search.'
             );
             return;
         }
@@ -235,15 +229,13 @@ const handleGeneratePreview = async () => {
             await window.dialogBoxAPI.showDialogBox(
                 'info',
                 'No Records',
-                'No records found for the selected criteria.',
-                ['OK']
+                'No records found for the selected criteria.'
             );
             hideLoading();
             return;
         }
 
         state.currentData = form14Data;
-        console.log('Form data loaded, state.currentData:', state.currentData?.length, 'records');
 
         // Use the globally exported function from the utility
         if (window.generateForm14Content) {
@@ -264,8 +256,7 @@ const handleGeneratePreview = async () => {
         await window.dialogBoxAPI.showDialogBox(
             'error',
             'Error',
-            `An error occurred while generating Form 14: ${error.message}`,
-            ['OK']
+            `An error occurred while generating Form 14: ${error.message}`
         );
         hideLoading();
     }

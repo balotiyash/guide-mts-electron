@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the main Js code for master registration page
  * Created on: 21/09/2025
- * Last Modified: 28/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Importing required modules & libraries
@@ -47,28 +47,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const instructorId = getSelectedInstructorId();
         
         if (!instructorId) {
-            await window.dialogBoxAPI.showDialogBox('error', 'Selection Error', 'Please select an instructor to delete.', ['OK']);
+            await window.dialogBoxAPI.showDialogBox('error', 'Selection Error', 'Please select an instructor to delete.');
             return;
         }
 
         // Confirm deletion
-        const confirmResult = await window.dialogBoxAPI.showDialogBox('question', 'Confirm Deletion', 'Are you sure you want to delete this instructor? This action cannot be undone.', ['Yes', 'No']);
+        const confirmResult = await window.dialogBoxAPI.showDialogBox('warning', 'Confirm Deletion', 'Are you sure you want to delete this instructor? This action cannot be undone.', ['Yes', 'No']);
         
         if (confirmResult === 0) {
             try {
                 const response = await window.masterEntryAPI.deleteInstructor(instructorId);
                 
                 if (response.status === "success") {
-                    await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Instructor deleted successfully.', ['OK']);
+                    await window.dialogBoxAPI.showDialogBox('info', 'Success', 'Instructor deleted successfully.');
                     
                     // Clear form and refresh list
                     window.location.reload();
                 } else {
-                    await window.dialogBoxAPI.showDialogBox('error', 'Error', response.message || 'Failed to delete instructor.', ['OK']);
+                    await window.dialogBoxAPI.showDialogBox('error', 'Error', response.message || 'Failed to delete instructor.');
                 }
             } catch (error) {
                 console.error('Delete error:', error);
-                await window.dialogBoxAPI.showDialogBox('error', 'Error', 'An error occurred while deleting the instructor.', ['OK']);
+                await window.dialogBoxAPI.showDialogBox('error', 'Error', 'An error occurred while deleting the instructor.');
             }
         }
     });

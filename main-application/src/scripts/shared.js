@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Common shared utilities for both main and renderer processes.
    Created on: 21/09/2025
-   Last Modified: 28/12/2025
+   Last Modified: 08/01/2025
 */
 
 // Utility: convert ISO (yyyy-mm-dd) → dd-mm-yyyy or dd/mm/yyyy
@@ -127,19 +127,9 @@ const performBackupDatabase = async () => {
 
         // Show result dialog
         if (result.success) {
-            await window.dialogBoxAPI.showDialogBox(
-                'info',
-                'Backup Successful',
-                result.message,
-                ['OK']
-            );
+            await window.dialogBoxAPI.showDialogBox('info', 'Backup Successful', result.message);
         } else {
-            await window.dialogBoxAPI.showDialogBox(
-                'error',
-                'Backup Failed',
-                result.message,
-                ['OK']
-            );
+            await window.dialogBoxAPI.showDialogBox('error', 'Backup Failed', result.message);
         }
     } catch (error) {
         console.error('Backup error:', error);
@@ -147,7 +137,6 @@ const performBackupDatabase = async () => {
             'error',
             'Backup Error',
             'An unexpected error occurred while backing up the database.',
-            ['OK']
         );
     }
 };
@@ -181,20 +170,14 @@ const performChangeDatabase = async () => {
                 await window.dialogBoxAPI.showDialogBox(
                     'info',
                     'Database Changed',
-                    result.message + '\n\nThe application will now reload with the new database.',
-                    ['OK']
+                    result.message + '\n\nThe application will now reload with the new database.'
                 );
 
                 // Reload the current page to refresh with new database
                 location.reload();
             } else {
                 // Show error message
-                await window.dialogBoxAPI.showDialogBox(
-                    'error',
-                    'Database Change Failed',
-                    result.message,
-                    ['OK']
-                );
+                await window.dialogBoxAPI.showDialogBox('error', 'Database Change Failed', result.message);
             }
         }
     } catch (error) {
@@ -202,8 +185,7 @@ const performChangeDatabase = async () => {
         await window.dialogBoxAPI.showDialogBox(
             'error',
             'Database Change Error',
-            'An unexpected error occurred while changing the database.',
-            ['OK']
+            'An unexpected error occurred while changing the database.'
         );
     }
 };
@@ -235,20 +217,14 @@ const performChangeArchitecture = async () => {
         // If user chooses Standalone Server (1), set host to localhost
         else if (response === 1) {
             await window.electronAPI.setHost('localhost');
-            await window.dialogBoxAPI.showDialogBox(
-                'info',
-                'Architecture Set',
-                'Architecture has been set to Standalone Server.',
-                ['OK']
-            );
+            await window.dialogBoxAPI.showDialogBox('info', 'Architecture Set', 'Architecture has been set to Standalone Server.');
         }
     } catch (error) {
         console.error('Architecture change error:', error);
         await window.dialogBoxAPI.showDialogBox(
             'error',
             'Architecture Change Error',
-            'An unexpected error occurred while changing the architecture.',
-            ['OK']
+            'An unexpected error occurred while changing the architecture.'
         );
     }
 };

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains utility functions for birthday reminders.
  * Created on: 24/10/2025
- * Last Modified: 21/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Importing required modules & libraries
@@ -50,8 +50,7 @@ const birthdayReminderUtility = () => {
             await window.dialogBoxAPI.showDialogBox(
                 'error',
                 'API Error',
-                `Failed to fetch birthday reminders: ${e.message}`,
-                ['OK']
+                `Failed to fetch birthday reminders: ${e.message}`
             );
         }
 
@@ -105,8 +104,7 @@ const birthdayReminderUtility = () => {
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
                 'No Selection',
-                'Please select at least one user to send SMS.',
-                ['OK']
+                'Please select at least one user to send SMS.'
             );
             return;
         }
@@ -140,7 +138,6 @@ const birthdayReminderUtility = () => {
             'info',
             'SMS Result',
             `SMS sent: ${successCount}, Failed: ${failCount}`,
-            ['OK']
         );
     });
 };

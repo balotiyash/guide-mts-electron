@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Common utility functions for data entry operations.
    Created on: 21/09/2025
-   Last Modified: 09/12/2025
+   Last Modified: 08/01/2026
 */
 
 // Function to set vehicle names in the select dropdown
@@ -121,10 +121,10 @@ const fetchWorkDescriptions = async (userId, onJobSelected) => {
                 "warning",
                 "Confirm Deletion",
                 "Are you sure you want to delete this job? This action cannot be undone.",
-                ["Delete", "Cancel"]
+                ["Yes", "No"]
             );
 
-            if (response === 0) { // If 'Delete' is clicked
+            if (response === 0) { // If 'Yes' is clicked
                 // const deleteResult = await window.dataEntryAPI.deleteJob(jobId);
                 const deleteResult = await fetch(`http://${await window.electronAPI.getHost()}:3000/api/v1/data-entry/delete-job/${jobId}`, {
                     method: 'DELETE'
@@ -141,8 +141,7 @@ const fetchWorkDescriptions = async (userId, onJobSelected) => {
                     await window.dialogBoxAPI.showDialogBox(
                         "error",
                         "Deletion Failed",
-                        "Failed to delete the job. Please try again.",
-                        ["OK"]
+                        "Failed to delete the job. Please try again."
                     );
                 }
             }

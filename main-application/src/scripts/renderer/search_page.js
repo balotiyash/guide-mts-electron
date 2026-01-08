@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the search page form interactions and date field functionality.
  * Created on: 11/10/2025
- * Last Modified: 28/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Import required modules & libraries
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     // Redirect to data entry page
                     window.electronAPI.navigateTo('data_entry.html');
                 } else {
-                    window.dialogBoxAPI.showDialogBox("info", "Info", "No phone number available for this customer.", ["OK"]);
+                    window.dialogBoxAPI.showDialogBox("info", "No Phone Number", "No phone number available for this customer.");
                 }
             });
             
@@ -156,28 +156,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         const endDate = endingDate.value;
 
         if (!searchType && !searchValue && !startDate && !endDate) {
-            window.dialogBoxAPI.showDialogBox("info", "Info", "Please enter search criteria.", ["OK"]);
+            window.dialogBoxAPI.showDialogBox("info", "Select Criteria", "Please select search criteria.");
             return;
         }
 
         if (searchType && !searchValue) {
-            window.dialogBoxAPI.showDialogBox("info", "Info", "Please enter search text.", ["OK"]);
+            window.dialogBoxAPI.showDialogBox("info", "Enter Search Text", "Please enter search text.");
             return;
         }
 
         // If search text is provided but no search type selected
         if (searchValue && !searchType) {
-            window.dialogBoxAPI.showDialogBox(
-                "info", 
-                "Search Type Required", 
-                "Please select a search type for the entered search text.", 
-                ["OK"]
-            );
+            window.dialogBoxAPI.showDialogBox("info", "Search Type Required", "Please select a search type for the entered search text.");
             return;
         }
 
         if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
-            window.dialogBoxAPI.showDialogBox("info", "Info", "Starting date cannot be after ending date.", ["OK"]);
+            window.dialogBoxAPI.showDialogBox("info", "Invalid Date Range", "Starting date cannot be after ending date.");
             return;
         }
 

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains utility functions for payment reminders.
  * Created on: 25/10/2025
- * Last Modified: 21/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Importing required modules & libraries
@@ -50,8 +50,7 @@ const paymentReminderUtility = () => {
             await window.dialogBoxAPI.showDialogBox(
                 'error',
                 'API Error',
-                `Failed to fetch payment reminders: ${e.message}`,
-                ['OK']
+                `Failed to fetch payment reminders: ${e.message}`
             );
         }
 
@@ -107,8 +106,7 @@ const paymentReminderUtility = () => {
             await window.dialogBoxAPI.showDialogBox(
                 'warning',
                 'No Selection',
-                'Please select at least one user to send SMS.',
-                ['OK']
+                'Please select at least one user to send SMS.'
             );
             return;
         }
@@ -145,8 +143,7 @@ const paymentReminderUtility = () => {
         await window.dialogBoxAPI.showDialogBox(
             'info',
             'SMS Result',
-            `SMS sent: ${successCount}, Failed: ${failCount}`,
-            ['OK']
+            `SMS sent: ${successCount}, Failed: ${failCount}`
         );
     });
 };

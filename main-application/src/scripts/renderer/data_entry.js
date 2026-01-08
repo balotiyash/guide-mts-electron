@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
- * Last Modified: 28/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Import required modules & libraries
@@ -181,10 +181,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         // Show confirmation dialog
-        const response = await window.dialogBoxAPI.showDialogBox("question", "Update Entry", "Do you want to update this entry?", ["OK", "Cancel"]);
+        const response = await window.dialogBoxAPI.showDialogBox("question", "Update Entry", "Do you want to update this entry?", ["Yes", "No"]);
 
         // User confirmed, proceed with updating
-        if (response !== 0) return; // 0 = "OK", 1 = "Cancel"
+        if (response !== 0) return; // 0 = "Yes", 1 = "No"
 
         // Collect form values
         let formValues = await collectFormValues(formElements, imageBlobs);
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Handling click event on Clear Button
     document.getElementById("clearBtn").addEventListener("click", async () => {
-        const response = await window.dialogBoxAPI.showDialogBox("warning", "Reset Form", "Do you want to clear the form?", ["OK", "Cancel"]);
+        const response = await window.dialogBoxAPI.showDialogBox("warning", "Reset Form", "Do you want to clear the form?", ["Yes", "No"]);
 
         if (response !== 0) return; // 0 = "Yes", 1 = "No"
         window.location.reload();
@@ -237,13 +237,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Handle click event on Delete Button
     document.getElementById("deleteBtn").addEventListener("click", async () => {
         if (!userId) {
-            await window.dialogBoxAPI.showDialogBox("warning", "No Existing Customer", "Please search and load an existing customer to delete.");
+            await window.dialogBoxAPI.showDialogBox("info", "No Existing Customer", "Please search and load an existing customer to delete.");
             return;
         }
 
-        const response = await window.dialogBoxAPI.showDialogBox("warning", "Delete Entry", "Are you sure you want to delete this entry? This action cannot be undone.", ["Delete", "Cancel"]);
+        const response = await window.dialogBoxAPI.showDialogBox("warning", "Delete Entry", "Are you sure you want to delete this entry? This action cannot be undone.", ["Yes", "No"]);
 
-        if (response !== 0) return; // 0 = "Delete", 1 = "Cancel"
+        if (response !== 0) return; // 0 = "Yes", 1 = "No"
 
         // API call to delete customer
         // const deleteResponse = await window.dataEntryAPI.deleteUser(userId);

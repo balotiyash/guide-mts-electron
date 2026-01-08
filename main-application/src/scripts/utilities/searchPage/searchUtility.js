@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Contains utility functions for the search page.
  * Created on: 11/10/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 08/01/2026
  */
 
 // Import required utilities
@@ -100,7 +100,7 @@ const exportToCSV = async () => {
     try {
         // Check if there's data to export
         if (filteredCustomers.length === 0) {
-            window.dialogBoxAPI.showDialogBox("info", "Info", "No data to export. Please perform a search first.", ["OK"]);
+            window.dialogBoxAPI.showDialogBox("warning", "Info", "No data to export. Please perform a search first.");
             return;
         }
 
@@ -160,16 +160,15 @@ const exportToCSV = async () => {
             window.dialogBoxAPI.showDialogBox(
                 "info",
                 "Export Successful",
-                `Customer data exported successfully!\nLocation: ${filePath}\nRecords exported: ${filteredCustomers.length}`,
-                ["OK"]
+                `Customer data exported successfully!\nLocation: ${filePath}\nRecords exported: ${filteredCustomers.length}`
             );
         } else {
-            window.dialogBoxAPI.showDialogBox("error", "Export Failed", `Failed to export data: ${writeResult.error}`, ["OK"]);
+            window.dialogBoxAPI.showDialogBox("error", "Export Failed", `Failed to export data: ${writeResult.error}`);
         }
 
     } catch (error) {
         console.error("Export error:", error);
-        window.dialogBoxAPI.showDialogBox("error", "Export Error", `An error occurred while exporting: ${error.message}`, ["OK"]);
+        window.dialogBoxAPI.showDialogBox("error", "Export Error", `An error occurred while exporting: ${error.message}`);
     }
 };
 

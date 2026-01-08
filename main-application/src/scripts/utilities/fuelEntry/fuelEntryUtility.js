@@ -2,7 +2,7 @@
  * Author: Yash Balotiya
  * Description: Utility functions for fuel entry management (Updated)
  * Created on: 24/09/2025
- * Last Modified: 28/09/2025
+ * Last Modified: 08/01/2026
  */
 
 // Function to load and display fuel data for a specific month
@@ -101,23 +101,23 @@ const saveFuelEntry = async () => {
 
     // Validation
     if (!vehicleSelect.value) {
-        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please select a vehicle', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please select a vehicle');
         return;
     }
 
     if (!dateHiddenInput.value) {
-        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please select a date', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please select a date');
         return;
     }
 
     if (!amountInput.value || parseFloat(amountInput.value) <= 0) {
-        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please enter a valid fuel amount', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please enter a valid fuel amount');
         return;
     }
 
     // New validation for kilometers input
     if (kmRanInput.value && isNaN(parseFloat(kmRanInput.value))) {
-        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please enter a valid kilometers value', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('warning', 'Validation Error', 'Please enter a valid kilometers value');
         return;
     }
 
@@ -145,19 +145,19 @@ const saveFuelEntry = async () => {
             const successMessage = `Fuel entry ${action} successfully!`;
 
             // Show success message
-            await window.dialogBoxAPI.showDialogBox('info', 'Success', successMessage, ['OK']);
+            await window.dialogBoxAPI.showDialogBox('info', 'Success', successMessage);
 
             // Clear form after successful entry
             window.location.reload();
         } else {
             // Show error message
             console.error('Error saving fuel entry:', fuelResult.error);
-            await window.dialogBoxAPI.showDialogBox('error', 'Error', `Error saving fuel entry: ${fuelResult.error}`, ['OK']);
+            await window.dialogBoxAPI.showDialogBox('error', 'Error', `Error saving fuel entry: ${fuelResult.error}`);
         }
     } catch (error) {
         // Show error message
         console.error('Error saving fuel entry:', error);
-        await window.dialogBoxAPI.showDialogBox('error', 'Error', 'Error saving fuel entry. Please try again.', ['OK']);
+        await window.dialogBoxAPI.showDialogBox('error', 'Error', 'Error saving fuel entry. Please try again.');
     }
 };
 

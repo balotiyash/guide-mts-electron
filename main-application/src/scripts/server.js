@@ -90,7 +90,7 @@ export const startApiServer = async () => {
 
             console.log(`API server listening on:`);
             console.log(`→ http://localhost:${port}`);
-            console.log(`→ http://${localIP}:${port}`);
+            console.log(`→ http://${localIP}:${port}\n`);
 
             // mDNS / Bonjour advertisement
             try {
@@ -104,7 +104,7 @@ export const startApiServer = async () => {
                     host: 'guide-mts' // => guide-mts.local
                 });
 
-                console.log(`mDNS advertised as: http://guide-mts.local:${port}`);
+                console.log(`mDNS advertised as: http://guide-mts.local:${port}\n`);
             } catch (err) {
                 console.warn('mDNS advertisement failed, continuing without it');
                 console.warn(err.message);
