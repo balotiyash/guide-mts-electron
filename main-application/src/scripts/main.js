@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 08/01/2026
+ * Last Modified: 18/01/2026
 */
 
 // Importing required modules & libraries
@@ -163,7 +163,8 @@ ipcMain.handle('show-dialog-box', async (event, { type, title, message, buttons 
             message,
             buttons,
             defaultId: 0,
-            cancelId: 1
+            cancelId: buttons.length > 1 ? buttons.length : -1, // Set cancelId beyond valid button indices
+            noLink: true
         });
 
         return result.response; // 👈 This gets sent back to renderer

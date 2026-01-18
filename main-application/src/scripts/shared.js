@@ -2,7 +2,7 @@
    Author: Yash Balotiya
    Description: Common shared utilities for both main and renderer processes.
    Created on: 21/09/2025
-   Last Modified: 08/01/2025
+   Last Modified: 18/01/2025
 */
 
 // Utility: convert ISO (yyyy-mm-dd) → dd-mm-yyyy or dd/mm/yyyy
@@ -209,6 +209,12 @@ const performChangeArchitecture = async () => {
             'Please specify whether this installation is for Client-Server or Standalone Server architecture.',
             ['Client-Server', 'Standalone Server']
         );
+
+        // If user cancels (clicks X), response will be 2 (cancelId set to buttons.length)
+        // Or if response is not 0 or 1, treat as cancellation
+        if (response !== 0 && response !== 1) {
+            return; // Simply close without doing anything
+        }
 
         // If user chooses Client-Server (0), open client setup window
         if (response === 0) {
