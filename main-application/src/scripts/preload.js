@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Preload script for Electron application. This script bridges the main process and renderer process, allowing secure communication.
  * Created on: 13/07/2025
- * Last Modified: 28/12/2025
+ * Last Modified: 29/01/2026
 */
 
 // Importing required modules from Electron
@@ -57,6 +57,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
     // API to open client setup window
     openClientSetup: () => ipcRenderer.send('open-client-setup'),
+
+    // API to open external links in default browser
+    openExternalLink: (url) => ipcRenderer.invoke('open-external-link', url),
 });
 
 // Exposing dialog box APIs

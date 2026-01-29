@@ -3,11 +3,11 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 18/01/2026
+ * Last Modified: 29/01/2026
 */
 
 // Importing required modules & libraries
-import { app, BrowserWindow, ipcMain, Menu, screen, dialog } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, screen, dialog, shell } from "electron";
 import path from "path";
 import createMenuTemplate from "./menu.js";
 import { fileURLToPath } from 'url';
@@ -171,5 +171,16 @@ ipcMain.handle('show-dialog-box', async (event, { type, title, message, buttons 
     } else {
         console.error('No focused window to show dialog box.');
         return -1;
+    }
+});
+
+// Open external links in default browser
+ipcMain.handle('open-external-link', async (event, url) => {
+    try {
+        await shell.openExternal(url);
+        return { success: true };
+    } catch (error) {
+        console.error('Failed to open external link:', error);
+        return { success: false, error: error.message };
     }
 });

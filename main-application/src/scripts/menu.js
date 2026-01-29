@@ -3,12 +3,12 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 27/01/2026
+ * Last Modified: 29/01/2026
 */
 
 // Module JS
 import path from 'path';
-import { app } from 'electron';
+import { app, shell } from 'electron';
 import { fileURLToPath } from 'url';
 
 // File paths
@@ -190,15 +190,15 @@ const createMenuTemplate = (win) => {
             submenu: [
                 {
                     label: 'About System',
-                    click: () => {
-                        console.log('About System clicked');
-                        // TODO: Show about system dialog
+                    click: async () => {
+                        const { shell } = await import('electron');
+                        const aboutSystemPath = path.join(__dirname, '../assets/documentations/About System.pdf');
+                        await shell.openPath(aboutSystemPath);
                     },
                 },
                 {
                     label: 'About Developer',
                     click: async () => {
-                        const { shell } = await import('electron');
                         await shell.openExternal('https://algodevopss.in/');
                     }
                 },
@@ -206,7 +206,6 @@ const createMenuTemplate = (win) => {
                 {
                     label: 'Learn More',
                     click: async () => {
-                        const { shell } = await import('electron');
                         await shell.openExternal('https://electronjs.org');
                     }
                 },
