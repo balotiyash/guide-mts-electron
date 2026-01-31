@@ -8,6 +8,7 @@
     "scripts": {
         "start": "electron .",
         "dist": "electron-builder --win --x64 --publish always",
+        "win": "electron-builder --win --x64",
         "build": "electron-builder"
     },
     "devDependencies": {

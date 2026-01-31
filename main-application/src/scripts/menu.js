@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Menu template for Electron application.
  * Created on: 01/08/2025
- * Last Modified: 29/01/2026
+ * Last Modified: 31/01/2026
 */
 
 // Module JS
@@ -192,8 +192,19 @@ const createMenuTemplate = (win) => {
                     label: 'About System',
                     click: async () => {
                         const { shell } = await import('electron');
-                        const aboutSystemPath = path.join(__dirname, '../assets/documentations/About System.pdf');
-                        await shell.openPath(aboutSystemPath);
+                        // Get the resources path which works in both dev and production
+                        const isDev = !app.isPackaged;
+                        let pdfPath;
+                        
+                        if (isDev) {
+                            // In development, use the src directory
+                            pdfPath = path.join(process.cwd(), 'src/assets/documentations/About System.pdf');
+                        } else {
+                            // In production, unpacked files are in resources/app.asar.unpacked
+                            pdfPath = path.join(process.resourcesPath, 'app.asar.unpacked/src/assets/documentations/About System.pdf');
+                        }
+                        
+                        await shell.openPath(pdfPath);
                     },
                 },
                 {
