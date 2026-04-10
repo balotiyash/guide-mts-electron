@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: Main script for Electron application. This script initializes the application and creates the main window.
  * Created on: 13/07/2025
- * Last Modified: 29/01/2026
+ * Last Modified: 10/04/2026
 */
 
 // Importing required modules & libraries
@@ -14,7 +14,7 @@ import { fileURLToPath } from 'url';
 import updater from "electron-updater";
 const { autoUpdater } = updater;
 import log from "electron-log";
-import { startApiServer } from "./server.js";
+import { startApiServer, stopApiServer } from "./server.js";
 
 // Register IPC handlers
 import registerDbHandler from "./main/ipc/dbHandler.js";
@@ -102,6 +102,15 @@ app.whenReady().then(async () => {
         createWindow();
     } catch (err) {
         console.error('Failed to create window:', err);
+    }
+});
+
+// Event listener for when all windows are closed
+app.on('before-quit', async () => {
+    try {
+        await stopApiServer();
+    } catch (error) {
+        console.warn('Failed to stop API server cleanly:', error.message);
     }
 });
 
