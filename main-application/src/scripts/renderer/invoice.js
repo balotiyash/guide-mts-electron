@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file handles the rendering of invoice data in the invoice window.
  * Created on: 16/09/2025
- * Last Modified: 20/12/2025
+ * Last Modified: 10/05/2026
 */
 
 // Date formatting function to handle multiple date formats
@@ -20,8 +20,9 @@ const formatDateToDDMMYYYY = (dateString) => {
         }
 
         if (dateString.includes('-') && dateString.split('-')[0].length === 2) {
-            // Already in DD-MM-YYYY format
-            return dateString;
+            // Already in DD-MM-YYYY format (possibly with time)
+            const dateOnly = dateString.split(' ')[0]; // Remove time if present
+            return dateOnly;
         }
 
         // Handle YYYY-MM-DD HH:MM:SS and YYYY-MM-DD formats

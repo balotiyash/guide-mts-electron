@@ -3,7 +3,7 @@
  * Author: Yash Balotiya, Neha Balotia
  * Description: This file contains JS code to handle payment entry page utilities
  * Created on: 22/09/2025
- * Last Modified: 08/01/2026
+ * Last Modified: 10/05/2026
  */
 
 // Import reusable SMS function
@@ -176,7 +176,7 @@ const submitPayment = async (userIdParam, workIdParam) => {
     const amountInputValue = document.getElementById("amountInput")?.value;
     const amountInput = parseFloat(amountInputValue);
     const paymentMode = document.getElementById("paymentMode")?.value.trim().toLowerCase();
-    const paymentDateValue = document.getElementById("payment-date")?.value;
+    const paymentDateValue = document.getElementById("payment-date-text")?.value;
     const paymentDate = paymentDateValue + " " + new Date().toLocaleTimeString();
     const pendingAmount = parseFloat(document.getElementById("formPendingAmount")?.textContent) || 0;
 

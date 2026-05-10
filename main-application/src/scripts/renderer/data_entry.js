@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Handles the data entry form interactions and validations. Main Logic goes here.
  * Created on: 31/08/2025
- * Last Modified: 08/01/2026
+ * Last Modified: 10/05/2026
  */
 
 // Import required modules & libraries
@@ -189,8 +189,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Collect form values
         let formValues = await collectFormValues(formElements, imageBlobs);
 
-        // API call
-        // const updateResponse = await window.dataEntryAPI.updateCustomer(userId, jobId, formValues);
+        // Ensure Edit only updates customer fields (do NOT modify work/job here)
+        const customerOnlyFormValues = { ...formValues };
+        delete customerOnlyFormValues.workDescriptionInput;
+        delete customerOnlyFormValues.amountInput;
+
+        // API call - update customer only
         const updateResponse = await fetch(`http://${hostAddress}:3000/api/v1/data-entry/update-customer`, {
             method: 'PUT',
             headers: {
@@ -199,7 +203,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             body: JSON.stringify({
                 userId: userId,
                 jobId: jobId,
-                formValues: formValues
+                formValues: customerOnlyFormValues
             })
         })
         .then(async response => {

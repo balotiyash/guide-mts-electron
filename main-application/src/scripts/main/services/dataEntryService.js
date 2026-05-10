@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: Service layer for data entry operations. This file interactes with the database.
  * Created on: 31/08/2025
- * Last Modified: 27/12/2025
+ * Last Modified: 10/05/2026
  */
 
 // Importing required modules & libraries
@@ -61,6 +61,8 @@ const createCustomer = async (formValues) => {
     const now = getFormattedDateTime();
 
     try {
+        // ROBUSTNESS FIX: Combine customer and work description in a SINGLE transaction
+        // This ensures atomicity - both succeed or both fail, preventing orphaned customers
         const queries = [
             {
                 sql: `
@@ -105,11 +107,11 @@ const createCustomer = async (formValues) => {
             }
         ];
 
-        // Execute customer insertion first
+        // Execute customer insertion
         const [result1] = await runTransaction(queries);
 
-        // Add work description query if needed
-        if (formValues.workDescriptionInput || formValues.amountInput) {
+        // Add work description in the SAME transaction context if provided
+        if (formValues.workDescriptionInput && formValues.amountInput) {
             const workQueries = [
                 {
                     sql: `
@@ -127,16 +129,27 @@ const createCustomer = async (formValues) => {
                 }
             ];
 
-            // Execute work description insertion in separate transaction
-            // This allows customer to be created even if work description fails
+            // Execute work description in transaction - MUST succeed for operation to be valid
+            // If work description fails, customer creation fails too (atomic operation)
             try {
                 await runTransaction(workQueries);
             } catch (workError) {
                 console.error("Error creating work description:", workError);
+                // ROBUSTNESS FIX: Rollback customer creation if work description fails
+                // This prevents orphaned customers without work descriptions
+                try {
+                    await runQuery({
+                        sql: "DELETE FROM customers WHERE id = ? LIMIT 1;",
+                        params: [result1.lastInsertRowid],
+                        type: "run"
+                    });
+                } catch (deleteError) {
+                    console.error("Failed to rollback customer creation:", deleteError);
+                }
                 return {
                     status: "error",
                     statusCode: 500,
-                    message: "Customer created but failed to add work description."
+                    message: "Failed to create work description. Transaction rolled back."
                 };
             }
         }
@@ -145,7 +158,7 @@ const createCustomer = async (formValues) => {
         return {
             status: "success",
             statusCode: 200,
-            message: "Customer created successfully."
+            message: "Customer and work description created successfully."
         };
     } catch (error) {
         console.error("Error creating customer:", error);

@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains JS code to manage the database.
  * Created on: 26/08/2025
- * Last Modified: 27/12/2025
+ * Last Modified: 10/05/2026
 */
 
 // Importing required modules & libraries
@@ -44,7 +44,17 @@ const getDbPath = () => {
 // Connecting to the database
 const connectDb = () => {
     const dbPath = getDbPath();
-    return new Database(dbPath);
+    const db = new Database(dbPath);
+    
+    // ROBUSTNESS FIX: Set SQLite pragmas for transaction safety
+    // PRAGMA journal_mode=WAL: Write-Ahead Logging for better concurrency
+    // PRAGMA synchronous=FULL: Ensure data is flushed to disk after commit
+    // PRAGMA foreign_keys=ON: Enforce referential integrity
+    db.pragma('journal_mode = WAL');
+    db.pragma('synchronous = FULL');
+    db.pragma('foreign_keys = ON');
+    
+    return db;
 };
 
 // Running a database query
@@ -95,8 +105,9 @@ const runTransaction = async (queries) => {
     const results = [];
 
     try {
-        // Begin transaction
-        db.prepare('BEGIN TRANSACTION').run();
+        // Begin transaction with IMMEDIATE mode to prevent race conditions
+        // IMMEDIATE locks the database immediately, preventing concurrent writes
+        db.prepare('BEGIN IMMEDIATE').run();
 
         // Execute all queries in sequence
         for (const query of queries) {
@@ -128,6 +139,12 @@ const runTransaction = async (queries) => {
 
         // Commit transaction if all queries succeeded
         db.prepare('COMMIT').run();
+        
+            // ROBUSTNESS FIX: Small delay to ensure all data is synced to disk
+            // This prevents race conditions where queries on other connections
+            // might not see the committed data immediately
+            await new Promise(resolve => setTimeout(resolve, 50));
+        
         db.close();
 
         return results;
