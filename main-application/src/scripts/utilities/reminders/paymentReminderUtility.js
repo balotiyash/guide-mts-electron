@@ -7,8 +7,9 @@
  */
 
 // Importing required modules & libraries
-import { sendSMS } from "../sms/smsUtility.js";
+//import { sendSMS } from "../sms/smsUtility.js";
 import { isoToDDMMYYYY } from "../../shared.js";
+import { sendNotificationPrompt } from "../sms/notificationUtility.js";
 
 // Payment Reminder Utility Function
 const paymentReminderUtility = () => {
@@ -132,7 +133,7 @@ const paymentReminderUtility = () => {
                 // Use direct import of sendSMS with type 'paymentReminder'
                 const date = new Date();
                 date.setDate(date.getDate() + 4);
-                const res = await sendSMS('paymentReminder', mobile, name, pending_amount, isoToDDMMYYYY(date.toISOString().substring(0, 10)));
+                const res = await sendNotificationPrompt('paymentReminder', mobile, name, pending_amount, isoToDDMMYYYY(date.toISOString().substring(0, 10)));
                 if (res && res.success) successCount++;
                 else failCount++;
             } catch {

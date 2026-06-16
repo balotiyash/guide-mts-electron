@@ -11,6 +11,7 @@ import { renderRows, renderCurrentPage, submitPayment } from "../utilities/payme
 import { printInvoiceForSelectedUser } from "../utilities/paymentEntry/printInvoiceUtility.js";
 import { paymentState } from "../utilities/paymentEntry/paymentUtility.js";
 import { sendPaymentSMSWithChoice } from "../utilities/sms/smsUtility.js";
+import {sendPaymentNotificationWithChoice} from "../utilities/sms/notificationUtility.js";
 import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 
 // On window load
@@ -225,7 +226,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            await sendPaymentSMSWithChoice(mobile_number, customerName);
+            await sendPaymentNotificationWithChoice(mobile_number, customerName);
 
             // Reload page to reflect changes
             window.location.reload();

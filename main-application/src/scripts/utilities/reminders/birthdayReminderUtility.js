@@ -7,7 +7,8 @@
  */
 
 // Importing required modules & libraries
-import { sendSMS } from "../../utilities/sms/smsUtility.js";
+import { sendNotificationPrompt } from "../../utilities/sms/notificationUtility.js";
+//import { sendSMS } from "../../utilities/sms/smsUtility.js";
 import { isoToDDMMYYYY } from "../../shared.js";
 
 // Birthday Reminder Utility Function
@@ -126,7 +127,8 @@ const birthdayReminderUtility = () => {
             const mobile = tr.children[4].textContent;
             try {
                 // Use direct import of sendSMS with type 'birthdayReminder'
-                const res = await sendSMS('birthdayReminder', mobile, name);
+                //temp testing
+                const res = await sendNotificationPrompt('birthdayReminder', mobile, name);
                 if (res && res.success) successCount++;
                 else failCount++;
             } catch {

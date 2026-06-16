@@ -7,7 +7,8 @@
 
 // Importing required modules & libraries
 import { compressAndConvertImage } from "../../utilities/dataEntry/dataEntryUtility.js";
-import { sendSMSPrompt } from "../sms/smsUtility.js";
+//import { sendSMSPrompt } from "../sms/smsUtility.js";
+import {sendNotificationPrompt} from "../sms/notificationUtility.js";
 
 // Function to handle data insertion logic
 const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) => {
@@ -54,7 +55,7 @@ const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) =>
             await window.dialogBoxAPI.showDialogBox("info", "Job Created", "A new job has been created for the existing customer.");
 
             // Send welcome SMS for job creation
-            await sendSMSPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
+            await sendNotificationPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
             
             window.electronAPI.navigateTo("payment_entry.html");
         } else {
@@ -82,7 +83,7 @@ const insertDataUtility = async (formElements, imageBlobs, is_repeat, userId) =>
             await window.dialogBoxAPI.showDialogBox("info", "Customer Created", "The customer has been created successfully.");
 
             // Send welcome SMS
-            await sendSMSPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
+            await sendNotificationPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
 
             window.electronAPI.navigateTo("payment_entry.html");
         } else {
@@ -161,5 +162,5 @@ const collectFormValues = async (formElements, imageBlobs) => {
 export {
     insertDataUtility,
     collectFormValues,
-    sendSMSPrompt
+    sendNotificationPrompt,
 };

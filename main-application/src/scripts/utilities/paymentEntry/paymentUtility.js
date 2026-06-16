@@ -8,6 +8,7 @@
 
 // Import reusable SMS function
 import { sendPaymentSMSWithChoice } from "../sms/smsUtility.js";
+import { sendPaymentNotificationWithChoice } from "../sms/notificationUtility.js";
 import dateUtility from "../dataEntry/dateUtility.js";
 import { isoToDDMMYYYY } from "../../shared.js";
 
@@ -214,9 +215,9 @@ const submitPayment = async (userIdParam, workIdParam) => {
     if (response && response.success) {
         window.dialogBoxAPI.showDialogBox('info', 'Success', 'Payment submitted successfully.')
             .then(async () => {
-                // Send payment SMS if mobile number is available
+                // Send payment notification if mobile number is available
                 if (paymentState.mobile_number) {
-                    await sendPaymentSMSWithChoice(paymentState.mobile_number, paymentState.customerName);
+                    await sendPaymentNotificationWithChoice(paymentState.mobile_number, paymentState.customerName);
                 }
 
                 const choice = await window.dialogBoxAPI.showDialogBox(

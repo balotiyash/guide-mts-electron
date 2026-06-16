@@ -10,7 +10,7 @@
 import { fillForm, setupImageInputListeners } from "./data_entry_load_data.js";
 import { setDropDownNames, fetchWorkDescriptions } from "../utilities/dataEntry/dataEntryUtility.js";
 import dateUtility from "../utilities/dataEntry/dateUtility.js";
-import { insertDataUtility, collectFormValues, sendSMSPrompt } from "../utilities/dataEntry/dataInsertUtility.js";
+import { insertDataUtility, collectFormValues, sendNotificationPrompt } from "../utilities/dataEntry/dataInsertUtility.js";
 import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
 // import log from "../logger.js";
 
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             await window.dialogBoxAPI.showDialogBox("info", "Customer Updated", "The customer has been updated successfully.");
             
             // Send SMS for successful update
-            await sendSMSPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
+            await sendNotificationPrompt("welcome", formValues.phoneInput, formValues.customerNameInput);
             
             window.location.reload();
         } else {
