@@ -10,11 +10,18 @@
 import { sendPaymentSMSWithChoice } from "../sms/smsUtility.js";
 import { sendPaymentNotificationWithChoice } from "../sms/notificationUtility.js";
 import dateUtility from "../dataEntry/dateUtility.js";
-import { isoToDDMMYYYY } from "../../shared.js";
+import { ddmmyyyyToISO, isoToDDMMYYYY } from "../../shared.js";
 
 dateUtility(); // Initialize date utility for payment date fields
 const paymentDateText = document.getElementById("payment-date-text");
-paymentDateText.value = isoToDDMMYYYY(new Date().toISOString());
+const paymentDateHidden = document.getElementById("payment-date");
+const initialDate = isoToDDMMYYYY(new Date().toISOString());
+if (paymentDateText) {
+    paymentDateText.value = initialDate;
+}
+if (paymentDateHidden) {
+    paymentDateHidden.value = ddmmyyyyToISO(initialDate);
+}
 
 // Mobile number & customer name of selected user (for SMS)
 export const paymentState = {
@@ -178,7 +185,8 @@ const submitPayment = async (userIdParam, workIdParam) => {
     const amountInput = parseFloat(amountInputValue);
     const paymentMode = document.getElementById("paymentMode")?.value.trim().toLowerCase();
     const paymentDateValue = document.getElementById("payment-date-text")?.value;
-    const paymentDate = paymentDateValue + " " + new Date().toLocaleTimeString();
+    const paymentDateISO = ddmmyyyyToISO(paymentDateValue);
+    const paymentDate = paymentDateISO ? `${paymentDateISO} ${new Date().toLocaleTimeString()}` : "";
     const pendingAmount = parseFloat(document.getElementById("formPendingAmount")?.textContent) || 0;
 
     // Validations

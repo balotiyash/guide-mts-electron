@@ -6,7 +6,7 @@ Created on: 15/06/2026
 Last Modified: 16/06/2026
 */
 
-const API_KEY =  'api' ; //api key for whatsapp
+const API_KEY =  '' ; //api key for whatsapp
 
 // Whatsapp message Utility Function
 const sendWhatsApp = async (
@@ -37,7 +37,7 @@ const sendWhatsApp = async (
                 break;
             
             case 'paymentWithName':
-                response = await fetch(`https://www.fast2sms.com/dev/whatsapp?authorization=${API_KEY}&message_id=18287&phone_number_id=1032604983275259&numbers=${phoneNo}&variables_values=${userName}|${amount}|${date}`,{
+                response = await fetch(`https://www.fast2sms.com/dev/whatsapp?authorization=${API_KEY}&message_id=18287&phone_number_id=1032604983275259&numbers=${phoneNo}&variables_values=${userName.toUpperCase()}|${amount}|${date}`,{
                   method: 'GET'
                 });
                 break;
@@ -172,7 +172,7 @@ const sendPaymentWhatsAppWithChoice = async (
                 'question',
                 'Send Payment WhatsApp Message?',
                 'Do you want to send payment confirmation WhatsApp message?',
-                ['With Name', 'Without Name', 'No WhatsApp Message']
+                ['With Name', 'Without Name', 'cancel']
             );
 
         if (choice === 0) {

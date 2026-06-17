@@ -7,9 +7,10 @@
  */
 
 // Importing required modules & libraries
-//import { sendSMS } from "../sms/smsUtility.js";
+import { sendSMS } from "../sms/smsUtility.js";
 import { isoToDDMMYYYY } from "../../shared.js";
-import { sendNotificationPrompt } from "../sms/notificationUtility.js";
+//import { sendNotificationPrompt } from "../sms/notificationUtility.js";
+import { sendWhatsApp } from "../sms/whatsappUtility.js";
 
 // Payment Reminder Utility Function
 const paymentReminderUtility = () => {
@@ -18,6 +19,7 @@ const paymentReminderUtility = () => {
 
     // Elements
     const sendBtn = document.getElementById("sendPaymentReminderBtn");
+    const sendWhatsappBtn = document.getElementById("sendPaymentReminderBtnWhatsapp");
     const table = document.querySelector("#paymentDataTable");
     const scrollDiv = document.querySelector("#paymentScrollDiv");
     const tbody = document.getElementById("paymentTableBody");
@@ -133,7 +135,7 @@ const paymentReminderUtility = () => {
                 // Use direct import of sendSMS with type 'paymentReminder'
                 const date = new Date();
                 date.setDate(date.getDate() + 4);
-                const res = await sendNotificationPrompt('paymentReminder', mobile, name, pending_amount, isoToDDMMYYYY(date.toISOString().substring(0, 10)));
+                const res = await sendSMS('paymentReminder', mobile, name, pending_amount, isoToDDMMYYYY(date.toISOString().substring(0, 10)));
                 if (res && res.success) successCount++;
                 else failCount++;
             } catch {
@@ -145,6 +147,55 @@ const paymentReminderUtility = () => {
             'info',
             'SMS Result',
             `SMS sent: ${successCount}, Failed: ${failCount}`
+        );
+    });
+
+    // Send Payment Reminder on Whatsapp button click
+    sendWhatsappBtn.addEventListener("click", async () => {
+        // Get checked users
+        const checkboxes = tbody.querySelectorAll(".paymentCheckbox:checked");
+        if (checkboxes.length === 0) {
+            await window.dialogBoxAPI.showDialogBox(
+                'warning',
+                'No Selection',
+                'Please select at least one user to send WhatsApp message.'
+            );
+            return;
+        }
+
+        // Confirm before sending WhatsApp message
+        const confirm = await window.dialogBoxAPI.showDialogBox(
+            'question',
+            'Send Payment Reminders',
+            `Are you sure you want to send payment WhatsApp message to ${checkboxes.length} user(s)?`,
+            ['Yes', 'No']
+        );
+        if (confirm !== 0) return;
+
+        // Send WhatsApp message to each selected user
+        let successCount = 0, failCount = 0;
+        for (const cb of checkboxes) {
+            const tr = cb.closest("tr");
+            const name = tr.children[2].textContent;
+            const mobile = tr.children[6].textContent;
+            const pending_amount = tr.children[4].textContent;
+
+            try {
+                // Use direct import of sendWhatsApp with type 'paymentReminder'
+                const date = new Date();
+                date.setDate(date.getDate() + 4);
+                const res = await sendWhatsApp('paymentReminder', mobile, name, pending_amount, isoToDDMMYYYY(date.toISOString().substring(0, 10)));
+                if (res && res.success) successCount++;
+                else failCount++;
+            } catch {
+                failCount++;
+            }
+        }
+
+        await window.dialogBoxAPI.showDialogBox(
+            'info',
+            'WhatsApp Result',
+            `WhatsApp sent: ${successCount}, Failed: ${failCount}`
         );
     });
 };

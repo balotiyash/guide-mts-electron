@@ -7,7 +7,9 @@
  */
 
 // Importing required modules & libraries
-import { sendNotificationPrompt } from "../../utilities/sms/notificationUtility.js";
+//import { sendNotificationPrompt } from "../../utilities/sms/notificationUtility.js";
+import { sendSMS } from "../../utilities/sms/smsUtility.js";
+import { sendWhatsApp } from "../../utilities/sms/whatsappUtility.js";
 //import { sendSMS } from "../../utilities/sms/smsUtility.js";
 import { isoToDDMMYYYY } from "../../shared.js";
 
@@ -18,6 +20,7 @@ const birthdayReminderUtility = () => {
     
     // Elements
     const sendBtn = document.getElementById("sendBirthdayReminderBtn");
+    const sendWhatsappBtn = document.getElementById("sendBirthdayReminderBtnWhatsapp");
     const table = document.querySelector(".reminderSection table");
     const scrollDiv = document.querySelector(".reminderSection .scrollDiv");
     const tbody = document.getElementById("birthdayTableBody");
@@ -26,6 +29,7 @@ const birthdayReminderUtility = () => {
     // table.style.display = "none";
     scrollDiv.style.display = "none";
     sendBtn.style.display = "none";
+    sendWhatsappBtn.style.display = "none";
 
     // Select-all logic
     if (selectAllCheckbox) {
@@ -59,6 +63,7 @@ const birthdayReminderUtility = () => {
         table.style.display = "table";
         scrollDiv.style.display = "block";
         sendBtn.style.display = "block";
+        sendWhatsappBtn.style.display = "block";
 
         // Populate table
         if (tbody) {
@@ -128,7 +133,7 @@ const birthdayReminderUtility = () => {
             try {
                 // Use direct import of sendSMS with type 'birthdayReminder'
                 //temp testing
-                const res = await sendNotificationPrompt('birthdayReminder', mobile, name);
+                const res = await sendSMS('birthdayReminder', mobile, name);
                 if (res && res.success) successCount++;
                 else failCount++;
             } catch {
@@ -140,6 +145,52 @@ const birthdayReminderUtility = () => {
             'info',
             'SMS Result',
             `SMS sent: ${successCount}, Failed: ${failCount}`,
+        );
+    });
+
+    // Send Birthday Reminder WhatsApp button click
+    sendWhatsappBtn.addEventListener("click", async () => {
+        // Get checked users
+        const checkboxes = tbody.querySelectorAll(".birthdayCheckbox:checked");
+        if (checkboxes.length === 0) {
+            await window.dialogBoxAPI.showDialogBox(
+                'warning',
+                'No Selection',
+                'Please select at least one user to send WhatsApp message.'
+            );
+            return;
+        }
+
+        // Confirm before sending WhatsApp message
+        const confirm = await window.dialogBoxAPI.showDialogBox(
+            'question',
+            'Send Birthday Reminders',
+            `Are you sure you want to send birthday WhatsApp message to ${checkboxes.length} user(s)?`,
+            ['Yes', 'No']
+        );
+        if (confirm !== 0) return;
+
+        // Send WhatsApp message to each selected user
+        let successCount = 0, failCount = 0;
+        for (const cb of checkboxes) {
+            const tr = cb.closest("tr");
+            const name = tr.children[2].textContent;
+            const mobile = tr.children[4].textContent;
+            try {
+                // Use direct import of sendWhatsApp with type 'birthdayReminder'
+                //temp testing
+                const res = await sendWhatsApp('birthdayReminder', mobile, name);
+                if (res && res.success) successCount++;
+                else failCount++;
+            } catch {
+                failCount++;
+            }
+        }
+
+        await window.dialogBoxAPI.showDialogBox(
+            'info',
+            'WhatsApp Result',
+            `WhatsApp messages sent: ${successCount}, Failed: ${failCount}`,
         );
     });
 };

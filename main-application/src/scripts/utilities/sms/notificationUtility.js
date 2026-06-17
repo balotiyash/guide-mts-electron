@@ -16,9 +16,6 @@ const sendNotificationPrompt = async (
     amount = '0',
     date = ''
 ) => {
-    console.log(
-        "SEND NOTIFICATION PROMPT CALLED"
-    );
 
     try {
 
@@ -44,7 +41,7 @@ const sendNotificationPrompt = async (
 
             case 1:
 
-                return await sendWhatsAppPrompt(
+                return await sendWhatsApp(//it was sendWhatsAppPrompt before, changed to sendWhatsApp for direct sending without extra prompt
                     type,
                     phoneNumber,
                     userName,

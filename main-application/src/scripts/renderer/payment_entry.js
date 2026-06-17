@@ -11,8 +11,8 @@ import { renderRows, renderCurrentPage, submitPayment } from "../utilities/payme
 import { printInvoiceForSelectedUser } from "../utilities/paymentEntry/printInvoiceUtility.js";
 import { paymentState } from "../utilities/paymentEntry/paymentUtility.js";
 import { sendPaymentSMSWithChoice } from "../utilities/sms/smsUtility.js";
-import {sendPaymentNotificationWithChoice} from "../utilities/sms/notificationUtility.js";
-import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener } from "../shared.js";
+import { sendPaymentNotificationWithChoice } from "../utilities/sms/notificationUtility.js";
+import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener, ddmmyyyyToISO } from "../shared.js";
 
 // On window load
 document.addEventListener('DOMContentLoaded', async () => {
@@ -179,8 +179,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Get new values
         const newAmount = parseFloat(document.getElementById("amountInput").value);
         const newMode = document.getElementById("paymentMode").value.trim().toLowerCase();
-        const paymentDateValue = document.getElementById("payment-date").value;
-        const newPaymentDate = paymentDateValue + " " + new Date().toTimeString().split(" ")[0];
+        const paymentDateHiddenValue = document.getElementById("payment-date").value?.trim();
+        const paymentDateTextValue = document.getElementById("payment-date-text").value?.trim();
+        const normalizedDate = paymentDateHiddenValue || ddmmyyyyToISO(paymentDateTextValue);
+        const newPaymentDate = normalizedDate ? `${normalizedDate} ${new Date().toTimeString().split(" ")[0]}` : "";
 
         // Validation
         if (!paymentId) {
@@ -188,7 +190,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        if (!paymentDateValue || paymentDateValue.trim() === '') {
+        if (!newPaymentDate) {
             window.dialogBoxAPI.showDialogBox('info', 'Invalid Input', 'Please select a payment date.');
             return;
         }
