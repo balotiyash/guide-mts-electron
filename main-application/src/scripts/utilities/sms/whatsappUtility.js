@@ -172,7 +172,7 @@ const sendPaymentWhatsAppWithChoice = async (
                 'question',
                 'Send Payment WhatsApp Message?',
                 'Do you want to send payment confirmation WhatsApp message?',
-                ['With Name', 'Without Name', 'cancel']
+                ['With Name', 'Without Name', 'Cancel']
             );
 
         if (choice === 0) {

@@ -5,6 +5,9 @@
  * Created on: 20/10/2025
  * Last Modified: 08/01/2026
 */
+const admin = '';
+const password = '';
+const senderId = '';
 
 // SMS Utility Function
 const sendSMS = async (
@@ -29,31 +32,31 @@ const sendSMS = async (
         // Determine SMS type and send accordingly
         switch (type) {
             case 'welcome':
-                response = await fetch(`http://www.smsjust.com/blank/sms/user/urlsms.php?username=aaminkhan&pass=gUIDE7897123@&senderid=GUIDEM&dest_mobileno=${phoneNo}&message=WELCOME %26 THANK YOU FOR JOINING GUIDE MOTOR TRAINING SCHOOL DEAR ${userName.toUpperCase()} NOTE: - LEARNING LICENSE, TRAINING %26 FEES. WILL BE VALID FOR SIX MONTHS ONLY. MONEY ONCE DEPOSITED WILL NOT BE REFUNDED/ADJUSTED. FOR ANY QUERIES / DETAILS CONTACT 022-24072677 / 022-24074237. FROM GUIDE M.T.S.&dltentityid=1601100000000009321&dlttempid=1607100000000299940&response=Y`, {
+                response = await fetch(`http://www.smsjust.com/blank/sms/user/urlsms.php?username=${admin}&pass=${password}&senderid=${senderId}&dest_mobileno=${phoneNo}&message=WELCOME %26 THANK YOU FOR JOINING GUIDE MOTOR TRAINING SCHOOL DEAR ${userName.toUpperCase()} NOTE: - LEARNING LICENSE, TRAINING %26 FEES. WILL BE VALID FOR SIX MONTHS ONLY. MONEY ONCE DEPOSITED WILL NOT BE REFUNDED/ADJUSTED. FOR ANY QUERIES / DETAILS CONTACT 022-24072677 / 022-24074237. FROM GUIDE M.T.S.&dltentityid=1601100000000009321&dlttempid=1607100000000299940&response=Y`, {
                     method: 'GET'
                 });
                 break;
             
             case 'paymentWithName':
-                response = await fetch(`http://www.smsjust.com/blank/sms/user/urlsms.php?username=aaminkhan&pass=gUIDE7897123@&senderid=GUIDEM&dest_mobileno=${phoneNo}&message=THANK YOU FOR THE PAYMENT DEAR ${userName.toUpperCase()} NOTE: - LEARNING LICENSE, TRAINING %26 FEES.WILL BE VALID FOR SIX MONTHS ONLY. MONEY ONCE DEPOSITED WILL NOT BE REFUNDED/ADJUSTED. FOR ANY QUERIES / DETAILS CONTACT – 022-24072677 / 022-24074237. FROM GUIDE M.T.S.&dltentityid=1601100000000009321&dlttempid=1607100000000299941&response=Y`, {
+                response = await fetch(`http://www.smsjust.com/blank/sms/user/urlsms.php?username=${admin}&pass=${password}&senderid=${senderId}&dest_mobileno=${phoneNo}&message=THANK YOU FOR THE PAYMENT DEAR ${userName.toUpperCase()} NOTE: - LEARNING LICENSE, TRAINING %26 FEES.WILL BE VALID FOR SIX MONTHS ONLY. MONEY ONCE DEPOSITED WILL NOT BE REFUNDED/ADJUSTED. FOR ANY QUERIES / DETAILS CONTACT – 022-24072677 / 022-24074237. FROM GUIDE M.T.S.&dltentityid=1601100000000009321&dlttempid=1607100000000299941&response=Y`, {
                     method: 'GET'
                 });
                 break;
                 
             case 'paymentWithoutName':
-                response = await fetch(`http://www.smsjust.com/blank/sms/user/urlsms.php?username=aaminkhan&pass=gUIDE7897123@&senderid=GUIDEM&dest_mobileno=${phoneNo}&message=DEAR CUSTOMER THANKS FOR THE PAYMENT. MONEY ONCE DEPOSITED WILL NOT BE REFUNDED / ADJUSTED. WE APPRECIATE BEING ABLE TO SERVE YOU. THANK YOU FOR CHOOSING GUIDE MOTORS FOR YOUR DRIVING LICENCE / VEHICLE RELATED RTO WORK. THE PROCESS OF YOUR RTO WORK WILL BE COMPLETED SOON. FOR ANY QUERIES / DETAILS CONTACT 022-24072677/022-24074237. FROM GUIDE M.T.S.&dltentityid=1601100000000009321&dlttempid=1607100000000355440&response=Y`, {
+                response = await fetch(`http://www.smsjust.com/blank/sms/user/urlsms.php?username=${admin}&pass=${password}&senderid=${senderId}&dest_mobileno=${phoneNo}&message=DEAR CUSTOMER THANKS FOR THE PAYMENT. MONEY ONCE DEPOSITED WILL NOT BE REFUNDED / ADJUSTED. WE APPRECIATE BEING ABLE TO SERVE YOU. THANK YOU FOR CHOOSING GUIDE MOTORS FOR YOUR DRIVING LICENCE / VEHICLE RELATED RTO WORK. THE PROCESS OF YOUR RTO WORK WILL BE COMPLETED SOON. FOR ANY QUERIES / DETAILS CONTACT 022-24072677/022-24074237. FROM GUIDE M.T.S.&dltentityid=1601100000000009321&dlttempid=1607100000000355440&response=Y`, {
                     method: 'GET'
                 });
                 break;
 
             case 'paymentReminder':
-                response = await fetch(`http://www.smsjust.com/blank/sms/user/urlsms.php?username=aaminkhan&pass=gUIDE7897123@&senderid=GUIDEM&dest_mobileno=${phoneNo}&message=DEAR ${userName.toUpperCase()} YOU ARE HEREBY REQUESTED TO PAY YOUR BALANCE AMOUNT Rs. ${amount} ON OR BEFORE ${date} AT OUR OFFICE. SO THAT WE CAN PROCEED WITH YOUR FURTHER PROCESS. NOTE: - LEARNING LICENSE, TRAINING %26 FEES WILL BE VALID FOR SIX MONTHS ONLY. MONEY ONCE DEPOSITED WILL NOT BE REFUNDED/ADJUSTED. FOR ANY QUERIES / DETAILS CONTACT – 022-24072677 / 022-24074237. FROM GUIDE M.T.S.&dltentityid=1601100000000009321&dlttempid=1607100000000299989&response=Y`, {
+                response = await fetch(`http://www.smsjust.com/blank/sms/user/urlsms.php?username=${admin}&pass=${password}&senderid=${senderId}&dest_mobileno=${phoneNo}&message=DEAR ${userName.toUpperCase()} YOU ARE HEREBY REQUESTED TO PAY YOUR BALANCE AMOUNT Rs. ${amount} ON OR BEFORE ${date} AT OUR OFFICE. SO THAT WE CAN PROCEED WITH YOUR FURTHER PROCESS. NOTE: - LEARNING LICENSE, TRAINING %26 FEES WILL BE VALID FOR SIX MONTHS ONLY. MONEY ONCE DEPOSITED WILL NOT BE REFUNDED/ADJUSTED. FOR ANY QUERIES / DETAILS CONTACT – 022-24072677 / 022-24074237. FROM GUIDE M.T.S.&dltentityid=1601100000000009321&dlttempid=1607100000000299989&response=Y`, {
                     method: 'GET'
                 });
                 break;
 
             case 'birthdayReminder':
-                response = await fetch(`http://www.smsjust.com/blank/sms/user/urlsms.php?username=aaminkhan&pass=gUIDE7897123@&senderid=GUIDEM&dest_mobileno=${phoneNo}&message=WISHING YOU A VERY HAPPY BIRTHDAY DEAR ${userName.toUpperCase()} FROM GUIDE MOTOR TRAINING SCHOOL. FOR ANY QUERIES / DETAILS CONTACT – 022-24072677 / 022-24074237.&dltentityid=1601100000000009321&dlttempid=1607100000000299938&response=Y`, {
+                response = await fetch(`http://www.smsjust.com/blank/sms/user/urlsms.php?username=${admin}&pass=${password}&senderid=${senderId}&dest_mobileno=${phoneNo}&message=WISHING YOU A VERY HAPPY BIRTHDAY DEAR ${userName.toUpperCase()} FROM GUIDE MOTOR TRAINING SCHOOL. FOR ANY QUERIES / DETAILS CONTACT – 022-24072677 / 022-24074237.&dltentityid=1601100000000009321&dlttempid=1607100000000299938&response=Y`, {
                     method: 'GET'
                 });
                 break;
