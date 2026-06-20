@@ -51,8 +51,14 @@ main {
 .reminderSection span {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    gap: 10px;
+}
+
+.reminderSection span h2 {
+    flex: 1;
+    margin: 0;
 }
 
 /* Table Styles */
