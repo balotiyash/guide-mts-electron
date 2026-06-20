@@ -6,7 +6,7 @@ Created on: 15/06/2026
 Last Modified: 16/06/2026
 */
 
-const API_KEY =  '' ; //api key for whatsapp
+const API_KEY =  ''; //api key for whatsapp
 
 // Whatsapp message Utility Function
 const sendWhatsApp = async (
