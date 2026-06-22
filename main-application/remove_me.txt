@@ -20,3 +20,11 @@ registration form freezes - network tab issue
 
 backup format main.js
 same for menu main.js
+
+SMS
+const admin = 'aaminkhan';
+const password = 'gUIDE7897123@';
+const senderId = 'GUIDEM';
+
+WHATSAPP
+HDvtXhAjK06MLOFzUm5cB9yu2qNsRWVflQI1kwECrYS3ZGPpb8uh1mP9Od4XepanAU3QxCrFNw6ED0fW
