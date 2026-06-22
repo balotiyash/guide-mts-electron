@@ -6,7 +6,7 @@ Created on: 15/06/2026
 Last Modified: 16/06/2026
 */
 
-const API_KEY =  '' ; //api key for whatsapp
+const API_KEY =  ' ' ; //api key for whatsapp
 
 // Whatsapp message Utility Function
 const sendWhatsApp = async (
@@ -152,10 +152,11 @@ const sendWhatsAppPrompt = async (whatsAppMessageType, phoneNumber, userName = '
     }
 };
 
-const sendPaymentWhatsAppWithChoice = async (
+const sendPaymentWhatsApp = async (
     mobile_number,
-    customerName
-) => {
+    customerName,
+    withName = true
+    ) => {
 
     if (!mobile_number) {
         return {
@@ -167,84 +168,28 @@ const sendPaymentWhatsAppWithChoice = async (
 
     try {
 
-        const choice =
-            await window.dialogBoxAPI.showDialogBox(
-                'question',
-                'Send Payment WhatsApp Message?',
-                'Do you want to send payment confirmation WhatsApp message?',
-                ['With Name', 'Without Name', 'Cancel']
+        const messageType =
+            withName
+                ? 'paymentWithName'
+                : 'paymentWithoutName';
+
+        const whatsappResponse =
+            await sendWhatsApp(
+                messageType,
+                mobile_number,
+                customerName
             );
 
-        if (choice === 0) {
-
-            const whatsappResponse =
-                await sendWhatsApp(
-                    'paymentWithName',
-                    mobile_number,
-                    customerName
-                );
-
-            if (whatsappResponse.success) {
-
-                await window.dialogBoxAPI.showDialogBox(
-                    'info',
-                    'WhatsApp Message Sent',
-                    'Payment confirmation WhatsApp message has been sent successfully.'
-                );
-
-                return {
-                    success: true,
-                    sent: true
-                };
-            }
-
-        } else if (choice === 1) {
-
-            const whatsappResponse =
-                await sendWhatsApp(
-                    'paymentWithoutName',
-                    mobile_number,
-                    customerName
-                );
-
-            if (whatsappResponse.success) {
-
-                await window.dialogBoxAPI.showDialogBox(
-                    'info',
-                    'WhatsApp Message Sent',
-                    'Payment confirmation WhatsApp message has been sent successfully.'
-                );
-
-                return {
-                    success: true,
-                    sent: true
-                };
-            }
-
-        } else {
-
-            return {
-                success: true,
-                sent: false,
-                message: 'User chose not to send WhatsApp message'
-            };
-        }
-
-        await window.dialogBoxAPI.showDialogBox(
-            'error',
-            'WhatsApp Message Failed',
-            'Failed to send payment confirmation WhatsApp message.'
-        );
-
         return {
-            success: false,
-            sent: false
+            success: whatsappResponse.success,
+            sent: whatsappResponse.success,
+            error: whatsappResponse.error
         };
 
     } catch (error) {
 
         console.error(
-            'Error in sendPaymentWhatsAppWithChoice:',
+            'Error in sendPaymentWhatsApp:',
             error
         );
 
@@ -255,4 +200,4 @@ const sendPaymentWhatsAppWithChoice = async (
         };
     }
 };
-export {sendWhatsApp, sendWhatsAppPrompt, sendPaymentWhatsAppWithChoice};
+export {sendWhatsApp, sendWhatsAppPrompt, sendPaymentWhatsApp};
