@@ -3,4 +3,4 @@ dist/
 *.log
 .env
 out/
-remove_me.txt
+src/scripts/utilities/sms/apiKeys.js

@@ -1,0 +1,22 @@
+npm run dist -- -p always
+npm run dist -- -p=always
+npm run dist -- --publish=always
+npx electron-builder --win --x64 --publish always
+
+notepad "$env:APPDATA\guide-mts\logs\main.log"
+
+npm list electron
+npm install --save-dev electron-rebuild
+npx electron-rebuild
+npx electron-rebuild -f -w better-sqlite3
+
+electron-icon-maker --input=src/assets/images/mts-logo.png --output=src/assets/icons
+
+add clgs after every error & success and print try catch error too
+also log all the actions into logger module import
+make date formatter in dataEntryService function in uutility.js then import it
+user friendly errors should be displayed and detailed on console
+registration form freezes - network tab issue
+
+backup format main.js
+same for menu main.js

@@ -5,9 +5,9 @@
    Last Modified: 16/06/2026
 */
 
-import {sendSMSPrompt,sendPaymentSMSWithChoice,sendSMS} from './smsUtility.js';
+import {sendSMSPrompt,sendPaymentSMS,sendSMS} from './smsUtility.js';
 
-import {sendWhatsAppPrompt,  sendPaymentWhatsAppWithChoice,sendWhatsApp} from './whatsappUtility.js';
+import {sendWhatsAppPrompt,  sendPaymentWhatsApp,sendWhatsApp} from './whatsappUtility.js';
 
 const sendNotificationPrompt = async (
     type,
@@ -114,36 +114,71 @@ const sendPaymentNotificationWithChoice = async (
             ['SMS', 'WhatsApp', 'Both', 'Cancel']
         );
 
+    if (methodChoice === 3) {
+        return {
+            success: false,
+            cancelled: true
+        };
+    }
+
+    const templateChoice =
+        await window.dialogBoxAPI.showDialogBox(
+            'question',
+            'Payment Notification',
+            'Choose message type',
+            ['With Name', 'Without Name', 'Cancel']
+        );
+
+    if (templateChoice === 2) {
+        return {
+            success: false,
+            cancelled: true
+        };
+    }
+
+    const withName = templateChoice === 0;
+
+    // SMS
     if (methodChoice === 0) {
-        return await sendPaymentSMSWithChoice(
+        return await sendPaymentSMS(
             mobile_number,
-            customerName
+            customerName,
+            withName
         );
     }
 
+    // WhatsApp
     if (methodChoice === 1) {
-        return await sendPaymentWhatsAppWithChoice(
+        return await sendPaymentWhatsApp(
             mobile_number,
-            customerName
+            customerName,
+            withName
         );
     }
 
+    // Both
     if (methodChoice === 2) {
 
-        // SMS choice
-        await sendPaymentSMSWithChoice(
-            mobile_number,
-            customerName
-        );
+        const smsResult =
+            await sendPaymentSMS(
+                mobile_number,
+                customerName,
+                withName
+            );
 
-        // WhatsApp choice
-        await sendPaymentWhatsAppWithChoice(
-            mobile_number,
-            customerName
-        );
+        const whatsappResult =
+            await sendPaymentWhatsApp(
+                mobile_number,
+                customerName,
+                withName
+            );
 
         return {
-            success: true
+            success:
+                smsResult.success &&
+                whatsappResult.success,
+            smsResult,
+            whatsappResult
         };
     }
 

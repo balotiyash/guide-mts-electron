@@ -1,6 +1,7 @@
 main-application/node_modules/
 main-application/dist/
-main-application/remove_me.txt
+# main-application/remove_me.txt
+main-application/src/scripts/utilities/sms/apiKeys.js
 *.log
 .env
 main-application/out/

@@ -10,7 +10,7 @@
 import { renderRows, renderCurrentPage, submitPayment } from "../utilities/paymentEntry/paymentUtility.js";
 import { printInvoiceForSelectedUser } from "../utilities/paymentEntry/printInvoiceUtility.js";
 import { paymentState } from "../utilities/paymentEntry/paymentUtility.js";
-import { sendPaymentSMSWithChoice } from "../utilities/sms/smsUtility.js";
+//import { sendPaymentSMSWithChoice } from "../utilities/sms/smsUtility.js";
 import { sendPaymentNotificationWithChoice } from "../utilities/sms/notificationUtility.js";
 import { setupBackupDatabaseListener, setupChangeDatabaseListener, setupChangeArchitectureListener, ddmmyyyyToISO } from "../shared.js";
 

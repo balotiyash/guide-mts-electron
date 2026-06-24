@@ -3,7 +3,7 @@
  * Author: Yash Balotiya
  * Description: This file contains the IPC handlers for reminder functionality.
  * Created on: 24/10/2025
- * Last Modified: 24/12/2025
+ * Last Modified: 24/06/2026
  */
 
 // Importing required modules & libraries
@@ -53,23 +53,33 @@ const getLLReminders = async () => {
 const getPaymentReminders = async () => {
     const result = await runQuery({
         sql: `
-            SELECT 
+            SELECT
                 c.customer_name,
                 c.mobile_number,
                 w.work AS work_description,
                 CAST(w.charged_amount AS REAL) AS charged_amount,
-                (CAST(w.charged_amount AS REAL) - IFNULL(SUM(CAST(p.amount_paid AS REAL)), 0)) AS pending_amount
+                (
+                    CAST(w.charged_amount AS REAL)
+                    - IFNULL(SUM(CAST(p.amount_paid AS REAL)), 0)
+                ) AS pending_amount
             FROM customers c
-            JOIN work_descriptions w 
+            JOIN work_descriptions w
                 ON w.customer_id = c.id
-            LEFT JOIN payments p 
-                ON p.customer_id = c.id
-            WHERE 
+            LEFT JOIN payments p
+                ON p.work_desc_id = w.id
+            WHERE
                 date(c.ll_issued_date) <= date('now', '-11 days', 'localtime')
-            GROUP BY 
-                c.id, w.id
-            HAVING 
-                pending_amount > 0;
+            GROUP BY
+                c.id,
+                w.id,
+                c.customer_name,
+                c.mobile_number,
+                w.work,
+                w.charged_amount
+            HAVING
+                pending_amount > 0
+            ORDER BY
+                c.customer_name;
         `,
         params: [],
         type: "all"

@@ -3,13 +3,16 @@
  * Author: Yash Balotiya, Krishna Rajput
  * Description: Utility function to send SMS notifications for various events.
  * Created on: 20/10/2025
- * Last Modified: 20/06/2026
+ * Last Modified: 24/06/2026
 */
 
+// Importing necessary credentials from apiKeys.js
+import { smsAdmin, smsPassword, smsSenderId } from './apiKeys.js';
+
 // SMS API credentials (replace with actual credentials)
-const admin = '';
-const password = '';
-const senderId = '';
+const admin = smsAdmin;
+const password = smsPassword;
+const senderId = smsSenderId;
 
 // SMS Utility Function
 const sendSMS = async (
@@ -150,50 +153,54 @@ const sendSMSPrompt = async (smsType, phoneNumber, userName = 'Customer', amount
 };
 
 // Function to handle payment SMS with user choice
-const sendPaymentSMSWithChoice = async (mobile_number, customerName) => {
+const sendPaymentSMS = async (
+    mobile_number,
+    customerName,
+    withName = true
+) => {
+
     if (!mobile_number) {
-        return { success: false, sent: false, error: 'No mobile number available' };
+        return {
+            success: false,
+            sent: false,
+            error: 'No mobile number available'
+        };
     }
 
     try {
-        // Show SMS type selection prompt
-        const smsChoice = await window.dialogBoxAPI.showDialogBox(
-            'question',
-            'Send Payment SMS?',
-            'Do you want to send payment confirmation SMS?',
-            ['With Name', 'Without Name', 'No SMS']
+
+        const messageType =
+            withName
+                ? 'paymentWithName'
+                : 'paymentWithoutName';
+
+        const smsResponse =
+            await sendSMS(
+                messageType,
+                mobile_number,
+                customerName
+            );
+
+        return {
+            success: smsResponse.success,
+            sent: smsResponse.success,
+            error: smsResponse.error
+        };
+
+    } catch (error) {
+
+        console.error(
+            'Error in sendPaymentSMS:',
+            error
         );
 
-        // Send SMS based on user choice
-        if (smsChoice === 0) {
-            // With Name
-            const smsResponse = await sendSMS("paymentWithName", mobile_number, customerName);
-            if (smsResponse.success) {
-                await window.dialogBoxAPI.showDialogBox("info", "SMS Sent", "Payment confirmation SMS has been sent successfully.");
-                return { success: true, sent: true };
-            } else {
-                await window.dialogBoxAPI.showDialogBox("error", "SMS Failed", "Failed to send payment confirmation SMS.");
-                return { success: false, sent: false, error: smsResponse.error };
-            }
-        } else if (smsChoice === 1) {
-            // Without Name
-            const smsResponse = await sendSMS("paymentWithoutName", mobile_number, customerName);
-            if (smsResponse.success) {
-                await window.dialogBoxAPI.showDialogBox("info", "SMS Sent", "Payment confirmation SMS has been sent successfully.");
-                return { success: true, sent: true };
-            } else {
-                await window.dialogBoxAPI.showDialogBox("error", "SMS Failed", "Failed to send payment confirmation SMS.");
-                return { success: false, sent: false, error: smsResponse.error };
-            }
-        } else {
-            // User chose "No SMS"
-            return { success: true, sent: false, message: 'User chose not to send SMS' };
-        }
-    } catch (error) {
-        console.error('Error in sendPaymentSMSWithChoice:', error);
-        return { success: false, sent: false, error: error.message };
+        return {
+            success: false,
+            sent: false,
+            error: error.message
+        };
     }
 };
 
 // Export the sendSMS function
-export { sendSMSPrompt, sendSMS, sendPaymentSMSWithChoice };
+export { sendSMSPrompt, sendSMS, sendPaymentSMS };

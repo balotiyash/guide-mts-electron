@@ -7,7 +7,7 @@
  */
 
 // Import reusable SMS function
-import { sendPaymentSMSWithChoice } from "../sms/smsUtility.js";
+//import { sendPaymentSMSWithChoice } from "../sms/smsUtility.js";
 import { sendPaymentNotificationWithChoice } from "../sms/notificationUtility.js";
 import dateUtility from "../dataEntry/dateUtility.js";
 import { ddmmyyyyToISO, isoToDDMMYYYY } from "../../shared.js";
