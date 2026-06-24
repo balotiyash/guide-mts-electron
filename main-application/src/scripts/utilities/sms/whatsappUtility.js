@@ -3,10 +3,13 @@ File: src/scripts/utilities/sms/whatsappUtility.js
 Author: Krishna Rajput
 Description: Utility functions for sending WhatsApp messages.
 Created on: 15/06/2026
-Last Modified: 16/06/2026
+Last Modified: 24/06/2026
 */
 
-const API_KEY =  ' ' ; //api key for whatsapp
+// Importing necessary credentials from apiKeys.js
+import { whatsappApiKey } from './apiKeys.js';
+
+const API_KEY = whatsappApiKey ; //api key for whatsapp
 
 // Whatsapp message Utility Function
 const sendWhatsApp = async (

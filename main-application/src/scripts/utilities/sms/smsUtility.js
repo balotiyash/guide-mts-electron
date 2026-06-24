@@ -3,19 +3,16 @@
  * Author: Yash Balotiya, Krishna Rajput
  * Description: Utility function to send SMS notifications for various events.
  * Created on: 20/10/2025
- * Last Modified: 20/06/2026
+ * Last Modified: 24/06/2026
 */
-<<<<<<< HEAD
-const admin = ' ';
-const password = ' ';
-const senderId = ' ';
-=======
+
+// Importing necessary credentials from apiKeys.js
+import { smsAdmin, smsPassword, smsSenderId } from './apiKeys.js';
 
 // SMS API credentials (replace with actual credentials)
-const admin = '';
-const password = '';
-const senderId = '';
->>>>>>> 22dea0bf8754b5633dae460130cd1c1b9495f953
+const admin = smsAdmin;
+const password = smsPassword;
+const senderId = smsSenderId;
 
 // SMS Utility Function
 const sendSMS = async (
